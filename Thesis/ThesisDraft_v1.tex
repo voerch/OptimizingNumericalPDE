@@ -126,11 +126,33 @@ Queen Mary University of London\\
 \tableofcontents
 
 \chapter{Introduction}
-This note presents a conjecture stemming from our investigations in the generation of sigmoid tensor categories of Picard numbers of tori in Banach algebras.
-\lipsum[20]
- 
+
+
+
+The mathematical theory of partial differential equations describing financial markets plays an important role in mathematical finance. In most cases these equations are too complicated to be solved explicitly, therefore different methods of finding approximate numerical solutions are needed.
+
+The most commonly used method is finite difference which tries to find approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. It is simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. The alternate direction implicit (ADI) method is used to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices \cite{thomas}. Finally, the Monte Carlo method is used to find the numerical solution when dimensions are too high by calculating an expectation (Feynman-Kac Theorem) \cite{klebaner}.
+
+The existing numerical methods for partial differential equations are all constrained by the computational complexity. Motivated by present results and methods employed in high performance computing, we believe there are interesting and challenging topics in numerical solutions of PDEs for finance.
+\section{Parabolic Partial Differential Equations}\label{Parabolic Partial Differential Equations}
+\lipsum[5]
+\subsection{Heat Equation}
+\lipsum[5]
+\subsection{Black Scholes in 1D/2D}
+\lipsum[5]
+\subsection{Numerical Methods for Parabolic Differential Equations}
+\lipsum[5]
+\subsubsection{Explicit}
+\lipsum[5]
+\subsubsection{Implicit/CN}
+\lipsum[5]
+\subsubsection{Monte Carlo}
+\lipsum[5]
+
 \section{Motivation for this work}
-In the works of Petri (\cite[Theorem 2.3]{Petri}) we find the following statement
+The idea of this project is to study how to take advantage of this parallelism and explore how much faster we can make these calculations.
+\\
+Being fast when evaluating new information is crucial for operations of hedge funds and investment banks. The aim of this project is to utilize High Performance Computing techniques to speed up the existing numerical methods using hardware and software that can be installed in a trading floor. Industry experience is the driver for the project to make an impact.
 
 \begin{theorem}[{\cite[Theorem 2.3]{Petri}, see also \cite[pg. 45]{BlackScholes}}]\label{PetriTheorem}
 The Gramm matrix for $E_8$ is:
@@ -152,45 +174,44 @@ $$
 Recall the theorem of Petri \ref{PetriTheorem}
 Look at section \ref{contentsofthesis}.
 
-\subsection{The problem of exponential extensions}
-Hello this is text for my proper disertation This disertation is about ....
+\subsection{The problem of numerical solutions}
+Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations.
 
-%\lipsum[23]
-\subsection{The approach of Junderstein}
-\lipsum[23]
-\section{Contents of the thesis}\label{contentsofthesis}
-\lipsum[23]
-\subsection{Chapter 1}
-\lipsum[23]
-\subsection{Chapter 2}
-\lipsum[23]
+We plan to develop the methods used for heat equation (${u_t(x,t)=u_{xx}(x,t)}$) as our basis point. As we go further into the project, the plan is to extend to Black-Scholes model ($\frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} = r(V - S \frac{\partial V}{\partial S})$)  and variations of Black-Scholes with increasing complexity such as the Multi-Asset Black-Scholes Model and Heston Stochastic Volatility Model.
+
+First step is to write a simple version on a simple framework that can be calculated by hand and with Excel. Following the verifications, next step is porting the simple version in a high level programming language like python for prototyping and validating all calculations. The penultimate step is moving into a low level programming language such as C++ and utilize high performance computing principles.
+
+High performance computing techniques that can be implemented for CPUs are pipelining and use of SSE/SIMD\cite{kusswurm} registers with Advanced Vector Extensions(AVX 512), multithreading with Open Multi-Processing(OpenMP) and compiler intrinsics. In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of requirement of delicate memory management.
+
+The project will be finalized by comparing the efficiency and speed of different implementations.
 
 
+\subsection{The approach to optimizations}
+\subsubsection{32 bit vs 64 bit}
+\lipsum[5]
+\subsubsection{Compilers VS/gcc/Intel}
+\lipsum[5]
+\subsubsection{AVX/Intrinsics}
+\lipsum[5]
+\subsubsection{Multithreading/OpenMP}
+\lipsum[5]	
+\subsubsection{CUDA}
+\lipsum[5]	
+\section{Timing the Code}
+\subsubsection{Windows API}
+\lipsum[5]
+\subsubsection{Chrono Library}
+\lipsum[5]
 
+\chapter{Work Done Optimizing}
 
-\chapter{Eulerian topological string motives}
-\lipsum[23]
-\section{Definitions}
-\lipsum[23]
-\subsection{Tate's theorem}
-\paragraph{Preliminary considerations}
-\lipsum[23]
-\paragraph{Motivic financial algebroids}
-\lipsum[23]
-
-\subsection{Grothendieck topologies}
-\lipsum[23]
-
-\section{Calculation of the invariant cycles}
-\lipsum[23]
-
-\subsection{Fontaine's theorem}
-
+\section{Parallelizing Tridiagonal Systems}
+\lipsum[5]
 
 
 
 \chapter{Conclusions}
-\lipsum[100]
+\lipsum[5]
 
 \appendix
 \chapter{Implementation of the {\tt BarrierOptionCVA} class}
@@ -201,7 +222,12 @@ Hello this is text for my proper disertation This disertation is about ....
 
 
 \bibliographystyle{plain}
-\begin{thebibliography}{9}
+\begin{thebibliography}{12}
+\bibitem{thomas} Thomas, James W. {\it Numerical Partial Differential Equations: Finite Difference Methods.}, pp. 164, Springer, 1998.
+
+\bibitem{klebaner}Klebaner, Fima C. {\it Introduction to Stochastic Calculus with Applications.}, pp. 155, Imperial College Press, 2005.
+
+\bibitem{kusswurm}Kusswurm, Daniel. {\it Modern x86 Assembly Language Programming: 32-Bit, 64-Bit, SSE, and AVX.} Apress, 2015.
 \bibitem[P99]{Petri}
    William Petri, 
   {\it Analysis of infinitely generated frog complexes},
