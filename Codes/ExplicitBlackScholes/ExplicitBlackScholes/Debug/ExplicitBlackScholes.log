@@ -1,8 +1,1 @@
-﻿  fdm.cpp
-c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\explicitblackscholes\explicitblackscholes\fdm.cpp(76): warning C4018: '<': signed/unsigned mismatch
-  main.cpp
-  option.cpp
-  payoff.cpp
-  pde.cpp
-  Generating Code...
-  ExplicitBlackScholes.vcxproj -> C:\Users\mberk\Documents\Visual Studio 2017\source\repos\voerch\Diss\Codes\ExplicitBlackScholes\Debug\ExplicitBlackScholes.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\Win32\PlatformToolsets\v141\Toolset.targets(34,5): error MSB8036: The Windows SDK version 10.0.17763.0 was not found. Install the required version of Windows SDK or change the SDK version in the project property pages or by right-clicking the solution and selecting "Retarget solution".

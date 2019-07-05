@@ -3,6 +3,7 @@
 #include "Option.h"
 #include "BSEq.h"
 #include "CNMethod.h"
+#include "ExplicitMethod.h"
 
 int main()
 {
@@ -19,6 +20,13 @@ int main()
    CNMethod Method(&BSPDE, imax, jmax);
    Method.SolvePDE();
    cout << "Price = " << Method.v(0.0,S0) << endl;
-   system("pause");
+
+   int imax = 3000, jmax = 1000;
+   ExplicitMethod Method2(&BSPDE, imax, jmax);
+
+   Method2.SolvePDE();
+
+   cout << "Price = " << Method2.v(0.0, S0) << endl;
+
    return 0;
 }
