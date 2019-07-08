@@ -1,6 +1,26 @@
+<<<<<<< HEAD
 ﻿  Main25.cpp
 c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\implicitblackscholes\implicitblackscholes\bsmodel01.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(24): error C2374: 'imax': redefinition; multiple initialization
   c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(16): note: see declaration of 'imax'
 c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(24): error C2374: 'jmax': redefinition; multiple initialization
   c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(16): note: see declaration of 'jmax'
+=======
+﻿  Option.cpp
+\\homes.student.eecs.qmul.ac.uk\mbe31\diss\codes\implicitblackscholes\implicitblackscholes\bsmodel01.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Matrix.cpp
+  Main25.cpp
+\\homes.student.eecs.qmul.ac.uk\mbe31\diss\codes\implicitblackscholes\implicitblackscholes\bsmodel01.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+\\homes.student.eecs.qmul.ac.uk\mbe31\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(24): error C2374: 'imax': redefinition; multiple initialization
+  \\homes.student.eecs.qmul.ac.uk\mbe31\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(16): note: see declaration of 'imax'
+\\homes.student.eecs.qmul.ac.uk\mbe31\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(24): error C2374: 'jmax': redefinition; multiple initialization
+  \\homes.student.eecs.qmul.ac.uk\mbe31\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(16): note: see declaration of 'jmax'
+  ImplicitScheme.cpp
+  FDMethod.cpp
+  ExplicitMethod.cpp
+  BSModel01.cpp
+\\homes.student.eecs.qmul.ac.uk\mbe31\diss\codes\implicitblackscholes\implicitblackscholes\bsmodel01.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  BSEq.cpp
+\\homes.student.eecs.qmul.ac.uk\mbe31\diss\codes\implicitblackscholes\implicitblackscholes\bsmodel01.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+>>>>>>> 99e13a429f77bd79d7022a28280ad875663020dc

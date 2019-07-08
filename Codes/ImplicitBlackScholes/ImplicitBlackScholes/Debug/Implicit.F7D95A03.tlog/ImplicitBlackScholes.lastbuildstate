@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 #TargetFrameworkVersion=v4.0:PlatformToolSet=v141:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.15063.0
 Debug|Win32|C:\Users\mberk\Documents\Visual Studio 2017\source\repos\voerch\Diss\Codes\ImplicitBlackScholes\|
+=======
+#TargetFrameworkVersion=v4.0:PlatformToolSet=v141:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.10240.0
+Debug|Win32|\\homes.student.eecs.qmul.ac.uk\mbe31\Diss\Codes\ImplicitBlackScholes\|
+>>>>>>> 99e13a429f77bd79d7022a28280ad875663020dc
