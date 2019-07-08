@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.2.15)  3 JUL 2019 23:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.2.15)  7 JUL 2019 23:08
 entering extended mode
 **./ThesisDraft_v1.tex
 (ThesisDraft_v1.tex
@@ -483,7 +483,7 @@ LaTeX Info: Redefining \nameref on input line 36.
 \@outlinefile=\write3
 \openout3 = `ThesisDraft_v1.out'.
 
-<QMCrest.png, id=59, 717.68124pt x 602.25pt>
+<QMCrest.png, id=79, 717.68124pt x 602.25pt>
 File: QMCrest.png Graphic file (type png)
 <use QMCrest.png>
 Package pdftex.def Info: QMCrest.png  used on input line 56.
@@ -531,84 +531,88 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 Chapter 1.
 [7
 
-] [8]
-Overfull \hbox (20.09789pt too wide) in paragraph at lines 143--143
-[]\OT1/cmr/bx/n/14.4 Numerical Meth-ods for Parabolic Dif-fer-en-tial Equa-
- []
+] [8] [9] [10] [11]
 
-[9] [10]
-
-LaTeX Warning: Reference `contentsofthesis' on page 11 undefined on input line 
-175.
+LaTeX Warning: Reference `contentsofthesis' on page 12 undefined on input line 
+183.
 
 
-Overfull \hbox (6.80309pt too wide) in paragraph at lines 180--181
+Overfull \hbox (6.80309pt too wide) in paragraph at lines 188--189
 []\OT1/cmr/m/n/12 We plan to de-velop the meth-ods used for heat equa-tion ($[]
 $)
  []
 
-[11]
-Overfull \hbox (2.64604pt too wide) in paragraph at lines 184--185
+[12]
+Overfull \hbox (2.64604pt too wide) in paragraph at lines 192--193
 \OT1/cmr/m/n/12 Ex-ten-sions(AVX 512), mul-ti-thread-ing with Open Multi-Proces
 sing(OpenMP)
  []
 
-[12] [13] [14] [15]
+[13] [14] [15] [16]
 Chapter 2.
-[16
-
-]
-Chapter 3.
 [17
 
 ]
-Appendix A.
+Chapter 3.
 [18
 
 ]
-Appendix B.
+Appendix A.
 [19
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 253.
- [20
+Appendix B.
+[20
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 253.
- (ThesisDraft_v1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 253.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 253.
-Package rerunfilecheck Info: File `ThesisDraft_v1.out' has not changed.
-(rerunfilecheck)             Checksum: 91EBF19F2A707C68B0BA8D171E90AF14;1017.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 261.
+ [21
 
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 261.
+ (ThesisDraft_v1.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 261.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 261.
+
+
+Package rerunfilecheck Warning: File `ThesisDraft_v1.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `ThesisDraft_v1.out':
+(rerunfilecheck)             Before: 36E2E46F0C30C4C60D429D8851135EE6;1391
+(rerunfilecheck)             After:  B61EF917DEF27E0A89FB9A8E70A9251B;1398.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 253.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 261.
  ) 
 Here is how much of TeX's memory you used:
- 15592 strings out of 492946
- 278114 string characters out of 3135527
- 592825 words of memory out of 3000000
- 19343 multiletter control sequences out of 15000+200000
+ 15601 strings out of 492946
+ 278264 string characters out of 3135527
+ 592682 words of memory out of 3000000
+ 19348 multiletter control sequences out of 15000+200000
  541744 words of font info for 58 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,7n,63p,790b,428s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on ThesisDraft_v1.pdf (22 pages, 385309 bytes).
+ 40i,7n,63p,786b,428s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{section.1.4} has been referenced but does not exi
+st, replaced by a fixed one
+
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on ThesisDraft_v1.pdf (23 pages, 389968 bytes).
 PDF statistics:
- 273 PDF objects out of 1000 (max. 8388607)
- 62 named destinations out of 1000 (max. 500000)
- 118 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 300 PDF objects out of 1000 (max. 8388607)
+ 66 named destinations out of 1000 (max. 500000)
+ 158 words of extra memory for PDF output out of 10000 (max. 10000000)
 

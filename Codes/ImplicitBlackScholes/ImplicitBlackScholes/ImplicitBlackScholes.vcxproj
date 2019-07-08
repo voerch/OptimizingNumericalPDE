@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{F7D95A03-A829-4FE4-B9A3-9381BAD59FC7}</ProjectGuid>
     <RootNamespace>ImplicitBlackScholes</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -118,6 +118,7 @@
     <ClInclude Include="BSEq.h" />
     <ClInclude Include="BSModel01.h" />
     <ClInclude Include="CNMethod.h" />
+    <ClInclude Include="ExplicitMethod.h" />
     <ClInclude Include="FDMethod.h" />
     <ClInclude Include="ImplicitScheme.h" />
     <ClInclude Include="Matrix.h" />
@@ -127,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="BSEq.cpp" />
     <ClCompile Include="BSModel01.cpp" />
+    <ClCompile Include="ExplicitMethod.cpp" />
     <ClCompile Include="FDMethod.cpp" />
     <ClCompile Include="ImplicitScheme.cpp" />
     <ClCompile Include="Main25.cpp" />

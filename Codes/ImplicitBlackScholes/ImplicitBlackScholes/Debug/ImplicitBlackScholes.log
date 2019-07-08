@@ -1,3 +1,6 @@
 ﻿  Main25.cpp
 c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\implicitblackscholes\implicitblackscholes\bsmodel01.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  ImplicitBlackScholes.vcxproj -> C:\Users\mberk\Documents\Visual Studio 2017\source\repos\voerch\Diss\Codes\ImplicitBlackScholes\Debug\ImplicitBlackScholes.exe
+c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(24): error C2374: 'imax': redefinition; multiple initialization
+  c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(16): note: see declaration of 'imax'
+c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(24): error C2374: 'jmax': redefinition; multiple initialization
+  c:\users\mberk\documents\visual studio 2017\source\repos\voerch\diss\codes\implicitblackscholes\implicitblackscholes\main25.cpp(16): note: see declaration of 'jmax'

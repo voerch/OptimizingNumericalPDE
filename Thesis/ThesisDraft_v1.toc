@@ -1,24 +1,26 @@
 \contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}% 
 \contentsline {section}{\numberline {1.1}Parabolic Partial Differential Equations}{8}{section.1.1}% 
 \contentsline {subsection}{\numberline {1.1.1}Heat Equation}{8}{subsection.1.1.1}% 
-\contentsline {subsection}{\numberline {1.1.2}Black Scholes in 1D/2D}{8}{subsection.1.1.2}% 
-\contentsline {subsection}{\numberline {1.1.3}Numerical Methods for Parabolic Differential Equations}{9}{subsection.1.1.3}% 
-\contentsline {subsubsection}{Explicit}{9}{section*.6}% 
-\contentsline {subsubsection}{Implicit/CN}{10}{section*.7}% 
-\contentsline {subsubsection}{Monte Carlo}{10}{section*.8}% 
-\contentsline {section}{\numberline {1.2}Motivation for this work}{11}{section.1.2}% 
-\contentsline {subsection}{\numberline {1.2.1}The problem of numerical solutions}{11}{subsection.1.2.1}% 
-\contentsline {subsection}{\numberline {1.2.2}The approach to optimizations}{12}{subsection.1.2.2}% 
-\contentsline {subsubsection}{32 bit vs 64 bit}{12}{section*.9}% 
-\contentsline {subsubsection}{Compilers VS/gcc/Intel}{13}{section*.10}% 
-\contentsline {subsubsection}{AVX/Intrinsics}{13}{section*.11}% 
-\contentsline {subsubsection}{Multithreading/OpenMP}{13}{section*.12}% 
-\contentsline {subsubsection}{CUDA}{14}{section*.13}% 
-\contentsline {section}{\numberline {1.3}Timing the Code}{14}{section.1.3}% 
-\contentsline {subsubsection}{Windows API}{14}{section*.14}% 
-\contentsline {subsubsection}{Chrono Library}{15}{section*.15}% 
-\contentsline {chapter}{\numberline {2}Work Done Optimizing}{16}{chapter.2}% 
-\contentsline {section}{\numberline {2.1}Parallelizing Tridiagonal Systems}{16}{section.2.1}% 
-\contentsline {chapter}{\numberline {3}Conclusions}{17}{chapter.3}% 
-\contentsline {chapter}{\numberline {A}Implementation of the {\tt BarrierOptionCVA} class}{18}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}shorter running title}{19}{appendix.B}% 
+\contentsline {subsection}{\numberline {1.1.2}Black-Scholes Equation}{9}{subsection.1.1.2}% 
+\contentsline {section}{\numberline {1.2}Numerical Methods for Parabolic Differential Equations}{9}{section.1.2}% 
+\contentsline {subsection}{\numberline {1.2.1}Explicit Method}{10}{subsection.1.2.1}% 
+\contentsline {subsection}{\numberline {1.2.2}Implicit Method}{10}{subsection.1.2.2}% 
+\contentsline {subsection}{\numberline {1.2.3}Theta Method and Crank-Nicholson Method}{10}{subsection.1.2.3}% 
+\contentsline {subsection}{\numberline {1.2.4}Rannacher Trick}{11}{subsection.1.2.4}% 
+\contentsline {subsection}{\numberline {1.2.5}Monte-Carlo Simulation}{11}{subsection.1.2.5}% 
+\contentsline {section}{\numberline {1.3}Motivation for this work}{12}{section.1.3}% 
+\contentsline {subsection}{\numberline {1.3.1}The problem of numerical solutions}{12}{subsection.1.3.1}% 
+\contentsline {subsection}{\numberline {1.3.2}The approach to optimizations}{13}{subsection.1.3.2}% 
+\contentsline {subsubsection}{32 bit vs 64 bit}{13}{section*.6}% 
+\contentsline {subsubsection}{Compilers VS/gcc/Intel}{14}{section*.7}% 
+\contentsline {subsubsection}{AVX/Intrinsics}{14}{section*.8}% 
+\contentsline {subsubsection}{Multithreading/OpenMP}{15}{section*.9}% 
+\contentsline {subsubsection}{CUDA}{15}{section*.10}% 
+\contentsline {subsection}{\numberline {1.3.3}Timing the Code}{15}{subsection.1.3.3}% 
+\contentsline {subsubsection}{Windows API}{15}{section*.11}% 
+\contentsline {subsubsection}{Chrono Library}{16}{section*.12}% 
+\contentsline {chapter}{\numberline {2}Work Done Optimizing}{17}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Parallelizing Tridiagonal Systems}{17}{section.2.1}% 
+\contentsline {chapter}{\numberline {3}Conclusions}{18}{chapter.3}% 
+\contentsline {chapter}{\numberline {A}Implementation of the {\tt BarrierOptionCVA} class}{19}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}shorter running title}{20}{appendix.B}% 
