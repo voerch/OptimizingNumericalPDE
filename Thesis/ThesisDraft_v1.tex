@@ -127,27 +127,38 @@ Queen Mary University of London\\
 
 \chapter{Introduction}
 
-Partial differential equations o
-
-
-Numerical partial differential equations is a large area of study. The subject includes components in the areas of applications, mathematics and computers. These three aspects of a problem are so strongly tied together that it is virtually impossible to consider the applied aspect of a problem without considering at least some of the mathematical counting aspects of that problem.[j.w. thomas]
-
-The mathematical theory of partial differential equations describing financial markets plays an important role in mathematical finance. In most cases these equations are too complicated to be solved explicitly, therefore different methods of finding an approximate numerical solution is needed.
-
-The most common framework is finite difference which tries to find approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. It is simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. The alternate direction implicit (ADI) method is used to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices \cite{thomas}. Finally, the Monte Carlo method is used to find the numerical solution when dimensions are too high by calculating an expectation (Feynman-Kac Theorem) \cite{klebaner}.
-
-The existing numerical methods for partial differential equations are all constrained by the computational complexity. Motivated by present results and methods employed in high performance computing, we believe there are interesting and challenging topics in numerical solutions of PDEs for finance.
-
 \section{Parabolic Partial Differential Equations}\label{Parabolic Partial Differential Equations}
+Since the foundation of the world humanity tried to understand and model the nature. Differential equations serves this purpose by enabling us to describe natural phenomena for instance, heat, sound and fluid flow. Field of differential equations is divided into two main categories, ordinary differential equations(ODEs) and partial differential equations(PDEs). ODEs depend only on one independent variable where PDEs there are more than one independent variables. 
+
+
+These equations (ordinary as well as partial differential equations) arise in the study of rates of change and of quantities or things that change
+
+Partial differential equations can be classified, for example if we can write a 2nd order linear PDEs of two independent variables as:
+
+$ au_{xx} + bu_{xy} + cu_{yy} + du_x + eu_y + fu + g = 0 $
+
+$ b^2 - 4ac > 0 $ : Hyperbolic partial differential equation
+
+$ b^2 - 4ac = 0 $ : Parabolic partial differential equation
+
+$ b^2 - 4ac < 0 $ : Elliptic partial differential equation, generally associated with equilibrium steady state problems.
 
 \subsection{Heat Equation}
 
 \subsection{Black-Scholes Equation}
+The mathematical theory of partial differential equations describing financial markets plays an important role in mathematical finance.
+
 A convection–diffusion equation inndimension contains both diffusion and convection termsand  these  equations  have  received  much  attention  in  the  engineering  literature  in  the  last50 years because they model many kinds of physical problems such as the Navier–Stokesequation and its specialisations. In financial engineering we view the Black–Scholes equationas an instance of a convection–diffusion equation.
 
-A convection–diffusion equation inndimension contains both diffusion and convection termsand  these  equations  have  received  much  attention  in  the  engineering  literature  in  the  last50 years because they model many kinds of physical problems such as the Navier–Stokesequation and its specialisations. In financial engineering we view the Black–Scholes equationas an instance of a convection–diffusion equation
 
 \section{Numerical Methods for Parabolic Differential Equations}
+Even if we can sometimes find analytical solutions of PDEs, generally it is impossible. Therefore we need to numerically solve the equation. Numerical partial differential equations is a large area of study. The subject includes components in the areas of applications, mathematics and computers. These three aspects of a problem are so strongly tied together that it is virtually impossible to consider the applied aspect of a problem without considering at least some of the mathematical counting aspects of that problem.[j.w. thomas]
+
+ In most cases these equations are too complicated to be solved explicitly, therefore different methods of finding an approximate numerical solution is needed.
+
+The most common framework is finite difference method which tries to find approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. It is simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. The alternate direction implicit (ADI) method is used to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices \cite{thomas}. Finally, the Monte Carlo method is used to find the numerical solution when dimensions are too high by calculating an expectation (Feynman-Kac Theorem) \cite{klebaner}.
+
+The existing numerical methods for partial differential equations are all constrained by the computational complexity. Motivated by present results and methods employed in high performance computing, we believe there are interesting and challenging topics in numerical solutions of PDEs for finance.
 
 \subsection{Explicit Method}
 
