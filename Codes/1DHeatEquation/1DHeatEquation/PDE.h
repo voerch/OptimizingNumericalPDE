@@ -1,4 +1,5 @@
 #pragma once
+#include "Option.h"
 
 // Second-order Parabolic PDE
 class ParabolicPDE{
@@ -29,14 +30,18 @@ class HeatEqn : public ParabolicPDE
 };
 
 // Implementing Black Scholes PDE
-//class BlackScholes : public ParabolicPDE
-//{
-//	double DiffusionCoeff(double t, double x) const;
-//	double ConvectionCoeff(double t, double x) const;
-//	double ZeroCoeff(double t, double x) const;
-//	double SourceCoeff(double t, double x) const;
-//
-//	double BoundaryLeft(double t, double x) const;
-//	double BoundaryRight(double t, double x) const;
-//	double InitCond(double x) const;
-//};
+class BlackScholesPDE : public ParabolicPDE
+{
+public:
+	VanillaOption* option;
+	BlackScholesPDE(VanillaOption* option_) : option(option_) {};
+
+	double DiffusionCoeff(double t, double x) const;
+	double ConvectionCoeff(double t, double x) const;
+	double ZeroCoeff(double t, double x) const;
+	double SourceCoeff(double t, double x) const;
+
+	double BoundaryLeft(double t, double x) const;
+	double BoundaryRight(double t, double x) const;
+	double InitCond(double x) const;
+};

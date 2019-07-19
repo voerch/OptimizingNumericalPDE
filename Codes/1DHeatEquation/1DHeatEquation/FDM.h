@@ -62,3 +62,23 @@ class ExplicitMethod : public FDM
 		
 		void stepMarch();
 };
+
+
+class CrankNicholson : public FDM
+{
+protected:
+	void calculateStepSize();
+	void setInitialConditions();
+	void calculateBoundaryConditions();
+	void calculateInnerDomain();
+
+public:
+	CrankNicholson(double xDomain_, long xNumberSteps_, double tDomain_, long tNumberSteps_, ParabolicPDE* PDE_)
+		: FDM(xDomain_, xNumberSteps_, tDomain_, tNumberSteps_, PDE_)
+	{
+		calculateStepSize();
+		setInitialConditions();
+	}
+
+	void stepMarch();
+};

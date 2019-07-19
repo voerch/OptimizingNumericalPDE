@@ -32,5 +32,8 @@
     <ClInclude Include="PDE.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
