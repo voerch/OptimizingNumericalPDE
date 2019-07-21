@@ -73,7 +73,6 @@ void ExplicitMethod::stepMarch()
 	grid.close();
 }
 
-
 void FDM::ThomasAlgorithm(const std::vector<double>& a, const std::vector<double>& b, const std::vector<double>& c, const std::vector<double>& d, std::vector<double>& f)
 {
 	size_t N = d.size();
@@ -87,7 +86,7 @@ void FDM::ThomasAlgorithm(const std::vector<double>& a, const std::vector<double
 	d_star[0] = d[0] / b[0];
 
 	// Create the c_star and d_star coefficients in the forward sweep                                                                                                                                                  
-	for (int i = 1; i<N; i++) {
+	for (int i = 1; i<N-1; i++) {
 		double m = 1.0 / (b[i] - a[i] * c_star[i - 1]);
 		c_star[i] = c[i] * m;
 		d_star[i] = (d[i] - a[i] * d_star[i - 1]) * m;
@@ -100,7 +99,6 @@ void FDM::ThomasAlgorithm(const std::vector<double>& a, const std::vector<double
 }
 
 
-
 //Defining functions for CN Method
 void CrankNicholson::calculateStepSize()
 {
@@ -111,11 +109,15 @@ void CrankNicholson::calculateStepSize()
 
 void CrankNicholson::setInitialConditions()
 {
-	std::vector<double> a(xNumberSteps - 1, -r/2.0);
-	std::vector<double> b(xNumberSteps, 1.0 + r);
-	std::vector<double> c(xNumberSteps - 1, -r/2.0);
-	
 	double currentX = 0;
+
+	//a.resize(xNumberSteps - 1, -r / 2.0);
+	//b.resize(xNumberSteps, 1.0 + r);
+	//c.resize(xNumberSteps - 1, -r / 2.0);
+
+	LowerDiag.resize(xNumberSteps - 1, 0.0);
+	Diag.resize(xNumberSteps, 0.0);
+	UpperDiag.resize(xNumberSteps - 1, 0.0);
 
 	oldResult.resize(xNumberSteps, 0.0);
 	newResult.resize(xNumberSteps, 0.0);
@@ -124,10 +126,10 @@ void CrankNicholson::setInitialConditions()
 	for (long xCounter = 0; xCounter < xNumberSteps; xCounter++)
 	{
 		currentX = static_cast<double>(xCounter) * xStepSize;
-		oldResult[xCounter] = PDE->InitCond(currentX);
+		newResult[xCounter] = PDE->InitCond(currentX);
 		xValues[xCounter] = currentX;
 	}
-
+	
 	tPrevious = 0;
 	tCurrent = 0;
 
@@ -137,36 +139,52 @@ void CrankNicholson::calculateBoundaryConditions()
 {
 	newResult[0] = PDE->BoundaryLeft(tPrevious, xValues[0]);
 	newResult[xNumberSteps - 1] = PDE->BoundaryRight(tPrevious, xValues[xNumberSteps - 1]);
+
 }
 
 // Loops through x values on a given time.
 void CrankNicholson::calculateInnerDomain()
 {
+	alpha = PDE->DiffusionCoeff(tPrevious, xValues[0]) * tStepSize / (2 * xStepSize * xStepSize);
+	beta = PDE->ConvectionCoeff(tPrevious, xValues[0]) * tStepSize / (4.0 * xStepSize);
+	gamma = PDE->ZeroCoeff(tPrevious, xValues[0]) * tStepSize * 0.5;
 
-	for (long xCounter = 1; xCounter < xNumberSteps - 1; xCounter++)
+	LowerDiag[0] = -alpha - beta;
+	Diag[0] = (1.0 + (2 * alpha) - gamma);
+	UpperDiag[0] = -alpha + beta;
+
+	for (long iCounter = 1; iCounter < xNumberSteps - 1; iCounter++)
 	{
+		alpha = PDE->DiffusionCoeff(tPrevious, xValues[iCounter]) * tStepSize / (2 * xStepSize * xStepSize);
+		beta = PDE->ConvectionCoeff(tPrevious, xValues[iCounter]) * tStepSize / (4.0 * xStepSize);
+		gamma = PDE->ZeroCoeff(tPrevious, xValues[iCounter]) * tStepSize * 0.5;
 
-
+		LowerDiag[iCounter] = - alpha - beta;
+		Diag[iCounter] = (1.0 + (2 * alpha) - gamma);
+		UpperDiag[iCounter] = - alpha + beta ;
+		
+		oldResult[iCounter] = (alpha + beta) * newResult[iCounter + 1] + (1.0 - (2 * alpha) + gamma) * newResult[iCounter] + (alpha - beta) * newResult[iCounter - 1];
 	}
+
+	ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+
 }
 
 // Loops through time.
 void CrankNicholson::stepMarch()
 {
-	std::ofstream grid("ExplicitGrid.csv");
+	std::ofstream grid("CNGrid.csv");
 	//grid << "xValues,tValues,Solution" << std::endl;
 	while (tCurrent < tDomain)
 	{
 		tCurrent = tPrevious + tStepSize;
 		calculateBoundaryConditions();
-		calculateInnerDomain();
-
+		
 		for (int outputCounter = 0; outputCounter < xNumberSteps; outputCounter++)
 		{
 			grid << xValues[outputCounter] << "," << tPrevious << "," << newResult[outputCounter] << std::endl;
 		}
-
-		oldResult = newResult;
+		calculateInnerDomain();
 		tPrevious = tCurrent;
 	}
 

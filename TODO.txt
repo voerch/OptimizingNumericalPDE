@@ -1,12 +1,19 @@
+BAK
 168 foreign exchange pricing rannacher ve stencil
 ADI Fin diff methods in finance 210 327
-
 duffy c++ 675/ 406kreider
 
-Further work
+TODO
 BSPde bdegistir callputflag duffy c++ 677 
 Timinge gore heatmap hazirla
 bencharmak case analytical solution bul heat IC 1 BC 0 bak
 Farkli grid boyutlarina gore error hesapla Nt Nx ve result/error 3d grafik hazirla optimal grid boyutu bul
 rannacher trick
 CN 684
+lab intel compilera bak
+
+
+
+CAN BE EXPANDED
+Cloud applications
+More type of options

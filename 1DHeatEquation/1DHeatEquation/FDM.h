@@ -74,6 +74,10 @@ protected:
 	void calculateBoundaryConditions();
 	void calculateInnerDomain();
 
+	std::vector<double> LowerDiag;
+	std::vector<double> Diag;
+	std::vector<double> UpperDiag;
+
 
 public:
 	CrankNicholson(double xDomain_, long xNumberSteps_, double tDomain_, long tNumberSteps_, ParabolicPDE* PDE_)
@@ -81,10 +85,6 @@ public:
 	{
 		calculateStepSize();
 		setInitialConditions();
-
-
-		
-
 	}
 
 	void stepMarch();
