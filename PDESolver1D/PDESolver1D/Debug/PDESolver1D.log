@@ -1,0 +1,7 @@
+﻿  PDE.cpp
+  main.cpp
+  FDM.cpp
+c:\users\mbe31\source\repos\pdesolver1d\fdm.cpp(89): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  PDESolver1D.vcxproj -> C:\Users\mbe31\source\repos\PDESolver1D\Debug\PDESolver1D.exe
+  PDESolver1D.vcxproj -> C:\Users\mbe31\source\repos\PDESolver1D\Debug\PDESolver1D.pdb (Partial PDB)

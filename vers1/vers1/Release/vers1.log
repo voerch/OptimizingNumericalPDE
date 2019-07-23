@@ -1,8 +1,0 @@
-﻿  Main.cpp
-c:\users\mbe31\source\repos\vers1\vers1\BSModel01.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating code
-  29 of 233 functions (12.4%) were compiled, the rest were copied from previous compilation.
-    4 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  vers1.vcxproj -> C:\Users\mbe31\source\repos\vers1\Release\vers1.exe
