@@ -8,11 +8,18 @@ class FDM
 	protected:
 		ParabolicPDE2D* PDE;
 
-		// Discretisating space
+		// Discretisating x
 		double xDomain; //Spatial extent [0, xDomain]
 		long xNumberSteps; // Number of steps for x
 		double xStepSize; // Calculated by xDomain/xNumberSteps
 		std::vector<double> xValues; //Stores coordinates of x
+
+		// Discretisating y
+		double yDomain; //Spatial eytent [0, yDomain]
+		long yNumberSteps; // Number of steps for y
+		double yStepSize; // Calculated by yDomain/yNumberSteps
+		std::vector<double> yValues; //Stores coordinates of y
+
 
 		// Discretisating time
 		double tDomain; // [0, tDomain]
@@ -21,7 +28,8 @@ class FDM
 
 		double tPrevious, tCurrent;
 
-		double r; // tStepSize / (xStepSize * xStepSize)
+		double rX; // tStepSize / (xStepSize * xStepSize)
+		double rY; // tStepSize / (xStepSize * xStepSize)
 		// Differencing coeffs
 		double alpha, beta, gamma;
 
@@ -29,8 +37,8 @@ class FDM
 		std::vector<double> oldResult; // N
 
 		// Constructor
-		FDM(double xDomain_, long xNumberSteps_, double tDomain_, long tNumberSteps_, ParabolicPDE2D* PDE_) : 
-			xDomain(xDomain_), xNumberSteps(xNumberSteps_), tDomain(tDomain_), tNumberSteps(tNumberSteps_), PDE(PDE_) {};
+		FDM(double xDomain_, long xNumberSteps_, double yDomain_, long yNumberSteps_, double tDomain_, long tNumberSteps_, ParabolicPDE2D* PDE_) :
+			xDomain(xDomain_), xNumberSteps(xNumberSteps_), yDomain(xDomain_), yNumberSteps(xNumberSteps_), tDomain(tDomain_), tNumberSteps(tNumberSteps_), PDE(PDE_) {};
 
 		// Override these virtual methods in derived classes for 
 		// specific FDM techniques, such as explicit Euler, Crank-Nicolson, etc.
@@ -46,27 +54,9 @@ class FDM
 		virtual void stepMarch() = 0;
 };
 
-class ExplicitMethod : public FDM
-{
-	protected:
-		void calculateStepSize();
-		void setInitialConditions();
-		void calculateBoundaryConditions();
-		void calculateInnerDomain();
-	
-	public:
-		ExplicitMethod(double xDomain_, long xNumberSteps_,	double tDomain_, long tNumberSteps_, ParabolicPDE2D* PDE_)
-			: FDM(xDomain_, xNumberSteps_,	tDomain_, tNumberSteps_, PDE_) 
-		{
-			calculateStepSize();
-			setInitialConditions();
-		}
-		
-		void stepMarch();
-};
 
 
-class CrankNicholson : public FDM
+class ADI : public FDM
 {
 protected:
 	void calculateStepSize();
@@ -80,8 +70,8 @@ protected:
 
 
 public:
-	CrankNicholson(double xDomain_, long xNumberSteps_, double tDomain_, long tNumberSteps_, ParabolicPDE2D* PDE_)
-		: FDM(xDomain_, xNumberSteps_, tDomain_, tNumberSteps_, PDE_)
+	ADI(double xDomain_, long xNumberSteps_, double yDomain_, long yNumberSteps_, double tDomain_, long tNumberSteps_, ParabolicPDE2D* PDE_)
+		: FDM(xDomain_, xNumberSteps_, yDomain_, yNumberSteps_, tDomain_, tNumberSteps_, PDE_)
 	{
 		calculateStepSize();
 		setInitialConditions();

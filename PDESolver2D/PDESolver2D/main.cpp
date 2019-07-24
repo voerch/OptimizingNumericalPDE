@@ -8,16 +8,15 @@ int main()
 	auto start = std::chrono::high_resolution_clock::now();
 
 	double x_dom = 1.0;     
-	long J = 20;
+	long J = 5;
+	double y_dom = 1.0;
+	long K = 5;
 	double t_dom = 0.075;
-	long N = 20;
+	long N = 5;
 
 	HeatEqn* heat_pde = new HeatEqn;
 
-	ExplicitMethod euler(x_dom, J, t_dom, N, heat_pde);
-	euler.stepMarch();
-
-	CrankNicholson cn(x_dom, J, t_dom, N, heat_pde);
+	ADI cn(x_dom, J, y_dom, K, t_dom, N, heat_pde);
 	cn.stepMarch();
 
 	delete heat_pde;

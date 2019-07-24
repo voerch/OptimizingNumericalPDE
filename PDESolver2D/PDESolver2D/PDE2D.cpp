@@ -21,5 +21,5 @@ double HeatEqn::BoundaryRight(double t, double x, double y) const
 double HeatEqn::InitCond(double x, double y) const
 {
 	//return sin(3.14159265358979323846 * x);
-	return 1;
+	return 1.0;
 }
