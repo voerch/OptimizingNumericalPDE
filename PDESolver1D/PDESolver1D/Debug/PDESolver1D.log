@@ -1,7 +1,5 @@
-﻿  PDE.cpp
-  main.cpp
-  FDM.cpp
-c:\users\mbe31\source\repos\pdesolver1d\fdm.cpp(89): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  PDESolver1D.vcxproj -> C:\Users\mbe31\source\repos\PDESolver1D\Debug\PDESolver1D.exe
-  PDESolver1D.vcxproj -> C:\Users\mbe31\source\repos\PDESolver1D\Debug\PDESolver1D.pdb (Partial PDB)
+﻿  OptimalGrid.cpp
+c:\users\mbe31\optimizingnumericalpde\pdesolver1d\pdesolver1d\optimalgrid.cpp(90): warning C4018: '<': signed/unsigned mismatch
+c:\users\mbe31\optimizingnumericalpde\pdesolver1d\pdesolver1d\optimalgrid.cpp(72): warning C4101: 'AnalyticalSol': unreferenced local variable
+  PDESolver1D.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDESolver1D\Debug\PDESolver1D.exe
+  PDESolver1D.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDESolver1D\Debug\PDESolver1D.pdb (Partial PDB)

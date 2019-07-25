@@ -22,6 +22,7 @@
     <ClCompile Include="FDM.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PDE.cpp" />
+    <ClCompile Include="OptimalGrid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FDM.h" />

@@ -1,6 +1,6 @@
 #include "FDM.h"
 #include <fstream>
-
+using namespace std;
 
 void FDM::ThomasAlgorithm(const std::vector<double>& a, const std::vector<double>& b, const std::vector<double>& c, const std::vector<double>& d, std::vector<double>& f)
 {
@@ -45,16 +45,25 @@ void ADI::setInitialConditions()
 
 	oldResult.resize(xNumberSteps, 0.0);
 	newResult.resize(xNumberSteps, 0.0);
+
 	xValues.resize(xNumberSteps, 0.0);
 	yValues.resize(yNumberSteps, 0.0);
 	
+	HalfStep.resize(xNumberSteps, vector<double>(yNumberSteps, 0));
+	FullStep.resize(xNumberSteps, vector<double>(yNumberSteps, 0));
+
+
 	for (long xCounter = 0; xCounter < xNumberSteps; xCounter++)
 	{
 		currentX = static_cast<double>(xCounter) * xStepSize;
-		currentY = static_cast<double>(xCounter) * yStepSize;
 		xValues[xCounter] = currentX;
-		yValues[xCounter] = currentY;
-		newResult[xCounter] = PDE->InitCond(currentX, currentY);
+		for (long yCounter = 0; yCounter < yNumberSteps; yCounter++)
+		{
+			currentY = static_cast<double>(yCounter) * yStepSize;
+			yValues[yCounter] = currentY;
+			HalfStep[xCounter][yCounter] = 1;
+			FullStep[xCounter][yCounter] = 1;
+		}
 	}
 	
 	tPrevious = 0;
@@ -64,9 +73,18 @@ void ADI::setInitialConditions()
 
 void ADI::calculateBoundaryConditions()
 {
-	newResult[0] = PDE->BoundaryLeft(tPrevious, xValues[0], yValues[0]);
-	newResult[xNumberSteps - 1] = PDE->BoundaryRight(tPrevious, xValues[xNumberSteps - 1], yValues[yNumberSteps - 1]);
+	for (long xCounter = 1; xCounter < xNumberSteps; xCounter++)
+	{
+		HalfStep[0][xCounter] = 0;
+		HalfStep[xNumberSteps - 1][xCounter] = 0;
+		HalfStep[xCounter][0] = 0;
+		HalfStep[xCounter][xNumberSteps - 1] = 0;
 
+		FullStep[0][xCounter] = 0;
+		FullStep[xNumberSteps - 1][xCounter] = 0;
+		FullStep[xCounter][0] = 0;
+		FullStep[xCounter][xNumberSteps - 1] = 0;
+	}
 }
 
 // Loops through x values on a given time.
@@ -79,13 +97,22 @@ void ADI::calculateInnerDomain()
 	LowerDiag.resize(xNumberSteps - 1, alpha);
 	Diag.resize(xNumberSteps, beta);
 	UpperDiag.resize(xNumberSteps - 1, gamma);
-	
-	//new result becomes n + 1/2
-	for (long iCounter = 1; iCounter < xNumberSteps - 1; iCounter++)
-	{		
-		oldResult[iCounter] = rY * newResult[iCounter + 1] + (1 - 2.0 *rY) * newResult[iCounter] + (rY) * newResult[iCounter - 1];
+
+	//new result becomes n + 1/2 and fills half step.
+	for (long yCounter = 1; yCounter < yNumberSteps - 1; yCounter++)
+	{
+		for (long xCounter = 1; xCounter < xNumberSteps - 1; xCounter++)
+		{
+			oldResult[xCounter] = rY * FullStep[xCounter][yCounter + 1] + (1 - 2.0 *rY) * FullStep[xCounter][yCounter] + (rY)* FullStep[xCounter][yCounter - 1];
+		}
+
+		ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+
+		for (long xCounter = 1; xCounter < xNumberSteps - 1; xCounter++)
+		{
+			HalfStep[xCounter][yCounter] = newResult[xCounter];
+		}
 	}
-	ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 
 	alpha = -rY;
 	beta = 1.0 + (2.0 * rY);
@@ -95,11 +122,20 @@ void ADI::calculateInnerDomain()
 	Diag.assign(yNumberSteps, beta);
 	UpperDiag.assign(yNumberSteps - 1, gamma);
 	//new result becomes n + 1
-	for (long iCounter = 1; iCounter < xNumberSteps - 1; iCounter++)
+	for (long xCounter = 1; xCounter < xNumberSteps - 1; xCounter++)
 	{
-		oldResult[iCounter] = rX * newResult[iCounter + 1] + (1 - 2.0 *rX) * newResult[iCounter] + (rX)* newResult[iCounter - 1];
+		for (long yCounter = 1; yCounter < yNumberSteps - 1; yCounter++)
+		{
+			oldResult[yCounter] = rX * FullStep[xCounter][yCounter + 1] + (1 - 2.0 *rX) * FullStep[xCounter][yCounter] + (rX)* FullStep[xCounter][yCounter - 1];
+		}
+
+		ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+
+		for (long yCounter = 1; yCounter < yNumberSteps - 1; yCounter++)
+		{
+			FullStep[xCounter][yCounter] = newResult[xCounter];
+		}
 	}
-	ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 }
 
 // Loops through time.
@@ -107,21 +143,18 @@ void ADI::stepMarch()
 {
 	std::ofstream grid("ADIGrid.csv");
 	//grid << "xValues,tValues,Solution" << std::endl;
-	while (tCurrent < tDomain)
+	while (tCurrent <= tDomain)
 	{
-		tCurrent = tPrevious + tStepSize;
-		calculateBoundaryConditions();
-		
 		for (int xCounter = 0; xCounter < xNumberSteps; xCounter++)
 		{
 			for (int yCounter = 0; yCounter < yNumberSteps; yCounter++)
 			{
-				grid << xValues[xCounter] << "," << yValues[yCounter] << "," << tPrevious << "," << newResult[yNumberSteps - 1] << std::endl;
+				grid << xValues[xCounter] << "," << yValues[yCounter] << "," << tCurrent << "," << FullStep[xCounter][yCounter] << std::endl;
 			}
-			calculateInnerDomain();		
 		}
-
-		tPrevious = tCurrent;
+		calculateBoundaryConditions();
+		calculateInnerDomain();
+		tCurrent += tStepSize;
 	}
 
 	grid.close();

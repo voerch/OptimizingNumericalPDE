@@ -68,6 +68,8 @@ protected:
 	std::vector<double> Diag;
 	std::vector<double> UpperDiag;
 
+	std::vector<std::vector<double>> HalfStep;
+	std::vector<std::vector<double>> FullStep;
 
 public:
 	ADI(double xDomain_, long xNumberSteps_, double yDomain_, long yNumberSteps_, double tDomain_, long tNumberSteps_, ParabolicPDE2D* PDE_)
@@ -75,6 +77,7 @@ public:
 	{
 		calculateStepSize();
 		setInitialConditions();
+
 	}
 
 	void stepMarch();

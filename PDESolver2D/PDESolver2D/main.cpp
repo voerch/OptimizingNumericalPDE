@@ -8,16 +8,16 @@ int main()
 	auto start = std::chrono::high_resolution_clock::now();
 
 	double x_dom = 1.0;     
-	long J = 5;
+	long J = 10;
 	double y_dom = 1.0;
-	long K = 5;
+	long K = 10;
 	double t_dom = 0.075;
-	long N = 5;
+	long N = 10;
 
 	HeatEqn* heat_pde = new HeatEqn;
 
-	ADI cn(x_dom, J, y_dom, K, t_dom, N, heat_pde);
-	cn.stepMarch();
+	ADI adi(x_dom, J, y_dom, K, t_dom, N, heat_pde);
+	adi.stepMarch();
 
 	delete heat_pde;
 

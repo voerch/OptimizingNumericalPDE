@@ -3,10 +3,10 @@
 #include "Option.h"
 #include <iostream>
 #include <chrono>
+#include <fstream>
 
 int main()
 {
-
 	//double x_dom = 1.0;     
 	//long J = 20;
 	//double t_dom = 0.075;
@@ -21,42 +21,52 @@ int main()
 	//cn.stepMarch();
 
 	//delete heat_pde;
-
-	double K = 0.5;  // Strike price
-	double r = 0.05;   // Risk-free rate (5%)
-	double v = 0.2;    // Volatility of the underlying (20%)
-	double T = 1.00;    // One year until expiry
-
-	double x_dom = 1.0;       // Spot goes from [0.0, 1.0]
-	unsigned long J = 20;
-	double t_dom = T;         // Time period as for the option
-	unsigned long N = 20;
-
-	VanillaOption* callOption = new EurCall(K, r, T, v);
-	BlackScholesPDE* bsPDE = new BlackScholesPDE(callOption);
-
-	auto start = std::chrono::high_resolution_clock::now();
-
-	ExplicitMethod euler(x_dom, J, t_dom, N, bsPDE);
-	euler.stepMarch();
-
-	auto finish = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> elapsed = finish - start;
-	std::cout << "Explicit Method elapsed time: " << elapsed.count() << std::endl;
 	
-	auto begin = std::chrono::high_resolution_clock::now();
+	std::ofstream timing("timing.csv");
+	timing << "timeCounter,ExplicitTiming,CNTiming" << std::endl;
+	for (int timeCounter = 0; timeCounter < 100; timeCounter++)
+	{
+		
+		double K = 0.5;  // Strike price
+		double r = 0.05;   // Risk-free rate (5%)
+		double v = 0.2;    // Volatility of the underlying (20%)
+		double T = 1.00;    // One year until expiry
 
-	CrankNicholson cn(x_dom, J, t_dom, N, bsPDE);
-	cn.stepMarch();
+		double x_dom = 1.0;       // Spot goes from [0.0, 1.0]
+		unsigned long J = 20;
+		double t_dom = T;         // Time period as for the option
+		unsigned long N = 20;
 
-	auto end = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> elapsed1 = end - begin;
-	std::cout << "CN Method elapsed time: " << elapsed1.count() << std::endl;
+		VanillaOption* callOption = new EurCall(K, r, T, v);
+		BlackScholesPDE* bsPDE = new BlackScholesPDE(callOption);
 
-	std::cout << callOption->PriceByBS(1.0) << std::endl;
+		auto start = std::chrono::high_resolution_clock::now();
 
-	delete bsPDE;
+		ExplicitMethod euler(x_dom, J, t_dom, N, bsPDE);
+		euler.stepMarch();
 
+		auto finish = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> elapsed = finish - start;
+		//std::cout << "Explicit Method elapsed time: " << elapsed.count() << std::endl;
+
+		auto begin = std::chrono::high_resolution_clock::now();
+
+		CrankNicholson cn(x_dom, J, t_dom, N, bsPDE);
+		cn.stepMarch();
+
+		auto end = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> elapsed1 = end - begin;
+		//std::cout << "CN Method elapsed time: " << elapsed1.count() << std::endl;
+
+		timing << timeCounter << "," << elapsed.count() << "," << elapsed1.count() << std::endl;
+
+		//std::cout << callOption->PriceByBS(1.0) << std::endl;
+
+		delete bsPDE;
+	
+	}
+
+	timing.close();
 	system("pause");
 	return 0;
 

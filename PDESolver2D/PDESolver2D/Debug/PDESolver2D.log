@@ -1,4 +1,6 @@
-﻿  FDM.cpp
+﻿  main.cpp
+  FDM.cpp
 c:\users\mbe31\optimizingnumericalpde\pdesolver2d\pdesolver2d\fdm.cpp(18): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   PDESolver2D.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDESolver2D\Debug\PDESolver2D.exe
   PDESolver2D.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDESolver2D\Debug\PDESolver2D.pdb (Partial PDB)

@@ -7,9 +7,8 @@ Purpose of this project to optimize numerical solutions of parabolic PDEs by tes
 
 #TODO
 ADI bitir
-
 bencharmak case analytical solution bul heat IC 1 BC 0 bak (204 duffy fdm)
-Farkli grid boyutlarina gore error hesapla Nt Nx ve result/error 3d grafik hazirla optimal grid boyutu bul optimum step size c++ duffy 710
+Farkli grid boyutlarina gore error hesapla Nt Nx ve result/error 3d grafik hazirla optimal grid boyutu bul optimum step size
 Timing output nasi olacak farkli caseler simulationlar daha zor
 Timinge gore heatmap hazirla
 farkli tridiagonal solverlara bak thomas algo cyclic reduction double sweep

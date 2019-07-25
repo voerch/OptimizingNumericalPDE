@@ -1,6 +1,6 @@
 #include "FDM.h"
 #include <fstream>
-
+#include <iostream>
 void ExplicitMethod::calculateStepSize() 
 {
 	xStepSize = xDomain / static_cast<double>(xNumberSteps-1);
@@ -45,6 +45,7 @@ void ExplicitMethod::calculateInnerDomain()
 		beta = (xStepSize * xStepSize) - (2.0 * TempVar) + (tStepSize * xStepSize * xStepSize * PDE->ZeroCoeff(tPrevious, xValues[xCounter]));
 		gamma = TempVar + TempVarTwo;
 
+
 		newResult[xCounter] = ((alpha * oldResult[xCounter - 1]) + (beta * oldResult[xCounter]) + (gamma * oldResult[xCounter + 1])) / (xStepSize * xStepSize) - (tStepSize * PDE->SourceCoeff(tPrevious, xValues[xCounter]));
 
 	}
@@ -69,7 +70,8 @@ void ExplicitMethod::stepMarch()
 		oldResult = newResult;
 		tPrevious = tCurrent;
 	}
-
+	//std::cout << oldResult[5] << std::endl;
+	//std::cout << newResult[5] << std::endl;
 	grid.close();
 }
 

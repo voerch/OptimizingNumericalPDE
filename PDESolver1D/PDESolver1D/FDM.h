@@ -25,8 +25,8 @@ class FDM
 		// Differencing coeffs
 		double alpha, beta, gamma;
 
-		std::vector<double> newResult; // N+1
-		std::vector<double> oldResult; // N
+	
+		
 
 		// Constructor
 		FDM(double xDomain_, long xNumberSteps_, double tDomain_, long tNumberSteps_, ParabolicPDE* PDE_) : 
@@ -42,6 +42,8 @@ class FDM
 		void ThomasAlgorithm(const std::vector<double>& a,	const std::vector<double>& b, const std::vector<double>& c,	const std::vector<double>& d, std::vector<double>& f);
 
 	public:
+		std::vector<double> oldResult; // N
+		std::vector<double> newResult; // N+1
 		// Carry out the actual time-stepping
 		virtual void stepMarch() = 0;
 };
