@@ -6,6 +6,10 @@ Purpose of this project to optimize numerical solutions of parabolic PDEs by tes
 The idea of this project is to study how to take advantage of this parallelism and explore how much faster we can make these calculations.
 
 # TODO #
+
+delta s + random 10^-20 prevent undesired optimization 
+log spot bs bak compare errors
+
 error için precision arttır
 Generalize ADI implement multi assset BS
 
