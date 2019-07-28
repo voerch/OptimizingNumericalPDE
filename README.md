@@ -6,12 +6,14 @@ Purpose of this project to optimize numerical solutions of parabolic PDEs by tes
 The idea of this project is to study how to take advantage of this parallelism and explore how much faster we can make these calculations.
 
 # TODO #
-
+yazmaya başla
+timing average al
 delta s + random 10^-20 prevent undesired optimization 
 log spot bs bak compare errors
-
+black scholes derivation
 error için precision arttır
 Generalize ADI implement multi assset BS
+duffy optimal grid
 
 farkli tridiagonal solverlara bak thomas algo cyclic reduction double sweep
 Intel numerical library for tridiagonal systems
@@ -19,7 +21,6 @@ Intel numerical library for tridiagonal systems
 32 bit vs 64  bit
 Intel compiler vs VSCompiler vs gcc
 Optimization switches
-
 OpenMP
 Multithreading (HPC slidesa bak)
 AVX/Intrinsics  (internal to the CPU, probably only through a Visual Studio compilation switch, see SIMD Registers section in attached slides) 
