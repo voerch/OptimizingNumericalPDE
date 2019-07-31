@@ -5,14 +5,22 @@ MSc Mathematical Finance
 Purpose of this project to optimize numerical solutions of parabolic PDEs by testing high performance computing techniques and comparing compilers/os/32bit/64bit.
 The idea of this project is to study how to take advantage of this parallelism and explore how much faster we can make these calculations.
 
+# TODO Derivation #
+black scholes pde derivation
+black scholes anal sol.
+heat equation separation of variables
+explicit
+implicit
+theta
+Generalize ADI
+
 # TODO #
-yazmaya başla
+
 timing average al
 delta s + random 10^-20 prevent undesired optimization 
-log spot bs bak compare errors
-black scholes derivation
+log spot bs bak compare errors 
 error için precision arttır
-Generalize ADI implement multi assset BS
+ implement multi assset BS
 duffy optimal grid
 
 farkli tridiagonal solverlara bak thomas algo cyclic reduction double sweep

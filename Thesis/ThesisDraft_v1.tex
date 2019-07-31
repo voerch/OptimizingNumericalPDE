@@ -41,11 +41,11 @@
 Mathematical Finance MSc Dissertation MTH775P, 2018/19 
 		\\
         \Huge
-        \textbf{Disquisitiones Arithmetic\ae}
+        \textbf{Accelerated Grids}
         \\        
         \vspace{0.4cm}
         \LARGE
-        High Performance Computing techniques for numerically solving financial PDEs
+        Optimizing financial partial differential equation solvers using high performance computing techniques.
         \\        
         \vspace{0.4cm}        
         \textbf{Mustafa Berke Erdis, ID 180883925}% student name and number        
@@ -92,7 +92,7 @@ Referenced text has been flagged by:
 
 \thispagestyle{empty}
         \begin{flushright}
-                This work is dedicated to my dog Charles Frederick.
+                This work is dedicated to my family.
         \end{flushright}
 \vspace{\stretch{2}}\null
 
@@ -127,28 +127,11 @@ Queen Mary University of London\\
 
 \chapter{Introduction}
 
-\section{Parabolic Partial Differential Equations}\label{Parabolic Partial Differential Equations}
-Since the foundation of the world humanity tried to understand and model the nature. Differential equations serves this purpose by enabling us to describe natural phenomena for instance, heat, sound and fluid flow. Field of differential equations is divided into two main categories, ordinary differential equations(ODEs) and partial differential equations(PDEs). ODEs depend only on one independent variable where PDEs there are more than one independent variables. 
+\section{Pricing Financial Derivatives}\label{Pricing Financial Derivatives}
+\subsection{The Risk Neutral Approach}
 
-
-These equations (ordinary as well as partial differential equations) arise in the study of rates of change and of quantities or things that change
-
-Partial differential equations can be classified, for example if we can write a 2nd order linear PDEs of two independent variables as:
-
-$ au_{xx} + bu_{xy} + cu_{yy} + du_x + eu_y + fu + g = 0 $
-
-$ b^2 - 4ac > 0 $ : Hyperbolic partial differential equation
-
-$ b^2 - 4ac = 0 $ : Parabolic partial differential equation
-
-$ b^2 - 4ac < 0 $ : Elliptic partial differential equation, generally associated with equilibrium steady state problems.
-
-\subsection{Heat Equation}
-
+$ S(t) = S(0) exp((\alpha - \sigma^2/2)t + \sigma B(t)) $
 \subsection{Black-Scholes Equation}
-The mathematical theory of partial differential equations describing financial markets plays an important role in mathematical finance.
-
-A convection–diffusion equation inndimension contains both diffusion and convection termsand  these  equations  have  received  much  attention  in  the  engineering  literature  in  the  last50 years because they model many kinds of physical problems such as the Navier–Stokesequation and its specialisations. In financial engineering we view the Black–Scholes equationas an instance of a convection–diffusion equation.
 
 
 \section{Numerical Methods for Parabolic Differential Equations}

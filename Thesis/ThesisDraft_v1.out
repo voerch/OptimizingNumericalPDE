@@ -1,6 +1,6 @@
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.1.1}{Parabolic Partial Differential Equations}{chapter.1}% 2
-\BOOKMARK [2][-]{subsection.1.1.1}{Heat Equation}{section.1.1}% 3
+\BOOKMARK [1][-]{section.1.1}{Pricing Financial Derivatives}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{The Risk Neutral Approach}{section.1.1}% 3
 \BOOKMARK [2][-]{subsection.1.1.2}{Black-Scholes Equation}{section.1.1}% 4
 \BOOKMARK [1][-]{section.1.2}{Numerical Methods for Parabolic Differential Equations}{chapter.1}% 5
 \BOOKMARK [2][-]{subsection.1.2.1}{Explicit Method}{section.1.2}% 6
