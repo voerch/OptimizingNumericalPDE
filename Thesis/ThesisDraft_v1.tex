@@ -9,6 +9,10 @@
 \usepackage{amsthm} % for theorems, lemmas etc
 \usepackage{amsfonts}
 \usepackage{lipsum} % to generate the lipsum random text in the sample
+\usepackage{tikz}
+\usepackage{siunitx}
+
+\usetikzlibrary{calc,decorations.pathmorphing,patterns}
 
 
 \usepackage[colorlinks=true, urlcolor=blue, pdfborder={0 0 0}]{hyperref}
@@ -45,7 +49,7 @@ Mathematical Finance MSc Dissertation MTH775P, 2018/19
         \\        
         \vspace{0.4cm}
         \LARGE
-        Optimizing financial partial differential equation solvers using high performance computing techniques.
+        Optimizing Solvers for Financial Partial Differential Equations
         \\        
         \vspace{0.4cm}        
         \textbf{Mustafa Berke Erdis, ID 180883925}% student name and number        
@@ -53,7 +57,7 @@ Mathematical Finance MSc Dissertation MTH775P, 2018/19
         \large Supervisor: Dr. Sebastian del Bano Rollin
         \\
         \vspace{0.9cm}
-        \includegraphics[scale=0.3]{QMCrest.png}
+        \includegraphics[scale=0.23]{QMCrest.png}
         \\
         \vspace{0.9cm}        
         \LARGE 
@@ -131,38 +135,7 @@ Queen Mary University of London\\
 \subsection{The Risk Neutral Approach}
 
 $ S(t) = S(0) exp((\alpha - \sigma^2/2)t + \sigma B(t)) $
-\subsection{Black-Scholes Equation}
-
-
-\section{Numerical Methods for Parabolic Differential Equations}
-Even if we can sometimes find analytical solutions of PDEs, generally it is impossible. Therefore we need to numerically solve the equation. Numerical partial differential equations is a large area of study. The subject includes components in the areas of applications, mathematics and computers. These three aspects of a problem are so strongly tied together that it is virtually impossible to consider the applied aspect of a problem without considering at least some of the mathematical counting aspects of that problem.[j.w. thomas]
-
- In most cases these equations are too complicated to be solved explicitly, therefore different methods of finding an approximate numerical solution is needed.
-
-The most common framework is finite difference method which tries to find approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. It is simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. The alternate direction implicit (ADI) method is used to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices \cite{thomas}. Finally, the Monte Carlo method is used to find the numerical solution when dimensions are too high by calculating an expectation (Feynman-Kac Theorem) \cite{klebaner}.
-
-The existing numerical methods for partial differential equations are all constrained by the computational complexity. Motivated by present results and methods employed in high performance computing, we believe there are interesting and challenging topics in numerical solutions of PDEs for finance.
-
-\subsection{Explicit Method}
-
-ADI Peaceman and Rachford in 1955 
-Operator splitting is a natural and old idea. When a PDE or system of PDEs contains different terms expressing different physics, it is natural to use different numerical methods for different physical processes. This can optimize and simplify the overall solution process. The idea was especially popularized in the context of the Navier-Stokes equations and reaction-diffusion PDEs. Common names for the technique are operator splitting, fractional step methods, and split-step methods. We shall stick to the former name. In the context of nonlinear differential equations, operator splitting can be used to isolate nonlinear terms and simplify the solution methods.
-
-A related technique, often known as dimensional splitting or alternating direction implicit (ADI) methods, is to split the spatial dimensions and solve a 2D or 3D problem as two or three consecutive 1D problems, but this type of splitting is not to be further considered here.
-
-\subsection{Implicit Method}
-
-\subsection{Theta Method and Crank-Nicholson Method}
-
-\subsection{Rannacher Trick}
-
-\subsection{Monte-Carlo Simulation}
-
-
-\section{Motivation for this work}
-The idea of this project is to study how to take advantage of this parallelism and explore how much faster we can make these calculations.
-\\
-Being fast when evaluating new information is crucial for operations of hedge funds and investment banks. The aim of this project is to utilize High Performance Computing techniques to speed up the existing numerical methods using hardware and software that can be installed in a trading floor. Industry experience is the driver for the project to make an impact.
+\subsection{Solving Financial Partial Differential Equations}
 
 \begin{theorem}[{\cite[Theorem 2.3]{Petri}, see also \cite[pg. 45]{BlackScholes}}]\label{PetriTheorem}
 The Gramm matrix for $E_8$ is:
@@ -180,49 +153,171 @@ $$
 $$
 \end{theorem}
 
-
 Recall the theorem of Petri \ref{PetriTheorem}
 Look at section \ref{contentsofthesis}.
 
-\subsection{The problem of numerical solutions}
-Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations.
-
-We plan to develop the methods used for heat equation (${u_t(x,t)=u_{xx}(x,t)}$) as our basis point. As we go further into the project, the plan is to extend to Black-Scholes model ($\frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} = r(V - S \frac{\partial V}{\partial S})$)  and variations of Black-Scholes with increasing complexity such as the Multi-Asset Black-Scholes Model and Heston Stochastic Volatility Model.
-
-First step is to write a simple version on a simple framework that can be calculated by hand and with Excel. Following the verifications, next step is porting the simple version in a high level programming language like python for prototyping and validating all calculations. The penultimate step is moving into a low level programming language such as C++ and utilize high performance computing principles.
-
-High performance computing techniques that can be implemented for CPUs are pipelining and use of SSE/SIMD\cite{kusswurm} registers with Advanced Vector Extensions(AVX 512), multithreading with Open Multi-Processing(OpenMP) and compiler intrinsics. In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of requirement of delicate memory management.
-
-The project will be finalized by comparing the efficiency and speed of different implementations.
 
 
-\subsection{Testing the High Performance Computing Techniques}
-\subsubsection{32 bit vs 64 bit}
-\lipsum[5]
-\subsubsection{Compilers VS/gcc/Intel}
-\lipsum[5]
-\subsubsection{AVX/Intrinsics}
-\lipsum[5]
-\subsubsection{Multithreading/OpenMP}
-\lipsum[5]	
-\subsubsection{CUDA}
-\lipsum[5]	
-\subsection{Timing the Code}
-\subsubsection{Windows API}
-\lipsum[5]
-\subsubsection{Chrono Library}
-\lipsum[5]
+\section{Finite Difference Methods}
+$ \frac{\partial u}{\partial t} = a(t,x) \frac{\partial^2 u}{\partial x^2} + b(t,x) \frac{\partial u}{\partial x} + c(t,x) u(t,x) + d(t,x) $
 
-\chapter{Work Done Optimizing}
+a(t,x) Diffusion coefficient
+b(t,x) Convection coefficient
+c(t,x) reaction coefficient
+d(t,x) source coefficient
 
-\section{Parallelizing Tridiagonal Systems}
+1st order Forward Difference
+$ \frac{\partial u}{\partial t} = \frac{u^{n+1}_i - u^n_i}{\Delta t} $
+
+1st order Central Difference 
+$ \frac{\partial u}{\partial x} = \frac{u^{n}_{i+1} - u^n_i}{\Delta t} $
+
+2nd order Central Difference 
+$ \frac{\partial^2 u}{\partial x^2} = \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2} $
+
+
+
+\subsection{Explicit Method}
+Explicit method is a forward time, central space scheme .
+
+Explicit method can be generalized as:
+$ u_j^{n+1} = \alpha u_{j-1}^{n} + \beta u_{j}^{n} + \gamma u_{j+1}^{n} $
+
+$ r = \frac{\delta t}{\delta x^2} $
+
+For heat equation:
+$ \alpha =  r, \beta = 1 - 2r, \gamma = r $
+
+For black-scholes equation:
+$ \alpha =  \frac{\sigma^2 j^2 \Delta t}{2} - \frac{r j \Delta t}{2}, \beta = 1 - \sigma^2 j^2 \Delta t - r \Delta t, \gamma = \frac{\sigma^2 j^2 \Delta t}{2} - \frac{r j \Delta t}{2} $
+
+\begin{tikzpicture}[decorate]
+
+ 
+ \filldraw[fill=red!80!white, draw=black,very thick] (5,5) circle (0.2cm);
+ \draw[line width=0.4mm] (5,4.8) -- (5,2.2);
+ \node at (5, 5.5) {$j, n+1$};
+ 
+
+ \filldraw[fill=red!80!white, draw=black,very thick] (5,2) circle (0.2cm);
+ \node at (5, 1.5) {$j, n$};
+ \draw[line width=0.4mm] (4.8,2) -- (2.2,2);
+ \filldraw[fill=red!80!white, draw=black,very thick] (2,2) circle (0.2cm);
+  \node at (2, 1.5) {$j-1, n$};
+ 
+ \draw[line width=0.4mm] (5.2,2) -- (7.8,2);
+ \filldraw[fill=red!80!white, draw=black,very thick] (8,2) circle (0.2cm);
+ \node at (8, 1.5) {$j+1, n$}; 
+  
+  
+ %\draw[line width=0.4mm] (5,1.8) -- (5,-0.8);
+ %\filldraw[fill=red!80!white, draw=black,very thick] (5,-1) circle (0.2cm);
+ %\node at (5, -1.5) {$j, n-1$};  
+
+
+
+
+ 
+\end{tikzpicture}
+
+\subsection{Implicit Method}
+
+\begin{tikzpicture}[decorate]
+
+ 
+ %\filldraw[fill=red!80!white, draw=black,very thick] (5,5) circle (0.2cm);
+ %\draw[line width=0.4mm] (5,4.8) -- (5,2.2);
+ %\node at (5, 5.5) {$j, n+1$};
+ 
+
+ \filldraw[fill=red!80!white, draw=black,very thick] (5,2) circle (0.2cm);
+ \node at (5, 2.5) {$j, n+1$};
+ \draw[line width=0.6mm] (4.8,2) -- (2.2,2);
+ \filldraw[fill=red!80!white, draw=black,very thick] (2,2) circle (0.2cm);
+  \node at (2, 2.5) {$j-1, n+1$};
+ 
+ \draw[line width=0.6mm] (5.2,2) -- (7.8,2);
+ \filldraw[fill=red!80!white, draw=black,very thick] (8,2) circle (0.2cm);
+ \node at (8, 2.5) {$j+1, n+1$}; 
+  
+  
+ \draw[line width=0.6mm] (5,1.8) -- (5,-0.8);
+ \filldraw[fill=red!80!white, draw=black,very thick] (5,-1) circle (0.2cm);
+ \node at (5, -1.5) {$j, n$};  
+ 
+\end{tikzpicture}
+
+\subsection{Theta Method and Crank-Nicholson Method}
+
+\begin{tikzpicture}[decorate]
+
+ 
+ %\filldraw[fill=red!80!white, draw=black,very thick] (5,5) circle (0.2cm);
+ %\draw[line width=0.4mm] (5,4.8) -- (5,2.2);
+ %\node at (5, 5.5) {$j, n+1$};
+ 
+
+ \filldraw[fill=red!80!white, draw=black,very thick] (5,2) circle (0.2cm);
+ \node at (5, 2.5) {$j, n+1$};
+ \draw[line width=0.6mm] (4.8,2) -- (2.2,2);
+ \filldraw[fill=red!80!white, draw=black,very thick] (2,2) circle (0.2cm);
+  \node at (2, 2.5) {$j-1, n+1$};
+ 
+ \draw[line width=0.6mm] (5.2,2) -- (7.8,2);
+ \filldraw[fill=red!80!white, draw=black,very thick] (8,2) circle (0.2cm);
+ \node at (8, 2.5) {$j+1, n+1$}; 
+  
+  
+  
+ \draw[line width=0.6mm] (5,1.8) -- (5,-0.8);
+ \filldraw[fill=red!80!white, draw=black,very thick] (5,-1) circle (0.2cm);
+ \node at (5, -1.5) {$j, n$};  
+
+\draw[line width=0.6mm] (4.8,-1) -- (2.2,-1);
+\filldraw[fill=red!80!white, draw=black,very thick] (2,-1) circle (0.2cm);
+ \node at (2, -1.5) {$j-1, n$};  
+
+\draw[line width=0.6mm] (5.2,-1) -- (7.8,-1);
+\filldraw[fill=red!80!white, draw=black,very thick] (8,-1) circle (0.2cm);
+ \node at (8, -1.5) {$j+1, n$};  
+ 
+\end{tikzpicture}
+
+\subsection{Alternating Direction Implicit Method}
+
+\subsection{Rannacher Trick}
+
+
+\section{Optimizations}
+
+\subsection{Compilers}
+\subsection{32 bit and 64 bit}
+
+\subsection{Optimization Switches}
+
+\subsection{Tridiagonal Solvers}
+
+\subsection{Threading}
+
+\subsection{OpenMP}
+\subsection{AVX and Intrinsics}
+\subsection{GPGPU}
+\subsection{Cloud Applications}
+
+\chapter{Optimization of Financial Partial Differential Equations}
+
+\section{Timing the Code}
+\subsection{Windows API}
+
+\subsection{Chrono Library}
+
 
 
 \chapter{Conclusions}
 
 
 \appendix
-\chapter{Implementation of the {\tt BarrierOptionCVA} class}
+\chapter{Implementation of the {\tt FiniteDifferenceMethod} class}
 \lipsum[100]
 \chapter[shorter running title]{Additional details on the Gundermanian determinant}
 \lipsum[100]
