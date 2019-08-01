@@ -32,7 +32,7 @@ double HeatEqn::InitCond(double x) const
 	//return 1;
 }
 
-double HeatEqn::HeatAnalyticalSolution(double t, double x)
+double HeatEqn::AnalyticSol(double t, double x)
 {
 	return exp(-t * pow(PI, 2))*sin(PI * x);
 }
@@ -64,4 +64,38 @@ double BlackScholesPDE::BoundaryRight(double t, double x) const
 double BlackScholesPDE::InitCond(double x) const
 {
 	return option->Payoff(x);
+}
+
+double BlackScholesPDE::AnalyticSol(double t, double x) const
+{
+	return option->PriceByBS(x);
+}
+
+double LogSpotBlackScholesPDE::DiffusionCoeff(double t, double x) const
+{
+	return -0.5 * option->sigma * option->sigma;
+}
+double LogSpotBlackScholesPDE::ConvectionCoeff(double t, double x) const
+{
+	return (0.5 * option->sigma * option->sigma) - option->interestRate;
+}
+double LogSpotBlackScholesPDE::ZeroCoeff(double t, double x) const
+{
+	return option->interestRate;
+}
+double LogSpotBlackScholesPDE::SourceCoeff(double t, double x) const
+{
+	return 0.0;
+}
+double LogSpotBlackScholesPDE::BoundaryLeft(double t, double x) const
+{
+	return 0.0;
+}
+double LogSpotBlackScholesPDE::BoundaryRight(double t, double x) const
+{
+	return (exp(x) - (option->strike)*exp(-(option->interestRate)*((option->timeToExpiry) - t)));
+}
+double LogSpotBlackScholesPDE::InitCond(double x) const
+{
+	return option->Payoff(exp(x));
 }

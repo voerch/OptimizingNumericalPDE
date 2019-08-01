@@ -1,10 +1,19 @@
 #include "FDM.h"
 #include <fstream>
 #include <iostream>
+#include <random>
+
+using namespace std;
+
 void ExplicitMethod::calculateStepSize() 
 {
-	xStepSize = xDomain / static_cast<double>(xNumberSteps-1);
+	xStepSize = xDomain / static_cast<double>(xNumberSteps - 1);
 	tStepSize = tDomain / static_cast<double>(tNumberSteps-1);
+
+	mt19937 RandomEngine(0);
+	uniform_real_distribution<double> RandomSmallNumber(0.0, 0.000000000000000000001);
+	xStepSize += RandomSmallNumber(RandomEngine);
+	tStepSize += RandomSmallNumber(RandomEngine);
 }
 
 void ExplicitMethod::setInitialConditions() 
@@ -55,7 +64,7 @@ void ExplicitMethod::calculateInnerDomain()
 void ExplicitMethod::stepMarch()
 {
 	std::ofstream grid("ExplicitGrid.csv");
-	//grid << "xValues,tValues,Solution" << std::endl;
+	grid << "xValues,tValues,Solution" << std::endl;
 	while (tCurrent < tDomain)
 	{
 		tCurrent = tPrevious + tStepSize;
@@ -106,16 +115,18 @@ void CrankNicholson::calculateStepSize()
 {
 	xStepSize = xDomain / static_cast<double>(xNumberSteps - 1);
 	tStepSize = tDomain / static_cast<double>(tNumberSteps - 1);
+
+	mt19937 RandomEngine(0);
+	uniform_real_distribution<double> RandomSmallNumber(0.0, 0.000000000000000000001);
+	xStepSize += RandomSmallNumber(RandomEngine);
+	tStepSize += RandomSmallNumber(RandomEngine);
+
 	r = tStepSize / (xStepSize * xStepSize);
 }
 
 void CrankNicholson::setInitialConditions()
 {
 	double currentX = 0;
-
-	//a.resize(xNumberSteps - 1, -r / 2.0);
-	//b.resize(xNumberSteps, 1.0 + r);
-	//c.resize(xNumberSteps - 1, -r / 2.0);
 
 	LowerDiag.resize(xNumberSteps - 1, 0.0);
 	Diag.resize(xNumberSteps, 0.0);
@@ -176,7 +187,7 @@ void CrankNicholson::calculateInnerDomain()
 void CrankNicholson::stepMarch()
 {
 	std::ofstream grid("CNGrid.csv");
-	//grid << "xValues,tValues,Solution" << std::endl;
+	grid << "xValues,tValues,Solution" << std::endl;
 	while (tCurrent < tDomain)
 	{
 		tCurrent = tPrevious + tStepSize;

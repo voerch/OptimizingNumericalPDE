@@ -14,6 +14,7 @@ public:
 	virtual double BoundaryLeft(double t, double x) const = 0;
 	virtual double BoundaryRight(double t, double x) const = 0;
 	virtual double InitCond(double x) const = 0;
+	virtual double AnalyticSol(double t, double x) const = 0;
 };
 
 // Implementing Heat Equation
@@ -29,7 +30,7 @@ class HeatEqn : public ParabolicPDE
 	double BoundaryRight(double t, double x) const;
 	double InitCond(double x) const;
 public:
-	double HeatAnalyticalSolution(double t, double x);
+	double AnalyticSol(double t, double x);
 };
 
 // Implementing Black Scholes PDE
@@ -47,4 +48,22 @@ public:
 	double BoundaryLeft(double t, double x) const;
 	double BoundaryRight(double t, double x) const;
 	double InitCond(double x) const;
+	double AnalyticSol (double t, double x) const;
+};
+
+class LogSpotBlackScholesPDE : public ParabolicPDE
+{
+public:
+	VanillaOption* option;
+	LogSpotBlackScholesPDE(VanillaOption* option_) : option(option_) {};
+
+	double DiffusionCoeff(double t, double x) const;
+	double ConvectionCoeff(double t, double x) const;
+	double ZeroCoeff(double t, double x) const;
+	double SourceCoeff(double t, double x) const;
+
+	double BoundaryLeft(double t, double x) const;
+	double BoundaryRight(double t, double x) const;
+	double InitCond(double x) const;
+
 };

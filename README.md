@@ -15,12 +15,11 @@ theta
 Generalize ADI
 
 # TODO #
-
-timing average al
-delta s + random 10^-20 prevent undesired optimization 
+ 
 log spot bs bak compare errors 
-error için precision arttır
- implement multi assset BS
+
+
+implement multi assset BS
 duffy optimal grid
 
 farkli tridiagonal solverlara bak thomas algo cyclic reduction double sweep
