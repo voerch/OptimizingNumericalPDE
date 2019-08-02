@@ -1,0 +1,4 @@
+﻿  FDM.cpp
+c:\users\mbe31\source\repos\pde1dsolver\pde1dsolver\fdm.cpp(100): warning C4018: '<': signed/unsigned mismatch
+  PDE1DSolver.vcxproj -> c:\users\mbe31\source\repos\PDE1DSolver\Debug\PDE1DSolver.exe
+  PDE1DSolver.vcxproj -> c:\users\mbe31\source\repos\PDE1DSolver\Debug\PDE1DSolver.pdb (Partial PDB)
