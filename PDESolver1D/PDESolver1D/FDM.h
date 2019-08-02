@@ -24,9 +24,7 @@ class FDM
 		double r; // tStepSize / (xStepSize * xStepSize)
 		// Differencing coeffs
 		double alpha, beta, gamma;
-
 	
-		
 
 		// Constructor
 		FDM(double xDomain_, long xNumberSteps_, double tDomain_, long tNumberSteps_, ParabolicPDE* PDE_) : 
