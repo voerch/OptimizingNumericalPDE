@@ -1,0 +1,38 @@
+\begin{thebibliography}{1}
+
+\bibitem{Thalesians}
+Saeed Amen.
+\newblock {\em Trading Thalesians: What the Ancient World Can Teach Us About
+  Trading Today}, pages 39--60.
+\newblock Palgrave Macmillan UK, London, 2014.
+
+\bibitem{BS}
+Fischer Black and Myron Scholes.
+\newblock The pricing of options and corporate liabilities.
+\newblock {\em Journal of Political Economy}, 81(3):637--654, 1973.
+
+\bibitem{cn}
+J.~Crank and P.~Nicolson.
+\newblock A practical method for numerical evaluation of solutions of partial
+  differential equations of the heat-conduction type.
+\newblock {\em Advances in Computational Mathematics}, 6(1):207--226, Dec 1996.
+
+\bibitem{peace}
+D.~W. Peaceman and H.~H. Rachford.
+\newblock The numerical solution of parabolic and elliptic differential
+  equations.
+\newblock {\em Journal of the Society for Industrial and Applied Mathematics},
+  3(1):28--41, 1955.
+
+\bibitem{BM}
+Sriram Ramaswamy.
+\newblock Pollen grains, random walks and einstein.
+\newblock {\em Resonance}, 5, 03 2000.
+
+\bibitem{thomas}
+Llewellyn~Hilleth Thomas.
+\newblock Elliptic problems in linear difference equations over a network.
+\newblock {\em Watson Sci. Comput. Lab. Rept., Columbia University, New York},
+  1, 1949.
+
+\end{thebibliography}

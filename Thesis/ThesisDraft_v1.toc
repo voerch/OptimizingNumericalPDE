@@ -1,27 +1,26 @@
-\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}
-\contentsline {section}{\numberline {1.1}Pricing Financial Derivatives}{7}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}The Risk Neutral Approach}{7}{subsection.1.1.1}
-\contentsline {subsection}{\numberline {1.1.2}Solving Financial Partial Differential Equations}{7}{subsection.1.1.2}
-\contentsline {section}{\numberline {1.2}Finite Difference Methods}{8}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Explicit Method}{8}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}Implicit Method}{9}{subsection.1.2.2}
-\contentsline {subsection}{\numberline {1.2.3}Theta Method and Crank-Nicholson Method}{9}{subsection.1.2.3}
-\contentsline {subsection}{\numberline {1.2.4}Alternating Direction Implicit Method}{10}{subsection.1.2.4}
-\contentsline {subsection}{\numberline {1.2.5}Rannacher Trick}{10}{subsection.1.2.5}
-\contentsline {section}{\numberline {1.3}Optimizations}{10}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}Compilers}{10}{subsection.1.3.1}
-\contentsline {subsection}{\numberline {1.3.2}32 bit and 64 bit}{10}{subsection.1.3.2}
-\contentsline {subsection}{\numberline {1.3.3}Optimization Switches}{10}{subsection.1.3.3}
-\contentsline {subsection}{\numberline {1.3.4}Tridiagonal Solvers}{10}{subsection.1.3.4}
-\contentsline {subsection}{\numberline {1.3.5}Threading}{10}{subsection.1.3.5}
-\contentsline {subsection}{\numberline {1.3.6}OpenMP}{10}{subsection.1.3.6}
-\contentsline {subsection}{\numberline {1.3.7}AVX and Intrinsics}{10}{subsection.1.3.7}
-\contentsline {subsection}{\numberline {1.3.8}GPGPU}{10}{subsection.1.3.8}
-\contentsline {subsection}{\numberline {1.3.9}Cloud Applications}{10}{subsection.1.3.9}
-\contentsline {chapter}{\numberline {2}Optimization of Financial Partial Differential Equations}{11}{chapter.2}
-\contentsline {section}{\numberline {2.1}Timing the Code}{11}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Windows API}{11}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Chrono Library}{11}{subsection.2.1.2}
-\contentsline {chapter}{\numberline {3}Conclusions}{12}{chapter.3}
-\contentsline {chapter}{\numberline {A}Implementation of the {\tt FiniteDifferenceMethod} class}{13}{appendix.A}
-\contentsline {chapter}{\numberline {B}shorter running title}{14}{appendix.B}
+\contentsline {chapter}{\numberline {1}Introduction}{8}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Pricing Financial Derivatives}{9}{section.1.1}% 
+\contentsline {subsection}{\numberline {1.1.1}The Risk Neutral Approach}{9}{subsection.1.1.1}% 
+\contentsline {subsection}{\numberline {1.1.2}Solving Financial Partial Differential Equations}{11}{subsection.1.1.2}% 
+\contentsline {section}{\numberline {1.2}Finite Difference Methods}{13}{section.1.2}% 
+\contentsline {subsection}{\numberline {1.2.1}Explicit Method}{14}{subsection.1.2.1}% 
+\contentsline {subsection}{\numberline {1.2.2}Crank-Nicholson Method}{16}{subsection.1.2.2}% 
+\contentsline {subsection}{\numberline {1.2.3}Rannacher Trick}{18}{subsection.1.2.3}% 
+\contentsline {subsection}{\numberline {1.2.4}Alternating Direction Implicit Method}{18}{subsection.1.2.4}% 
+\contentsline {section}{\numberline {1.3}Optimizations}{20}{section.1.3}% 
+\contentsline {subsection}{\numberline {1.3.1}Compilers}{20}{subsection.1.3.1}% 
+\contentsline {subsection}{\numberline {1.3.2}32 bit and 64 bit}{20}{subsection.1.3.2}% 
+\contentsline {subsection}{\numberline {1.3.3}Optimization Switches}{20}{subsection.1.3.3}% 
+\contentsline {subsection}{\numberline {1.3.4}Tridiagonal Solvers}{20}{subsection.1.3.4}% 
+\contentsline {subsection}{\numberline {1.3.5}Threading}{20}{subsection.1.3.5}% 
+\contentsline {subsection}{\numberline {1.3.6}OpenMP}{20}{subsection.1.3.6}% 
+\contentsline {subsection}{\numberline {1.3.7}AVX and Intrinsics}{20}{subsection.1.3.7}% 
+\contentsline {subsection}{\numberline {1.3.8}GPGPU}{21}{subsection.1.3.8}% 
+\contentsline {subsection}{\numberline {1.3.9}Cloud Applications}{21}{subsection.1.3.9}% 
+\contentsline {chapter}{\numberline {2}Optimization of Financial PDEs}{22}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Timing the Code}{23}{section.2.1}% 
+\contentsline {subsection}{\numberline {2.1.1}Windows API}{23}{subsection.2.1.1}% 
+\contentsline {subsection}{\numberline {2.1.2}Chrono Library}{23}{subsection.2.1.2}% 
+\contentsline {chapter}{\numberline {3}Conclusions}{24}{chapter.3}% 
+\contentsline {chapter}{\numberline {A}Implementation of the {\tt FiniteDifferenceMethod} class}{25}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}shorter running title}{26}{appendix.B}% 

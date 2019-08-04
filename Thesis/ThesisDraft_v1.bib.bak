@@ -1,0 +1,104 @@
+@article{BS,
+author = {Black, Fischer and Scholes, Myron},
+title = {The Pricing of Options and Corporate Liabilities},
+journal = {Journal of Political Economy},
+volume = {81},
+number = {3},
+pages = {637-654},
+year = {1973},
+doi = {10.1086/260062},
+
+URL = { 
+        https://doi.org/10.1086/260062
+    
+},
+eprint = { 
+        https://doi.org/10.1086/260062
+  
+}
+}
+
+@article{BM,
+author = {Ramaswamy, Sriram},
+year = {2000},
+month = {03},
+pages = {},
+title = {Pollen grains, random walks and einstein},
+volume = {5},
+journal = {Resonance},
+doi = {10.1007/BF02838997}
+}
+
+@Inbook{Thalesians,
+author="Amen, Saeed",
+title="Trading Thalesians: What the Ancient World Can Teach Us About Trading Today",
+year="2014",
+publisher="Palgrave Macmillan UK",
+address="London",
+pages="39--60",
+abstract="Before we delve into the depths of finance, discussing the alpha and beta strategies which are the primary subject of this chapter, we digress to the olive. Why olives? As we noted in Chapter 1 and numerous times since, it was in the olive market that Thales did the first recorded option trade. Hence, it seems like an appropriate place to start our story. Greek cuisine has become very popular worldwide. If there is a food which seems to embody Greece and its cuisine, it would likely be the olive. The very slightly bitter taste of the olive is incredibly distinctive, and a flavor which is instantly memorable. For those who have grown up surrounded by olives, it is a taste which reminds them of home. For the rest of us, it is a taste which whispers to us from the shores of the Mediterranean.",
+isbn="978-1-137-39953-3",
+doi="10.1057/9781137399533_3",
+url="https://doi.org/10.1057/9781137399533_3"
+}
+
+@article{thomas,
+  title={Elliptic problems in linear difference equations over a network},
+  author={Thomas, Llewellyn Hilleth},
+  journal={Watson Sci. Comput. Lab. Rept., Columbia University, New York},
+  volume={1},
+  year={1949}
+}
+
+@article{peace,
+ ISSN = {03684245},
+ URL = {http://www.jstor.org/stable/2098834},
+ author = {D. W. Peaceman and H. H. Rachford},
+ journal = {Journal of the Society for Industrial and Applied Mathematics},
+ number = {1},
+ pages = {28--41},
+ publisher = {Society for Industrial and Applied Mathematics},
+ title = {The Numerical Solution of Parabolic and Elliptic Differential Equations},
+ volume = {3},
+ year = {1955}
+}
+
+
+@article{giles,
+author = {B. Giles, Michael and Carter, Rebecca},
+year = {2005},
+month = {09},
+pages = {},
+title = {Convergence analysis of Crank-Nicolson and Rannacher time-marching},
+volume = {9},
+journal = {J. Comput. Finance},
+doi = {10.21314/JCF.2006.152}
+}
+
+@article{rannacher,
+author = {Rannacher, Rolf},
+year = {1984},
+month = {06},
+pages = {309-327},
+title = {Finite Element Solution of Diffusion Problems with Irregular Data},
+volume = {43},
+journal = {Numerische Mathematik},
+doi = {10.1007/BF01390130}
+}
+
+@Article{cn,
+author="Crank, J.
+and Nicolson, P.",
+title="A practical method for numerical evaluation of solutions of partial differential equations of the heat-conduction type",
+journal="Advances in Computational Mathematics",
+year="1996",
+month="Dec",
+day="01",
+volume="6",
+number="1",
+pages="207--226",
+issn="1572-9044",
+doi="10.1007/BF02127704",
+url="https://doi.org/10.1007/BF02127704"
+}
+
