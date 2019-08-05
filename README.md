@@ -11,7 +11,7 @@ bakilacak:
 2) black scholes log pde derivation
 3) black scholes anal sol.
 4) Error hesaplamayi dusun / duffy optimal grid
-5) heat equation separation of variables 1D ve 2D
+5) heat equation separation of variables 1D ve 2D duffy 41 fdm
 6) explicit
 7) Crank nicolson
 9) rannacher trick

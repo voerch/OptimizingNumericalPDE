@@ -20,7 +20,7 @@ public:
 // Implementing Heat Equation
 class HeatEqn : public ParabolicPDE
 {
-
+public:
 	double DiffusionCoeff(double t, double x) const;
 	double ConvectionCoeff(double t, double x) const;
 	double ZeroCoeff(double t, double x) const;
@@ -29,8 +29,7 @@ class HeatEqn : public ParabolicPDE
 	double BoundaryLeft(double t, double x) const;
 	double BoundaryRight(double t, double x) const;
 	double InitCond(double x) const;
-public:
-	double AnalyticSol(double t, double x);
+	double AnalyticSol(double t, double x) const;
 };
 
 // Implementing Black Scholes PDE

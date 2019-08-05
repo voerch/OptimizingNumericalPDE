@@ -1,10 +1,12 @@
 \documentclass[12pt, oneside]{book}
+
 \usepackage{graphicx}  % this is for includegraphics
+\graphicspath{{figures/}}
 
 \usepackage{setspace}
 \onehalfspacing % this sets spacing to 1.5 
 
-
+\usepackage{subfig}
 \usepackage{amsmath}
 \usepackage{amsthm} % for theorems, lemmas etc
 \usepackage{amsfonts}
@@ -257,21 +259,22 @@ $$ \frac{\partial u}{\partial x} = \frac{u^{n}_{i+1} - u^n_i}{\Delta t} $$
     \begin{figure}[!htb]
         \centering
             \includegraphics[scale=0.9]{Discretize.png}
-        \caption{Discretizing on 10 x 10 grid}
+        \caption{10 x 10 grid}
     \end{figure}
     
 Utilizing the boundary conditions and initial conditions:
-    \begin{figure}[!htb]
-        \centering
-            \includegraphics[scale=0.9]{Boundary.png}
-        \caption{Applying the boundary conditions}
-    \end{figure}
 
-    \begin{figure}[!htb]
-        \centering
-            \includegraphics[scale=0.9]{Initial.png}
-        \caption{Applying the boundary conditions}
-    \end{figure}
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Boundary.png}
+    \caption{Boundary conditions.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Initial.png}
+    \caption{Initial conditions.}
+  \end{minipage}
+\end{figure}
+
 
 \subsection{Explicit Method}
 Explicit method is a forward time, central space scheme .
@@ -475,42 +478,108 @@ CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector 
 
 \subsection{Cloud Applications}
 
-\chapter{Optimization of Financial PDEs}
-First step is to write a simple version on a simple framework that can be calculated by hand and with Excel. Following the verifications, next step is porting the simple version in a high level programming language like python for prototyping and validating all calculations. The penultimate step is moving into a low level programming language such as C++ and utilize high performance computing principles.
+\chapter{Optimizing Solvers}
+Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was deriving toy examples that can be calculated by hand and Excel. Following the verifications, porting the toy examples in C++ and utilize high performance computing principles.
 
-Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations.
+\section{Heat Equation}
+Most basic case for parabolic differential equations is the heat equation.
 
-Most basic case for parabolic differential equations is the heat equation
-\begin{equation}
-u_t(x,t)=u_{xx}(x, t)
-\end{equation}
-Initial Conditions
-\begin{equation}
-u(x, 0) = sin(\pi x)
-\end{equation}
-Boundary Conditions
-\begin{equation}
-u(0, t) = u(x_max, t) = 0
-\end{equation}
+\begin{eqnarray}
+u_t(x,t) &=& u_{xx}(x, t) \\[10pt]
+u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
+u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
+\end{eqnarray}
 
+\subsection{Analytical Solution of Heat Equation}
+
+Separation of variables optimal grid size
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGridError.png}
+    \caption{Error of grid sizes.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGridTimer.png}
+    \caption{Timing grid sizes.}
+  \end{minipage}
+\end{figure}
+
+After choosing the optimal grid size the resulting grids can be visualized as
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGrid.png}
+    \caption{Explicit method.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatCNGrid.png}
+    \caption{Crank nicolson method.}
+  \end{minipage}
+\end{figure}
+
+\section{Black-Scholes}
 Black-Scholes model for call option
-\begin{equation}
-\frac{\partial C}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 C}{\partial S^2} = r(C - S \frac{\partial C}{\partial S})
-\end{equation}
-Initial Conditions
-\begin{equation}
-C(S, T) = (S - K, 0)^+
-\end{equation}
-Boundary Conditions
-\begin{equation}
-C(S_max, t) = S_max - K exp(-r(T-t))
-C(0, t) = 0
-\end{equation}
 
+\begin{eqnarray}
+\frac{\partial C}{\partial t} &=& rS\frac{\partial C}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 C}{\partial S^2} - rC \\[10pt]
+C(0,t) &=& 0, \hspace{4pt} C(S_{\max},t)=S_{\max} - K e^{-r(T-t)}, \hspace{10pt} 0 \leq t \leq T \\[10pt]
+C(S,T) &=& \max(S-K,0), \hspace{10pt} 0 \leq S \leq S_{\max}
+\end{eqnarray}
+
+
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c||} 
+ \hline
+ Parameter & Value\\ [0.5ex] 
+ \hline\hline
+ 1 & 6\\ 
+ 2 & 7\\
+ 3 & 545\\
+ 4 & 545\\
+ 5 & 88\\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Black-Scholes model testing parameters.}
+\end{table}
+
+
+
+\subsection{Analytical Solution}
+
+Derive analytical solution optimal grid size
+
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSExplicitGridError.png}
+    \caption{Explicit method.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSExplicitGridTimer.png}
+    \caption{Crank nicolson method.}
+  \end{minipage}
+\end{figure}
+
+After choosing the optimal grid size the resulting grids can be visualized as
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSExplicitGrid.png}
+    \caption{Explicit method.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSCNGrid.png}
+    \caption{Crank nicolson method.}
+  \end{minipage}
+\end{figure}
+
+\section{2 Dimensional Heat Equation Base Case}
 2 Dimensional Heat Equation to test ADI method:
 \begin{equation}
 \frac{\partial f}{\partial t} = \frac{\partial^2 f}{\partial x^2} +\frac{\partial^2 f}{\partial y^2}
-\end{equation}
+\end{equation}$  $
 Initial Condition
 \begin{equation}
 f(x,y,0) = 1
@@ -530,7 +599,7 @@ Measuring execution time intervals accurately is an important aspect to compare 
 
 \subsection{Chrono Library}
 
-
+\section{Optimization Experiments}
 
 \chapter{Conclusions}
 

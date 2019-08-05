@@ -29,12 +29,11 @@ double HeatEqn::BoundaryRight(double t, double x) const
 double HeatEqn::InitCond(double x) const
 {
 	return sin(PI * x);
-	//return 1;
 }
 
-double HeatEqn::AnalyticSol(double t, double x)
+double HeatEqn::AnalyticSol(double t, double x) const
 {
-	return exp(-t * pow(PI, 2))*sin(PI * x);
+	return exp(-t * pow(PI, 2)) * sin(PI * x);
 }
 
 double BlackScholesPDE::DiffusionCoeff(double t, double x) const
