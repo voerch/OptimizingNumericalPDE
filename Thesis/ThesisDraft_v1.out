@@ -27,6 +27,8 @@
 \BOOKMARK [2][-]{subsection.2.4.1}{Windows API}{section.2.4}% 27
 \BOOKMARK [2][-]{subsection.2.4.2}{Chrono Library}{section.2.4}% 28
 \BOOKMARK [1][-]{section.2.5}{Optimization Experiments}{chapter.2}% 29
-\BOOKMARK [0][-]{chapter.3}{Conclusions}{}% 30
-\BOOKMARK [0][-]{appendix.A}{Implementation of the FiniteDifferenceMethod class}{}% 31
-\BOOKMARK [0][-]{appendix.B}{shorter running title}{}% 32
+\BOOKMARK [2][-]{subsection.2.5.1}{Compilers and Solution Platforms}{section.2.5}% 30
+\BOOKMARK [2][-]{subsection.2.5.2}{Thomas Algorithm and Cyclic Reduction}{section.2.5}% 31
+\BOOKMARK [0][-]{chapter.3}{Conclusions}{}% 32
+\BOOKMARK [0][-]{appendix.A}{Implementation of the FiniteDifferenceMethod class}{}% 33
+\BOOKMARK [0][-]{appendix.B}{shorter running title}{}% 34

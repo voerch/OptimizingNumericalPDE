@@ -1,0 +1,12 @@
+﻿  FDM.cpp
+FDM.cpp(102): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+  OptimalGrid.cpp
+  PDE.cpp
+  Timing.cpp
+  Generating code
+  20 of 257 functions ( 7.8%) were compiled, the rest were copied from previous compilation.
+    15 functions were new in current compilation
+    8 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  PDE1DSolver.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDE1DSolver\Release\PDE1DSolver.exe

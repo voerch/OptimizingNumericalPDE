@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2019.7.23)  5 AUG 2019 19:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2019.7.23)  6 AUG 2019 19:25
 entering extended mode
 **./ThesisDraft_v1.tex
 (ThesisDraft_v1.tex
@@ -1012,7 +1012,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 42.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 \c__siunitx_mathtt_int=\count320
-<figures/QMCrest.png, id=134, 717.68124pt x 602.25pt>
+<figures/QMCrest.png, id=142, 717.68124pt x 602.25pt>
 File: figures/QMCrest.png Graphic file (type png)
 <use figures/QMCrest.png>
 Package pdftex.def Info: figures/QMCrest.png  used on input line 62. on input l
@@ -1056,21 +1056,21 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 147.
  [9] [10] [11]
 [12]
-<figures/Discretize.png, id=263, 202.50656pt x 212.29312pt>
+<figures/Discretize.png, id=273, 202.50656pt x 212.29312pt>
 File: figures/Discretize.png Graphic file (type png)
 <use figures/Discretize.png>
 Package pdftex.def Info: figures/Discretize.png  used on input line 261. on inp
 ut line 261.
 Package pdftex.def Info: Requested size: 182.2542pt x 191.06204pt on input line
  261.
-<figures/Boundary.png, id=264, 196.48407pt x 210.03468pt>
+<figures/Boundary.png, id=274, 196.48407pt x 210.03468pt>
 File: figures/Boundary.png Graphic file (type png)
 <use figures/Boundary.png>
 Package pdftex.def Info: figures/Boundary.png  used on input line 269. on input
  line 269.
 Package pdftex.def Info: Requested size: 195.0pt x 208.46378pt on input line 26
 9.
-<figures/Initial.png, id=265, 204.01219pt x 207.02344pt>
+<figures/Initial.png, id=275, 204.01219pt x 207.02344pt>
 File: figures/Initial.png Graphic file (type png)
 <use figures/Initial.png>
 Package pdftex.def Info: figures/Initial.png  used on input line 273. on input 
@@ -1084,7 +1084,7 @@ Overfull \hbox (2.61108pt too wide) in paragraph at lines 268--276
 
 [13 <./figures/Discretize.png>] [14 <./figures/Boundary.png> <./figures/Initial
 .png>]
-<figures/Explicit.png, id=279, 205.5178pt x 212.29312pt>
+<figures/Explicit.png, id=289, 205.5178pt x 212.29312pt>
 File: figures/Explicit.png Graphic file (type png)
 <use figures/Explicit.png>
 Package pdftex.def Info: figures/Explicit.png  used on input line 300. on input
@@ -1098,7 +1098,7 @@ Overfull \hbox (1.17094pt too wide) in paragraph at lines 330--332
  []
 
 [16] [17]
-<figures/ADI.png, id=306, 402.75468pt x 360.59718pt>
+<figures/ADI.png, id=316, 402.75468pt x 360.59718pt>
 File: figures/ADI.png Graphic file (type png)
 <use figures/ADI.png>
 Package pdftex.def Info: figures/ADI.png  used on input line 453. on input line
@@ -1107,117 +1107,132 @@ Package pdftex.def Info: Requested size: 322.20418pt x 288.47813pt on input lin
 e 453.
  [18] [19 <./figures/ADI.png>] [20]
 Chapter 2.
-<figures/HeatExplicitGridError.png, id=327, 433.62pt x 289.08pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<figures/HeatExplicitGridError.png, id=337, 433.62pt x 289.08pt>
 File: figures/HeatExplicitGridError.png Graphic file (type png)
 <use figures/HeatExplicitGridError.png>
 Package pdftex.def Info: figures/HeatExplicitGridError.png  used on input line 
-499. on input line 499.
-Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 49
-9.
-<figures/HeatExplicitGridTimer.png, id=328, 433.62pt x 289.08pt>
+512. on input line 512.
+Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 51
+2.
+<figures/HeatExplicitGridTimer.png, id=338, 433.62pt x 289.08pt>
 File: figures/HeatExplicitGridTimer.png Graphic file (type png)
 <use figures/HeatExplicitGridTimer.png>
 Package pdftex.def Info: figures/HeatExplicitGridTimer.png  used on input line 
-503. on input line 503.
-Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 50
-3.
+516. on input line 516.
+Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 51
+6.
 
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 498--506
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 511--519
 [][] [] 
  []
 
 [21
 
 ]
-<figures/HeatExplicitGrid.png, id=334, 433.62pt x 289.08pt>
+<figures/HeatExplicitGrid.png, id=344, 433.62pt x 289.08pt>
 File: figures/HeatExplicitGrid.png Graphic file (type png)
 <use figures/HeatExplicitGrid.png>
-Package pdftex.def Info: figures/HeatExplicitGrid.png  used on input line 511. 
-on input line 511.
-Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 51
-1.
-<figures/HeatCNGrid.png, id=335, 433.62pt x 289.08pt>
+Package pdftex.def Info: figures/HeatExplicitGrid.png  used on input line 528. 
+on input line 528.
+Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 52
+8.
+<figures/HeatCNGrid.png, id=345, 433.62pt x 289.08pt>
 File: figures/HeatCNGrid.png Graphic file (type png)
 <use figures/HeatCNGrid.png>
-Package pdftex.def Info: figures/HeatCNGrid.png  used on input line 515. on inp
-ut line 515.
-Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 51
-5.
+Package pdftex.def Info: figures/HeatCNGrid.png  used on input line 532. on inp
+ut line 532.
+Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 53
+2.
 
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 510--518
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 527--535
 [][] [] 
  []
 
 [22 <./figures/HeatExplicitGridError.png> <./figures/HeatExplicitGridTimer.png>
  <./figures/HeatExplicitGrid.png> <./figures/HeatCNGrid.png>]
-<figures/BSExplicitGridError.png, id=346, 433.62pt x 289.08pt>
+<figures/BSExplicitGridError.png, id=357, 433.62pt x 289.08pt>
 File: figures/BSExplicitGridError.png Graphic file (type png)
 <use figures/BSExplicitGridError.png>
-Package pdftex.def Info: figures/BSExplicitGridError.png  used on input line 55
-6. on input line 556.
-Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 55
-6.
-<figures/BSExplicitGridTimer.png, id=347, 433.62pt x 289.08pt>
-File: figures/BSExplicitGridTimer.png Graphic file (type png)
-<use figures/BSExplicitGridTimer.png>
-Package pdftex.def Info: figures/BSExplicitGridTimer.png  used on input line 56
-0. on input line 560.
-Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 56
-0.
-
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 555--563
-[][] [] 
- []
-
-<figures/BSExplicitGrid.png, id=348, 433.62pt x 289.08pt>
-File: figures/BSExplicitGrid.png Graphic file (type png)
-<use figures/BSExplicitGrid.png>
-Package pdftex.def Info: figures/BSExplicitGrid.png  used on input line 569. on
- input line 569.
-Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 56
-9.
-<figures/BSCNGrid.png, id=349, 433.62pt x 289.08pt>
-File: figures/BSCNGrid.png Graphic file (type png)
-<use figures/BSCNGrid.png>
-Package pdftex.def Info: figures/BSCNGrid.png  used on input line 573. on input
- line 573.
+Package pdftex.def Info: figures/BSExplicitGridError.png  used on input line 57
+3. on input line 573.
 Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 57
 3.
+<figures/BSExplicitGridTimer.png, id=358, 433.62pt x 289.08pt>
+File: figures/BSExplicitGridTimer.png Graphic file (type png)
+<use figures/BSExplicitGridTimer.png>
+Package pdftex.def Info: figures/BSExplicitGridTimer.png  used on input line 57
+7. on input line 577.
+Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 57
+7.
 
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 568--576
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 572--580
 [][] [] 
  []
 
-[23 <./figures/BSExplicitGridError.png> <./figures/BSExplicitGridTimer.png>]
-[24 <./figures/BSExplicitGrid.png> <./figures/BSCNGrid.png>] [25]
-Chapter 3.
-[26
+<BSExplicitGrid.png, id=359, 433.62pt x 289.08pt>
+File: BSExplicitGrid.png Graphic file (type png)
+<use BSExplicitGrid.png>
+Package pdftex.def Info: BSExplicitGrid.png  used on input line 586. on input l
+ine 586.
+Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 58
+6.
+<BSCNGrid.png, id=360, 433.62pt x 289.08pt>
+File: BSCNGrid.png Graphic file (type png)
+<use BSCNGrid.png>
+Package pdftex.def Info: BSCNGrid.png  used on input line 590. on input line 59
+0.
+Package pdftex.def Info: Requested size: 195.0pt x 130.00098pt on input line 59
+0.
 
-]
-Appendix A.
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 585--593
+[][] [] 
+ []
+
+[23] [24 <./figures/BSExplicitGridError.png> <./figures/BSExplicitGridTimer.png
+> <./BSExplicitGrid.png> <./BSCNGrid.png>]
+Overfull \hbox (39.29874pt too wide) in paragraph at lines 649--660
+ [][] 
+ []
+
+[25] [26]
+Chapter 3.
 [27
 
 ]
-Appendix B.
-(ThesisDraft_v1.bbl [28
-
-]) [29
+Appendix A.
+[28
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 622.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 622.
+Appendix B.
+(ThesisDraft_v1.bbl [29
+
+]) [30
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 694.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 694.
  (ThesisDraft_v1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 622.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 622.
-Package rerunfilecheck Info: File `ThesisDraft_v1.out' has not changed.
-(rerunfilecheck)             Checksum: 85C31858693464FA6AA8247A45323A44;2252.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 622.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 694.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 694.
+
+
+Package rerunfilecheck Warning: File `ThesisDraft_v1.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `ThesisDraft_v1.out':
+(rerunfilecheck)             Before: E2D648205889F5D636F2AD72F2D3D36E;2423
+(rerunfilecheck)             After:  5A0EF6102B00D24F1F3CA392C89FA664;2431.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 694.
  ) 
 Here is how much of TeX's memory you used:
- 28196 strings out of 493314
- 574841 string characters out of 3138867
+ 28206 strings out of 493314
+ 574922 string characters out of 3138867
  688454 words of memory out of 3000000
- 31264 multiletter control sequences out of 15000+200000
+ 31266 multiletter control sequences out of 15000+200000
  540921 words of font info for 61 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,65p,10367b,815s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1237,9 +1252,9 @@ s/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
 sfonts/cm/cmtt12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb>
-Output written on ThesisDraft_v1.pdf (30 pages, 965857 bytes).
+Output written on ThesisDraft_v1.pdf (31 pages, 958857 bytes).
 PDF statistics:
- 471 PDF objects out of 1000 (max. 8388607)
- 112 named destinations out of 1000 (max. 500000)
- 339 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 492 PDF objects out of 1000 (max. 8388607)
+ 120 named destinations out of 1000 (max. 500000)
+ 355 words of extra memory for PDF output out of 10000 (max. 10000000)
 

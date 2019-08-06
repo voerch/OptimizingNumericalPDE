@@ -1,0 +1,12 @@
+﻿  FDM.cpp
+FDM.cpp(109): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+  OptimalGrid.cpp
+  PDE.cpp
+  Timing.cpp
+  Generating code
+  36 of 257 functions (14.0%) were compiled, the rest were copied from previous compilation.
+    15 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  PDE1DSolver.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDE1DSolver\x64\Release\PDE1DSolver.exe

@@ -490,6 +490,19 @@ u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
 u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
 \end{eqnarray}
 
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c||} 
+ \hline
+ Parameter & Value\\ [0.5ex] 
+ \hline\hline
+ Maximum spatial coordinate & 1.0\\ 
+ Maximum time & 0.075 %\\[1ex] 
+
+ \end{tabular}
+ \caption{Heat equation testing parameters.}
+\end{table}
+
 \subsection{Analytical Solution of Heat Equation}
 
 Separation of variables optimal grid size
@@ -504,6 +517,10 @@ Separation of variables optimal grid size
     \caption{Timing grid sizes.}
   \end{minipage}
 \end{figure}
+
+
+
+Grid size depends on the parameters prove this duffy book.
 
 After choosing the optimal grid size the resulting grids can be visualized as
 \begin{figure}[!htb]
@@ -534,11 +551,11 @@ C(S,T) &=& \max(S-K,0), \hspace{10pt} 0 \leq S \leq S_{\max}
  \hline
  Parameter & Value\\ [0.5ex] 
  \hline\hline
- 1 & 6\\ 
- 2 & 7\\
- 3 & 545\\
- 4 & 545\\
- 5 & 88\\ [1ex] 
+ Strike Price & 1.0\\ 
+ Volatility & 20 \% \\
+ Risk Free Rate & 5 \% \\
+ Time to Expiry & 2.0\\
+ Maximum Share Price & 2.0\\ [1ex] 
  \hline
  \end{tabular}
  \caption{Black-Scholes model testing parameters.}
@@ -600,6 +617,61 @@ Measuring execution time intervals accurately is an important aspect to compare 
 \subsection{Chrono Library}
 
 \section{Optimization Experiments}
+
+
+Windows 10 Enterprise 64 bit 
+x64 based processor
+Intel Core i7-6700 CPU @3.40 GHz cores?
+16 GB Ram
+Using Microsoft Visual Studio Enterprise 2017, Version 15.3.3 Release mode
+c++ version???
+
+\subsection{Compilers and Solution Platforms}
+32 bit vs 64 bit 
+VS vs Intel compiler
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & 0.022081 & 0.02035\\ 
+ Visual Studio Compiler x64 & 0.018627 & 0.01888\\
+ Intel Compiler x86 & 0.023165 & 0.023723\\
+ Intel Compiler x64 & 0.019535 & 0.017451\\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Averaging 1000 timings for Black-Scholes.}
+\end{table}
+
+\begin{table}[htp!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Testing & Explicit Method Timing & Crank Nicolson Timing\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & 0.022625 & 0.022441\\ 
+ Visual Studio Compiler x64 & 0.018933 & 0.016687
+\\
+ Intel Compiler x86 & 0.023076 & 0.023719\\
+ Intel Compiler x64 & 0.017271 & 0.017271\\[1ex] 
+ \hline
+ \end{tabular}
+ \caption{Averaging 1000 timings for Black-Scholes and adding random $\epsilon < 10^{-7} $ to step size in order to avoid compiler optimizations.}
+\end{table}
+
+
+
+In practical terms, you would use X64 when:  You need to directly address more than 4GB of memory, or
+    You need very fast (native) processing of 64 bit numerical quantities (including double-precision floating-point numbers)
+
+X86 (32 bit) is suitable for most everything else.
+
+\subsection{Thomas Algorithm and Cyclic Reduction}
+Use openmp and cyclic vs thomas
+\subsubsection{Parallel Thomas Algorithm}
+\subsubsection{Parallel Cyclic Reduction}
+
 
 \chapter{Conclusions}
 
