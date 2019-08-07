@@ -1,37 +1,39 @@
-\contentsline {chapter}{\numberline {1}Introduction}{8}{chapter.1}% 
-\contentsline {section}{\numberline {1.1}Pricing Financial Derivatives}{9}{section.1.1}% 
-\contentsline {subsection}{\numberline {1.1.1}The Risk Neutral Approach}{9}{subsection.1.1.1}% 
-\contentsline {subsection}{\numberline {1.1.2}Solving Financial Partial Differential Equations}{11}{subsection.1.1.2}% 
-\contentsline {section}{\numberline {1.2}Finite Difference Methods}{13}{section.1.2}% 
-\contentsline {subsection}{\numberline {1.2.1}Explicit Method}{14}{subsection.1.2.1}% 
-\contentsline {subsection}{\numberline {1.2.2}Crank-Nicholson Method}{15}{subsection.1.2.2}% 
-\contentsline {subsection}{\numberline {1.2.3}Rannacher Trick}{17}{subsection.1.2.3}% 
-\contentsline {subsection}{\numberline {1.2.4}Alternating Direction Implicit Method}{17}{subsection.1.2.4}% 
-\contentsline {section}{\numberline {1.3}Optimizations}{19}{section.1.3}% 
-\contentsline {subsection}{\numberline {1.3.1}Compilers}{19}{subsection.1.3.1}% 
-\contentsline {subsection}{\numberline {1.3.2}32 bit and 64 bit}{20}{subsection.1.3.2}% 
-\contentsline {subsection}{\numberline {1.3.3}Optimization Switches}{20}{subsection.1.3.3}% 
-\contentsline {subsection}{\numberline {1.3.4}Tridiagonal Solvers}{20}{subsection.1.3.4}% 
-\contentsline {subsection}{\numberline {1.3.5}Threading}{20}{subsection.1.3.5}% 
-\contentsline {subsection}{\numberline {1.3.6}OpenMP}{20}{subsection.1.3.6}% 
-\contentsline {subsection}{\numberline {1.3.7}AVX and Intrinsics}{20}{subsection.1.3.7}% 
-\contentsline {subsection}{\numberline {1.3.8}GPGPU}{20}{subsection.1.3.8}% 
-\contentsline {subsection}{\numberline {1.3.9}Cloud Applications}{20}{subsection.1.3.9}% 
-\contentsline {chapter}{\numberline {2}Optimizing Solvers}{21}{chapter.2}% 
-\contentsline {section}{\numberline {2.1}Heat Equation}{21}{section.2.1}% 
-\contentsline {subsection}{\numberline {2.1.1}Analytical Solution of Heat Equation}{22}{subsection.2.1.1}% 
-\contentsline {section}{\numberline {2.2}Black-Scholes}{23}{section.2.2}% 
-\contentsline {subsection}{\numberline {2.2.1}Analytical Solution}{23}{subsection.2.2.1}% 
-\contentsline {section}{\numberline {2.3}2 Dimensional Heat Equation Base Case}{23}{section.2.3}% 
-\contentsline {section}{\numberline {2.4}Timing the Code}{25}{section.2.4}% 
-\contentsline {subsection}{\numberline {2.4.1}Windows Application Programming Interface}{25}{subsection.2.4.1}% 
-\contentsline {subsection}{\numberline {2.4.2}Chrono Library}{25}{subsection.2.4.2}% 
-\contentsline {section}{\numberline {2.5}Optimization Experiments}{26}{section.2.5}% 
-\contentsline {subsection}{\numberline {2.5.1}Compilers and Solution Platforms}{26}{subsection.2.5.1}% 
-\contentsline {subsection}{\numberline {2.5.2}Thomas Algorithm and Cyclic Reduction}{27}{subsection.2.5.2}% 
-\contentsline {subsubsection}{Parallel Thomas Algorithm}{27}{section*.18}% 
-\contentsline {subsubsection}{Parallel Cyclic Reduction}{27}{section*.19}% 
-\contentsline {chapter}{\numberline {3}Conclusions}{28}{chapter.3}% 
-\contentsline {chapter}{\numberline {A}Usage of chrono class}{29}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Implementation of the {\tt FiniteDifferenceMethod} class}{30}{appendix.B}% 
-\contentsline {chapter}{\numberline {C}shorter running title}{31}{appendix.C}% 
+\contentsline {chapter}{\numberline {1}Introduction}{8}{chapter.1}
+\contentsline {section}{\numberline {1.1}Pricing Financial Derivatives}{9}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}The Risk Neutral Approach}{9}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Solving Financial Partial Differential Equations}{11}{subsection.1.1.2}
+\contentsline {section}{\numberline {1.2}Finite Difference Methods}{13}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Explicit Method}{14}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Crank-Nicholson Method}{15}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Rannacher Trick}{17}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}Alternating Direction Implicit Method}{17}{subsection.1.2.4}
+\contentsline {section}{\numberline {1.3}Optimizations}{19}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Compilers}{19}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}32 bit and 64 bit}{20}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Optimization Switches}{20}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Tridiagonal Solvers}{20}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.5}Threading}{20}{subsection.1.3.5}
+\contentsline {subsection}{\numberline {1.3.6}OpenMP}{20}{subsection.1.3.6}
+\contentsline {subsection}{\numberline {1.3.7}AVX and Intrinsics}{20}{subsection.1.3.7}
+\contentsline {subsection}{\numberline {1.3.8}GPGPU}{20}{subsection.1.3.8}
+\contentsline {subsection}{\numberline {1.3.9}Cloud Applications}{20}{subsection.1.3.9}
+\contentsline {chapter}{\numberline {2}Optimizing Solvers}{21}{chapter.2}
+\contentsline {section}{\numberline {2.1}Heat Equation}{21}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Analytical Solution of Heat Equation}{22}{subsection.2.1.1}
+\contentsline {section}{\numberline {2.2}Black-Scholes}{23}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Analytical Solution}{23}{subsection.2.2.1}
+\contentsline {section}{\numberline {2.3}2 Dimensional Heat Equation Base Case}{23}{section.2.3}
+\contentsline {section}{\numberline {2.4}Timing the Code}{25}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Windows Application Programming Interface}{25}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Chrono Library}{25}{subsection.2.4.2}
+\contentsline {section}{\numberline {2.5}Optimization Experiments}{26}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Tridiagonal Solvers}{26}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Thomas Algorithm and Cyclic Reduction}{26}{subsection.2.5.2}
+\contentsline {subsubsection}{Parallel Thomas Algorithm}{26}{section*.16}
+\contentsline {subsubsection}{Parallel Cyclic Reduction}{26}{section*.17}
+\contentsline {subsection}{\numberline {2.5.3}Compilers and Solution Platforms}{26}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}Visual Studio Optimization Switches}{26}{subsection.2.5.4}
+\contentsline {chapter}{\numberline {3}Conclusions}{28}{chapter.3}
+\contentsline {chapter}{\numberline {A}Usage of chrono class}{29}{appendix.A}
+\contentsline {chapter}{\numberline {B}Implementation of the {\tt FiniteDifferenceMethod} class}{30}{appendix.B}
+\contentsline {chapter}{\numberline {C}shorter running title}{31}{appendix.C}

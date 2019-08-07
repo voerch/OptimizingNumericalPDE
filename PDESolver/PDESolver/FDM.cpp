@@ -158,8 +158,8 @@ void CrankNicholson::calculateInnerDomain()
 		oldResult[iCounter] = (alpha + beta) * newResult[iCounter + 1] + (1.0 - (2 * alpha) + gamma) * newResult[iCounter] + (alpha - beta) * newResult[iCounter - 1];
 	}
 
-	ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-
+	//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+	IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 }
 
 // Loops through time.
@@ -302,6 +302,8 @@ void ADI::InnerDomain()
 void ADI::stepMarch()
 {
 	std::ofstream grid("ADIGrid.csv");
+	grid << "xValues,yValues,tValues,Solution" << std::endl;
+
 	//grid << "xValues,tValues,Solution" << std::endl;
 	while (tCurrent <= tDomain)
 	{

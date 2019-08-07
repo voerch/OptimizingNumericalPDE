@@ -27,9 +27,11 @@
 \BOOKMARK [2][-]{subsection.2.4.1}{Windows Application Programming Interface}{section.2.4}% 27
 \BOOKMARK [2][-]{subsection.2.4.2}{Chrono Library}{section.2.4}% 28
 \BOOKMARK [1][-]{section.2.5}{Optimization Experiments}{chapter.2}% 29
-\BOOKMARK [2][-]{subsection.2.5.1}{Compilers and Solution Platforms}{section.2.5}% 30
+\BOOKMARK [2][-]{subsection.2.5.1}{Tridiagonal Solvers}{section.2.5}% 30
 \BOOKMARK [2][-]{subsection.2.5.2}{Thomas Algorithm and Cyclic Reduction}{section.2.5}% 31
-\BOOKMARK [0][-]{chapter.3}{Conclusions}{}% 32
-\BOOKMARK [0][-]{appendix.A}{Usage of chrono class}{}% 33
-\BOOKMARK [0][-]{appendix.B}{Implementation of the FiniteDifferenceMethod class}{}% 34
-\BOOKMARK [0][-]{appendix.C}{shorter running title}{}% 35
+\BOOKMARK [2][-]{subsection.2.5.3}{Compilers and Solution Platforms}{section.2.5}% 32
+\BOOKMARK [2][-]{subsection.2.5.4}{Visual Studio Optimization Switches}{section.2.5}% 33
+\BOOKMARK [0][-]{chapter.3}{Conclusions}{}% 34
+\BOOKMARK [0][-]{appendix.A}{Usage of chrono class}{}% 35
+\BOOKMARK [0][-]{appendix.B}{Implementation of the FiniteDifferenceMethod class}{}% 36
+\BOOKMARK [0][-]{appendix.C}{shorter running title}{}% 37
