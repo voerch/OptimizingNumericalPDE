@@ -321,7 +321,7 @@ $$ A = a(t,x) \frac{\Delta t}{\Delta x^2},  B = b(t,x) \frac{\Delta t}{4\Delta x
 
 The left hand side groups the unknowns and the right hand side groups knowns. The system of equations can be represented by a tridiagonal matrix system. Most commonly these system are solved by Thomas Algorithm.
 
-\begin{definition} Thomas Algorithm \\
+\begin{definition}\label{tha} Thomas Algorithm \\
 The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The system equations can be written as
 $$
 \begin{bmatrix}  
@@ -617,22 +617,17 @@ Using the Windows API for just timing the code is slightly excessive given the a
 
 The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
 
-
 \section{Optimization Experiments}
+This section documents the performance of attempted optimizations. Experiments  are  conducted  at  W307 computer laboratory, Queen Mary University of London.  Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7-6700 CPU with 4 cores clocked at 3.40 GHz. 
 
-This section documents the performance of attempted optimizations. Experiments  are  conducted  in  the  W307 computer laboratory at  the  Queen Mary University of London.  Each computer has Windows 10 Enterprise 64 bit , 16 GB of RAM, Intel Core i7-6700 CPU with 4 cores clocked at 3.40 GHz. 
-
-The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized  in  the  tests  include   Intel Compiler version 18.0.3 and Intel Math  Kernel  Library .  
+The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized  in  the  tests  include   Intel Compiler, version 18.0.3 and Intel Math  Kernel  Library, version X .  
 
 \subsection{Tridiagonal Solvers}
+While using the Crank Nicolson and Alternating Direction Implicit methods the computationally intensive part of program is solving tridiagonal systems. Previously defined Thomas Algorithm is the most commonly used method  \ref{tha}.
 
-Previously Defined Thomas Algorithm
-LAPACK routines for solving systems of linear equations, spesifically gtsv function from Intel Math Kernel Library.
-
-\subsection{Thomas Algorithm and Cyclic Reduction}
-Use openmp and cyclic vs thomas
-\subsubsection{Parallel Thomas Algorithm}
-\subsubsection{Parallel Cyclic Reduction}
+Intel Math Kernel Library implements routines for solving systems of linear equations   from the standard LAPACK library.  Variety of matrix types are supported by the routines.
+Specifically gtsv function is utilized from the package. 
+Using Gaussian elimination with partial pivoting, gstv computes the solution to the system of linear equations with a tridiagonal coefficient matrix.  \cite{gtsv}
 
 
 \subsection{Compilers and Solution Platforms}
@@ -668,8 +663,6 @@ VS vs Intel compiler
  \end{tabular}
  \caption{Averaging 1000 timings for Black-Scholes and adding random $\epsilon < 10^{-7} $ to step size in order to avoid compiler optimizations.}
 \end{table}
-
-
 
 In practical terms, you would use X64 when:  You need to directly address more than 4GB of memory, or
     You need very fast (native) processing of 64 bit numerical quantities (including double-precision floating-point numbers)

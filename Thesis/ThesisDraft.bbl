@@ -17,6 +17,13 @@ J.~Crank and P.~Nicolson.
   differential equations of the heat-conduction type.
 \newblock {\em Advances in Computational Mathematics}, 6(1):207--226, Dec 1996.
 
+\bibitem{gtsv}
+{Intel}.
+\newblock Intel math kernel library for c, gtsv.
+\newblock
+  \url{https://software.intel.com/en-us/mkl-developer-reference-c-gtsv}, 2019.
+\newblock [Online; accessed 7-August-2019].
+
 \bibitem{peace}
 D.~W. Peaceman and H.~H. Rachford.
 \newblock The numerical solution of parabolic and elliptic differential

@@ -108,5 +108,15 @@ url="https://doi.org/10.1007/BF02127704"
  isbn = {157231995X},
  edition = {5th},
  publisher = {Microsoft Press},
- address = {Redmond, WA, USA},
+ address = {Redmond, WA, USA}
 } 
+
+
+  
+@misc{ gtsv,
+    author = "{Intel}",
+    title = "Intel Math Kernel Library for C, gtsv",
+    year = "2019",
+    howpublished = "\url{https://software.intel.com/en-us/mkl-developer-reference-c-gtsv}",
+    note = "[Online; accessed 7-August-2019]"
+  }
