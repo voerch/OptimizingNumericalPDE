@@ -1,6 +1,6 @@
 \begin{thebibliography}{1}
 
-\bibitem{Thalesians}
+\bibitem{thalesians}
 Saeed Amen.
 \newblock {\em Trading Thalesians: What the Ancient World Can Teach Us About
   Trading Today}, pages 39--60.
@@ -23,6 +23,11 @@ D.~W. Peaceman and H.~H. Rachford.
   equations.
 \newblock {\em Journal of the Society for Industrial and Applied Mathematics},
   3(1):28--41, 1955.
+
+\bibitem{windows}
+Charles Petzold.
+\newblock {\em Programming Windows, Fifth Edition}.
+\newblock Microsoft Press, Redmond, WA, USA, 5th edition, 1998.
 
 \bibitem{BM}
 Sriram Ramaswamy.

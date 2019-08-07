@@ -1,17 +1,18 @@
 \documentclass[12pt, oneside]{book}
+
 \usepackage{graphicx}  % this is for includegraphics
+\graphicspath{{figures/}}
 
 \usepackage{setspace}
 \onehalfspacing % this sets spacing to 1.5 
 
-
+\usepackage{subfig}
 \usepackage{amsmath}
 \usepackage{amsthm} % for theorems, lemmas etc
 \usepackage{amsfonts}
 \usepackage{lipsum} % to generate the lipsum random text in the sample
 \usepackage{tikz}
 \usepackage{siunitx}
-
 \usetikzlibrary{calc,decorations.pathmorphing,patterns}
 
 
@@ -119,22 +120,17 @@ Here  you write a summary of the work. A paragraph on the motivation, previous w
 
 \lipsum[100]% replace this by your text
 
-
-
 \begin{flushright}
 Queen Mary University of London\\
 12${}^{\text{th}}$ August 2019
 \end{flushright}
 
-
 \tableofcontents
 
 \chapter{Introduction}
-In Ancient Greece, Thales was scorned for his poverty. Later that year, Thales utilized his skills in astrology. He forecasted the increase in olive yields. Using his limited capital, he rented oil presses in winter. Over the oil making season, many people rushed to the presses because of the high yields. Thales, as he rented the presses over the winter, let them upon what terms he pleased. Thales showed it was easy for philosophers to be rich if they chose it and accidentally laid the foundations of financial derivatives. \cite{Thalesians}
+In Ancient Greece, Thales was scorned for his poverty. Later that year, Thales utilized his skills in astrology. He forecasted the increase in olive yields. Using his limited capital, he rented oil presses in winter. Months lates, over the oil making season, many people rushed to the presses because of the high yields that Thales predicted. As he rented the presses over the winter, he forced the terms he pleased. Thales showed it was easy for philosophers to be rich if they chose it and practically used the first  financial derivative product. \cite{thalesians}
 
-In the modern world, financial derivatives are contracts between two or more parties. The value of the contract depends on one or several underlying assets. Commonly the assets are currencies, equities, bonds, interest rates, market indices or commodities.
-
-The simplest vanilla call option the right but not the obligation to buy the underlying at the expiry date at a previously agreed strike price. Thales essentially bought call options for oil presses.  So if the olive yields didn't come as Thales expected he didn't have the obligation to use the olive presses.
+In the modern world, financial derivatives are contracts between two or more parties. The value of the contract depends on one or several underlying assets. Commonly the assets are currencies, equities, bonds, interest rates, market indices or commodities. The vanilla call option gives the right but not the obligation to buy the underlying asset at the expiry date at a previously agreed strike price.  On the other hand, the vanilla put option gives the right but not the obligation to sell the underlying asset at the expiry date at a previously agreed strike price. Essentially, Thales bought call options for oil presses.  So if the olive yields didn't come as Thales expected he didn't have the obligation to use the olive presses.
 
 \section{Pricing Financial Derivatives}\label{Pricing Financial Derivatives}
 \subsection{The Risk Neutral Approach}
@@ -257,21 +253,22 @@ $$ \frac{\partial u}{\partial x} = \frac{u^{n}_{i+1} - u^n_i}{\Delta t} $$
     \begin{figure}[!htb]
         \centering
             \includegraphics[scale=0.9]{Discretize.png}
-        \caption{Discretizing on 10 x 10 grid}
+        \caption{10 x 10 grid}
     \end{figure}
     
 Utilizing the boundary conditions and initial conditions:
-    \begin{figure}[!htb]
-        \centering
-            \includegraphics[scale=0.9]{Boundary.png}
-        \caption{Applying the boundary conditions}
-    \end{figure}
 
-    \begin{figure}[!htb]
-        \centering
-            \includegraphics[scale=0.9]{Initial.png}
-        \caption{Applying the boundary conditions}
-    \end{figure}
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Boundary.png}
+    \caption{Boundary conditions.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Initial.png}
+    \caption{Initial conditions.}
+  \end{minipage}
+\end{figure}
+
 
 \subsection{Explicit Method}
 Explicit method is a forward time, central space scheme .
@@ -475,42 +472,125 @@ CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector 
 
 \subsection{Cloud Applications}
 
-\chapter{Optimization of Financial PDEs}
-First step is to write a simple version on a simple framework that can be calculated by hand and with Excel. Following the verifications, next step is porting the simple version in a high level programming language like python for prototyping and validating all calculations. The penultimate step is moving into a low level programming language such as C++ and utilize high performance computing principles.
+\chapter{Optimizing Solvers}
+Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was deriving toy examples that can be calculated by hand and Excel. Following the verifications, porting the toy examples in C++ and utilize high performance computing principles.
 
-Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations.
+\section{Heat Equation}
+Most basic case for parabolic differential equations is the heat equation.
 
-Most basic case for parabolic differential equations is the heat equation
-\begin{equation}
-u_t(x,t)=u_{xx}(x, t)
-\end{equation}
-Initial Conditions
-\begin{equation}
-u(x, 0) = sin(\pi x)
-\end{equation}
-Boundary Conditions
-\begin{equation}
-u(0, t) = u(x_max, t) = 0
-\end{equation}
+\begin{eqnarray}
+u_t(x,t) &=& u_{xx}(x, t) \\[10pt]
+u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
+u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
+\end{eqnarray}
 
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c||} 
+ \hline
+ Parameter & Value\\ [0.5ex] 
+ \hline\hline
+ Maximum spatial coordinate & 1.0\\ 
+ Maximum time & 0.075 %\\[1ex] 
+
+ \end{tabular}
+ \caption{Heat equation testing parameters.}
+\end{table}
+
+\subsection{Analytical Solution of Heat Equation}
+
+Separation of variables optimal grid size
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGridError.png}
+    \caption{Error of grid sizes.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGridTimer.png}
+    \caption{Timing grid sizes.}
+  \end{minipage}
+\end{figure}
+
+
+
+Grid size depends on the parameters prove this duffy book.
+
+After choosing the optimal grid size the resulting grids can be visualized as
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGrid.png}
+    \caption{Explicit method.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatCNGrid.png}
+    \caption{Crank nicolson method.}
+  \end{minipage}
+\end{figure}
+
+\section{Black-Scholes}
 Black-Scholes model for call option
-\begin{equation}
-\frac{\partial C}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 C}{\partial S^2} = r(C - S \frac{\partial C}{\partial S})
-\end{equation}
-Initial Conditions
-\begin{equation}
-C(S, T) = (S - K, 0)^+
-\end{equation}
-Boundary Conditions
-\begin{equation}
-C(S_max, t) = S_max - K exp(-r(T-t))
-C(0, t) = 0
-\end{equation}
 
+\begin{eqnarray}
+\frac{\partial C}{\partial t} &=& rS\frac{\partial C}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 C}{\partial S^2} - rC \\[10pt]
+C(0,t) &=& 0, \hspace{4pt} C(S_{\max},t)=S_{\max} - K e^{-r(T-t)}, \hspace{10pt} 0 \leq t \leq T \\[10pt]
+C(S,T) &=& \max(S-K,0), \hspace{10pt} 0 \leq S \leq S_{\max}
+\end{eqnarray}
+
+
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c||} 
+ \hline
+ Parameter & Value\\ [0.5ex] 
+ \hline\hline
+ Strike Price & 1.0\\ 
+ Volatility & 20 \% \\
+ Risk Free Rate & 5 \% \\
+ Time to Expiry & 2.0\\
+ Maximum Share Price & 2.0\\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Black-Scholes model testing parameters.}
+\end{table}
+
+
+
+\subsection{Analytical Solution}
+
+Derive analytical solution optimal grid size
+
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSExplicitGridError.png}
+    \caption{Explicit method.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSExplicitGridTimer.png}
+    \caption{Crank nicolson method.}
+  \end{minipage}
+\end{figure}
+
+After choosing the optimal grid size the resulting grids can be visualized as
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSExplicitGrid.png}
+    \caption{Explicit method.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSCNGrid.png}
+    \caption{Crank nicolson method.}
+  \end{minipage}
+\end{figure}
+
+\section{2 Dimensional Heat Equation Base Case}
 2 Dimensional Heat Equation to test ADI method:
 \begin{equation}
 \frac{\partial f}{\partial t} = \frac{\partial^2 f}{\partial x^2} +\frac{\partial^2 f}{\partial y^2}
-\end{equation}
+\end{equation}$  $
 Initial Condition
 \begin{equation}
 f(x,y,0) = 1
@@ -524,30 +604,102 @@ f(x, 0, t) = f(x, 1, t) = 0
 \end{equation}
 
 \section{Timing the Code}
-Measuring execution time intervals accurately is an important aspect to compare the efficiency and speed of different implementations.
+Measuring execution time intervals accurately is an important aspect to compare the efficiency and speed of different environments and implementations.
 
-\subsection{Windows API}
+
+\subsection{Windows Application Programming Interface}
+Windows Application Programming Interface (API) is the lowest level of interaction between applications and the windows operating system. Thus every program is built upon  the API. Mostly, the interaction is hidden, the runtime and support libraries manage it in the background. \cite{windows}
+
+The APIs can be easily used in C++ environment. Timing can be achieved by "QueryPerformanceCounter" or "QueryPerformanceFrequency"  functions. Respectively, they retrieve a high resolution time stamp and the frequency of the performance counter.  The functions can be easily utilized for time measurements.
 
 \subsection{Chrono Library}
+Using the Windows API for just timing the code is slightly excessive given the amount of work it takes. Luckily, Chrono library was introduced part of the C++11’s standard library.  Timers and clocks might differ on distinct systems, thus Chrono library is designed to work effortlessly with date and time.
 
+The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
+
+
+\section{Optimization Experiments}
+
+This section documents the performance. 
+
+The  source  code  is  written  in  C  and  compiled  with  the  Intel  C  compiler  v15.   External  libraries  utilized  in  thereference  implementation  include  HLIBpro  v2.2  with  Intel  TBB  [31,  37],  and  the  sequential  version  of  the  IntelMath  Kernel  Library  [38].  
+
+Experiments  are  conducted  in  the  W  at  the  KingAbdullah University of Science & Technology.  Each node has 128GB of RAM and two Intel Haswell processors,each with 16 cores clocked at 2.3Ghz.
+
+Windows 10 Enterprise 64 bit 
+x64 based processor
+Intel Core i7-6700 CPU @3.40 GHz cores?
+16 GB Ram
+Using Microsoft Visual Studio Enterprise 2017, Version 15.3.3 Release mode
+c++ version???
+
+\subsection{Compilers and Solution Platforms}
+32 bit vs 64 bit 
+VS vs Intel compiler
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & 0.022081 & 0.02035\\ 
+ Visual Studio Compiler x64 & 0.018627 & 0.01888\\
+ Intel Compiler x86 & 0.023165 & 0.023723\\
+ Intel Compiler x64 & 0.019535 & 0.017451\\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Averaging 1000 timings for Black-Scholes.}
+\end{table}
+
+\begin{table}[htp!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Testing & Explicit Method Timing & Crank Nicolson Timing\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & 0.022625 & 0.022441\\ 
+ Visual Studio Compiler x64 & 0.018933 & 0.016687
+\\
+ Intel Compiler x86 & 0.023076 & 0.023719\\
+ Intel Compiler x64 & 0.017271 & 0.017271\\[1ex] 
+ \hline
+ \end{tabular}
+ \caption{Averaging 1000 timings for Black-Scholes and adding random $\epsilon < 10^{-7} $ to step size in order to avoid compiler optimizations.}
+\end{table}
+
+
+
+In practical terms, you would use X64 when:  You need to directly address more than 4GB of memory, or
+    You need very fast (native) processing of 64 bit numerical quantities (including double-precision floating-point numbers)
+
+X86 (32 bit) is suitable for most everything else.
+
+\subsection{Thomas Algorithm and Cyclic Reduction}
+Use openmp and cyclic vs thomas
+\subsubsection{Parallel Thomas Algorithm}
+\subsubsection{Parallel Cyclic Reduction}
 
 
 \chapter{Conclusions}
 
 
 \appendix
+\chapter{Usage of chrono class}
+Should code example be in appendix or stay here?
+\begin{verbatim}
+auto start = std::chrono::high_resolution_clock::now();
+    Portion of code to be timed
+auto finish = std::chrono::high_resolution_clock::now();
+std::chrono::duration<double> elapsed = finish - start;
+std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+\end{verbatim}
+
 \chapter{Implementation of the {\tt FiniteDifferenceMethod} class}
 \lipsum[10]
 \chapter[shorter running title]{Additional details on the Gundermanian determinant}
-\lipsum[10]
-
-
-    
+\lipsum[10]    
 
 \bibliographystyle{plain}
-\bibliography{ThesisDraft_v1}
-
-
-
+\bibliography{ThesisDraft}
 
 \end{document}

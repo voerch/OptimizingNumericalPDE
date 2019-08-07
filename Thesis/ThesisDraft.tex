@@ -13,7 +13,6 @@
 \usepackage{lipsum} % to generate the lipsum random text in the sample
 \usepackage{tikz}
 \usepackage{siunitx}
-
 \usetikzlibrary{calc,decorations.pathmorphing,patterns}
 
 
@@ -121,22 +120,17 @@ Here  you write a summary of the work. A paragraph on the motivation, previous w
 
 \lipsum[100]% replace this by your text
 
-
-
 \begin{flushright}
 Queen Mary University of London\\
 12${}^{\text{th}}$ August 2019
 \end{flushright}
 
-
 \tableofcontents
 
 \chapter{Introduction}
-In Ancient Greece, Thales was scorned for his poverty. Later that year, Thales utilized his skills in astrology. He forecasted the increase in olive yields. Using his limited capital, he rented oil presses in winter. Over the oil making season, many people rushed to the presses because of the high yields. Thales, as he rented the presses over the winter, let them upon what terms he pleased. Thales showed it was easy for philosophers to be rich if they chose it and accidentally laid the foundations of financial derivatives. \cite{Thalesians}
+In Ancient Greece, Thales was scorned for his poverty. Later that year, Thales utilized his skills in astrology. He forecasted the increase in olive yields. Using his limited capital, he rented oil presses in winter. Months lates, over the oil making season, many people rushed to the presses because of the high yields that Thales predicted. As he rented the presses over the winter, he forced the terms he pleased. Thales showed it was easy for philosophers to be rich if they chose it and practically used the first  financial derivative product. \cite{thalesians}
 
-In the modern world, financial derivatives are contracts between two or more parties. The value of the contract depends on one or several underlying assets. Commonly the assets are currencies, equities, bonds, interest rates, market indices or commodities.
-
-The simplest vanilla call option the right but not the obligation to buy the underlying at the expiry date at a previously agreed strike price. Thales essentially bought call options for oil presses.  So if the olive yields didn't come as Thales expected he didn't have the obligation to use the olive presses.
+In the modern world, financial derivatives are contracts between two or more parties. The value of the contract depends on one or several underlying assets. Commonly the assets are currencies, equities, bonds, interest rates, market indices or commodities. The vanilla call option gives the right but not the obligation to buy the underlying asset at the expiry date at a previously agreed strike price.  On the other hand, the vanilla put option gives the right but not the obligation to sell the underlying asset at the expiry date at a previously agreed strike price. Essentially, Thales bought call options for oil presses.  So if the olive yields didn't come as Thales expected he didn't have the obligation to use the olive presses.
 
 \section{Pricing Financial Derivatives}\label{Pricing Financial Derivatives}
 \subsection{The Risk Neutral Approach}
@@ -610,21 +604,25 @@ f(x, 0, t) = f(x, 1, t) = 0
 \end{equation}
 
 \section{Timing the Code}
-Measuring execution time intervals accurately is an important aspect to compare the efficiency and speed of different implementations.
+Measuring execution time intervals accurately is an important aspect to compare the efficiency and speed of different environments and implementations.
 
-\subsection{Windows API}
+
+\subsection{Windows Application Programming Interface}
+Windows Application Programming Interface (API) is the lowest level of interaction between applications and the windows operating system. Thus every program is built upon  the API. Mostly, the interaction is hidden, the runtime and support libraries manage it in the background. \cite{windows}
+
+The APIs can be easily used in C++ environment. Timing can be achieved by "QueryPerformanceCounter" or "QueryPerformanceFrequency"  functions. Respectively, they retrieve a high resolution time stamp and the frequency of the performance counter.  The functions can be easily utilized for time measurements.
 
 \subsection{Chrono Library}
+Using the Windows API for just timing the code is slightly excessive given the amount of work it takes. Luckily, Chrono library was introduced part of the C++11’s standard library.  Timers and clocks might differ on distinct systems, thus Chrono library is designed to work effortlessly with date and time.
+
+The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
+
 
 \section{Optimization Experiments}
 
+This section documents the performance of attempted optimizations. Experiments  are  conducted  in  the  W307 computer laboratory at  the  Queen Mary University of London.  Each computer has Windows 10 Enterprise 64 bit , 16 GB of RAM, Intel Core i7-6700 CPU with 4 cores clocked at 3.40 GHz. 
 
-Windows 10 Enterprise 64 bit 
-x64 based processor
-Intel Core i7-6700 CPU @3.40 GHz cores?
-16 GB Ram
-Using Microsoft Visual Studio Enterprise 2017, Version 15.3.3 Release mode
-c++ version???
+The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized  in  the  tests  include   Intel Compiler and Intel Math  Kernel  Library .  
 
 \subsection{Compilers and Solution Platforms}
 32 bit vs 64 bit 
@@ -677,18 +675,22 @@ Use openmp and cyclic vs thomas
 
 
 \appendix
+\chapter{Usage of chrono class}
+Should code example be in appendix or stay here?
+\begin{verbatim}
+auto start = std::chrono::high_resolution_clock::now();
+    Portion of code to be timed
+auto finish = std::chrono::high_resolution_clock::now();
+std::chrono::duration<double> elapsed = finish - start;
+std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+\end{verbatim}
+
 \chapter{Implementation of the {\tt FiniteDifferenceMethod} class}
 \lipsum[10]
 \chapter[shorter running title]{Additional details on the Gundermanian determinant}
-\lipsum[10]
-
-
-    
+\lipsum[10]    
 
 \bibliographystyle{plain}
-\bibliography{ThesisDraft_v1}
-
-
-
+\bibliography{ThesisDraft}
 
 \end{document}
