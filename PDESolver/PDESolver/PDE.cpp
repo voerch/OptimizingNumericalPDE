@@ -127,3 +127,7 @@ double Heat2D::InitCond2D(double x, double y) const
 	//return sin(3.14159265358979323846 * x);
 	return 1.0;
 }
+double Heat2D::AnalyticSol(double x, double y) const
+{
+	return  (32 / (pow(PI, 3) * sinh(PI / 2))) * sin((PI * x) / 2)  * sinh((PI * y) / 2);
+}

@@ -81,6 +81,8 @@ public:
 	virtual double BoundaryLeft2D(double t, double x, double y) const = 0;
 	virtual double BoundaryRight2D(double t, double x, double y) const = 0;
 	virtual double InitCond2D(double x, double y) const = 0;
+
+	virtual double AnalyticSol(double x, double y) const = 0;
 };
 
 // Implementing 2D Heat Equation
@@ -97,5 +99,5 @@ class Heat2D : public ParabolicPDE2D
 	double BoundaryLeft2D(double t, double x, double y) const;
 	double BoundaryRight2D(double t, double x, double y) const;
 	double InitCond2D(double x, double y) const;
-
+	double AnalyticSol(double x, double y) const;
 };

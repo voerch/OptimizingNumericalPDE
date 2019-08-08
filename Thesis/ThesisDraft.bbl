@@ -17,6 +17,11 @@ J.~Crank and P.~Nicolson.
   differential equations of the heat-conduction type.
 \newblock {\em Advances in Computational Mathematics}, 6(1):207--226, Dec 1996.
 
+\bibitem{DougADI}
+Jim Douglas, Jr.
+\newblock Alternating direction methods for three space variables.
+\newblock {\em Numer. Math.}, 4(1):41--63, December 1962.
+
 \bibitem{gtsv}
 {Intel}.
 \newblock Intel math kernel library for c, gtsv.

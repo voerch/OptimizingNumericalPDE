@@ -5,7 +5,7 @@
 
 int main()
 {
-	double x_dom = 1.0;     
+	double x_dom = 2.0;     
 	long J = 10;
 	double y_dom = 1.0;
 	long K = 10;
