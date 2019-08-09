@@ -1,8 +1,7 @@
 #pragma once
 #include <vector>
 #include "mkl.h"
-#include <fftw_mpi.h>
-
+#include <cmath>
 
 void ThomasAlgorithm(const std::vector<double>& a, const std::vector<double>& b, const std::vector<double>& c, const std::vector<double>& d, std::vector<double>& f)
 {
@@ -57,17 +56,24 @@ void IntelSolver(std::vector<double>& a, std::vector<double>& b, std::vector<dou
 	LAPACKE_dgtsv(matrix_layout, n, nrhs, LowerDiag, Diag, UpperDiag, oldResult, ldb);
 }
 
-#include <cmath>
 
-void cpu_cr(float *a, float *b, float *c, float *F, float *x, int size) {
+int log2(int x) 
+{
+	return  (int)(log((float)x) / log(2.0));
+}
+
+void CyclicReduction(std::vector<double>& a, std::vector<double>& b, std::vector<double>& c, std::vector<double>& F, std::vector<double>& x)
+{
+	
+	int size = b.size();
 	int i, j, index1, index2, offset;
 	float k1, k2;
 
 
 	/*Part 1 - Forward Reduction */
 	for (i = 0; i<log2(size + 1) - 1; i++) {
-		for (j = pow(2.0, i + 1) - 1; j<size; j = j + pow(2.0, i + 1)) {
-			offset = pow(2.0, i);
+		for (j = pow(2, i + 1) - 1; j<size; j = j + pow(2, i + 1)) {
+			offset = pow(2, i);
 			index1 = j - offset;
 			index2 = j + offset;
 
@@ -91,8 +97,6 @@ void cpu_cr(float *a, float *b, float *c, float *F, float *x, int size) {
 			}
 		}
 	}
-
-
 
 	/*part 2 - find the middle  */
 	int index = (size - 1) / 2;

@@ -159,7 +159,8 @@ void CrankNicholson::calculateInnerDomain()
 	}
 
 	//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-	IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+	//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+	CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 }
 
 // Loops through time.

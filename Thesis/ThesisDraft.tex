@@ -475,7 +475,7 @@ CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector 
 Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was deriving toy examples that can be calculated by hand and Excel. Following the verifications, porting the toy examples in C++ and utilize high performance computing principles.
 
 \section{Heat Equation}
-Most basic case for parabolic differential equations is the heat equation.
+Most basic case for parabolic differential equations is the heat equation. In the experiments the following initial and boundary conditions where $ T = 0.075 $ and $ x_{max} = 1.0$ will be used.
 
 \begin{eqnarray}
 u_t(x,t) &=& u_{xx}(x, t) \\[10pt]
@@ -483,22 +483,58 @@ u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
 u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
 \end{eqnarray}
 
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c||} 
- \hline
- Parameter & Value\\ [0.5ex] 
- \hline\hline
- Maximum spatial coordinate & 1.0\\ 
- Maximum time & 0.075 %\\[1ex] 
-
- \end{tabular}
- \caption{Heat equation testing parameters.}
-\end{table}
 
 \subsection{Analytical Solution of Heat Equation}
+Certain kinds of partial differential equations allows us to find an analytical solution with the help of the Separation of Variables technique \cite{duffyfinite}	.
 
-Separation of variables optimal grid size
+\begin{eqnarray}
+u(x,t) = X(x) T(t) \\[10pt]
+u_{xx}(x, t) = X^{''}(x) T(t) \\[10pt]
+u_t (x,t) = X(t) T^{'}(t)
+\end{eqnarray}
+
+Using the partial derivatives the equation $ u_t = u_{xx} $ becomes
+\begin{equation}
+\frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)}
+\end{equation}
+
+Right hand side only depends on x and the left hand side depends only on t. Therefore, the equation is valid only when each side is equal to a constant, which we set to λ. Rearranging terms gives us the following equations:
+
+\begin{eqnarray}
+\frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)} = \lambda \\[10pt]
+X^{''}(x) = \lambda X(x), \hspace{10pt} T^{'}(t) = \lambda T(t) \\[10pt]
+X(0) = X(1) = 0
+\end{eqnarray}
+
+Solving for X(x) is an example case of Sturm-Liouville problem \cite{sepvar}. However the $\lambda < 0$ and $\lambda = 0$ cases result in trivial solutions, thus they are discarded. Solving for $\lambda > 0$ yields
+\begin{equation}
+X(x)= c_1 sin(kx) + c_2 cos(kx)
+\end{equation}
+
+The boundary conditions leads to $ c_2 = 0, c_1 sin(k) = 0 \rightarrow k = 0, \pi, 2\pi, ...n\pi$ where n is an integer.
+
+Solving for $T(t)$ gives the solution
+\begin{eqnarray}
+T(t) = c_3 exp(-n^2 \pi ^2 t) \\[10pt]
+u(x,t) = \sum_{n=1}^{\infty} b_n exp(-n^2 \pi ^2 t) sin(n \pi x)
+\end{eqnarray}
+
+where we have set $b_n = c_1 c_3$. The initial condition gives
+\begin{equation}
+u(x,0) = sin(\pi x) = \sum_{n=1}^{\infty} b_n sin(n \pi x)
+\end{equation}
+which is a Fourier sine series. Thus, the coefficient $b_n$ is chosen such that
+\begin{equation}
+b_n = 2 \int_{0}^{1} sin(\pi x) sin(\pi n x) dx = \frac{2sin(\pi n)}{\pi - \pi n^2}
+\end{equation}
+Combining the solutions
+\begin{equation}
+\sum_{n=1}^{\infty} \frac{2sin(\pi n)}{\pi - \pi n^2} exp(-n^2 \pi ^2 t) sin(n \pi x)= exp(-\pi t) sin(\pi x)
+\end{equation}
+
+The resulting analytical solution is utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. Figure 2.1 demonstrates the error compared to the grid sizes. The optimal grid size for this specific problem is 50 by 50.
+ 
+Grid size depends on the parameters prove this duffy book.
 
 \begin{figure}[!htb]
   \begin{minipage}[b]{0.5\textwidth}
@@ -512,8 +548,6 @@ Separation of variables optimal grid size
 \end{figure}
 
 
-
-Grid size depends on the parameters prove this duffy book.
 
 After choosing the optimal grid size the resulting grids can be visualized as
 \begin{figure}[!htb]

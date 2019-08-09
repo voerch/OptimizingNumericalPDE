@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{thalesians}
 Saeed Amen.
@@ -22,11 +22,26 @@ Jim Douglas, Jr.
 \newblock Alternating direction methods for three space variables.
 \newblock {\em Numer. Math.}, 4(1):41--63, December 1962.
 
+\bibitem{duffyfinite}
+D.J. Duffy.
+\newblock {\em Finite Difference Methods in Financial Engineering: A Partial
+  Differential Equation Approach}.
+\newblock The Wiley Finance Series. Wiley, 2006.
+
 \bibitem{gtsv}
 {Intel}.
 \newblock Intel math kernel library for c, gtsv.
 \newblock
   \url{https://software.intel.com/en-us/mkl-developer-reference-c-gtsv}, 2019.
+\newblock [Online; accessed 7-August-2019].
+
+\bibitem{sepvar}
+{Matthew J. Hancock}.
+\newblock The 1-d heat equation (18.303, linear partial differential
+  equations).
+\newblock
+  \url{https://ocw.mit.edu/courses/mathematics/18-303-linear-partial-differential-equations-fall-2006/lecture-notes/heateqni.pdf},
+  2006.
 \newblock [Online; accessed 7-August-2019].
 
 \bibitem{peace}

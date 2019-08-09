@@ -20,17 +20,17 @@
 \contentsline {chapter}{\numberline {2}Optimizing Solvers}{21}{chapter.2}
 \contentsline {section}{\numberline {2.1}Heat Equation}{21}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Analytical Solution of Heat Equation}{22}{subsection.2.1.1}
-\contentsline {section}{\numberline {2.2}Black-Scholes}{23}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Analytical Solution}{23}{subsection.2.2.1}
-\contentsline {section}{\numberline {2.3}2 Dimensional Heat Equation Base Case}{23}{section.2.3}
-\contentsline {section}{\numberline {2.4}Timing the Code}{25}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Windows Application Programming Interface}{25}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Chrono Library}{25}{subsection.2.4.2}
-\contentsline {section}{\numberline {2.5}Optimization Experiments}{26}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}Tridiagonal Solvers}{26}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {2.5.2}Compilers and Solution Platforms}{26}{subsection.2.5.2}
-\contentsline {subsection}{\numberline {2.5.3}Visual Studio Optimization Switches}{27}{subsection.2.5.3}
-\contentsline {chapter}{\numberline {3}Conclusions}{28}{chapter.3}
-\contentsline {chapter}{\numberline {A}Usage of chrono class}{29}{appendix.A}
-\contentsline {chapter}{\numberline {B}Implementation of the {\tt FiniteDifferenceMethod} class}{30}{appendix.B}
-\contentsline {chapter}{\numberline {C}shorter running title}{31}{appendix.C}
+\contentsline {section}{\numberline {2.2}Black-Scholes}{24}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Analytical Solution}{25}{subsection.2.2.1}
+\contentsline {section}{\numberline {2.3}2 Dimensional Heat Equation Base Case}{25}{section.2.3}
+\contentsline {section}{\numberline {2.4}Timing the Code}{26}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Windows Application Programming Interface}{26}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Chrono Library}{27}{subsection.2.4.2}
+\contentsline {section}{\numberline {2.5}Optimization Experiments}{27}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Tridiagonal Solvers}{27}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Compilers and Solution Platforms}{28}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}Visual Studio Optimization Switches}{29}{subsection.2.5.3}
+\contentsline {chapter}{\numberline {3}Conclusions}{30}{chapter.3}
+\contentsline {chapter}{\numberline {A}Usage of chrono class}{31}{appendix.A}
+\contentsline {chapter}{\numberline {B}Implementation of the {\tt FiniteDifferenceMethod} class}{32}{appendix.B}
+\contentsline {chapter}{\numberline {C}shorter running title}{33}{appendix.C}
