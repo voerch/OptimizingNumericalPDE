@@ -1,36 +1,32 @@
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.1.1}{Pricing Financial Derivatives}{chapter.1}% 2
-\BOOKMARK [2][-]{subsection.1.1.1}{The Risk Neutral Approach}{section.1.1}% 3
-\BOOKMARK [2][-]{subsection.1.1.2}{Solving Financial Partial Differential Equations}{section.1.1}% 4
-\BOOKMARK [1][-]{section.1.2}{Finite Difference Methods}{chapter.1}% 5
-\BOOKMARK [2][-]{subsection.1.2.1}{Explicit Method}{section.1.2}% 6
-\BOOKMARK [2][-]{subsection.1.2.2}{Crank-Nicholson Method}{section.1.2}% 7
-\BOOKMARK [2][-]{subsection.1.2.3}{Rannacher Trick}{section.1.2}% 8
-\BOOKMARK [2][-]{subsection.1.2.4}{Alternating Direction Implicit Method}{section.1.2}% 9
-\BOOKMARK [1][-]{section.1.3}{Optimizations}{chapter.1}% 10
-\BOOKMARK [2][-]{subsection.1.3.1}{Compilers}{section.1.3}% 11
-\BOOKMARK [2][-]{subsection.1.3.2}{32 bit and 64 bit}{section.1.3}% 12
-\BOOKMARK [2][-]{subsection.1.3.3}{Optimization Switches}{section.1.3}% 13
-\BOOKMARK [2][-]{subsection.1.3.4}{Tridiagonal Solvers}{section.1.3}% 14
-\BOOKMARK [2][-]{subsection.1.3.5}{Threading}{section.1.3}% 15
-\BOOKMARK [2][-]{subsection.1.3.6}{OpenMP}{section.1.3}% 16
-\BOOKMARK [2][-]{subsection.1.3.7}{AVX and Intrinsics}{section.1.3}% 17
-\BOOKMARK [2][-]{subsection.1.3.8}{GPGPU}{section.1.3}% 18
-\BOOKMARK [2][-]{subsection.1.3.9}{Cloud Applications}{section.1.3}% 19
-\BOOKMARK [0][-]{chapter.2}{Optimizing Solvers}{}% 20
-\BOOKMARK [1][-]{section.2.1}{Heat Equation}{chapter.2}% 21
-\BOOKMARK [2][-]{subsection.2.1.1}{Analytical Solution of Heat Equation}{section.2.1}% 22
-\BOOKMARK [1][-]{section.2.2}{Black-Scholes}{chapter.2}% 23
-\BOOKMARK [2][-]{subsection.2.2.1}{Analytical Solution}{section.2.2}% 24
-\BOOKMARK [1][-]{section.2.3}{2 Dimensional Heat Equation Base Case}{chapter.2}% 25
-\BOOKMARK [1][-]{section.2.4}{Timing the Code}{chapter.2}% 26
-\BOOKMARK [2][-]{subsection.2.4.1}{Windows Application Programming Interface}{section.2.4}% 27
-\BOOKMARK [2][-]{subsection.2.4.2}{Chrono Library}{section.2.4}% 28
-\BOOKMARK [1][-]{section.2.5}{Optimization Experiments}{chapter.2}% 29
-\BOOKMARK [2][-]{subsection.2.5.1}{Tridiagonal Solvers}{section.2.5}% 30
-\BOOKMARK [2][-]{subsection.2.5.2}{Compilers and Solution Platforms}{section.2.5}% 31
-\BOOKMARK [2][-]{subsection.2.5.3}{Visual Studio Optimization Switches}{section.2.5}% 32
-\BOOKMARK [0][-]{chapter.3}{Conclusions}{}% 33
-\BOOKMARK [0][-]{appendix.A}{Usage of chrono class}{}% 34
-\BOOKMARK [0][-]{appendix.B}{Implementation of the FiniteDifferenceMethod class}{}% 35
-\BOOKMARK [0][-]{appendix.C}{shorter running title}{}% 36
+\BOOKMARK [1][-]{section.1.1}{Motivation of the Project}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Literature Review}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Contents of the Thesis}{chapter.1}% 4
+\BOOKMARK [0][-]{chapter.2}{Pricing Financial Derivatives}{}% 5
+\BOOKMARK [1][-]{section.2.1}{The Risk Neutral Approach}{chapter.2}% 6
+\BOOKMARK [2][-]{subsection.2.1.1}{Black-Scholes Partial Differential Equation}{section.2.1}% 7
+\BOOKMARK [2][-]{subsection.2.1.2}{Derivation of the Black-Scholes Equation}{section.2.1}% 8
+\BOOKMARK [1][-]{section.2.2}{Solving Partial Differential Equations}{chapter.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.1}{Heat Equation}{section.2.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.2}{Two Dimensional Heat Equation}{section.2.2}% 11
+\BOOKMARK [1][-]{section.2.3}{Finite Difference Methods}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.3.1}{Discretization}{section.2.3}% 13
+\BOOKMARK [2][-]{subsection.2.3.2}{Explicit Method}{section.2.3}% 14
+\BOOKMARK [2][-]{subsection.2.3.3}{Crank-Nicholson Method}{section.2.3}% 15
+\BOOKMARK [2][-]{subsection.2.3.4}{Rannacher Trick}{section.2.3}% 16
+\BOOKMARK [2][-]{subsection.2.3.5}{Alternating Direction Implicit Method}{section.2.3}% 17
+\BOOKMARK [0][-]{chapter.3}{Optimizing Solvers}{}% 18
+\BOOKMARK [1][-]{section.3.1}{Timing the Code}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.1.1}{Windows Application Programming Interface}{section.3.1}% 20
+\BOOKMARK [2][-]{subsection.3.1.2}{Chrono Library}{section.3.1}% 21
+\BOOKMARK [1][-]{section.3.2}{Optimization Experiments}{chapter.3}% 22
+\BOOKMARK [2][-]{subsection.3.2.1}{Tridiagonal Solvers}{section.3.2}% 23
+\BOOKMARK [2][-]{subsection.3.2.2}{32 bit and 64 bit}{section.3.2}% 24
+\BOOKMARK [2][-]{subsection.3.2.3}{Visual Studio Optimization Switches}{section.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.2.4}{Optimal Grid Size}{section.3.2}% 26
+\BOOKMARK [1][-]{section.3.3}{Results of the Numerical Experiments}{chapter.3}% 27
+\BOOKMARK [0][-]{chapter.4}{Conclusions}{}% 28
+\BOOKMARK [1][-]{section.4.1}{Further Work}{chapter.4}% 29
+\BOOKMARK [0][-]{appendix.A}{Usage of chrono class}{}% 30
+\BOOKMARK [0][-]{appendix.B}{Implementation of the FiniteDifferenceMethod class}{}% 31
+\BOOKMARK [0][-]{appendix.C}{shorter running title}{}% 32

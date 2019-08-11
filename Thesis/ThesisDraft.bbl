@@ -28,12 +28,36 @@ D.J. Duffy.
   Differential Equation Approach}.
 \newblock The Wiley Finance Series. Wiley, 2006.
 
+\bibitem{cloudfunc}
+Sadjad Fouladi, Francisco Romero, Dan Iter, Qian Li, Shuvo Chatterjee, Christos
+  Kozyrakis, Matei Zaharia, and Keith Winstein.
+\newblock From laptop to lambda: Outsourcing everyday jobs to thousands of
+  transient functional containers.
+\newblock In {\em 2019 {USENIX} Annual Technical Conference ({USENIX} {ATC}
+  19)}, pages 475--488, Renton, WA, July 2019. {USENIX} Association.
+
+\bibitem{Hockney}
+R.~W. Hockney.
+\newblock A fast direct solution of poisson's equation using fourier analysis.
+\newblock {\em J. ACM}, 12(1):95--113, January 1965.
+
 \bibitem{gtsv}
 {Intel}.
 \newblock Intel math kernel library for c, gtsv.
 \newblock
   \url{https://software.intel.com/en-us/mkl-developer-reference-c-gtsv}, 2019.
 \newblock [Online; accessed 7-August-2019].
+
+\bibitem{weather}
+Stephen Jewson and Mihail Zervos.
+\newblock The black-scholes equation for weather derivatives.
+\newblock {\em SSRN Electronic Journal}, 09 2003.
+
+\bibitem{klebaner}
+F.C. Klebaner.
+\newblock {\em Introduction to Stochastic Calculus with Applications}.
+\newblock Introduction to Stochastic Calculus with Applications. Imperial
+  College Press, 2005.
 
 \bibitem{sepvar}
 {Matthew J. Hancock}.
@@ -43,6 +67,17 @@ D.J. Duffy.
   \url{https://ocw.mit.edu/courses/mathematics/18-303-linear-partial-differential-equations-fall-2006/lecture-notes/heateqni.pdf},
   2006.
 \newblock [Online; accessed 7-August-2019].
+
+\bibitem{merton}
+Robert~C. Merton.
+\newblock Option pricing when underlying stock returns are discontinuous.
+\newblock {\em Journal of Financial Economics}, 3(1):125 -- 144, 1976.
+
+\bibitem{fpga}
+Samuel Palmer.
+\newblock Accelerating implicit finite difference schemes using a hardware
+  optimised implementation of the thomas algorithm for fpgas.
+\newblock {\em arXiv preprint arXiv: 1402.5094, 2014}, 2014.
 
 \bibitem{peace}
 D.~W. Peaceman and H.~H. Rachford.
@@ -66,5 +101,10 @@ Llewellyn~Hilleth Thomas.
 \newblock Elliptic problems in linear difference equations over a network.
 \newblock {\em Watson Sci. Comput. Lab. Rept., Columbia University, New York},
   1, 1949.
+
+\bibitem{wilmott}
+Paul Wilmott.
+\newblock {\em Paul Wilmott Introduces Quantitative Finance}.
+\newblock Wiley-Interscience, New York, NY, USA, 2 edition, 2007.
 
 \end{thebibliography}

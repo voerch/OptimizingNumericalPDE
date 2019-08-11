@@ -128,134 +128,266 @@ Queen Mary University of London\\
 \tableofcontents
 
 \chapter{Introduction}
-In Ancient Greece, Thales was scorned for his poverty. Later that year, Thales utilized his skills in astrology. He forecasted the increase in olive yields. Using his limited capital, he rented oil presses in winter. Months lates, over the oil making season, many people rushed to the presses because of the high yields that Thales predicted. As he rented the presses over the winter, he forced the terms he pleased. Thales showed it was easy for philosophers to be rich if they chose it and practically used the first  financial derivative product. \cite{thalesians}
+In Ancient Greece, Thales was scorned for his poverty. Later that year, Thales utilized his skills in astrology to forecast an increase in olive yields. Using his limited capital, he rented oil presses in winter. Months later, over the oil making season, many people rushed to the presses because of the high yields that Thales predicted. As he rented the presses over the winter, he forced the terms he pleased. Thales showed it was easy for philosophers to be rich if they chose it and practically used the first  financial derivative product \cite{thalesians}. 
 
-In the modern world, financial derivatives are contracts between two or more parties. The value of the contract depends on one or several underlying assets. Commonly the assets are currencies, equities, bonds, interest rates, market indices or commodities. The vanilla call option gives the right but not the obligation to buy the underlying asset at the expiry date at a previously agreed strike price.  On the other hand, the vanilla put option gives the right but not the obligation to sell the underlying asset at the expiry date at a previously agreed strike price. Essentially, Thales bought call options for oil presses.  So if the olive yields didn't come as Thales expected he didn't have the obligation to use the olive presses.
+In the modern world, financial derivatives are contracts between two or more parties. The value of the contract depends on one or several underlying assets. Commonly the assets are currencies, equities, bonds, interest rates, market indices or commodities. The vanilla call option gives the right but not the obligation to buy the underlying asset at the expiry date at a previously agreed strike price. Essentially, Thales bought call options for oil presses.  If the olive yields didn't come as Thales expected he didn't have the obligation to use the olive presses.  On the other hand, the vanilla put option gives the right but not the obligation to sell the underlying asset at the expiry date at a previously agreed strike price. Practical applications of the options include hedging or speculating the future asset price. Hence, accurately pricing the options is crucial for an efficient and mature financial market.
 
-\section{Pricing Financial Derivatives}\label{Pricing Financial Derivatives}
-\subsection{The Risk Neutral Approach}
+Merton and Scholes received the 1997 Nobel Prize in Economic Science for this work \cite{merton}. 
+
+\section{Motivation of the Project}
+Derivative pricing in the real world is a computationally intensive task. The existing numerical methods for partial differential equations are all constrained by the computational complexity. Being fast when evaluating new information is critical for the operations of hedge funds and investment banks. Therefore optimizing the existing numerical methods with hardware and software that can be installed on a trading floor is crucial. Goal of the project is to provide efficient methods for pricing options.
+
+Purpose of this project to optimize numerical solutions of parabolic PDEs by testing high performance computing techniques and comparing compilers/os/32bit/64bit.
+The idea of this project is to study how to take advantage of this parallelism and explore how much faster we can make these calculations.
+
+\section{Literature Review}
+Bakılacak paperlar ekle.
+
+\section{Contents of the Thesis}
+Included in your ‘Introduction’ section should be a clear summary of  what  you  have  achieved  in  the  project  work  presented,  such  as  any  new  results, generalisations, corollaries, examples, new connections, or computer investigations.  The thesis is organized as follows.  Chapter 2 presents an introduction to financial derivatives, Black-Scholes model and finite difference models.  Chapter3 extends the 2d and gives examples of two dimensional heat equation.  Chapter 4 develops the numerical methods and techniques considered to solve the PDE-based models for the option pricing problems.  In the same chapter,  finite difference method with improved algorithms to solve a large tridiagonal systems is discussed.  Chapter 5 shows the numerical results of our numerical methods with several examples of.  Chapter 6 concludes the thesis.
+
+\chapter{Pricing Financial Derivatives}\label{Pricing Financial Derivatives}
+\section{The Risk Neutral Approach}
+The Black-Scholes framework is a theoretical valuation formula for options. It reveals the relationship between the prices of the options and the underlying assets. Since almost all corporate liabilities can be viewed as combinations of options, the formula is applicable to common stocks and corporate bonds \cite{BS}. The Black-Scholes model makes the following assumptions:
+\begin{itemize}
+\item There does not exist any arbitrage opportunity in the financial market.  The traders can’t make instantaneous profit without any risk.
+\item The underlying asset value follows a geometric Brownian Motion $dS = \mu S dt + \sigma S dB $ where $\mu$ denotes the average rate of growth of the underlying assets, $\sigma$ denotes the volatility of the asset price and B is a Brownian Motion.
+\item The market is frictionless.  This means there are no transaction fees, the interest rates for borrowing and lending money from and to the bank are the same, every party  in  market  has  immediate  information  and  all  entities  are  available  at  anytime and in any size.
+\item No dividend will paid on the underlying asset $S$.
+\end{itemize}
+
+\subsection{Black-Scholes Partial Differential Equation}
+The original model is used to price the vanilla  option, which is the simplest type of option.
+Under the assumptions of Black-Scholes framework, the call or put option price satisfies the parabolic partial differential equation:
+
+\begin{equation}
+\frac{\partial V}{\partial t} = rS\frac{\partial V}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} - rV
+\end{equation}
+
+Framework shows the  price V(t,S)  of  a  European  option  driven  by  one underlying asset that satisfies the PDE where $r$, $\sigma$, $t$, $S$respectively denotes the risk-free interest rate, volatility, time and the underlying price.  It is assumed that $r$ and $\sigma$ are constants. In more complicated models such as stochastic volatility models they can be a function. In order to price a vanilla call option the PDE needs to satisfy the following boundary and initial conditions.
+
+\begin{eqnarray}
+C(0,t) &=& 0, \hspace{4pt} C(S_{\max},t)=S_{\max} - K e^{-r(T-t)}, \hspace{10pt} 0 \leq t \leq T \\[10pt]
+C(S,T) &=& \max(S-K,0), \hspace{10pt} 0 \leq S \leq S_{\max}
+\end{eqnarray}
+
+\subsection{Derivation of the Black-Scholes Equation}
+Black-Scholes model takes advantage of the properties of the geometric Brownian motion and It\^{o}'s lemma. 
+
 \begin{definition} Brownian Motion 
-
-Brownian motion (also known as Wiener Process) was discovered by botanist Robert Brown as he observed a chaotic motion of particles suspended in water. \cite{BM}  A  Brownian  motion, $B(t)$,  is  a  continuous-time  stochastic  process  with  the  following properties: 
+Brownian motion (also known as Wiener Process) was discovered by botanist Robert Brown as he observed a chaotic motion of particles suspended in water \cite{BM}. A  Brownian  motion, $B(t)$,  is  a  continuous-time  stochastic  process  with  the  following properties: 
 \begin{itemize}
 \item $ B(0) = 0 $.
 \item $ B(t) $ is a continuous function of t.
 \item For $ 0  \leq s < t $ the increment $ B(t) -  B(s)  $ has normal distribution $ \mathcal{N}(0, t-s) $.
 \end{itemize}
-Brownian motion is the basic building block in stochastic calculus and geometric Brownian motion is often used to model the stock prices.
-
+Brownian motion is the basic building block in stochastic calculus and geometric Brownian motion is used to model the stock prices in Black-Scholes model.
 \end{definition}
 
-\begin{theorem} It\^{o}'s Lemma
+\begin{lemma} It\^{o}'s Lemma
+Let $B(t)$ be a Brownian motion and $X(t)$ be an Ito process which satisfies the stochastic differential equation:
+\begin{equation}
+dX(t) = \mu(X(t),t)dt + \sigma(X(t),t)dB(t)
+\end{equation} 
+If $f(x, t) \in C^2(\mathbb{R}^2,\mathbb{R})$ then $f(X(t),t)$ is also an Ito drift-diffusion process, with its differential given by:
+\begin{equation}
+d(f(X(t),t)) = \frac{\partial f}{\partial t}(X(t),t)dt + f'(X(t),t)dX + \frac{1}{2}f''(X(t),t)dX(t)^2
+\end{equation} 
+With $dX(t)^2$ given by: $dt^2 = 0$, $dt dB(t) = 0$ and $dB(t)^2 = dt$.
+\end{lemma}
 
-Let $B(t)$ be a Brownian motion and $W(t)$ be an Ito drift-diffusion process which satisfies the stochastic differential equation:
+\begin{theorem}
+Assume that the asset price $S$ follows a geometric Brownian motion.  Under the assumptions of Black-Scholes framework, the call or put option price $V(t,S)$ satisfies the parabolic partial differential equation
 \begin{equation}
-dW(t) = \mu(W(t),t)dt + \sigma(W(t),t)dB(t)
-\end{equation} 
-If $f(w, t) \in C^2(\mathbb{R}^2,\mathbb{R})$ then $f(W(t),t)$ is also an Ito drift-diffusion process, with its differential given by:
-\begin{equation}
-d(f(W(t),t)) = \frac{\partial f}{\partial t}(W(t),t)dt + f'(W(t),t)dW + \frac{1}{2}f''(W(t),t)dW(t)^2
-\end{equation} 
-With $dW(t)^2$ given by: $dt^2 = 0$, $dt dB(t) = 0$ and $dB(t)^2 = dt$.
+\frac{\partial V}{\partial t} = rS\frac{\partial V}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} - rV
+\end{equation}
 \end{theorem}
 
-
-
-\begin{theorem} Black-Scholes Model
-
-The Black-Scholes framework is a theoretical valuation formula for options. Since almost all corporate liabilities can be viewed as combinations of options, the formula is applicable to common stock, corporate bonds etc.  \cite{BS} Under the assumptions of Black-Scholes framework, the call or put option price satisfies the parabolic partial differential equation:
+\begin{proof}
+Suppose an investor sets up a self-financing portfolio,  $ X(t)$, comprising one option and an $\Delta$ amount of the underlying asset. Therefore, value of the portfolio at time t is $X(t) = V(t) + \Delta S(t)$. 
+Since the self-financing trading strategy has no capital influx or consumption, the value of portfolio change can be written as 
 \begin{equation}
-\frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} = r(V - S \frac{\partial V}{\partial S})
+dX = dV + \Delta dS
 \end{equation}
 
-\end{theorem}  
-
-\begin{proof} 
-
-Suppose an investor sets up a self-financing portfolio at time t, with a total value $ X(t)$. 
-The portfolio consists of:
-\begin{itemize}
-\item $ \Delta(t) $ share of stocks
-\item Remaining $ X(t) - \Delta(t)S(t) $ deposit in the riskless bank account which yields continuously compounded interest at rate $r$.
- 
-\end{itemize}
-Self-financing trading strategy has no capital influx or consumption, the value of portfolio changes as: 
+Applying the It\^{o}'s Lemma to the option price V(t,S)
 \begin{equation}
-dX(t) =  \Delta(t)dS(t) + r(X(t) +  \Delta(t)S(t))dt
+dV = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial S} (S,t) dS + \frac{1}{2}\frac{\partial^2 V}{\partial S^2}(S,t)dS^2
 \end{equation}
 
-Black-Scholes model assumes that the stock price under the "market probability measure" follows a gBM. 
-
+Since the Black-Scholes model assumes that the stock price under the "market probability measure" follows a gBM. 
 \begin{equation}
-S(t) = S(0) exp((\alpha - \sigma^2/2)t + \sigma B(t)), t \geq 0
-\end{equation} where $\sigma > 0$ is a constant volatility parameter, $ \alpha > 0$ is a mean rate of return. In differential form: 
-\begin{equation}
-dS(t) = \alpha S(t)dt + \sigma S(t)dB(t) 
+dS = \mu S dt + \sigma S dW
 \end{equation}
 
 Putting (1.4) and (1.6) together yields
 \begin{equation}
- dX(t) = rX(t)dt + (\alpha - r) \Delta(t)S(t)dt + \sigma \Delta(t)S(t)dB(t)
+dV = (\frac{\partial V}{\partial t} + \mu S \frac{\partial V}{\partial S} + \frac{1}{2} \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + \Delta \mu S) dt + (\sigma S \frac{\partial V}{\partial S}+\Delta \sigma S) dW
 \end{equation}
 
-The first term denotes the return on investment X(t) in bank, second term is the risk premium and third term appears due to the volatility of the stock market.
-
-In order to calculate the differential for the discounted portfolio value $exp(-rt) X(t) $, we use the It\^{o}'s formula.
+The fact that portfolio is risk-free implies that the second term involving the Brownian Motion, $dW$, must be zero.  This technique is known as delta-hedging , otherwise, we would have an arbitrage opportunity. Thus, $ \Delta = - \frac{\partial V}{\partial S}$.  Hence, the growth rate of the portfolio must be the risk free rate which can be summarized as $ dX = r X dt $. Substituting $\Delta$ and $dX$ yields
 
 \begin{equation}
- d(exp(-rt) X(t)) = -r exp(-rt) X(t)dt + exp(-rt) dX(t)
- \end{equation}
- 
- Substituting $dX(t)$ from (1.7)
- 
- \begin{equation}
- (\alpha - r) \Delta(t)S(t)dt + \sigma \Delta(t)S(t)dB(t)
+\frac{\partial V}{\partial t} + \frac{1}{2} \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} = r(V-S\frac{\partial V}{\partial S})
 \end{equation}
 
-\end{proof}
+Rearranging the equation to get famous Black-Scholes equation:
+\begin{equation}
+\frac{\partial V}{\partial t} = rS\frac{\partial V}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} - rV
+\end{equation}
+\end{proof} 
 
-\begin{remark} 1 sayfa anlat bunu
-The Black-Scholes model is still  used but not entirely applicable to assets that cannot be hedged. Multi asset derivatives(equity baskets), Weather derivatives, non tradable assets, not freely tradable FX (Brazil real, Korean Won). The industry uses a different product called non deliverable forward for such.
+\begin{definition} The resulting partial differential equation can be solved for the analytical solution.  The boundary conditions and initial conditions for the call option is
+\begin{eqnarray}
+\frac{\partial C}{\partial t} &=& rS\frac{\partial C}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 C}{\partial S^2} - rC \\[10pt]
+C(0,t) &=& 0, \hspace{4pt} C(S_{\max},t)=S_{\max} - K e^{-r(T-t)}, \hspace{10pt} 0 \leq t \leq T \\[10pt]
+C(S,T) &=& \max(S-K,0), \hspace{10pt} 0 \leq S \leq S_{\max}
+\end{eqnarray}
+
+Solving the equations, the formulae \cite{wilmott} for European call is
+\begin{eqnarray}
+C = S \Phi (d_1) - K e^{-r(T-t)} \Phi (d_2) \\[10pt]
+d_1 = \frac{log(S/K) + (r + \sigma^2/2)(T - t)}{\sigma \sqrt{T-t}} \\[10pt]
+d_2 = d_1 - \sigma \sqrt{T-t}
+\end{eqnarray}
+
+\end{definition}
+
+\begin{remark}  Untradable assets\\ 
+Modern financial engineering created derivatives using untradable assets as an underlying such as multi asset derivatives like equity baskets, weather derivatives and non-deliverable forwards. Non-deliverable forwards are for offshore investors that want to trade non-convertible currencies such as Brazilian Real, South Korean Won.  The Black-Scholes model is still used in these cases \cite{weather} but not entirely applicable to assets that cannot be hedged.
 \end{remark}
 
 
+\section{Solving Partial Differential Equations}
+Since the foundation of the world humanity tried to understand and model the nature. Differential equations serves this purpose by enabling us to describe natural phenomena for instance, heat, sound and fluid flow. General form of 2nd order PDEs of two independent variables is $$ au_{xx} + bu_{xy} + cu_{yy} + du_x + eu_y + fu + g = 0 $$ If the equation satisfies the condition $ b^2 - 4ac = 0 $  it is considered a parabolic partial differential equation. Generally, financial partial differential equations can be classified as parabolic partial differential equations.
 
-\subsection{Solving Financial Partial Differential Equations}
+Generally, partial differential equations are too complicated to work out an analytical solution. Thus, we need to achieve a numerical solution to the problem. Numerical partial differential equations includes components in the areas of applications, mathematics and computers. The most common framework is finite difference method which tries to find approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. Instead we try to find approximate solutions of the problem at a discrete set of points in the (x, t) plane, normally a rectangular grid of points. It is simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. 
 
+Feynman-Kac theorem \cite{klebaner}, establishes a link between parabolic partial differential equations and stochastic processes by writing the solution as a conditional expectation. Thanks to the theorem, Monte Carlo method is also utilized to find the numerical solutions to the partial differential equations.  Monte Carlo method is preferred when the dimensions are too high !!Glassermann MC book rough calculation of error MC vs PDE grids(1-2 pages)!!
 
-Since the foundation of the world humanity tried to understand and model the nature. Differential equations serves this purpose by enabling us to describe natural phenomena for instance, heat, sound and fluid flow. The mathematical theory of partial differential equations describing financial markets plays an important role in mathematical finance.
+\subsection{Heat Equation}
+Most basic case for parabolic differential equations is the heat equation. In the experiments the following initial and boundary conditions will be used.
 
-General form of 2nd order PDEs of two independent variables is $$ au_{xx} + bu_{xy} + cu_{yy} + du_x + eu_y + fu + g = 0 $$ If the equation satisfies the condition $ b^2 - 4ac = 0 $  it is considered a parabolic partial differential equation. Generally, financial partial differential equations can be classified as parabolic partial differential equations.
+\begin{eqnarray}
+u_t(x,t) &=& u_{xx}(x, t) \\[10pt]
+u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
+u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
+\end{eqnarray}
 
+\begin{definition} Analytical Solution of Heat Equation
 
-Sometimes there are analytical solutions derive analytical bs/separation of variables heat equation Vanilla options barrier options reference (1 page)
+Certain kinds of partial differential equations allows us to find an analytical solution with the help of the Separation of Variables technique \cite{duffyfinite}.
 
-Numerical partial differential equations is a large area of study. The subject includes components in the areas of applications, mathematics and computers. These three aspects of a problem are so strongly tied together that it is virtually impossible to consider the applied aspect of a problem without considering at least some of the mathematical counting aspects of that problem.[j.w. thomas]
+\begin{eqnarray}
+u(x,t) = X(x) T(t) \\[10pt]
+u_{xx}(x, t) = X^{''}(x) T(t) \\[10pt]
+u_t (x,t) = X(t) T^{'}(t)
+\end{eqnarray}
 
-On the other hand, mostly partial differential equations are too complicated to work out an analytical solution. Thus, we need to achieve a numerical solution to the problem.
+Using the partial derivatives the equation $ u_t = u_{xx} $ becomes
+\begin{equation}
+\frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)}
+\end{equation}
 
-The most common framework is finite difference method which tries to find approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points.
-Instead we try to find approximate solutions of the problem at a discrete set of points in the (x, t) plane, normally a rectangular grid of points. It is simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. 
+Right hand side only depends on x and the left hand side depends only on t. Therefore, the equation is valid only when each side is equal to a constant, which we set to $ \lambda $. Rearranging terms gives us the following equations:
 
-But sometimes we need to use numerical methods Monte carlo high dimensions, Grids low dimensions show feynman kac writes as expectation
-Glassermann MC book rough calculation of error MC vs PDE grids(1-2 pages)
-Finally, the Monte Carlo method is used to find the numerical solution when dimensions are too high by calculating an expectation (Feynman-Kac Theorem) klebaner.
+\begin{eqnarray}
+\frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)} = \lambda \\[10pt]
+X^{''}(x) = \lambda X(x), \hspace{10pt} T^{'}(t) = \lambda T(t) \\[10pt]
+X(0) = X(1) = 0
+\end{eqnarray}
+
+Solving for X(x) is an example case of Sturm-Liouville problem \cite{sepvar}. However the $\lambda < 0$ and $\lambda = 0$ cases result in trivial solutions, thus they are discarded. Solving for $\lambda > 0$ yields
+\begin{equation}
+X(x)= c_1 sin(kx) + c_2 cos(kx)
+\end{equation}
+
+The boundary conditions leads to $ c_2 = 0, c_1 sin(k) = 0 \rightarrow k = 0, \pi, 2\pi, ...n\pi$ where n is an integer.
+
+Solving for $T(t)$ gives the solution
+\begin{eqnarray}
+T(t) = c_3 exp(-n^2 \pi ^2 t) \\[10pt]
+u(x,t) = \sum_{n=1}^{\infty} b_n exp(-n^2 \pi ^2 t) sin(n \pi x)
+\end{eqnarray}
+
+where we have set $b_n = c_1 c_3$. The initial condition gives
+\begin{equation}
+u(x,0) = sin(\pi x) = \sum_{n=1}^{\infty} b_n sin(n \pi x)
+\end{equation}
+which is a Fourier sine series. Thus, the coefficient $b_n$ is chosen such that
+\begin{equation}
+b_n = 2 \int_{0}^{1} sin(\pi x) sin(\pi n x) dx = \frac{2sin(\pi n)}{\pi - \pi n^2}
+\end{equation}
+Combining the solutions
+\begin{equation}
+u_n(x,t) = \sum_{n=1}^{\infty} \frac{2sin(\pi n)}{\pi - \pi n^2} exp(-n^2 \pi ^2 t) sin(n \pi x)= exp(-\pi t) sin(\pi x)
+\end{equation}
+\end{definition}
+
+\subsection{Two Dimensional Heat Equation}
+2 Dimensional Heat Equation to test ADI method:
+\begin{equation}
+\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2} +\frac{\partial^2 u}{\partial y^2}
+\end{equation}$  $
+Initial and boundary condition
+\begin{eqnarray}
+u(x,y,0) = 1, \hspace{10pt} 0 \leq x \leq x_{\max}, \hspace{10pt} 0 \leq y \leq y_{\max} \\[10pt]
+u(x, 0, t) = u(x, y_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
+u(x, 0, t) = u(x, 1, t) = 0 , \hspace{10pt} 0 \leq t \leq T
+\end{eqnarray}
+
+\begin{definition} Analytical Solution of Two Dimensional Heat Equation
+Similarly, applying separation of variables method to the equation
+\begin{eqnarray}
+u(x,t) = X(x) Y(y) T(t) \\[10pt]
+X^{''}(x) - B X(x) = 0 \\[10pt]
+Y^{''}(y) - C (y) = 0 \\[10pt]
+T^{'}(t) - (B + C) T(t) = 0 \\[10pt]
+X(0) = X(1) = 0, \hspace{10pt} Y(0) = Y(1) = 0
+\end{eqnarray}
+
+We have solved for X(x) and Y(y) in Analytical Solution of Heat Equation:
+\begin{eqnarray} 
+X_n (x)=  sin(n \pi x), \hspace{10pt} B = n \pi
+Y_m (x)=  sin(m \pi y), \hspace{10pt} C = m \pi
+\end{eqnarray}
+
+Solving for $T(t)$ gives the solution
+\begin{eqnarray}
+T(t) = exp(- \pi \sqrt{m^2 + n^2}) \\[10pt]
+u(x, y, t) =\sum_{m=1}^{\infty} \sum_{n=1}^{\infty} A_{mn}  sin(n \pi x) sin(m \pi y) exp(- \pi \sqrt{m^2 + n^2})
+\end{eqnarray}
+
+The initial condition gives
+\begin{equation}
+u(x, y, 0) = 1 = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty}  A_{mn} sin(n \pi x) sin(m \pi y)
+\end{equation}
+which is a double Fourier sine series. Thus, the coefficient $A_{mn}$ is chosen such that
+\begin{equation}
+ A_{mn} = 4 \int_{0}^{1}  \int_{0}^{1} sin(\pi n x)  sin(\pi n y) dx dy = \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n} 
+\end{equation}
+Combining the solutions
+\begin{multline}
+u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n}  \\ sin(n \pi x) sin(m \pi y) exp(- \pi \sqrt{m^2 + n^2}) = 0
+\end{multline}
+
+\end{definition}
 
 \section{Finite Difference Methods}
-Parabolic partial differential equation can be denoted as
-$$ \frac{\partial u}{\partial t} = a(t,x) \frac{\partial^2 u}{\partial x^2} + b(t,x) \frac{\partial u}{\partial x} + c(t,x) u(t,x) + d(t,x) $$
+\subsection{Discretization}
+First, we need to discretize the PDE for numerically solving parabolic PDEs such as heat equation using FDMs, the space dimension(s) and the time dimensionare handled differently.
 
-$a(t,x)$ denotes diffusion coefficient,  $b(t,x)$ convection coefficient, $c(t,x)$ reaction coefficient, $d(t,x)$ source coefficient.
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.9]{Discretize.png}
+    \caption{10 x 10 discretization.}
+\end{figure}
+    
 
 1st order Central Difference 
 $$ \frac{\partial u}{\partial x} = \frac{u^{n}_{i+1} - u^n_i}{\Delta t} $$
 
-    \begin{figure}[!htb]
-        \centering
-            \includegraphics[scale=0.9]{Discretize.png}
-        \caption{10 x 10 grid}
-    \end{figure}
-    
+
 Utilizing the boundary conditions and initial conditions:
 
 \begin{figure}[!htb]
@@ -308,21 +440,80 @@ $$ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}
 
 $$ A = a(t,x) \frac{\Delta t}{\Delta x^2},  B = b(t,x) \frac{\Delta t}{4\Delta x}, C = c(t,x) \frac{\Delta t}{2},  D = d(t,x) \Delta t $$ 
 
-
-
 \begin{multline}
  (-A -B) u^{n+1}_{i+1} + (1 + 2A - C) u^{n+1}_i + (-A + B) u^{n+1}_{i-1} =  \\
 =  (A+B) u^{n}_{i+1} + (1 - 2A + C) u^{n}_i + (A - B) u^{n}_{i-1} + D
 \end{multline}
 
-
-
-
-
 The left hand side groups the unknowns and the right hand side groups knowns. The system of equations can be represented by a tridiagonal matrix system. Most commonly these system are solved by Thomas Algorithm.
 
-\begin{definition}\label{tha} Thomas Algorithm \\
-The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The system equations can be written as
+
+
+\subsection{Rannacher Trick}
+Using the Crank nicholson 
+
+\subsection{Alternating Direction Implicit Method}
+The alternate direction implicit (ADI) method is used to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices.
+
+ADI Peaceman and Rachford in 1955 \cite{peace}
+
+Operator splitting is a natural and old idea. When a PDE or system of PDEs contains different terms expressing different physics, it is natural to use different numerical methods for different physical processes. This can optimize and simplify the overall solution process. The idea was especially popularized in the context of the Navier-Stokes equations and reaction-diffusion PDEs. Common names for the technique are operator splitting, fractional step methods, and split-step methods. We shall stick to the former name. In the context of nonlinear differential equations, operator splitting can be used to isolate nonlinear terms and simplify the solution methods. \cite{DougADI}
+A related technique, often known as dimensional splitting or alternating direction implicit (ADI) methods, is to split the spatial dimensions and solve a 2D or 3D problem as two or three consecutive 1D problems, but this type of splitting is not to be further considered here.
+ \cite{thomas}. 
+
+\begin{equation}
+\delta x^2 u^{n}_{i,j}  = \frac{u^{n}_{i+1,j} - 2u^{n}_{i,j} + u^{n}_{i-1,j}}{\Delta x^2}
+\end{equation}
+
+\begin{equation}
+\frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n}_{i,j} + \delta y^2 u^{n}_{i,j}
+\end{equation}
+
+\begin{equation}
+\frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n+1}_{i,j} + \delta y^2 u^{n+1}_{i,j}
+\end{equation}
+
+Divide each time step in half
+Implicit x, Explicit y:
+\begin{equation}
+\frac{u^{n+1/2}_{i,j} + u^{n}_{i,j}}{0.5 \Delta t} = \frac{\delta x^2 u^{n+1/2}_{i,j} }{\Delta x^2} + \frac{\delta y^2 u^{n}_{i,j}}{\Delta y^2}
+\end{equation}
+
+Explicit x, Implicit y:
+\begin{equation}
+\frac{u^{n+1}_{i,j} + u^{n+1/2}_{i,j}}{0.5 \Delta t} = \frac{\delta x^2 u^{n+1/2}_{i,j} }{\Delta x^2} + \frac{\delta y^2 u^{n+1}_{i,j}}{\Delta y^2}
+\end{equation}
+
+
+    \begin{figure}[!htb]
+        \centering
+            \includegraphics[scale=0.8]{ADI.png}
+        \caption{Computational stencil of alternating direction implicit method}
+    \end{figure}
+
+\chapter{Optimizing Solvers}
+Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was deriving toy examples that can be calculated by hand and Excel. Following the verifications, porting the toy examples in C++ and utilize high performance computing principles.
+
+This section documents the performance of attempted optimizations. Experiments  are  conducted  at  W307 computer laboratory, Queen Mary University of London.  Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7-6700 CPU with 4 cores clocked at 3.40 GHz.  The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized  in  the  tests  include   Intel Compiler, version 18.0.3 and Intel Math  Kernel  Library, version X .  
+
+\section{Timing the Code}
+Measuring execution time intervals accurately is an important aspect to compare the efficiency and speed of different environments and implementations.
+
+\subsection{Windows Application Programming Interface}
+Windows Application Programming Interface (API) is the lowest level of interaction between applications and the windows operating system. Thus every program is built upon  the API. Mostly, the interaction is hidden, the runtime and support libraries manage it in the background \cite{windows}. The APIs can be used in the C++ environment. Runtime can be calculated by "QueryPerformanceCounter" or "QueryPerformanceFrequency"  functions. Respectively, the functions retrieve a high resolution time stamp and the frequency of the performance counter. 
+
+\subsection{Chrono Library}
+Using the Windows API for just timing the code is slightly excessive given the amount of work it takes. Luckily, Chrono library was introduced part of the C++11’s standard library.  Timers and clocks might differ on distinct systems, thus Chrono library is designed to work effortlessly with date and time. The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
+
+\section{Optimization Experiments}
+Main optimization techniques that can be implemented can be listed as follows
+Intel Compiler, VS Compiler, gcc
+
+\subsection{Tridiagonal Solvers}
+Implementing Crank Nicolson and Alternating Direction Implicit methods requires to solve tridiagonal systems which is the most computationally intensive part of the program.  Therefore, choosing efficient tridiagonal solvers is crucial for the speed of the solver. In this experiment three different algorithms will be tested.
+
+\subsubsection{Thomas Algorithm}
+ Thomas Algorithm is the most commonly used method for solving tridiagonal system of equations. The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The system equations can be written as
 $$
 \begin{bmatrix}  
 b_1 & c_1 & 0 & 0 & ... & 0 \\ 
@@ -350,7 +541,6 @@ d_3 \\
 d_k \\ 
 \end{bmatrix}
 $$
-
 
 The method begins by forming coefficients \(c^{*}_i\) and \(d^{*}_i\) in place of \(a_i\), \(b_i\) and \(c_i\) as follows:
 $$
@@ -401,105 +591,24 @@ The algorithm for the solution of these equations is now straightforward and wor
 
 \[ f_k = d^{*}_k, \qquad f_i = d^{*}_k - c^{*}_i x_{i+1}, \qquad i = k-1, k-2, ... ,2,1 \]
 
-\end{definition}
 
-\subsection{Rannacher Trick}
-Using the Crank nicholson 
-
-
-
-\subsection{Alternating Direction Implicit Method}
-The alternate direction implicit (ADI) method is used to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices.
-
-ADI Peaceman and Rachford in 1955 \cite{peace}
-
-Operator splitting is a natural and old idea. When a PDE or system of PDEs contains different terms expressing different physics, it is natural to use different numerical methods for different physical processes. This can optimize and simplify the overall solution process. The idea was especially popularized in the context of the Navier-Stokes equations and reaction-diffusion PDEs. Common names for the technique are operator splitting, fractional step methods, and split-step methods. We shall stick to the former name. In the context of nonlinear differential equations, operator splitting can be used to isolate nonlinear terms and simplify the solution methods.
-
-A related technique, often known as dimensional splitting or alternating direction implicit (ADI) methods, is to split the spatial dimensions and solve a 2D or 3D problem as two or three consecutive 1D problems, but this type of splitting is not to be further considered here.
+ \subsubsection{Intel Math Kernel Library}
+ Intel Math Kernel Library implements routines for solving systems of linear equations   from the standard LAPACK library.  Variety of matrix types are supported by the routines. Specifically gtsv function is utilized from the package. Using Gaussian elimination with partial pivoting, gstv computes the solution to the system of linear equations with a tridiagonal coefficient matrix \cite{gtsv}.  
+ 
+ \subsubsection{Cyclic Reduction}
+Cyclic reduction was proposed by R. W. Hockney in the 1960s for solving the resulting linear systems from the  discretization of the Poisson equation \cite{Hockney}. 
 
 
-\begin{equation}
-\delta x^2 u^{n}_{i,j}  = \frac{u^{n}_{i+1,j} - 2u^{n}_{i,j} + u^{n}_{i-1,j}}{\Delta x^2}
-\end{equation}
-
-\begin{equation}
-\frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n}_{i,j} + \delta y^2 u^{n}_{i,j}
-\end{equation}
-
-\begin{equation}
-\frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n+1}_{i,j} + \delta y^2 u^{n+1}_{i,j}
-\end{equation}
-
-Divide each time step in half
-Implicit x, Explicit y:
-\begin{equation}
-\frac{u^{n+1/2}_{i,j} + u^{n}_{i,j}}{0.5 \Delta t} = \frac{\delta x^2 u^{n+1/2}_{i,j} }{\Delta x^2} + \frac{\delta y^2 u^{n}_{i,j}}{\Delta y^2}
-\end{equation}
-
-Explicit x, Implicit y:
-\begin{equation}
-\frac{u^{n+1}_{i,j} + u^{n+1/2}_{i,j}}{0.5 \Delta t} = \frac{\delta x^2 u^{n+1/2}_{i,j} }{\Delta x^2} + \frac{\delta y^2 u^{n+1}_{i,j}}{\Delta y^2}
-\end{equation}
-
-
-    \begin{figure}[!htb]
-        \centering
-            \includegraphics[scale=0.8]{ADI.png}
-        \caption{Computational stencil of alternating direction implicit method}
-    \end{figure}
-
-
-
-\section{Optimizations}
-Derivative pricing in the real world is a computationally intensive task. The existing numerical methods for partial differential equations are all constrained by the computational complexity. Being fast when evaluating new information is critical for the operations of hedge funds and investment banks. referansbul Therefore optimizing the existing numerical methods with hardware and software that can be installed on a trading floor is crucial. Main optimization techniques that can be implemented can be listed as follows.
-
-\subsection{Compilers}
-Intel Compiler, VS Compiler, gcc
 
 \subsection{32 bit and 64 bit}
+In practical terms, you would use X64 when:  You need to directly address more than 4GB of memory, or
+    You need very fast (native) processing of 64 bit numerical quantities (including double-precision floating-point numbers) X86 (32 bit) is suitable for most everything else.
+    
+\subsection{Visual Studio Optimization Switches}
 
-\subsection{Optimization Switches}
 
-\subsection{Tridiagonal Solvers}
-Thomas Algorithm, cyclic reduction double sweep.
-\subsection{Threading}
-High performance computing techniques that can be implemented for multithreading with Open Multi-Processing(OpenMP) and compiler intrinsics.
-\subsection{OpenMP}
-\subsection{AVX and Intrinsics}
-CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512),
-\subsection{GPGPU}
- In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management.
-
-\subsection{Cloud Applications}
-
-\chapter{Optimizing Solvers}
-Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was deriving toy examples that can be calculated by hand and Excel. Following the verifications, porting the toy examples in C++ and utilize high performance computing principles.
-
-\section{Heat Equation}
-Most basic case for parabolic differential equations is the heat equation.
-
-\begin{eqnarray}
-u_t(x,t) &=& u_{xx}(x, t) \\[10pt]
-u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
-u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
-\end{eqnarray}
-
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c||} 
- \hline
- Parameter & Value\\ [0.5ex] 
- \hline\hline
- Maximum spatial coordinate & 1.0\\ 
- Maximum time & 0.075 %\\[1ex] 
-
- \end{tabular}
- \caption{Heat equation testing parameters.}
-\end{table}
-
-\subsection{Analytical Solution of Heat Equation}
-
-Separation of variables optimal grid size
+\subsection{Optimal Grid Size}
+The resulting analytical solutions are utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. Figure X and X demonstrates the error compared to the grid sizes. The optimal grid size for heat equation and Black-Scholes equation is 50 by 50. why uniform olunca daha iyi oluyor araştır??
 
 \begin{figure}[!htb]
   \begin{minipage}[b]{0.5\textwidth}
@@ -511,10 +620,6 @@ Separation of variables optimal grid size
     \caption{Timing grid sizes.}
   \end{minipage}
 \end{figure}
-
-
-
-Grid size depends on the parameters prove this duffy book.
 
 After choosing the optimal grid size the resulting grids can be visualized as
 \begin{figure}[!htb]
@@ -528,22 +633,11 @@ After choosing the optimal grid size the resulting grids can be visualized as
   \end{minipage}
 \end{figure}
 
-\section{Black-Scholes}
-Black-Scholes model for call option
-
-\begin{eqnarray}
-\frac{\partial C}{\partial t} &=& rS\frac{\partial C}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 C}{\partial S^2} - rC \\[10pt]
-C(0,t) &=& 0, \hspace{4pt} C(S_{\max},t)=S_{\max} - K e^{-r(T-t)}, \hspace{10pt} 0 \leq t \leq T \\[10pt]
-C(S,T) &=& \max(S-K,0), \hspace{10pt} 0 \leq S \leq S_{\max}
-\end{eqnarray}
-
-
-
 \begin{table}[h!]
 \centering
  \begin{tabular}{||c c||} 
  \hline
- Parameter & Value\\ [0.5ex] 
+ Parameter & Value\\ [0.5ex]
  \hline\hline
  Strike Price & 1.0\\ 
  Volatility & 20 \% \\
@@ -555,26 +649,31 @@ C(S,T) &=& \max(S-K,0), \hspace{10pt} 0 \leq S \leq S_{\max}
  \caption{Black-Scholes model testing parameters.}
 \end{table}
 
-
-
-\subsection{Analytical Solution}
-
-Derive analytical solution optimal grid size
-
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c||} 
+ \hline
+ Parameter & Value\\ [0.5ex]
+ \hline\hline
+  $T$ & 0.075\\ 
+  $ x_{max} $  & 1.0  \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{One dimensional heat equation testing parameters.}
+\end{table}
 
 \begin{figure}[!htb]
   \begin{minipage}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth]{BSExplicitGridError.png}
-    \caption{Explicit method.}
+    \caption{Error of grid sizes.}
   \end{minipage}
   \begin{minipage}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth]{BSExplicitGridTimer.png}
-    \caption{Crank nicolson method.}
+    \caption{Timing grid sizes.}
   \end{minipage}
 \end{figure}
 
 After choosing the optimal grid size the resulting grids can be visualized as
-
 \begin{figure}[!htb]
   \begin{minipage}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth]{BSExplicitGrid.png}
@@ -586,53 +685,24 @@ After choosing the optimal grid size the resulting grids can be visualized as
   \end{minipage}
 \end{figure}
 
-\section{2 Dimensional Heat Equation Base Case}
-2 Dimensional Heat Equation to test ADI method:
-\begin{equation}
-\frac{\partial f}{\partial t} = \frac{\partial^2 f}{\partial x^2} +\frac{\partial^2 f}{\partial y^2}
-\end{equation}$  $
-Initial Condition
-\begin{equation}
-f(x,y,0) = 1
-\end{equation}
-Boundary Conditions
-\begin{equation}
-f(x, 0, t) = f(x, 1, t) = 0
-\end{equation}
-\begin{equation}
-f(x, 0, t) = f(x, 1, t) = 0
-\end{equation}
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c||} 
+ \hline
+ Parameter & Value\\ [0.5ex]
+ \hline\hline
+  $T$ & 0.075\\ 
+  $ x_{max} $  & 1.0  \\ 
+   $ y_{max} $  & 1.0  \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Two dimensional heat equation testing parameters.}
+\end{table}
+\section{Results of the Numerical Experiments}
+Timing  the tridiagonal systems in a vanilla setup.
+Timing  the different ompilers and Solution Platforms Timing 32 bit vs 64 bit + VS vs Intel compiler
+Timing changing the optimization switches with the most optimal one.
 
-\section{Timing the Code}
-Measuring execution time intervals accurately is an important aspect to compare the efficiency and speed of different environments and implementations.
-
-
-\subsection{Windows Application Programming Interface}
-Windows Application Programming Interface (API) is the lowest level of interaction between applications and the windows operating system. Thus every program is built upon  the API. Mostly, the interaction is hidden, the runtime and support libraries manage it in the background. \cite{windows}
-
-The APIs can be easily used in C++ environment. Timing can be achieved by "QueryPerformanceCounter" or "QueryPerformanceFrequency"  functions. Respectively, they retrieve a high resolution time stamp and the frequency of the performance counter.  The functions can be easily utilized for time measurements.
-
-\subsection{Chrono Library}
-Using the Windows API for just timing the code is slightly excessive given the amount of work it takes. Luckily, Chrono library was introduced part of the C++11’s standard library.  Timers and clocks might differ on distinct systems, thus Chrono library is designed to work effortlessly with date and time.
-
-The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
-
-\section{Optimization Experiments}
-This section documents the performance of attempted optimizations. Experiments  are  conducted  at  W307 computer laboratory, Queen Mary University of London.  Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7-6700 CPU with 4 cores clocked at 3.40 GHz. 
-
-The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized  in  the  tests  include   Intel Compiler, version 18.0.3 and Intel Math  Kernel  Library, version X .  
-
-\subsection{Tridiagonal Solvers}
-While using the Crank Nicolson and Alternating Direction Implicit methods the computationally intensive part of program is solving tridiagonal systems. Previously defined Thomas Algorithm is the most commonly used method  \ref{tha}.
-
-Intel Math Kernel Library implements routines for solving systems of linear equations   from the standard LAPACK library.  Variety of matrix types are supported by the routines.
-Specifically gtsv function is utilized from the package. 
-Using Gaussian elimination with partial pivoting, gstv computes the solution to the system of linear equations with a tridiagonal coefficient matrix.  \cite{gtsv}
-
-
-\subsection{Compilers and Solution Platforms}
-32 bit vs 64 bit 
-VS vs Intel compiler
 \begin{table}[h!]
 \centering
  \begin{tabular}{||c c c||} 
@@ -663,20 +733,20 @@ VS vs Intel compiler
  \end{tabular}
  \caption{Averaging 1000 timings for Black-Scholes and adding random $\epsilon < 10^{-7} $ to step size in order to avoid compiler optimizations.}
 \end{table}
-
-In practical terms, you would use X64 when:  You need to directly address more than 4GB of memory, or
-    You need very fast (native) processing of 64 bit numerical quantities (including double-precision floating-point numbers)
-
-X86 (32 bit) is suitable for most everything else.
-
-
-
-\subsection{Visual Studio Optimization Switches}
-
-
-
+ 
 \chapter{Conclusions}
 
+\section{Further Work}
+aaaaa \cite{fpga},  cloud functions \cite{cloudfunc}.
+
+Threading
+High performance computing techniques that can be implemented for multithreading with Open Multi-Processing(OpenMP) and compiler intrinsics.
+
+AVX and Intrinsics
+CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512),
+
+GPGPU
+ In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management.
 
 \appendix
 \chapter{Usage of chrono class}
@@ -690,6 +760,12 @@ std::cout << "Elapsed time: " << elapsed.count() << " s\n";
 \end{verbatim}
 
 \chapter{Implementation of the {\tt FiniteDifferenceMethod} class}
+
+Parabolic partial differential equation can be denoted as
+$$ \frac{\partial u}{\partial t} = a(t,x) \frac{\partial^2 u}{\partial x^2} + b(t,x) \frac{\partial u}{\partial x} + c(t,x) u(t,x) + d(t,x) $$
+
+$a(t,x)$ denotes diffusion coefficient,  $b(t,x)$ convection coefficient, $c(t,x)$ reaction coefficient, $d(t,x)$ source coefficient
+
 \lipsum[10]
 \chapter[shorter running title]{Additional details on the Gundermanian determinant}
 \lipsum[10]    
