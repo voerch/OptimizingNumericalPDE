@@ -11,6 +11,12 @@ Fischer Black and Myron Scholes.
 \newblock The pricing of options and corporate liabilities.
 \newblock {\em Journal of Political Economy}, 81(3):637--654, 1973.
 
+\bibitem{basket}
+Jaehyuk Choi.
+\newblock Sum of all black–scholes–merton models: An efficient pricing
+  method for spread, basket, and asian options.
+\newblock {\em Journal of Futures Markets}, 38(6):627--644, 2018.
+
 \bibitem{cn}
 J.~Crank and P.~Nicolson.
 \newblock A practical method for numerical evaluation of solutions of partial
@@ -27,6 +33,11 @@ D.J. Duffy.
 \newblock {\em Finite Difference Methods in Financial Engineering: A Partial
   Differential Equation Approach}.
 \newblock The Wiley Finance Series. Wiley, 2006.
+
+\bibitem{evans}
+G.~Evans, J.M. Blackledge, and P.~Yardley.
+\newblock {\em Numerical methods for partial differential equations}.
+\newblock Springer undergraduate mathematics series. Springer, 2000.
 
 \bibitem{cloudfunc}
 Sadjad Fouladi, Francisco Romero, Dan Iter, Qian Li, Shuvo Chatterjee, Christos
@@ -73,6 +84,12 @@ Robert~C. Merton.
 \newblock Option pricing when underlying stock returns are discontinuous.
 \newblock {\em Journal of Financial Economics}, 3(1):125 -- 144, 1976.
 
+\bibitem{morton}
+K.~W. Morton and D.~F. Mayers.
+\newblock {\em Numerical Solution of Partial Differential Equations: An
+  Introduction}.
+\newblock Cambridge University Press, 2 edition, 2005.
+
 \bibitem{fpga}
 Samuel Palmer.
 \newblock Accelerating implicit finite difference schemes using a hardware
@@ -95,6 +112,24 @@ Charles Petzold.
 Sriram Ramaswamy.
 \newblock Pollen grains, random walks and einstein.
 \newblock {\em Resonance}, 5, 03 2000.
+
+\bibitem{gdsmith}
+G.D. Smith, G.D. Smith, G.D.S. Smith, M.~Smither, and Oxford~University Press.
+\newblock {\em Numerical Solution of Partial Differential Equations: Finite
+  Difference Methods}.
+\newblock Oxford applied mathematics and computing science series. Clarendon
+  Press, 1985.
+
+\bibitem{tavella}
+D.~Tavella and C.~Randall.
+\newblock {\em Pricing Financial Instruments: The Finite Difference Method}.
+\newblock Wiley Series in Financial Engineering. Wiley, 2000.
+
+\bibitem{jwthomas}
+J.W. Thomas.
+\newblock {\em Numerical Partial Differential Equations: Finite Difference
+  Methods}.
+\newblock Texts in Applied Mathematics. Springer New York, 2013.
 
 \bibitem{thomas}
 Llewellyn~Hilleth Thomas.

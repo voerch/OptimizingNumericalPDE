@@ -222,6 +222,20 @@ doi = {10.2139/ssrn.436282},
 url = { https://ssrn.com/abstract=436282}
 }
 
+@article{basket,
+author = {Choi, Jaehyuk},
+title = {Sum of all Black–Scholes–Merton models: An efficient pricing method for spread, basket, and Asian options},
+journal = {Journal of Futures Markets},
+volume = {38},
+number = {6},
+pages = {627-644},
+keywords = {Asian option, basket option, curse of dimensionality, multi-asset Black–Scholes–Merton, spread option},
+doi = {10.1002/fut.21909},
+url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/fut.21909},
+eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/fut.21909},
+year = {2018}
+}
+
 @book{wilmott,
  author = {Wilmott, Paul},
  title = {Paul Wilmott Introduces Quantitative Finance},
@@ -296,6 +310,14 @@ url = { https://ssrn.com/abstract=436282}
   publisher={Wiley}
 }
 
-
+@book{morton, 
+place={Cambridge}, 
+edition={2},
+title={Numerical Solution of Partial Differential Equations: An Introduction},
+DOI={10.1017/CBO9780511812248},
+publisher={Cambridge University Press},
+author={Morton, K. W. and Mayers, D. F.},
+year={2005}
+}
 
 

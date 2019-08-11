@@ -7,29 +7,29 @@
 \contentsline {subsection}{\numberline {2.1.1}Black-Scholes Partial Differential Equation}{12}{subsection.2.1.1}% 
 \contentsline {subsection}{\numberline {2.1.2}Derivation of the Black-Scholes Equation}{12}{subsection.2.1.2}% 
 \contentsline {section}{\numberline {2.2}Solving Partial Differential Equations}{15}{section.2.2}% 
-\contentsline {subsection}{\numberline {2.2.1}Heat Equation}{16}{subsection.2.2.1}% 
-\contentsline {subsection}{\numberline {2.2.2}Two Dimensional Heat Equation}{19}{subsection.2.2.2}% 
-\contentsline {section}{\numberline {2.3}Finite Difference Methods}{21}{section.2.3}% 
-\contentsline {subsection}{\numberline {2.3.1}Discretization}{21}{subsection.2.3.1}% 
-\contentsline {subsection}{\numberline {2.3.2}Explicit Method}{22}{subsection.2.3.2}% 
-\contentsline {subsection}{\numberline {2.3.3}Crank-Nicholson Method}{23}{subsection.2.3.3}% 
-\contentsline {subsection}{\numberline {2.3.4}Rannacher Trick}{24}{subsection.2.3.4}% 
+\contentsline {subsection}{\numberline {2.2.1}Heat Equation}{17}{subsection.2.2.1}% 
+\contentsline {section}{\numberline {2.3}Finite Difference Methods}{19}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}Discretization}{19}{subsection.2.3.1}% 
+\contentsline {subsection}{\numberline {2.3.2}Explicit Method}{20}{subsection.2.3.2}% 
+\contentsline {subsection}{\numberline {2.3.3}Crank-Nicholson Method}{22}{subsection.2.3.3}% 
+\contentsline {subsection}{\numberline {2.3.4}Rannacher Trick}{23}{subsection.2.3.4}% 
 \contentsline {subsection}{\numberline {2.3.5}Alternating Direction Implicit Method}{24}{subsection.2.3.5}% 
-\contentsline {chapter}{\numberline {3}Optimizing Solvers}{27}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Timing the Code}{27}{section.3.1}% 
-\contentsline {subsection}{\numberline {3.1.1}Windows Application Programming Interface}{28}{subsection.3.1.1}% 
-\contentsline {subsection}{\numberline {3.1.2}Chrono Library}{28}{subsection.3.1.2}% 
-\contentsline {section}{\numberline {3.2}Optimization Experiments}{28}{section.3.2}% 
-\contentsline {subsection}{\numberline {3.2.1}Tridiagonal Solvers}{28}{subsection.3.2.1}% 
-\contentsline {subsubsection}{Thomas Algorithm}{29}{section*.11}% 
-\contentsline {subsubsection}{Intel Math Kernel Library}{30}{section*.12}% 
-\contentsline {subsubsection}{Cyclic Reduction}{30}{section*.13}% 
-\contentsline {subsection}{\numberline {3.2.2}32 bit and 64 bit}{31}{subsection.3.2.2}% 
-\contentsline {subsection}{\numberline {3.2.3}Visual Studio Optimization Switches}{31}{subsection.3.2.3}% 
-\contentsline {subsection}{\numberline {3.2.4}Optimal Grid Size}{31}{subsection.3.2.4}% 
-\contentsline {section}{\numberline {3.3}Results of the Numerical Experiments}{33}{section.3.3}% 
-\contentsline {chapter}{\numberline {4}Conclusions}{35}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Further Work}{35}{section.4.1}% 
-\contentsline {chapter}{\numberline {A}Usage of chrono class}{36}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Implementation of the {\tt FiniteDifferenceMethod} class}{37}{appendix.B}% 
-\contentsline {chapter}{\numberline {C}shorter running title}{38}{appendix.C}% 
+\contentsline {subsubsection}{Two Dimensional Heat Equation}{24}{section*.9}% 
+\contentsline {chapter}{\numberline {3}Optimizing Solvers}{29}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Timing the Code}{29}{section.3.1}% 
+\contentsline {subsection}{\numberline {3.1.1}Windows Application Programming Interface}{30}{subsection.3.1.1}% 
+\contentsline {subsection}{\numberline {3.1.2}Chrono Library}{30}{subsection.3.1.2}% 
+\contentsline {section}{\numberline {3.2}Optimization Experiments}{30}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}Tridiagonal Solvers}{30}{subsection.3.2.1}% 
+\contentsline {subsubsection}{Thomas Algorithm}{31}{section*.11}% 
+\contentsline {subsubsection}{Intel Math Kernel Library}{32}{section*.12}% 
+\contentsline {subsubsection}{Cyclic Reduction}{32}{section*.13}% 
+\contentsline {subsection}{\numberline {3.2.2}32 bit and 64 bit}{33}{subsection.3.2.2}% 
+\contentsline {subsection}{\numberline {3.2.3}Visual Studio Optimization Switches}{33}{subsection.3.2.3}% 
+\contentsline {subsection}{\numberline {3.2.4}Optimal Grid Size}{33}{subsection.3.2.4}% 
+\contentsline {section}{\numberline {3.3}Results of the Numerical Experiments}{35}{section.3.3}% 
+\contentsline {chapter}{\numberline {4}Conclusions}{37}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Further Work}{37}{section.4.1}% 
+\contentsline {chapter}{\numberline {A}Usage of chrono class}{38}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Implementation of the {\tt FiniteDifferenceMethod} class}{39}{appendix.B}% 
+\contentsline {chapter}{\numberline {C}shorter running title}{40}{appendix.C}% 

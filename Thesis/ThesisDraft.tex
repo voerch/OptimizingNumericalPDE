@@ -237,7 +237,7 @@ Rearranging the equation to get famous Black-Scholes equation:
 \end{equation}
 \end{proof} 
 
-\begin{definition} The resulting partial differential equation can be solved for the analytical solution.  The boundary conditions and initial conditions for the call option is
+\begin{definition} The resulting partial differential equation can be solved analytically using the following boundary conditions and initial conditions for call options.
 \begin{eqnarray}
 \frac{\partial C}{\partial t} &=& rS\frac{\partial C}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 C}{\partial S^2} - rC \\[10pt]
 C(0,t) &=& 0, \hspace{4pt} C(S_{\max},t)=S_{\max} - K e^{-r(T-t)}, \hspace{10pt} 0 \leq t \leq T \\[10pt]
@@ -254,7 +254,7 @@ d_2 = d_1 - \sigma \sqrt{T-t}
 \end{definition}
 
 \begin{remark}  Untradable assets\\ 
-Modern financial engineering created derivatives using untradable assets as an underlying such as multi asset derivatives like equity baskets, weather derivatives and non-deliverable forwards. Non-deliverable forwards are for offshore investors that want to trade non-convertible currencies such as Brazilian Real, South Korean Won.  The Black-Scholes model is still used in these cases \cite{weather} but not entirely applicable to assets that cannot be hedged.
+Modern financial engineering created derivatives using untradable assets as an underlying such as multi asset derivatives like equity baskets, weather derivatives and non-deliverable forwards. Non-deliverable forwards are for offshore investors that want to trade non-convertible currencies such as Brazilian Real, South Korean Won.  The Black-Scholes model is still used in these cases \cite{weather} \cite{basket} but not entirely applicable to assets that cannot be hedged.
 \end{remark}
 
 
@@ -263,7 +263,13 @@ Since the foundation of the world humanity tried to understand and model the nat
 
 Generally, partial differential equations are too complicated to work out an analytical solution. Thus, we need to achieve a numerical solution to the problem. Numerical partial differential equations includes components in the areas of applications, mathematics and computers. The most common framework is finite difference method which tries to find approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. Instead we try to find approximate solutions of the problem at a discrete set of points in the (x, t) plane, normally a rectangular grid of points. It is simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. 
 
+Multidimensional finite differences (such as ADI schemes) are only practical up to 3 dimensions, higher dimension are too demanding in terms of computer memory and computing time.
+
+For higher order problems Monte Carlo is usually the method of choice. Using low discrepancy quasi random suites (e.g. Sobol) along with the Brownian bridge technique leads to reasonable computing times. See for instance Jaeckel's book "monte carlo methods in finance".
+
 Feynman-Kac theorem \cite{klebaner}, establishes a link between parabolic partial differential equations and stochastic processes by writing the solution as a conditional expectation. Thanks to the theorem, Monte Carlo method is also utilized to find the numerical solutions to the partial differential equations.  Monte Carlo method is preferred when the dimensions are too high !!Glassermann MC book rough calculation of error MC vs PDE grids(1-2 pages)!!
+
+The finite difference method has become a very popular for approximating the Black Scholes equation. This equation is an example of a convection-diffusion equation. Heat equation is the most basic convection-diffusion equation, we will be using it as a benchmark to test the methods. 
 
 \subsection{Heat Equation}
 Most basic case for parabolic differential equations is the heat equation. In the experiments the following initial and boundary conditions will be used.
@@ -324,7 +330,108 @@ u_n(x,t) = \sum_{n=1}^{\infty} \frac{2sin(\pi n)}{\pi - \pi n^2} exp(-n^2 \pi ^2
 \end{equation}
 \end{definition}
 
-\subsection{Two Dimensional Heat Equation}
+\section{Finite Difference Methods}
+\subsection{Discretization}
+Essentially, solving a PDE is the problem of finding a function which depends on values at infinitely many points. Naturally, the finite difference methods first step is to make the problem discrete that we are able to solve \cite{jwthomas}. As a result, we need to discretise the space dimensions and time dimension. The discretization procedure begins by replacing the domain $[0, x_{max}]$ x  $[0, T]$  by a set of mesh points. In order to get a $n$ x $m$ equally spaced mesh points the step sizes are calculated as $ \Delta t = \frac{T}{m}$, $\Delta x = \frac{x_{max}}{n}$.
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.8]{Discretize.png}
+    \caption{10 x 10 grid.}
+\end{figure}
+In order to replace our PDE, we need to utilize finite difference approximations for the partial derivatives. Notationally, we will define $u^n_i$ to be a function defined at the point $(i \Delta x, n \Delta t) $.
+
+\begin{itemize}
+        \item Forward difference: $ \frac{\partial u}{\partial t} = \frac{u^{n+1}_i - u^n_i}{\Delta t} $
+        \item Central difference: $ \frac{\partial u}{\partial t} = \frac{u^{n+1}_i - u^{n-1}_i}{\Delta t} $
+        \item Backwards difference: $ \frac{\partial u}{\partial t} = \frac{u^{n}_i - u^{n-1}_i}{\Delta t} $
+        \item Second order central difference: $ \frac{\partial^2 u}{\partial x^2} = \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2} $
+\end{itemize}
+
+We now have a grid that approximates our domain. Aiming to obtain a unique solution using numerical methods, we need initial and boundary conditions. Final step is applying the values given by such conditions.
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Boundary.png}
+    \caption{Boundary conditions.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Initial.png}
+    \caption{Initial condition.}
+  \end{minipage}
+\end{figure}
+
+\subsection{Explicit Method}
+Explicit method generalises the parabolic partial differential equation by applying the forward difference to the time derivative and the centred second difference (FTCS).
+
+Applying the finite differences to the parabolic partial differential equation form
+\begin{equation}
+a(t, x)  u_{xx} + b(t, x) u_x + c(t, x) u_t + d(t, x) u = 0
+\end{equation}
+\begin{equation}
+a(t, x)  \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2}  + b(t, x)  \frac{u^{n}_{i+1} - u^{n}_{i-1}}{\Delta t} + c(t, x)   \frac{u^{n+1}_i - u^n_i}{\Delta t} + d u^n_i = 0
+\end{equation}
+
+If we rearrange the formula it can be summarised as
+\begin{equation}
+u_j^{n+1} = \alpha u_{j-1}^{n} + \beta u_{j}^{n} + \gamma u_{j+1}^{n}
+\end{equation}
+
+The formula expresses one unknown nodal value directly in terms of known nodal values  \cite{evans}. Defining $ r = \frac{\Delta t}{\Delta x^2} $. The coefficients for the heat equation becomes
+\begin{eqnarray}
+\alpha =  r  \\[10pt]
+\beta = 1 - 2r  \\[10pt]
+\gamma = r  \\[10pt]
+\end{eqnarray}
+
+The coefficients for the Black-Scholes partial differential equation becomes
+\begin{eqnarray}
+\alpha =  \frac{\sigma^2 j^2 \Delta t}{2} - \frac{r j \Delta t}{2} \\[10pt]
+\beta = 1 - \sigma^2 j^2 \Delta t - r \Delta t \\[10pt]
+\gamma = \frac{\sigma^2 j^2 \Delta t}{2} - \frac{r j \Delta t}{2}
+\end{eqnarray}
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.9]{Explicit.png}
+    \caption{Computational stencil of explicit method applied to Black-Scholes}
+\end{figure}
+
+\subsection{Crank-Nicholson Method}
+The explicit method is computationally cheap however this brings a serious drawback, for explicit method to attain reasonable accuracy the step size must be kept small \cite{gdsmith}. Thankfully, the Crank-Nicolson finite difference scheme was introduced by John Crank and Phyllis Nicolson \cite{cn}. Considering numerous articles and publications in the financial engineering literature use Crank-Nicolson as the de-facto scheme for time discretisation, the method has become one of the most popular finite difference schemes for approximating the solution of the Black - Scholes equation and its generalisations \cite{tavella}.
+
+ If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. 
+ \begin{equation}
+ u_t  = a(t, x)  u_{xx} + b(t, x) u_x + c(t, x) u  + d(t, x)
+\end{equation}
+\begin{equation}
+\frac{u^{n+1}_i - u^n_i}{\Delta t}  = a(t, x)  \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2}  + b(t, x)  \frac{u^{n}_i - u^{n-1}_i}{\Delta t}  + c(t, x)  u^n_i + d(t, x)
+\end{equation}
+
+In contrast to the FTCS scheme, we now have three unknowns in this equation, the three values of $u$ at the higher time level.  Crank-Nicolson method takes a weighted average of the FTCS and BTCS schemes. Therefore the approximations become
+\begin{itemize}
+ \item $ u(t,x) \approx \frac{1}{2} ( u^{n+1}_i +  u^n_i) $
+ \item $   \frac{\partial u}{\partial t} \approx \frac{u^{n+1}_i - u^n_i}{\Delta t} $
+ \item $   \frac{\partial u}{\partial x} \approx \frac{u^n_{i+1} - u^n_{i-1} + u^{n+1}_{i+1} - u^{n+1}_{i-1}}{4\Delta x} $
+ \item $ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1} + u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{2(\Delta x)^2} $
+\end{itemize}
+
+Applying the new finite differences to the parabolic partial differential equation
+\begin{multline}
+ (-A -B) u^{n+1}_{i+1} + (1 + 2A - C) u^{n+1}_i + (-A + B) u^{n+1}_{i-1} =  \\
+=  (A+B) u^{n}_{i+1} + (1 - 2A + C) u^{n}_i + (A - B) u^{n}_{i-1} + D
+\end{multline}
+$$ A = a(t,x) \frac{\Delta t}{\Delta x^2},  B = b(t,x) \frac{\Delta t}{4\Delta x}, C = c(t,x) \frac{\Delta t}{2},  D = d(t,x) \Delta t $$ 
+
+Note that in contrast to the FTCS scheme, we now have three unknowns in this equation, the three values of $u$ at the higher time level. The left hand side groups the unknowns and the right hand side groups knowns. The system of equations can be represented by a tridiagonal matrix system. This system of equations can be solved by various algorithms such as Gauss elimination or Thomas algorithm.
+
+\subsection{Rannacher Trick}
+??
+
+\subsection{Alternating Direction Implicit Method}
+So far the investigated partial differential equations were one space-like dimensional. When more than one space dimensions are involved, we have to deal with equations such as two dimensional heat equation or multi-asset black-scholes equation. 
+
+\subsubsection{Two Dimensional Heat Equation}
 2 Dimensional Heat Equation to test ADI method:
 \begin{equation}
 \frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2} +\frac{\partial^2 u}{\partial y^2}
@@ -373,117 +480,53 @@ u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 
 
 \end{definition}
 
-\section{Finite Difference Methods}
-\subsection{Discretization}
-First, we need to discretize the PDE for numerically solving parabolic PDEs such as heat equation using FDMs, the space dimension(s) and the time dimension are handled differently.
 
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.8]{Discretize.png}
-    \caption{10 x 10 discretization.}
-\end{figure}
-    
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.8]{Boundary.png}
-    \caption{Boundary conditions.}
-\end{figure}
-
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.8]{Initial.png}
-    \caption{Initial condition.}
-\end{figure}
-
-
-\subsection{Explicit Method}
-Explicit method is a forward time, central space scheme .
-1st order Forward Difference
-$$ \frac{\partial u}{\partial t} = \frac{u^{n+1}_i - u^n_i}{\Delta t} $$
-
-2nd order Central Difference 
-$$ \frac{\partial^2 u}{\partial x^2} = \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2} $$
-
-The parabolic partial differential equation can be generalized by applying the forward difference to the time derivative and the centred second difference.
-$$ u_j^{n+1} = \alpha u_{j-1}^{n} + \beta u_{j}^{n} + \gamma u_{j+1}^{n} $$
-
-For heat equation the coefficients become
-$$ \alpha =  r, \beta = 1 - 2r, \gamma = r $$
-
-Black-Scholes partial differential equation the coefficients become:
-$$ \alpha =  \frac{\sigma^2 j^2 \Delta t}{2} - \frac{r j \Delta t}{2}, \beta = 1 - \sigma^2 j^2 \Delta t - r \Delta t, \gamma = \frac{\sigma^2 j^2 \Delta t}{2} - \frac{r j \Delta t}{2} $$
-
-where $ r = \frac{\delta t}{\delta x^2} $.
-
-    \begin{figure}[!htb]
-        \centering
-            \includegraphics[scale=0.9]{Explicit.png}
-        \caption{Computational stencil of explicit method}
-    \end{figure}
-
-\subsection{Crank-Nicholson Method}
-The crank nicolson method was introduced \cite{cn}
-
-$$ u(t,x) \approx \frac{1}{2} ( u^{n+1}_i +  u^n_i) $$
-
-$$   \frac{\partial u}{\partial t} \approx \frac{u^{n+1}_i - u^n_i}{\Delta t} $$
-
-$$   \frac{\partial u}{\partial x} \approx \frac{u^n_{i+1} - u^n_{i-1} + u^{n+1}_{i+1} - u^{n+1}_{i-1}}{4\Delta x} $$
-
-$$ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1} + u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{2(\Delta x)^2} $$
-
-$$ A = a(t,x) \frac{\Delta t}{\Delta x^2},  B = b(t,x) \frac{\Delta t}{4\Delta x}, C = c(t,x) \frac{\Delta t}{2},  D = d(t,x) \Delta t $$ 
-
-\begin{multline}
- (-A -B) u^{n+1}_{i+1} + (1 + 2A - C) u^{n+1}_i + (-A + B) u^{n+1}_{i-1} =  \\
-=  (A+B) u^{n}_{i+1} + (1 - 2A + C) u^{n}_i + (A - B) u^{n}_{i-1} + D
-\end{multline}
-
-The left hand side groups the unknowns and the right hand side groups knowns. The system of equations can be represented by a tridiagonal matrix system. Most commonly these system are solved by Thomas Algorithm.
-
-
-
-\subsection{Rannacher Trick}
-Using the Crank nicholson 
-
-\subsection{Alternating Direction Implicit Method}
 The alternate direction implicit (ADI) method is used to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices.
 
 ADI Peaceman and Rachford in 1955 \cite{peace}
 
 Operator splitting is a natural and old idea. When a PDE or system of PDEs contains different terms expressing different physics, it is natural to use different numerical methods for different physical processes. This can optimize and simplify the overall solution process. The idea was especially popularized in the context of the Navier-Stokes equations and reaction-diffusion PDEs. Common names for the technique are operator splitting, fractional step methods, and split-step methods. We shall stick to the former name. In the context of nonlinear differential equations, operator splitting can be used to isolate nonlinear terms and simplify the solution methods. \cite{DougADI}
 A related technique, often known as dimensional splitting or alternating direction implicit (ADI) methods, is to split the spatial dimensions and solve a 2D or 3D problem as two or three consecutive 1D problems, but this type of splitting is not to be further considered here.
- \cite{thomas}. 
 
+\cite{morton}
+
+In order to develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
 \begin{equation}
 \delta x^2 u^{n}_{i,j}  = \frac{u^{n}_{i+1,j} - 2u^{n}_{i,j} + u^{n}_{i-1,j}}{\Delta x^2}
 \end{equation}
 
+Explicit approximation of the derivates can be written as
 \begin{equation}
 \frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n}_{i,j} + \delta y^2 u^{n}_{i,j}
 \end{equation}
-
+Implicit  approximation of the derivates can be written as
 \begin{equation}
 \frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n+1}_{i,j} + \delta y^2 u^{n+1}_{i,j}
 \end{equation}
 
-Divide each time step in half
-Implicit x, Explicit y:
+Dividing each time step in half we introduce a temporary intermediate unknown $u^{n+1/2}_{i,j}$. Firstly, the two dimensional heat equation is approximating implicitly x and explicitly over y.
 \begin{equation}
 \frac{u^{n+1/2}_{i,j} + u^{n}_{i,j}}{0.5 \Delta t} = \frac{\delta x^2 u^{n+1/2}_{i,j} }{\Delta x^2} + \frac{\delta y^2 u^{n}_{i,j}}{\Delta y^2}
 \end{equation}
+Rearranging the set of equations yields a tridiagonal system which is solved for the temporary intermediate unknown $u^{n+1/2}_{i,j}$.
+\begin{equation}
+- r_x * u^{n+1/2}_{i+1,j} + (1 + 2r_x) u^{n+1/2}_{i,j}  - r_x u^{n+1/2}_{i,j}  = r_y u^{n}_{i,j+1} + (1 + 2r_y) u^{n}_{i,j} + r_y u^{n}_{i,j-1}
+\end{equation}
 
-Explicit x, Implicit y:
+In order to calculate the solution $u^{n+1}_{i,j}$ by approximating explicitly x and implicitly over y.
 \begin{equation}
 \frac{u^{n+1}_{i,j} + u^{n+1/2}_{i,j}}{0.5 \Delta t} = \frac{\delta x^2 u^{n+1/2}_{i,j} }{\Delta x^2} + \frac{\delta y^2 u^{n+1}_{i,j}}{\Delta y^2}
 \end{equation}
+Rearranging the set of equations yields a tridiagonal system which can be solved using gaussian elimination, thomas algorithm etc.
+\begin{equation}
+-r_y u^{n+1}_{i,j+1} + (1 + 2r_y) u^{n+1}_{i,j} - r_y u^{n+1}_{i,j-1} = r_x * u^{n+1/2}_{i+1,j} + (1 + 2r_x) u^{n+1/2}_{i,j} + r_x u^{n+1/2}_{i,j}
+\end{equation}
 
-
-    \begin{figure}[!htb]
-        \centering
-            \includegraphics[scale=0.8]{ADI.png}
-        \caption{Computational stencil of alternating direction implicit method}
-    \end{figure}
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.8]{ADI.png}
+    \caption{Computational stencil of alternating direction implicit method}
+\end{figure}
 
 \chapter{Optimizing Solvers}
 Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was deriving toy examples that can be calculated by hand and Excel. Following the verifications, porting the toy examples in C++ and utilize high performance computing principles.
@@ -500,14 +543,12 @@ Windows Application Programming Interface (API) is the lowest level of interacti
 Using the Windows API for just timing the code is slightly excessive given the amount of work it takes. Luckily, Chrono library was introduced part of the C++11’s standard library.  Timers and clocks might differ on distinct systems, thus Chrono library is designed to work effortlessly with date and time. The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
 
 \section{Optimization Experiments}
-Main optimization techniques that can be implemented can be listed as follows
-Intel Compiler, VS Compiler, gcc
-
+Main optimization techniques that can be implemented are parallelizing tridiagonal solvers, Visual Studio optimization switches, different compilers and different solution platforms.
 \subsection{Tridiagonal Solvers}
 Implementing Crank Nicolson and Alternating Direction Implicit methods requires to solve tridiagonal systems which is the most computationally intensive part of the program.  Therefore, choosing efficient tridiagonal solvers is crucial for the speed of the solver. In this experiment three different algorithms will be tested.
 
 \subsubsection{Thomas Algorithm}
- Thomas Algorithm is the most commonly used method for solving tridiagonal system of equations. The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The system equations can be written as
+Thomas Algorithm is the most commonly used method for solving tridiagonal system of equations. The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The system equations can be written as
 $$
 \begin{bmatrix}  
 b_1 & c_1 & 0 & 0 & ... & 0 \\ 
@@ -592,11 +633,8 @@ The algorithm for the solution of these equations is now straightforward and wor
  \subsubsection{Cyclic Reduction}
 Cyclic reduction was proposed by R. W. Hockney in the 1960s for solving the resulting linear systems from the  discretization of the Poisson equation \cite{Hockney}. 
 
-
-
 \subsection{32 bit and 64 bit}
-In practical terms, you would use X64 when:  You need to directly address more than 4GB of memory, or
-    You need very fast (native) processing of 64 bit numerical quantities (including double-precision floating-point numbers) X86 (32 bit) is suitable for most everything else.
+In practical terms, you would use X64 when:  You need to directly address more than 4GB of memory, or   You need very fast (native) processing of 64 bit numerical quantities (including double-precision floating-point numbers) X86 (32 bit) is suitable for most everything else.
     
 \subsection{Visual Studio Optimization Switches}
 
