@@ -388,7 +388,7 @@ The coefficients for the Black-Scholes partial differential equation becomes
 \begin{eqnarray}
 \alpha =  \frac{\sigma^2 j^2 \Delta t}{2} - \frac{r j \Delta t}{2} \\[10pt]
 \beta = 1 - \sigma^2 j^2 \Delta t - r \Delta t \\[10pt]
-\gamma = \frac{\sigma^2 j^2 \Delta t}{2} - \frac{r j \Delta t}{2}
+\gamma = \frac{\sigma^2 j^2 \Delta t}{2} + \frac{r j \Delta t}{2}
 \end{eqnarray}
 
 \begin{figure}[!htb]
@@ -791,16 +791,23 @@ std::chrono::duration<double> elapsed = finish - start;
 std::cout << "Elapsed time: " << elapsed.count() << " s\n";
 \end{verbatim}
 
-\chapter{Implementation of the {\tt FiniteDifferenceMethod} class}
-
+\chapter{Implementation of the {\tt PDE} class}
 Parabolic partial differential equation can be denoted as
 $$ \frac{\partial u}{\partial t} = a(t,x) \frac{\partial^2 u}{\partial x^2} + b(t,x) \frac{\partial u}{\partial x} + c(t,x) u(t,x) + d(t,x) $$
 
 $a(t,x)$ denotes diffusion coefficient,  $b(t,x)$ convection coefficient, $c(t,x)$ reaction coefficient, $d(t,x)$ source coefficient
+analytic solution, initial conditions boundary conditions
+\chapter{Implementation of the {\tt FiniteDifferenceMethod} class}
 
-\lipsum[10]
-\chapter[shorter running title]{Additional details on the Gundermanian determinant}
-\lipsum[10]    
+\begin{verbatim}
+void stepSize();
+void initialConditions();
+void boundaryConditions();
+void innerDomain();
+void timeMarch();
+\end{verbatim}
+
+
 
 \bibliographystyle{plain}
 \bibliography{ThesisDraft}

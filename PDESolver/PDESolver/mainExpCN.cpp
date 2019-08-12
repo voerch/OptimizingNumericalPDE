@@ -22,7 +22,7 @@ int main()
 
 	auto CNStart = std::chrono::high_resolution_clock::now();
 	CrankNicholson cn(x_dom, xStep, t_dom, tStep, heat_pde);
-	cn.stepMarch();
+	cn.timeMarch();
 	auto CNFinish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> CNTime = CNFinish - CNStart;
 

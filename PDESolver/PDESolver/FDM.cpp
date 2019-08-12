@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void ExplicitMethod::calculateStepSize() 
+void ExplicitMethod::stepSize()
 {
 	xStepSize = xDomain / static_cast<double>(xNumberSteps - 1);
 	tStepSize = tDomain / static_cast<double>(tNumberSteps-1);
@@ -17,7 +17,7 @@ void ExplicitMethod::calculateStepSize()
 	tStepSize += RandomSmallNumber(RandomEngine);
 }
 
-void ExplicitMethod::setInitialConditions() 
+void ExplicitMethod::initialConditions()
 {
 	double currentX = 0;
 
@@ -37,14 +37,13 @@ void ExplicitMethod::setInitialConditions()
 
 }
 
-void ExplicitMethod::calculateBoundaryConditions() 
+void ExplicitMethod::boundaryConditions()
 {
 	newResult[0] = PDE->BoundaryLeft(tPrevious, xValues[0]);
 	newResult[xNumberSteps-1] = PDE->BoundaryRight(tPrevious, xValues[xNumberSteps-1]);
 }
 
-// Loops through x values on a given time.
-void ExplicitMethod::calculateInnerDomain() 
+void ExplicitMethod::innerDomain()
 {
 	for (long xCounter = 1; xCounter < xNumberSteps - 1; xCounter++)
 	{
@@ -61,13 +60,12 @@ void ExplicitMethod::calculateInnerDomain()
 	}
 }
 
-// Loops through time.
-void ExplicitMethod::stepMarch()
+void ExplicitMethod::timeMarch()
 {
 	std::ofstream grid("ExplicitGrid.csv");
 	grid << "xValues,tValues,Solution" << std::endl;
 
-	calculateBoundaryConditions();
+	boundaryConditions();
 	for (int outputCounter = 0; outputCounter < xNumberSteps; outputCounter++)
 	{
 		grid << xValues[outputCounter] << "," << tCurrent << "," << newResult[outputCounter] << std::endl;
@@ -75,8 +73,8 @@ void ExplicitMethod::stepMarch()
 
 	for (tCurrent = tStepSize; tCurrent < tDomain + tStepSize; tCurrent += tStepSize)
 	{
-		calculateBoundaryConditions();
-		calculateInnerDomain();
+		boundaryConditions();
+		innerDomain();
 		for (int outputCounter = 0; outputCounter < xNumberSteps; outputCounter++)
 		{
 			grid << xValues[outputCounter] << "," << tCurrent << "," << newResult[outputCounter] << std::endl;
@@ -87,10 +85,8 @@ void ExplicitMethod::stepMarch()
 	grid.close();
 }
 
-
-
 //Defining functions for CN Method
-void CrankNicholson::calculateStepSize()
+void CrankNicholson::stepSize()
 {
 	xStepSize = xDomain / static_cast<double>(xNumberSteps - 1);
 	tStepSize = tDomain / static_cast<double>(tNumberSteps - 1);
@@ -103,7 +99,7 @@ void CrankNicholson::calculateStepSize()
 	r = tStepSize / (xStepSize * xStepSize);
 }
 
-void CrankNicholson::setInitialConditions()
+void CrankNicholson::initialConditions()
 {
 	double currentX = 0;
 
@@ -127,15 +123,14 @@ void CrankNicholson::setInitialConditions()
 
 }
 
-void CrankNicholson::calculateBoundaryConditions()
+void CrankNicholson::boundaryConditions()
 {
 	newResult[0] = PDE->BoundaryLeft(tPrevious, xValues[0]);
 	newResult[xNumberSteps - 1] = PDE->BoundaryRight(tPrevious, xValues[xNumberSteps - 1]);
 
 }
 
-// Loops through x values on a given time.
-void CrankNicholson::calculateInnerDomain()
+void CrankNicholson::innerDomain()
 {
 	alpha = PDE->DiffusionCoeff(tPrevious, xValues[0]) * tStepSize / (2 * xStepSize * xStepSize);
 	beta = PDE->ConvectionCoeff(tPrevious, xValues[0]) * tStepSize / (4.0 * xStepSize);
@@ -160,16 +155,15 @@ void CrankNicholson::calculateInnerDomain()
 
 	//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 	//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-	CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+	//CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 }
 
-// Loops through time.
-void CrankNicholson::stepMarch()
+void CrankNicholson::timeMarch()
 {
 	std::ofstream grid("CNGrid.csv");
 	grid << "xValues,tValues,Solution" << std::endl;
 
-	calculateBoundaryConditions();
+	boundaryConditions();
 	for (int outputCounter = 0; outputCounter < xNumberSteps; outputCounter++)
 	{
 		grid << xValues[outputCounter] << "," << tCurrent << "," << newResult[outputCounter] << std::endl;
@@ -177,8 +171,8 @@ void CrankNicholson::stepMarch()
 
 	for (tCurrent = tStepSize; tCurrent < tDomain + tStepSize; tCurrent += tStepSize)
 	{
-		calculateBoundaryConditions();
-		calculateInnerDomain();
+		boundaryConditions();
+		innerDomain();
 		for (int outputCounter = 0; outputCounter < xNumberSteps; outputCounter++)
 		{
 			grid << xValues[outputCounter] << "," << tCurrent << "," << newResult[outputCounter] << std::endl;
@@ -189,7 +183,7 @@ void CrankNicholson::stepMarch()
 	grid.close();
 }
 
-//Defining functions for CN Method
+
 void ADI::StepSize()
 {
 	xStepSize = xDomain / static_cast<double>(xNumberSteps - 1);
@@ -248,7 +242,6 @@ void ADI::BoundaryConditions()
 	}
 }
 
-// Loops through x values on a given time.
 void ADI::InnerDomain()
 {
 	alpha = -rX;
@@ -300,12 +293,11 @@ void ADI::InnerDomain()
 }
 
 // Loops through time.
-void ADI::stepMarch()
+void ADI::TimeMarch()
 {
 	std::ofstream grid("ADIGrid.csv");
 	grid << "xValues,yValues,tValues,Solution" << std::endl;
 
-	//grid << "xValues,tValues,Solution" << std::endl;
 	while (tCurrent <= tDomain)
 	{
 		for (int xCounter = 0; xCounter < xNumberSteps; xCounter++)
@@ -319,6 +311,5 @@ void ADI::stepMarch()
 		InnerDomain();
 		tCurrent += tStepSize;
 	}
-
 	grid.close();
 }

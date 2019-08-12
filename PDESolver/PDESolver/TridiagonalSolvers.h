@@ -1,7 +1,12 @@
 #pragma once
 #include <vector>
-#include "mkl.h"
 #include <cmath>
+
+#include <mkl.h>
+#include <mkl_scalapack.h>
+
+
+#include <omp.h>
 
 void ThomasAlgorithm(const std::vector<double>& a, const std::vector<double>& b, const std::vector<double>& c, const std::vector<double>& d, std::vector<double>& f)
 {
@@ -31,6 +36,7 @@ void ThomasAlgorithm(const std::vector<double>& a, const std::vector<double>& b,
 // Documentation for Intel Math Kernel Library: 
 // https://software.intel.com/en-us/mkl-developer-reference-c-gtsv
 // https://software.intel.com/sites/products/documentation/doclib/mkl_sa/11/mkl_lapack_examples/
+
 void IntelSolver(std::vector<double>& a, std::vector<double>& b, std::vector<double>& c, std::vector<double>& d, std::vector<double>& f)
 {
 	int size = a.size();
@@ -56,68 +62,46 @@ void IntelSolver(std::vector<double>& a, std::vector<double>& b, std::vector<dou
 	LAPACKE_dgtsv(matrix_layout, n, nrhs, LowerDiag, Diag, UpperDiag, oldResult, ldb);
 }
 
-
-int log2(int x) 
-{
-	return  (int)(log((float)x) / log(2.0));
-}
-
-void CyclicReduction(std::vector<double>& a, std::vector<double>& b, std::vector<double>& c, std::vector<double>& F, std::vector<double>& x)
-{
-	
-	int size = b.size();
-	int i, j, index1, index2, offset;
-	float k1, k2;
-
-
-	/*Part 1 - Forward Reduction */
-	for (i = 0; i<log2(size + 1) - 1; i++) {
-		for (j = pow(2, i + 1) - 1; j<size; j = j + pow(2, i + 1)) {
-			offset = pow(2, i);
-			index1 = j - offset;
-			index2 = j + offset;
-
-			k1 = a[j] / b[index1];
-			k2 = c[j] / b[index2];
-
-			if (j == size - 1) {
-				k1 = a[j] / b[j - offset];
-				b[j] = b[j] - c[j - offset] * k1;
-				F[j] = F[j] - F[j - offset] * k1;
-				a[j] = -a[j - offset] * k1;
-				c[j] = 0.0;
-			}
-			else {
-				k1 = a[j] / b[j - offset];
-				k2 = c[j] / b[j + offset];
-				b[j] = b[j] - c[j - offset] * k1 - a[j + offset] * k2;
-				F[j] = F[j] - F[j - offset] * k1 - F[j + offset] * k2;
-				a[j] = -a[j - offset] * k1;
-				c[j] = -c[j + offset] * k2;
-			}
-		}
-	}
-
-	/*part 2 - find the middle  */
-	int index = (size - 1) / 2;
-	x[index] = F[index] / b[index];
-
-	/*part 3 - back substitution */
-	for (i = log2(size + 1) - 2; i >= 0; i--) {
-		for (j = pow(2.0, i + 1) - 1; j<size; j = j + pow(2.0, i + 1)) {
-			offset = pow(2.0, i);
-			index1 = j - offset;
-			index2 = j + offset;
-
-
-			if (j != index1) {
-				if (index1 - offset < 0) x[index1] = (F[index1] - c[index1] * x[index1 + offset]) / b[index1];
-				else x[index1] = (F[index1] - a[index1] * x[index1 - offset] - c[index1] * x[index1 + offset]) / b[index1];
-			}if (j != index2) {
-				if (index2 + offset >= size) x[index2] = (F[index2] - a[index2] * x[index2 - offset]) / b[index2];
-				else x[index2] = (F[index2] - a[index2] * x[index2 - offset] - c[index2] * x[index2 + offset]) / b[index2];
-			}
-
-		}
-	}
-}
+//Solves A x = B using cyclic reduction from the package ScaLAPACK
+// https://software.intel.com/en-us/mkl-developer-reference-c-scalapack-routines
+// https://software.intel.com/en-us/mkl-developer-reference-c-p-dbtrs
+//
+//void IntelParallelSolver(std::vector<double>& a, std::vector<double>& b, std::vector<double>& c, std::vector<double>& d, std::vector<double>& f)
+//{
+//	//Pointers to vectors as the function requires double arrays.
+//	double * LowerDiag = &a[0];
+//	double * Diag = &b[0];
+//	double * UpperDiag = &c[0];
+//	double * oldResult = &d[0];
+//	
+//	char trans = 'N';
+//	MKL_INT n = a.size();
+//
+//
+//	//Number of upper and lower diagonals of A.
+//	MKL_INT bwl = 1;
+//	MKL_INT bwu = 1;
+//
+//	//The number of right-hand sides, the number of columns in B
+//	MKL_INT nrhs = 1;
+//
+//	
+//	double a;
+//
+//	MKL_INT ja;
+//	MKL_INT desca;
+//
+//	MKL_INT ib = 0;
+//	MKL_INT descb = d.size();
+//
+//	double af;
+//	MKL_INT laf;
+//	
+//	double * work = &f[0];
+//	MKL_INT lwork = f.size();
+//
+//	MKL_INT info;
+//
+//	pddbtrs(&trans, &n, &bwl, &bwu, &nrhs, &a, &ja, &desca, oldResult, &ib, &descb, &af, &laf, work, &lwork, &info);
+//
+//}
