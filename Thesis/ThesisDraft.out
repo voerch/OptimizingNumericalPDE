@@ -27,5 +27,5 @@
 \BOOKMARK [0][-]{chapter.4}{Conclusions}{}% 27
 \BOOKMARK [1][-]{section.4.1}{Further Work}{chapter.4}% 28
 \BOOKMARK [0][-]{appendix.A}{Usage of chrono class}{}% 29
-\BOOKMARK [0][-]{appendix.B}{Implementation of the FiniteDifferenceMethod class}{}% 30
-\BOOKMARK [0][-]{appendix.C}{shorter running title}{}% 31
+\BOOKMARK [0][-]{appendix.B}{Implementation of the PDE class}{}% 30
+\BOOKMARK [0][-]{appendix.C}{Implementation of the FiniteDifferenceMethod class}{}% 31

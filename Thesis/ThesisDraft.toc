@@ -15,21 +15,21 @@
 \contentsline {subsection}{\numberline {2.3.4}Rannacher Trick}{23}{subsection.2.3.4}% 
 \contentsline {subsection}{\numberline {2.3.5}Alternating Direction Implicit Method}{24}{subsection.2.3.5}% 
 \contentsline {subsubsection}{Two Dimensional Heat Equation}{24}{section*.9}% 
-\contentsline {chapter}{\numberline {3}Optimizing Solvers}{29}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Timing the Code}{29}{section.3.1}% 
-\contentsline {subsection}{\numberline {3.1.1}Windows Application Programming Interface}{30}{subsection.3.1.1}% 
-\contentsline {subsection}{\numberline {3.1.2}Chrono Library}{30}{subsection.3.1.2}% 
-\contentsline {section}{\numberline {3.2}Optimization Experiments}{30}{section.3.2}% 
-\contentsline {subsection}{\numberline {3.2.1}Tridiagonal Solvers}{30}{subsection.3.2.1}% 
-\contentsline {subsubsection}{Thomas Algorithm}{31}{section*.11}% 
-\contentsline {subsubsection}{Intel Math Kernel Library}{32}{section*.12}% 
-\contentsline {subsubsection}{Cyclic Reduction}{32}{section*.13}% 
-\contentsline {subsection}{\numberline {3.2.2}32 bit and 64 bit}{33}{subsection.3.2.2}% 
-\contentsline {subsection}{\numberline {3.2.3}Visual Studio Optimization Switches}{33}{subsection.3.2.3}% 
-\contentsline {subsection}{\numberline {3.2.4}Optimal Grid Size}{33}{subsection.3.2.4}% 
-\contentsline {section}{\numberline {3.3}Results of the Numerical Experiments}{35}{section.3.3}% 
-\contentsline {chapter}{\numberline {4}Conclusions}{37}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Further Work}{37}{section.4.1}% 
-\contentsline {chapter}{\numberline {A}Usage of chrono class}{38}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Implementation of the {\tt FiniteDifferenceMethod} class}{39}{appendix.B}% 
-\contentsline {chapter}{\numberline {C}shorter running title}{40}{appendix.C}% 
+\contentsline {chapter}{\numberline {3}Optimizing Solvers}{28}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Timing the Code}{28}{section.3.1}% 
+\contentsline {subsection}{\numberline {3.1.1}Windows Application Programming Interface}{29}{subsection.3.1.1}% 
+\contentsline {subsection}{\numberline {3.1.2}Chrono Library}{29}{subsection.3.1.2}% 
+\contentsline {section}{\numberline {3.2}Optimization Experiments}{29}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}Tridiagonal Solvers}{29}{subsection.3.2.1}% 
+\contentsline {subsubsection}{Thomas Algorithm}{30}{section*.11}% 
+\contentsline {subsubsection}{Intel Math Kernel Library}{31}{section*.12}% 
+\contentsline {subsubsection}{Cyclic Reduction}{31}{section*.13}% 
+\contentsline {subsection}{\numberline {3.2.2}32 bit and 64 bit}{32}{subsection.3.2.2}% 
+\contentsline {subsection}{\numberline {3.2.3}Visual Studio Optimization Switches}{32}{subsection.3.2.3}% 
+\contentsline {subsection}{\numberline {3.2.4}Optimal Grid Size}{32}{subsection.3.2.4}% 
+\contentsline {section}{\numberline {3.3}Results of the Numerical Experiments}{34}{section.3.3}% 
+\contentsline {chapter}{\numberline {4}Conclusions}{36}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Further Work}{36}{section.4.1}% 
+\contentsline {chapter}{\numberline {A}Usage of chrono class}{37}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Implementation of the {\tt PDE} class}{38}{appendix.B}% 
+\contentsline {chapter}{\numberline {C}Implementation of the {\tt FiniteDifferenceMethod} class}{39}{appendix.C}% 

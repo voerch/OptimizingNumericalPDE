@@ -429,7 +429,7 @@ Note that in contrast to the FTCS scheme, we now have three unknowns in this equ
 ??
 
 \subsection{Alternating Direction Implicit Method}
-So far the investigated partial differential equations were one space-like dimensional. When more than one space dimensions are involved, we have to deal with equations such as two dimensional heat equation or multi-asset black-scholes equation. 
+The natural extension of our study of the one-dimensional problem would now be to investigate partial differential equations with more than one space-like dimension. When more than one space dimensions are involved, we have to deal with equations such as two dimensional heat equation or multi-asset black-scholes equation. 
 
 \subsubsection{Two Dimensional Heat Equation}
 2 Dimensional Heat Equation to test ADI method:
@@ -481,30 +481,23 @@ u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 
 \end{definition}
 
 
-The alternate direction implicit (ADI) method is used to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices.
-
-ADI Peaceman and Rachford in 1955 \cite{peace}
-
-Operator splitting is a natural and old idea. When a PDE or system of PDEs contains different terms expressing different physics, it is natural to use different numerical methods for different physical processes. This can optimize and simplify the overall solution process. The idea was especially popularized in the context of the Navier-Stokes equations and reaction-diffusion PDEs. Common names for the technique are operator splitting, fractional step methods, and split-step methods. We shall stick to the former name. In the context of nonlinear differential equations, operator splitting can be used to isolate nonlinear terms and simplify the solution methods. \cite{DougADI}
-A related technique, often known as dimensional splitting or alternating direction implicit (ADI) methods, is to split the spatial dimensions and solve a 2D or 3D problem as two or three consecutive 1D problems, but this type of splitting is not to be further considered here.
-
-\cite{morton}
+The alternating direction implicit (ADI) method is one of the most common techniques to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices.  The scheme was first proposed by Peaceman and Rachford in 1955 for  oil reservoir modelling \cite{peace}. Basically the methods to split the spatial dimensions and solve a 2D problem as two consecutive 1D problems. It is possible to use ADI in more than 3 dimensions which produces the same number of consecutive 1D problems \cite{DougADI}.
 
 In order to develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
 \begin{equation}
 \delta x^2 u^{n}_{i,j}  = \frac{u^{n}_{i+1,j} - 2u^{n}_{i,j} + u^{n}_{i-1,j}}{\Delta x^2}
 \end{equation}
 
-Explicit approximation of the derivates can be written as
+Explicit approximation of the derivatives can be written as
 \begin{equation}
 \frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n}_{i,j} + \delta y^2 u^{n}_{i,j}
 \end{equation}
-Implicit  approximation of the derivates can be written as
+Implicit  approximation of the derivatives can be written as
 \begin{equation}
 \frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n+1}_{i,j} + \delta y^2 u^{n+1}_{i,j}
 \end{equation}
 
-Dividing each time step in half we introduce a temporary intermediate unknown $u^{n+1/2}_{i,j}$. Firstly, the two dimensional heat equation is approximating implicitly x and explicitly over y.
+Dividing each time step in half we introduce a temporary intermediate unknown $u^{n+1/2}_{i,j}$. Firstly, the two dimensional heat equation is approximating implicitly x and explicitly over y. The total work involved in one time step amounts to solving $ N_{steps} - 1$ tridiagonal systems \cite{morton}. 
 \begin{equation}
 \frac{u^{n+1/2}_{i,j} + u^{n}_{i,j}}{0.5 \Delta t} = \frac{\delta x^2 u^{n+1/2}_{i,j} }{\Delta x^2} + \frac{\delta y^2 u^{n}_{i,j}}{\Delta y^2}
 \end{equation}
@@ -732,7 +725,7 @@ After choosing the optimal grid size the resulting grids can be visualized as
 \end{table}
 \section{Results of the Numerical Experiments}
 Timing  the tridiagonal systems in a vanilla setup.
-Timing  the different ompilers and Solution Platforms Timing 32 bit vs 64 bit + VS vs Intel compiler
+Timing  the different compilers and Solution Platforms Timing 32 bit vs 64 bit + VS vs Intel compiler
 Timing changing the optimization switches with the most optimal one.
 
 \begin{table}[h!]
