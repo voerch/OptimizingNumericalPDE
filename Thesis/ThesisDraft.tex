@@ -687,6 +687,21 @@ After choosing the optimal grid size the resulting grids can be visualized as
  \caption{One dimensional heat equation testing parameters.}
 \end{table}
 
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c||} 
+ \hline
+ Parameter & Value\\ [0.5ex]
+ \hline\hline
+  $T$ & 0.075\\ 
+  $ x_{max} $  & 1.0  \\ 
+   $ y_{max} $  & 1.0  \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Two dimensional heat equation testing parameters.}
+\end{table}
+
+
 \begin{figure}[!htb]
   \begin{minipage}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth]{BSExplicitGridError.png}
@@ -710,20 +725,13 @@ After choosing the optimal grid size the resulting grids can be visualized as
   \end{minipage}
 \end{figure}
 
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c||} 
- \hline
- Parameter & Value\\ [0.5ex]
- \hline\hline
-  $T$ & 0.075\\ 
-  $ x_{max} $  & 1.0  \\ 
-   $ y_{max} $  & 1.0  \\ [1ex] 
- \hline
- \end{tabular}
- \caption{Two dimensional heat equation testing parameters.}
-\end{table}
-\section{Results of the Numerical Experiments}
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{ADIHeat.png}
+    \caption{Solution of two dimensional heat equation using ADI.}
+\end{figure}
+
+\section{Comparison of methods}
 Timing  the tridiagonal systems in a vanilla setup.
 Timing  the different compilers and Solution Platforms Timing 32 bit vs 64 bit + VS vs Intel compiler
 Timing changing the optimization switches with the most optimal one.

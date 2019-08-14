@@ -27,7 +27,7 @@
 \contentsline {subsection}{\numberline {3.2.2}32 bit and 64 bit}{32}{subsection.3.2.2}% 
 \contentsline {subsection}{\numberline {3.2.3}Visual Studio Optimization Switches}{32}{subsection.3.2.3}% 
 \contentsline {subsection}{\numberline {3.2.4}Optimal Grid Size}{32}{subsection.3.2.4}% 
-\contentsline {section}{\numberline {3.3}Results of the Numerical Experiments}{34}{section.3.3}% 
+\contentsline {section}{\numberline {3.3}Comparison of methods}{34}{section.3.3}% 
 \contentsline {chapter}{\numberline {4}Conclusions}{36}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}Further Work}{36}{section.4.1}% 
 \contentsline {chapter}{\numberline {A}Usage of chrono class}{37}{appendix.A}% 
