@@ -237,7 +237,7 @@ Rearranging the equation to get famous Black-Scholes equation:
 \end{equation}
 \end{proof} 
 
-\begin{definition} The resulting partial differential equation can be solved analytically using the following boundary conditions and initial conditions for call options.
+\begin{definition}\label{bsAnal} The resulting partial differential equation can be solved analytically using the following boundary conditions and initial conditions for call options.
 \begin{eqnarray}
 \frac{\partial C}{\partial t} &=& rS\frac{\partial C}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 C}{\partial S^2} - rC \\[10pt]
 C(0,t) &=& 0, \hspace{4pt} C(S_{\max},t)=S_{\max} - K e^{-r(T-t)}, \hspace{10pt} 0 \leq t \leq T \\[10pt]
@@ -280,7 +280,7 @@ u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
 u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
 \end{eqnarray}
 
-\begin{definition} Analytical Solution of Heat Equation
+\begin{definition}\label{heatAnal} Analytical Solution of Heat Equation
 
 Certain kinds of partial differential equations allows us to find an analytical solution with the help of the Separation of Variables technique \cite{duffyfinite}.
 
@@ -443,7 +443,7 @@ u(x, 0, t) = u(x, y_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
 u(x, 0, t) = u(x, 1, t) = 0 , \hspace{10pt} 0 \leq t \leq T
 \end{eqnarray}
 
-\begin{definition} Analytical Solution of Two Dimensional Heat Equation
+\begin{definition}\label{heat2Anal} Analytical Solution of Two Dimensional Heat Equation
 Similarly, applying separation of variables method to the equation
 \begin{eqnarray}
 u(x,t) = X(x) Y(y) T(t) \\[10pt]
@@ -627,13 +627,36 @@ The algorithm for the solution of these equations is now straightforward and wor
 Cyclic reduction was proposed by R. W. Hockney in the 1960s for solving the resulting linear systems from the  discretization of the Poisson equation \cite{Hockney}. 
 
 \subsection{32 bit and 64 bit}
-In practical terms, you would use X64 when:  You need to directly address more than 4GB of memory, or   You need very fast (native) processing of 64 bit numerical quantities (including double-precision floating-point numbers) X86 (32 bit) is suitable for most everything else.
-    
+
+The CPU accesses data from RAM using the register that stores memory addresses. 32 bit and 64 bit refers to the amount of data the system can access. so a 32-bit system can address a maximum of 4 GB (4,294,967,296 bytes) of RAM where a 64-bit register can theoretically reference 18,446,744,073,709,551,616 bytes, or 17,179,869,184 GB (16 exabytes) of memory. Since 32 bit does not have access to more than 4 GB, if the system has more than 4 GB of RAM, it will be inaccesible by the CPU, thus A 64 bit system will be needed. The memory increase of 64 bit systems means it is capable of very fast processing of numerical quantities.
+
+One disadvantage of the 64 bit systems is more requirement of memory because addresses are 64 bits (8 bytes) wide instead of 32 bits (4 bytes) wide. Due to the increased size of pointers and data structures, 64-bit programs will occupy more memory than an 32-bit version.
+
 \subsection{Visual Studio Optimization Switches}
+Visual Studio Optimization Switches, also known as /O options controls various optimizations to be chosen according to the needs of the project \cite{vsopt}.
 
+\begin{itemize}
+\item /O1: generates minimum size code.
+\item /O2: optimizes for maximum speed.
+\item /Ob: controls inline function expansion.
+\item /Od: disables optimizations.
+\item /Og: enables global optimizations.
+\item /Oi: generates intrinsic functions for appropriate function calls.
+\item /Os: favors optimizations for size over optimizations for speed.
+\item /Ot: favors optimizations for speed over optimizations for size.
+\item /Ox: selects several of the optimizations with an emphasis on speed. It is a strict subset of the /O2 optimizations.
+\item /Oy: suppresses the creation of frame pointers on the call stack for quicker function calls. 
+\end{itemize}
 
+Since the aim of this project is to be as fast as possible, the default case(/Ot) will be tested against /O2.
+
+\subsection{OpenMP}
+Threading
+High performance computing techniques that can be implemented for multithreading with Open Multi-Processing(OpenMP) and compiler intrinsics.
+OpenMP is used for parallelism within a (multi-core) node 
+\section{Comparison of methods}
 \subsection{Optimal Grid Size}
-The resulting analytical solutions are utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. Figure X and X demonstrates the error compared to the grid sizes. The optimal grid size for heat equation and Black-Scholes equation is 50 by 50. why uniform olunca daha iyi oluyor araştır??
+Previously defined analytical solutions (\ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal}) are utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. Figure X and X demonstrates the error compared to the grid sizes. The optimal grid size for heat equation and Black-Scholes equation is 50 by 50.
 
 \begin{figure}[!htb]
   \begin{minipage}[b]{0.5\textwidth}
@@ -731,10 +754,9 @@ After choosing the optimal grid size the resulting grids can be visualized as
     \caption{Solution of two dimensional heat equation using ADI.}
 \end{figure}
 
-\section{Comparison of methods}
-Timing  the tridiagonal systems in a vanilla setup.
-Timing  the different compilers and Solution Platforms Timing 32 bit vs 64 bit + VS vs Intel compiler
-Timing changing the optimization switches with the most optimal one.
+
+\subsection{Base Case}
+Timing the base case for thomas algorithm, intel solver and cyclic reduction. The timings are mean of 1000 trials and each trial adds a random number $ 0 < \epsilon < 10^-7 $ to the step size to avoid compiler optimizations.
 
 \begin{table}[h!]
 \centering
@@ -742,44 +764,160 @@ Timing changing the optimization switches with the most optimal one.
  \hline
  Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
  \hline\hline\hline
- Visual Studio Compiler x86 & 0.022081 & 0.02035\\ 
- Visual Studio Compiler x64 & 0.018627 & 0.01888\\
- Intel Compiler x86 & 0.023165 & 0.023723\\
- Intel Compiler x64 & 0.019535 & 0.017451\\ [1ex] 
+ Visual Studio Compiler x86 & 0.02496743 & 0.02590181 \\ 
+ Visual Studio Compiler x64 & 0.02105383 & 0.02216256 \\
+ Intel Compiler x86 & 0.02563324 & 0.02633357 \\
+ Intel Compiler x64 & 0.02210323 & 0.02298945\\ [1ex] 
  \hline
  \end{tabular}
- \caption{Averaging 1000 timings for Black-Scholes.}
+ \caption{Solving Black-Scholes with Thomas Algorithm base case.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 &  \\ 
+ Visual Studio Compiler x64 & \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & 0.02171834 & 0.02286124\\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving Black-Scholes with Intel Solver base case.}
 \end{table}
 
 \begin{table}[htp!]
 \centering
- \begin{tabular}{||c c c||} 
+ \begin{tabular}{||c c c c||} 
  \hline
- Testing & Explicit Method Timing & Crank Nicolson Timing\\ [0.5ex] 
+ Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
  \hline\hline\hline
- Visual Studio Compiler x86 & 0.022625 & 0.022441\\ 
- Visual Studio Compiler x64 & 0.018933 & 0.016687
-\\
- Intel Compiler x86 & 0.023076 & 0.023719\\
- Intel Compiler x64 & 0.017271 & 0.017271\\[1ex] 
+ Visual Studio Compiler x86 & 0.02502006 & 0.02536817 & 0.07766176 \\ 
+ Visual Studio Compiler x64 & 0.02185875 & 0.02211793 & 0.06512516 \\
+ Intel Compiler x86 & 0.02685609 & 0.02694334 & 0.08277156\\
+ Intel Compiler x64 & 0.0225934 & 0.0226115 & 0.06614703\\[1ex] 
  \hline
  \end{tabular}
- \caption{Averaging 1000 timings for Black-Scholes and adding random $\epsilon < 10^{-7} $ to step size in order to avoid compiler optimizations.}
+ \caption{Solving heat equation with Thomas Algorithm base case.}
 \end{table}
  
-\chapter{Conclusions}
+ 
+\begin{table}[htp!]
+\centering
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 \\ 
+ Visual Studio Compiler x64 &  \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & 0.02239165 & 0.02195975 & 0.06337759\\[1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving heat equation with Intel Solver base case.}
+\end{table}
+ 
+
+\subsection{Visual Studio Optimizations} 
+ The optimization switch for enabling most speed optimizations /Ox will be utilized in this section. 
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & \\ 
+ Visual Studio Compiler x64 & \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving Black-Scholes with Thomas Algorithm using Visual Studio optimizations.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & \\ 
+ Visual Studio Compiler x64 & \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving Black-Scholes with Intel Solver using Visual Studio optimizations.}
+\end{table}
+
+\begin{table}[htp!]
+\centering
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 \\ 
+ Visual Studio Compiler x64 & \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & \\[1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving heat equation with Thomas Algorithm using Visual Studio optimizations.}
+\end{table}
+ 
+ 
+\begin{table}[htp!]
+\centering
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 \\ 
+ Visual Studio Compiler x64 & \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & \\[1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving heat equation with Intel Solver using Visual Studio optimizations.}
+\end{table}
+
+\subsection{Cyclic Reduction with OpenMP} 
+ 
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Cyclic Reduction\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & 0\\ 
+ Visual Studio Compiler x64 & 0 \\
+ Intel Compiler x86 & 0\\
+ Intel Compiler x64 &0 \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving Black-Scholes with cyclic reduction.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Cyclic Reduction\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & 0\\ 
+ Visual Studio Compiler x64 & 0 \\
+ Intel Compiler x86 & 0\\
+ Intel Compiler x64 &0 \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving heat equation with cyclic reduction.}
+\end{table}
 
 \section{Further Work}
-aaaaa \cite{fpga},  cloud functions \cite{cloudfunc}.
+AVX and Intrinsics CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512)GPGPU In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management. \cite{fpga},  cloud functions \cite{cloudfunc}.
 
-Threading
-High performance computing techniques that can be implemented for multithreading with Open Multi-Processing(OpenMP) and compiler intrinsics.
-
-AVX and Intrinsics
-CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512),
-
-GPGPU
- In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management.
 
 \appendix
 \chapter{Usage of chrono class}

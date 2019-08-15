@@ -1,2 +1,18 @@
-﻿  PDESolver.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\Debug\PDESolver.exe
+﻿  mainTiming.cpp
+  mainOptimalGrid.cpp
+  mainExpCN.cpp
+  mainADI.cpp
+  PDE.cpp
+  FDM.cpp
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\tridiagonalsolvers.h(128): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\tridiagonalsolvers.h(128): warning C4018: '<': signed/unsigned mismatch
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\tridiagonalsolvers.h(128): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\tridiagonalsolvers.h(130): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\tridiagonalsolvers.h(168): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\tridiagonalsolvers.h(171): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\tridiagonalsolvers.h(171): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\tridiagonalsolvers.h(173): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+  LINK : C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\Debug\PDESolver.exe not found or not built by the last incremental link; performing full link
+  PDESolver.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\Debug\PDESolver.exe
   PDESolver.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\Debug\PDESolver.pdb (Partial PDB)

@@ -135,7 +135,7 @@ class FDM2D
 
 	public:
 		// Carry out the actual time-stepping
-		virtual void stepMarch() = 0;
+		virtual void TimeMarch() = 0;
 };
 
 

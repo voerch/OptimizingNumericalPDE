@@ -84,6 +84,14 @@ Robert~C. Merton.
 \newblock Option pricing when underlying stock returns are discontinuous.
 \newblock {\em Journal of Financial Economics}, 3(1):125 -- 144, 1976.
 
+\bibitem{vsopt}
+{Microsoft}.
+\newblock /o options (optimize code).
+\newblock
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/o-options-optimize-code?view=vs-2019},
+  2017.
+\newblock [Online; accessed 10-August-2019].
+
 \bibitem{morton}
 K.~W. Morton and D.~F. Mayers.
 \newblock {\em Numerical Solution of Partial Differential Equations: An
