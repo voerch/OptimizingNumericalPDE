@@ -154,8 +154,8 @@ void CrankNicholson::innerDomain()
 	}
 
 	//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-	IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-	//CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+	//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+	CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 }
 
 void CrankNicholson::timeMarch()

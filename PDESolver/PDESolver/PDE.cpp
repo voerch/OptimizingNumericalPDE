@@ -28,6 +28,7 @@ double HeatEqn::BoundaryRight(double t, double x) const
 }
 double HeatEqn::InitCond(double x) const
 {
+	//return 1.0;
 	return sin(PI * x);
 }
 

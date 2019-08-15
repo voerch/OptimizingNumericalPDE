@@ -18,9 +18,9 @@ int main()
 		double T = 2.00;    // One year until expiry
 
 		double x_dom = 2.0;       // Spot goes from [0.0, 2.0]
-		unsigned long J = 50;
+		unsigned long J = 64;
 		double t_dom = T;         // Time period as for the option
-		unsigned long N = 50;
+		unsigned long N = 64;
 
 		VanillaOption* callOption = new EurCall(K, r, T, v);
 		BlackScholesPDE* bsPDE = new BlackScholesPDE(callOption);
@@ -44,7 +44,7 @@ int main()
 	}
 	timing.close();
 
-	std::ofstream heattiming("HeatTiming.csv");
+	/*std::ofstream heattiming("HeatTiming.csv");
 	heattiming << "Explicit,CN,ADI" << std::endl;
 	for (int timeCounter = 0; timeCounter < 1000; timeCounter++)
 	{
@@ -89,6 +89,6 @@ int main()
 		heattiming << ExpTime.count() << "," << CNTime.count() << "," << ADITime.count() << std::endl;
 
 	}
-	heattiming.close();
+	heattiming.close();*/
 
 }

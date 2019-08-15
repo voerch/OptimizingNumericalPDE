@@ -5,16 +5,18 @@
 //#include <chrono>
 //#include <fstream>
 //
+//#include <thread>
+//
+//
 //int main()
 //{
-//	long xStep = 50;
-//	long tStep = 50;
+//	long xStep = 64;
+//	long tStep = 64;
 //
 //	///////////////////////////////////////
 //
 //	double x_dom = 1.0;     
 //	double t_dom = 0.06;
-//
 //	HeatEqn* heat_pde = new HeatEqn;
 //
 //	//ExplicitMethod euler(x_dom, xStep, t_dom, tStep, heat_pde);

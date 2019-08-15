@@ -12,12 +12,6 @@ stability/consistency analysis
 * Timinge gore heatmap hazirla
 * kodlarin basina author date description ekle
 
-
-sor:
-1) 1d 2d heat special case e göre yaptım genel mi yazayım?
-2) MC vs Grid error compare paul glassermann?
-3) Cyclic reduction too many versions
-4) internet kaynaklari?
 Root mean squared relative error testing
  why uniform grid olunca daha iyi oluyor araştır??
 

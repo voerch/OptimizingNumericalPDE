@@ -105,25 +105,22 @@ void IntelSolver(std::vector<double>& a, std::vector<double>& b, std::vector<dou
 //
 //}
 
-//#define OMP_SCHEDULE dynamic
-//#define CHUNK 32
-
 void CyclicReduction(std::vector<double> LDiag, std::vector<double> Diag, std::vector<double> UDiag, std::vector<double> oldResult, std::vector<double>& newResult)
 {
 	double Temp1;
 	double Temp2;
 	int iReducePlus, iReduceMinus, offset;
-
+	int size = newResult.size();
 	LDiag.insert(LDiag.begin(), 0.0);
 	UDiag.push_back(0.0);
 	//Forward Reduction
-	//#pragma omp parallel for
-	for (int Step = 1; Step < log2(Diag.size() + 1); Step++)
+
+#pragma omp parallel for collapse(2)
+	for (int Step = 1; Step < int(log2(Diag.size() + 1)); Step++)
 	{
-		//#pragma omp parallel for
 		for (int iReduce = pow(2, Step) - 1; iReduce < Diag.size(); iReduce += pow(2, Step))
 		{
-			offset = pow(2.0, Step - 1);
+			offset = pow(2, Step - 1);
 			iReduceMinus = iReduce - offset;
 			iReducePlus = iReduce + offset;
 
@@ -156,36 +153,35 @@ void CyclicReduction(std::vector<double> LDiag, std::vector<double> Diag, std::v
 
 	}
 
-	int size = newResult.size();
-	int backSubPlus, backSubMinus;
-	//Backward Substitution
-	newResult[size - 1] = (oldResult[size - 1] - (LDiag[size - 1] * newResult[size - 2])) / Diag[size - 1];
+	//Backward Substitution Phase
 
+	int backSubPlus, backSubMinus;
+
+#pragma omp parallel for collapse(2)
 	for (int Step = log2(size + 1) - 2; Step >= 0; Step--)
 	{
-		//#pragma omp parallel for
-		for (int backSub = pow(2.0, Step + 1) - 1; backSub < size; backSub += pow(2.0, Step))
+		for (int backSub = pow(2, Step + 1) - 1; backSub < size; backSub += pow(2, Step))
 		{
-			offset = pow(2.0, Step - 1);
+			offset = pow(2, Step - 1);
 			backSubMinus = backSub - offset;
 			backSubPlus = backSub + offset;
 
-			//newResult[backSub] = (oldResult[backSub] - (newResult[backSubMinus] * LDiag[backSub]) - (UDiag[backSub] * newResult[backSubPlus])) / Diag[backSub];
-			if (backSub != backSubMinus) {
-				if (backSubMinus - offset < 0) newResult[backSubMinus] = (oldResult[backSubMinus] - UDiag[backSubMinus] * newResult[backSubMinus + offset]) / Diag[backSubMinus];
-				else newResult[backSubMinus] = (oldResult[backSubMinus] - LDiag[backSubMinus] * newResult[backSubMinus - offset] - UDiag[backSubMinus] * newResult[backSubMinus + offset]) / Diag[backSubMinus];
-			}if (backSub != backSubPlus) {
-				if (backSubPlus + offset >= size) newResult[backSubPlus] = (oldResult[backSubPlus] - LDiag[backSubPlus] * newResult[backSubPlus - offset]) / Diag[backSubPlus];
-				else newResult[backSubPlus] = (oldResult[backSubPlus] - LDiag[backSubPlus] * newResult[backSubPlus - offset] - UDiag[backSubPlus] * newResult[backSubPlus + offset]) / Diag[backSubPlus];
+			if (backSubMinus <= 0)
+			{
+				newResult[backSub] = (oldResult[backSub] - (UDiag[backSub] * newResult[backSubPlus])) / Diag[backSub];
+			}
+			else if (backSubPlus >= size)
+			{
+				newResult[backSub] = (oldResult[backSub] - (newResult[backSubMinus] * LDiag[backSub])) / Diag[backSub];
+
+			}
+			else
+			{
+				newResult[backSub] = (oldResult[backSub] - (newResult[backSubMinus] * LDiag[backSub]) - (UDiag[backSub] * newResult[backSubPlus])) / Diag[backSub];
 			}
 		}
 	}
-	//newResult[0] = oldResult[0] - (UDiag[0] * newResult[1]) / Diag[0];
 	LDiag.erase(LDiag.begin());
 	UDiag.pop_back();
 
 }
-
-
-// https://github.com/minavouronikou/cyclic_reduction/blob/master/cyclic%20reduction%20(L)/kernel.cu
-// https://github.com/cudpp/cudpp/blob/master/src/cudpp/kernel/tridiagonal_kernel.cuh
