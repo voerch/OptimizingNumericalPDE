@@ -153,18 +153,16 @@ The Black-Scholes framework is a theoretical valuation formula for options. It r
 \item There does not exist any arbitrage opportunity in the financial market.  The traders can’t make instantaneous profit without any risk.
 \item The underlying asset value follows a geometric Brownian Motion $dS = \mu S dt + \sigma S dB $ where $\mu$ denotes the average rate of growth of the underlying assets, $\sigma$ denotes the volatility of the asset price and B is a Brownian Motion.
 \item The market is frictionless.  This means there are no transaction fees, the interest rates for borrowing and lending money from and to the bank are the same, every party  in  market  has  immediate  information  and  all  entities  are  available  at  anytime and in any size.
-\item No dividend will paid on the underlying asset $S$.
 \end{itemize}
 
 \subsection{Black-Scholes Partial Differential Equation}
-The original model is used to price the vanilla  option, which is the simplest type of option.
-Under the assumptions of Black-Scholes framework, the call or put option price satisfies the parabolic partial differential equation:
+The original model is used to price the vanilla  option, which is the simplest type of option. The dividends can be included in the Black-Scholes formula. Presence of dividends can be included in the Black-Scholes formula. Since it doesn't effect the performance, for the sake of simplicity we will assume there are no dividends paid. Under the assumptions of Black-Scholes framework, the call or put option price satisfies the parabolic partial differential equation.
 
 \begin{equation}
 \frac{\partial V}{\partial t} = rS\frac{\partial V}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} - rV
 \end{equation}
 
-Framework shows the  price V(t,S)  of  a  European  option  driven  by  one underlying asset that satisfies the PDE where $r$, $\sigma$, $t$, $S$respectively denotes the risk-free interest rate, volatility, time and the underlying price.  It is assumed that $r$ and $\sigma$ are constants. In more complicated models such as stochastic volatility models they can be a function. In order to price a vanilla call option the PDE needs to satisfy the following boundary and initial conditions.
+Framework shows the  price V(t,S)  of  a  European  option  driven  by  one underlying asset that satisfies the PDE where $r$, $\sigma$, $t$, $S$respectively denotes the risk-free interest rate, volatility, time and the underlying price.  It is assumed that $r$ and $\sigma$ are constants. In more complicated models such as stochastic volatility models they can be a function.We will consider the  PDE and conditions for the call options.  In order to price a vanilla call option the PDE needs to satisfy the following boundary and initial conditions. 
 
 \begin{eqnarray}
 C(0,t) &=& 0, \hspace{4pt} C(S_{\max},t)=S_{\max} - K e^{-r(T-t)}, \hspace{10pt} 0 \leq t \leq T \\[10pt]
@@ -174,13 +172,14 @@ C(S,T) &=& \max(S-K,0), \hspace{10pt} 0 \leq S \leq S_{\max}
 \subsection{Derivation of the Black-Scholes Equation}
 Black-Scholes model takes advantage of the properties of the geometric Brownian motion and It\^{o}'s lemma. 
 
-\begin{definition} Brownian Motion 
+\begin{definition} Brownian Motion \\
 Brownian motion (also known as Wiener Process) was discovered by botanist Robert Brown as he observed a chaotic motion of particles suspended in water \cite{BM}. A  Brownian  motion, $B(t)$,  is  a  continuous-time  stochastic  process  with  the  following properties: 
 \begin{itemize}
 \item $ B(0) = 0 $.
 \item $ B(t) $ is a continuous function of t.
-\item For $ 0  \leq s < t $ the increment $ B(t) -  B(s)  $ has normal distribution $ \mathcal{N}(0, t-s) $.
-\end{itemize}
+\item For $ 0  \leq s < t $ the increment $ B(t) -  B(s)  $ has normal distribution  $ \mathcal{N}(0, t-s) $.
+\item  For $ t_0  \leq  t_1 \leq ... \leq  t_n $ the increments $ B(t_k) - B(t_{k-1}) $ where $k=1, .... ,n $ are independent random variables.
+\end{itemize}    
 Brownian motion is the basic building block in stochastic calculus and geometric Brownian motion is used to model the stock prices in Black-Scholes model.
 \end{definition}
 
@@ -253,15 +252,16 @@ d_2 = d_1 - \sigma \sqrt{T-t}
 
 \end{definition}
 
-\begin{remark}  Untradable assets\\ 
-Modern financial engineering created derivatives using untradable assets as an underlying such as multi asset derivatives like equity baskets, weather derivatives and non-deliverable forwards. Non-deliverable forwards are for offshore investors that want to trade non-convertible currencies such as Brazilian Real, South Korean Won.  The Black-Scholes model is still used in these cases \cite{weather} \cite{basket} but not entirely applicable to assets that cannot be hedged.
+\begin{remark}Untradable Assets\\ Modern financial engineering created derivatives using untradable assets as an underlying such as multi asset derivatives like equity baskets, weather derivatives and non-deliverable forwards. Non-deliverable forwards are for offshore investors that want to trade non-convertible currencies such as Brazilian Real, South Korean Won.  The Black-Scholes model is still used in these cases \cite{weather} \cite{basket} but not entirely applicable to assets that cannot be hedged.
 \end{remark}
 
 
 \section{Solving Partial Differential Equations}
-Since the foundation of the world humanity tried to understand and model the nature. Differential equations serves this purpose by enabling us to describe natural phenomena for instance, heat, sound and fluid flow. General form of 2nd order PDEs of two independent variables is $$ au_{xx} + bu_{xy} + cu_{yy} + du_x + eu_y + fu + g = 0 $$ If the equation satisfies the condition $ b^2 - 4ac = 0 $  it is considered a parabolic partial differential equation. Generally, financial partial differential equations can be classified as parabolic partial differential equations.
+Since the foundation of the world humanity tried to understand and model the nature. Differential equations serves this purpose by enabling us to describe natural phenomena for instance, heat, sound and fluid flow. 
+Differential equations can be classified in to two categories. Ordinary differential equations serve to model a movement space or plane, an example would be the trajectory of a projectile launched from a cannon follows a curve determined by an ordinary differential equation that is derived from Newton's second law.
+On the other hand, partial differential equations modelles a function, a typical example is the heat distribution. This distinction usually makes PDEs much harder to solve than ordinary differential equations.
 
-Generally, partial differential equations are too complicated to work out an analytical solution. Thus, we need to achieve a numerical solution to the problem. Numerical partial differential equations includes components in the areas of applications, mathematics and computers. The most common framework is finite difference method which tries to find approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. Instead we try to find approximate solutions of the problem at a discrete set of points in the (x, t) plane, normally a rectangular grid of points. It is simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. 
+General form of 2nd order PDEs of two independent variables is $$ au_{xx} + bu_{xy} + cu_{yy} + du_x + eu_y + fu + g = 0 $$ If the equation satisfies the condition $ b^2 - 4ac = 0 $  it is considered a parabolic partial differential equation. Generally, financial partial differential equations can be classified as parabolic partial differential equations. Generally, partial differential equations are too complicated to work out an analytical solution. Thus, we need to achieve a numerical solution to the problem. Numerical partial differential equations includes components in the areas of applications, mathematics and computers. The most common framework is finite difference method which tries to find approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. Instead we try to find approximate solutions of the problem at a discrete set of points in the $(x, t)$ plane, normally a rectangular grid of points. It is simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. 
 
 Multidimensional finite differences (such as ADI schemes) are only practical up to 3 dimensions, higher dimension are too demanding in terms of computer memory and computing time.
 
@@ -272,7 +272,7 @@ Feynman-Kac theorem \cite{klebaner}, establishes a link between parabolic partia
 The finite difference method has become a very popular for approximating the Black Scholes equation. This equation is an example of a convection-diffusion equation. Heat equation is the most basic convection-diffusion equation, we will be using it as a benchmark to test the methods. 
 
 \subsection{Heat Equation}
-Most basic case for parabolic differential equations is the heat equation. In the experiments the following initial and boundary conditions will be used.
+Most basic case for parabolic differential equations is the heat equation. In the experiments the following initial and boundary conditions will be used. We will consider the following PDE and conditions for the purposes of research.
 
 \begin{eqnarray}
 u_t(x,t) &=& u_{xx}(x, t) \\[10pt]
@@ -295,7 +295,7 @@ Using the partial derivatives the equation $ u_t = u_{xx} $ becomes
 \frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)}
 \end{equation}
 
-Right hand side only depends on x and the left hand side depends only on t. Therefore, the equation is valid only when each side is equal to a constant, which we set to $ \lambda $. Rearranging terms gives us the following equations:
+Right hand side only depends on $x$ and the left hand side depends only on $t$. Therefore, the equation is valid only when each side is equal to a constant, which we set to $ \lambda $. Rearranging terms gives us the following equations:
 
 \begin{eqnarray}
 \frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)} = \lambda \\[10pt]
@@ -330,109 +330,9 @@ u_n(x,t) = \sum_{n=1}^{\infty} \frac{2sin(\pi n)}{\pi - \pi n^2} exp(-n^2 \pi ^2
 \end{equation}
 \end{definition}
 
-\section{Finite Difference Methods}
-\subsection{Discretization}
-Essentially, solving a PDE is the problem of finding a function which depends on values at infinitely many points. Naturally, the finite difference methods first step is to make the problem discrete that we are able to solve \cite{jwthomas}. As a result, we need to discretise the space dimensions and time dimension. The discretization procedure begins by replacing the domain $[0, x_{max}]$ x  $[0, T]$  by a set of mesh points. In order to get a $n$ x $m$ equally spaced mesh points the step sizes are calculated as $ \Delta t = \frac{T}{m}$, $\Delta x = \frac{x_{max}}{n}$.
+\subsection{Two Dimensional Heat Equation}
+The natural extension of our study of the one-dimensional problem would now be to investigate partial differential equations with more than one space-like dimension. When more than one space dimensions are involved, we have to deal with equations such as two dimensional heat equation or multi-asset black-scholes equation.  We will consider the following PDE and conditions for the purposes of research.
 
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.8]{Discretize.png}
-    \caption{10 x 10 grid.}
-\end{figure}
-In order to replace our PDE, we need to utilize finite difference approximations for the partial derivatives. Notationally, we will define $u^n_i$ to be a function defined at the point $(i \Delta x, n \Delta t) $.
-
-\begin{itemize}
-        \item Forward difference: $ \frac{\partial u}{\partial t} = \frac{u^{n+1}_i - u^n_i}{\Delta t} $
-        \item Central difference: $ \frac{\partial u}{\partial t} = \frac{u^{n+1}_i - u^{n-1}_i}{\Delta t} $
-        \item Backwards difference: $ \frac{\partial u}{\partial t} = \frac{u^{n}_i - u^{n-1}_i}{\Delta t} $
-        \item Second order central difference: $ \frac{\partial^2 u}{\partial x^2} = \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2} $
-\end{itemize}
-
-We now have a grid that approximates our domain. Aiming to obtain a unique solution using numerical methods, we need initial and boundary conditions. Final step is applying the values given by such conditions.
-
-\begin{figure}[!htb]
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{Boundary.png}
-    \caption{Boundary conditions.}
-  \end{minipage}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{Initial.png}
-    \caption{Initial condition.}
-  \end{minipage}
-\end{figure}
-
-\subsection{Explicit Method}
-Explicit method generalises the parabolic partial differential equation by applying the forward difference to the time derivative and the centred second difference (FTCS).
-
-Applying the finite differences to the parabolic partial differential equation form
-\begin{equation}
-a(t, x)  u_{xx} + b(t, x) u_x + c(t, x) u_t + d(t, x) u = 0
-\end{equation}
-\begin{equation}
-a(t, x)  \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2}  + b(t, x)  \frac{u^{n}_{i+1} - u^{n}_{i-1}}{\Delta t} + c(t, x)   \frac{u^{n+1}_i - u^n_i}{\Delta t} + d u^n_i = 0
-\end{equation}
-
-If we rearrange the formula it can be summarised as
-\begin{equation}
-u_j^{n+1} = \alpha u_{j-1}^{n} + \beta u_{j}^{n} + \gamma u_{j+1}^{n}
-\end{equation}
-
-The formula expresses one unknown nodal value directly in terms of known nodal values  \cite{evans}. Defining $ r = \frac{\Delta t}{\Delta x^2} $. The coefficients for the heat equation becomes
-\begin{eqnarray}
-\alpha =  r  \\[10pt]
-\beta = 1 - 2r  \\[10pt]
-\gamma = r  \\[10pt]
-\end{eqnarray}
-
-The coefficients for the Black-Scholes partial differential equation becomes
-\begin{eqnarray}
-\alpha =  \frac{\sigma^2 j^2 \Delta t}{2} - \frac{r j \Delta t}{2} \\[10pt]
-\beta = 1 - \sigma^2 j^2 \Delta t - r \Delta t \\[10pt]
-\gamma = \frac{\sigma^2 j^2 \Delta t}{2} + \frac{r j \Delta t}{2}
-\end{eqnarray}
-
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.9]{Explicit.png}
-    \caption{Computational stencil of explicit method applied to Black-Scholes}
-\end{figure}
-
-\subsection{Crank-Nicholson Method}
-The explicit method is computationally cheap however this brings a serious drawback, for explicit method to attain reasonable accuracy the step size must be kept small \cite{gdsmith}. Thankfully, the Crank-Nicolson finite difference scheme was introduced by John Crank and Phyllis Nicolson \cite{cn}. Considering numerous articles and publications in the financial engineering literature use Crank-Nicolson as the de-facto scheme for time discretisation, the method has become one of the most popular finite difference schemes for approximating the solution of the Black - Scholes equation and its generalisations \cite{tavella}.
-
- If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. 
- \begin{equation}
- u_t  = a(t, x)  u_{xx} + b(t, x) u_x + c(t, x) u  + d(t, x)
-\end{equation}
-\begin{equation}
-\frac{u^{n+1}_i - u^n_i}{\Delta t}  = a(t, x)  \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2}  + b(t, x)  \frac{u^{n}_i - u^{n-1}_i}{\Delta t}  + c(t, x)  u^n_i + d(t, x)
-\end{equation}
-
-In contrast to the FTCS scheme, we now have three unknowns in this equation, the three values of $u$ at the higher time level.  Crank-Nicolson method takes a weighted average of the FTCS and BTCS schemes. Therefore the approximations become
-\begin{itemize}
- \item $ u(t,x) \approx \frac{1}{2} ( u^{n+1}_i +  u^n_i) $
- \item $   \frac{\partial u}{\partial t} \approx \frac{u^{n+1}_i - u^n_i}{\Delta t} $
- \item $   \frac{\partial u}{\partial x} \approx \frac{u^n_{i+1} - u^n_{i-1} + u^{n+1}_{i+1} - u^{n+1}_{i-1}}{4\Delta x} $
- \item $ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1} + u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{2(\Delta x)^2} $
-\end{itemize}
-
-Applying the new finite differences to the parabolic partial differential equation
-\begin{multline}
- (-A -B) u^{n+1}_{i+1} + (1 + 2A - C) u^{n+1}_i + (-A + B) u^{n+1}_{i-1} =  \\
-=  (A+B) u^{n}_{i+1} + (1 - 2A + C) u^{n}_i + (A - B) u^{n}_{i-1} + D
-\end{multline}
-$$ A = a(t,x) \frac{\Delta t}{\Delta x^2},  B = b(t,x) \frac{\Delta t}{4\Delta x}, C = c(t,x) \frac{\Delta t}{2},  D = d(t,x) \Delta t $$ 
-
-Note that in contrast to the FTCS scheme, we now have three unknowns in this equation, the three values of $u$ at the higher time level. The left hand side groups the unknowns and the right hand side groups knowns. The system of equations can be represented by a tridiagonal matrix system. This system of equations can be solved by various algorithms such as Gauss elimination or Thomas algorithm.
-
-\subsection{Rannacher Trick}
-??
-
-\subsection{Alternating Direction Implicit Method}
-The natural extension of our study of the one-dimensional problem would now be to investigate partial differential equations with more than one space-like dimension. When more than one space dimensions are involved, we have to deal with equations such as two dimensional heat equation or multi-asset black-scholes equation. 
-
-\subsubsection{Two Dimensional Heat Equation}
-2 Dimensional Heat Equation to test ADI method:
 \begin{equation}
 \frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2} +\frac{\partial^2 u}{\partial y^2}
 \end{equation}$  $
@@ -480,7 +380,116 @@ u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 
 
 \end{definition}
 
+\section{Finite Difference Methods}
+\subsection{Discretization}
+Essentially, solving a PDE is the problem of finding a function which depends on values at infinitely many points. Naturally, the finite difference methods first step is to make the problem discrete that we are able to solve \cite{jwthomas}. As a result, we need to discretise the space dimensions and time dimension. The discretization procedure begins by replacing the domain $[0, x_{max}]$ x  $[0, T]$  by a set of mesh points. In order to get a $n$ x $m$ equally spaced mesh points the step sizes are calculated as $ \Delta t = \frac{T}{m}$, $\Delta x = \frac{x_{max}}{n}$.
 
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.8]{Discretize.png}
+    \caption{10 x 10 grid.}
+\end{figure}
+In order to replace our PDE, we need to utilize finite difference approximations for the partial derivatives. Notationally, we will define $u^n_i$ to be a function defined at the point $(i \Delta x, n \Delta t) $.
+
+\begin{itemize}
+        \item Forward difference: $ \frac{\partial u}{\partial t} = \frac{u^{n+1}_i - u^n_i}{\Delta t} + \mathcal{O}( \Delta t) $
+        \item Central difference: $ \frac{\partial u}{\partial x} = \frac{u^n_{i+1} - u^n_{i-1}}{\Delta t}   + \mathcal{O}( \Delta x) $
+        \item Backwards difference: $ \frac{\partial u}{\partial x} = \frac{u^{n}_i - u^n_{i - 1}}{\Delta t}  + \mathcal{O}( \Delta x) $
+        \item Second order central difference: $ \frac{\partial^2 u}{\partial x^2} = \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2}  + \mathcal{O}( \Delta x^2) $
+\end{itemize}
+
+We now have a grid that approximates our domain. Aiming to obtain a unique solution using numerical methods, we need initial and boundary conditions. Final step is applying the values given by such conditions.
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Boundary.png}
+    \caption{Boundary conditions.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Initial.png}
+    \caption{Initial condition.}
+  \end{minipage}
+\end{figure}
+
+\subsection{Explicit Method}
+Explicit method generalises the parabolic partial differential equation by applying the forward difference to the time derivative and the centred second difference (FTCS scheme).
+\begin{equation} \label{gen}
+a(t, x)  u_{xx} + b(t, x) u_x + c(t, x) u_t + d(t, x) u = 0
+\end{equation}
+
+We will be applying the finite differences to the equation  \ref{gen}  for the purposes of simplicity since heat equation and Black-Scholes equation can be generalized in the form for certain choices of coefficients. 
+
+\begin{equation}
+a(t, x)  \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2}  + b(t, x)  \frac{u^{n}_{i+1} - u^{n}_{i-1}}{\Delta x} + c(t, x)   \frac{u^{n+1}_i - u^n_i}{\Delta t} + d(t, x) u^n_i = 0
+\end{equation}
+
+Applying the forward time and centred space differences where $ r = \frac{\Delta t}{\Delta x^2} $.
+\begin{multline}
+u^{n+1}_i = u^n_{i + 1} (\frac{-r a(t,x)}{\Delta x c(t,x)} - \frac{a(t, x)}{c(t, x)}) + u^n_{i}(1 + \frac{2 r a(t, x)}{c(t, x)} - \frac{\Delta t d(t, x)}{c(t, x)}) \\
++ u^n_{i - 1} (\frac{-r a(t, x)}{c(t, x)} + \frac{r b(t, x)}{\Delta x c(t, x)})
+\end{multline}
+
+We will replace the coefficients of $ u^n_{i + 1},  u^n_i,  u^n_{i - 1}$  terms with $\gamma,  \alpha, \beta$ respectively. If we rearrange the formula, it can be summarised as
+
+\begin{equation}
+u_j^{n+1} = \gamma u_{j+1}^{n} + \beta u_{j}^{n} + \alpha u_{j-1}^{n} 
+\end{equation}
+
+The formula expresses one unknown nodal value directly in terms of known nodal values  \cite{evans}.  In the case of heat equation the coefficients  $\gamma,  \alpha, \beta$ become
+\begin{equation}
+\alpha =  r \hspace{15pt} \beta = 1 - 2r \hspace{15pt} \gamma = r
+\end{equation}
+
+Replacing the coefficients with black scholes partial differential equation coefficients, the coefficients $\gamma,  \alpha, \beta$ yields
+\begin{equation}
+\alpha =  \frac{\sigma^2 j^2 \Delta t}{2} - \frac{r j \Delta t}{2} \hspace{15pt} 
+\beta = 1 - \sigma^2 j^2 \Delta t - r \Delta t \hspace{15pt} 
+\gamma = \frac{\sigma^2 j^2 \Delta t}{2} + \frac{r j \Delta t}{2}
+\end{equation}
+
+Solving heat equation and Black-Scholes differs only in one aspect. Black-Scholes is solved backwards in time where heat equation is solved forwards in time. 
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{ExplicitHeat.png}
+    \caption{Computational stencil \\of heat equation.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{ExplicitBS.png}
+    \caption{Computational stencil \\of Black-Scholes.}
+  \end{minipage}
+\end{figure}
+
+
+\subsection{Crank-Nicholson Method}
+The explicit method is computationally cheap however this brings a serious drawback, for explicit method to attain reasonable accuracy the step size must be kept small \cite{gdsmith}. Thankfully, the Crank-Nicolson finite difference scheme was introduced by John Crank and Phyllis Nicolson \cite{cn}. Considering numerous articles and publications in the financial engineering literature use Crank-Nicolson as the de-facto scheme for time discretisation, the method has become one of the most popular finite difference schemes for approximating the solution of the Black - Scholes equation and its generalisations \cite{tavella}.
+
+ If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. Applying the finite differences to the equation \ref{gen} 
+\begin{equation}
+\frac{u^{n+1}_i - u^n_i}{\Delta t}  = a(t, x)  \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2}  + b(t, x)  \frac{u^{n}_i - u^{n-1}_i}{\Delta t}  + c(t, x)  u^n_i + d(t, x)
+\end{equation}
+
+In contrast to the FTCS scheme, we now have three unknowns in this equation, the three values of $u$ at the higher time level.  Crank-Nicolson method takes a weighted average of the FTCS and BTCS schemes. Therefore the approximations become
+\begin{itemize}
+ \item $ u(t,x) \approx \frac{1}{2} ( u^{n+1}_i +  u^n_i) $
+ \item $   \frac{\partial u}{\partial t} \approx \frac{u^{n+1}_i - u^n_i}{\Delta t} $
+ \item $   \frac{\partial u}{\partial x} \approx \frac{u^n_{i+1} - u^n_{i-1} + u^{n+1}_{i+1} - u^{n+1}_{i-1}}{4\Delta x} $
+ \item $ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1} + u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{2(\Delta x)^2} $
+\end{itemize}
+
+Applying the new finite differences to the parabolic partial differential equation
+\begin{multline}
+ (-A -B) u^{n+1}_{i+1} + (1 + 2A - C) u^{n+1}_i + (-A + B) u^{n+1}_{i-1} =  \\
+=  (A+B) u^{n}_{i+1} + (1 - 2A + C) u^{n}_i + (A - B) u^{n}_{i-1} + D
+\end{multline}
+$$ A = a(t,x) \frac{\Delta t}{\Delta x^2},  B = b(t,x) \frac{\Delta t}{4\Delta x}, C = c(t,x) \frac{\Delta t}{2},  D = d(t,x) \Delta t $$ 
+
+Note that in contrast to the FTCS scheme, we now have three unknowns in this equation, the three values of $u$ at the higher time level. The left hand side groups the unknowns and the right hand side groups knowns. The system of equations can be represented by a tridiagonal matrix system. This system of equations can be solved by various algorithms such as Gauss elimination or Thomas algorithm.
+
+\subsection{Rannacher Trick}
+??
+
+\subsection{Alternating Direction Implicit Method}
 The alternating direction implicit (ADI) method is one of the most common techniques to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices.  The scheme was first proposed by Peaceman and Rachford in 1955 for  oil reservoir modelling \cite{peace}. Basically the methods to split the spatial dimensions and solve a 2D problem as two consecutive 1D problems. It is possible to use ADI in more than 3 dimensions which produces the same number of consecutive 1D problems \cite{DougADI}.
 
 In order to develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
@@ -541,7 +550,9 @@ Main optimization techniques that can be implemented are parallelizing tridiagon
 Implementing Crank Nicolson and Alternating Direction Implicit methods requires to solve tridiagonal systems which is the most computationally intensive part of the program.  Therefore, choosing efficient tridiagonal solvers is crucial for the speed of the solver. In this experiment three different algorithms will be tested.
 
 \subsubsection{Thomas Algorithm}
-Thomas Algorithm is the most commonly used method for solving tridiagonal system of equations. The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The system equations can be written as
+Thomas Algorithm is the most commonly used method for solving tridiagonal system of equations. The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The algorithm is a simplified version of the gaussian elimination.
+
+The system equations can be written as
 $$
 \begin{bmatrix}  
 b_1 & c_1 & 0 & 0 & ... & 0 \\ 
@@ -621,7 +632,7 @@ The algorithm for the solution of these equations is now straightforward and wor
 
 
  \subsubsection{Intel Math Kernel Library}
- Intel Math Kernel Library implements routines for solving systems of linear equations   from the standard LAPACK library.  Variety of matrix types are supported by the routines. Specifically gtsv function is utilized from the package. Using Gaussian elimination with partial pivoting, gstv computes the solution to the system of linear equations with a tridiagonal coefficient matrix \cite{gtsv}.  
+Intel Math Kernel Library implements routines for solving systems of linear equations from the standard LAPACK library. Variety of atrix types are supported by the routines.  Specifically gtsv function is utilized from the package. Using Gaussian elimination with partial pivoting, gstv computes the solution to the system of linear equations with a tridiagonal coefficient matrix \cite{gtsv}.  
  
  \subsubsection{Cyclic Reduction}
 Cyclic reduction was proposed by R. W. Hockney in the 1960s for solving the resulting linear systems from the  discretization of the Poisson equation \cite{Hockney}. 
