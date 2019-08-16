@@ -272,7 +272,8 @@ Feynman-Kac theorem \cite{klebaner}, establishes a link between parabolic partia
 The finite difference method has become a very popular for approximating the Black Scholes equation. This equation is an example of a convection-diffusion equation. Heat equation is the most basic convection-diffusion equation, we will be using it as a benchmark to test the methods. 
 
 \subsection{Heat Equation}
-Most basic case for parabolic differential equations is the heat equation. In the experiments the following initial and boundary conditions will be used. We will consider the following PDE and conditions for the purposes of research.
+The heat equation is fundamental to financial engineering. Heat equation is a component in the Black-Schole equation and Black-Scholes equation can be transformed to the heat equation by changing variables \cite{capinski}. Thus understanding  of  heat equation  helps  in  our appreciation of Black–Scholes. In the experiments the following initial and boundary conditions for the heat equation will be used.
+
 
 \begin{eqnarray}
 u_t(x,t) &=& u_{xx}(x, t) \\[10pt]
@@ -282,7 +283,7 @@ u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
 
 \begin{definition}\label{heatAnal} Analytical Solution of Heat Equation
 
-Certain kinds of partial differential equations allows us to find an analytical solution with the help of the Separation of Variables technique \cite{duffyfinite}.
+Certain kinds of partial differential equations allows us to find an analytical solution with the help of the Separation of Variables technique.
 
 \begin{eqnarray}
 u(x,t) = X(x) T(t) \\[10pt]

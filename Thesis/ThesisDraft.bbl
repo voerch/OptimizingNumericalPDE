@@ -72,7 +72,7 @@ F.C. Klebaner.
 
 \bibitem{sepvar}
 {Matthew J. Hancock}.
-\newblock The 1-d heat equation (18.303, linear partial differential
+\newblock The 1-d heat equation (mit course 18.303, linear partial differential
   equations).
 \newblock
   \url{https://ocw.mit.edu/courses/mathematics/18-303-linear-partial-differential-equations-fall-2006/lecture-notes/heateqni.pdf},
@@ -149,5 +149,10 @@ Llewellyn~Hilleth Thomas.
 Paul Wilmott.
 \newblock {\em Paul Wilmott Introduces Quantitative Finance}.
 \newblock Wiley-Interscience, New York, NY, USA, 2 edition, 2007.
+
+\bibitem{capinski}
+Tomasz Zastawniak and {Maciej J.} Capinski.
+\newblock {\em Numerical Methods in Finance with C++}, pages 149 -- 150.
+\newblock Mastering Mathematical Finance. Cambridge University Press, 7 2012.
 
 \end{thebibliography}

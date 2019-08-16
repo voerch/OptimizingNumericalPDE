@@ -105,18 +105,18 @@ void IntelSolver(std::vector<double>& a, std::vector<double>& b, std::vector<dou
 //
 //}
 
-void CyclicReduction(std::vector<double> LDiag, std::vector<double> Diag, std::vector<double> UDiag, std::vector<double> oldResult, std::vector<double>& newResult)
+void CyclicReduction(std::vector<double> LDiag, std::vector<double> Diag, std::vector<double> UDiag, std::vector<double>  oldResult, std::vector<double>& newResult)
 {
-	double Temp1;
-	double Temp2;
-	int iReducePlus, iReduceMinus, offset;
+	double Temp1, Temp2;
+	int iReducePlus, iReduceMinus, offset, backSubPlus, backSubMinus;
 	int size = newResult.size();
+	int iReduce, Step;
 	LDiag.insert(LDiag.begin(), 0.0);
 	UDiag.push_back(0.0);
-	//Forward Reduction
-
+	
+//Forward Reduction phase
 #pragma omp parallel for collapse(2)
-	for (int Step = 1; Step < int(log2(Diag.size() + 1)); Step++)
+	for (Step = 1; Step <= int(log2(size)); Step++)
 	{
 		for (int iReduce = pow(2, Step) - 1; iReduce < Diag.size(); iReduce += pow(2, Step))
 		{
@@ -124,41 +124,74 @@ void CyclicReduction(std::vector<double> LDiag, std::vector<double> Diag, std::v
 			iReduceMinus = iReduce - offset;
 			iReducePlus = iReduce + offset;
 
-			if (iReduce == Diag.size() - 1)
+			//if (iReduce == Diag.size() - 1)
+			//{
+			//	Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
+			//	LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
+			//	UDiag[iReduce] = 0;
+			//	Diag[iReduce] = Diag[iReduce] - (UDiag[iReduceMinus] * Temp1);
+
+			//	oldResult[iReduce] = oldResult[iReduce] - oldResult[iReduceMinus] * Temp1;
+
+			//	//newResult[iReduce] = (oldResult[iReduce] - (LDiag[iReduce] * newResult[iReduce - 1])) / Diag[iReduce];
+			//}
+			//else
+			//{
+			//	Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
+			//	Temp2 = UDiag[iReduce] / Diag[iReducePlus];
+
+			//	LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
+			//	UDiag[iReduce] = -UDiag[iReducePlus] * Temp2;
+			//	Diag[iReduce] = Diag[iReduce] - (LDiag[iReducePlus] * Temp2) - (UDiag[iReduceMinus] * Temp1);
+			//	oldResult[iReduce] = oldResult[iReduce] - (oldResult[iReduceMinus] * Temp1) - (oldResult[iReducePlus] * Temp2);
+
+
+			//}
+
+			//newResult[iReduce] = (oldResult[iReduce] - (LDiag[iReduce] * newResult[iReduceMinus]) - (UDiag[iReduce] * newResult[iReducePlus])) / Diag[iReduce];
+
+
+			if (iReduceMinus <= 0)
+			{
+				Temp2 = UDiag[iReduce] / Diag[iReducePlus];
+				LDiag[iReduce] = 0;
+				UDiag[iReduce] = -UDiag[iReducePlus] * Temp2;
+				Diag[iReduce] = Diag[iReduce] - (LDiag[iReducePlus] * Temp2);
+				oldResult[iReduce] = oldResult[iReduce] - (oldResult[iReducePlus] * Temp2);
+			}
+			else if (iReducePlus >= size)
 			{
 				Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
 				LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
 				UDiag[iReduce] = 0;
 				Diag[iReduce] = Diag[iReduce] - (UDiag[iReduceMinus] * Temp1);
-
 				oldResult[iReduce] = oldResult[iReduce] - oldResult[iReduceMinus] * Temp1;
-
-				//newResult[iReduce] = (oldResult[iReduce] - (LDiag[iReduce] * newResult[iReduce - 1])) / Diag[iReduce];
 			}
 			else
 			{
 				Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
 				Temp2 = UDiag[iReduce] / Diag[iReducePlus];
-
 				LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
 				UDiag[iReduce] = -UDiag[iReducePlus] * Temp2;
 				Diag[iReduce] = Diag[iReduce] - (LDiag[iReducePlus] * Temp2) - (UDiag[iReduceMinus] * Temp1);
 				oldResult[iReduce] = oldResult[iReduce] - (oldResult[iReduceMinus] * Temp1) - (oldResult[iReducePlus] * Temp2);
-
-				//newResult[iReduce] = (oldResult[iReduce] - (LDiag[iReduce] * newResult[iReduce - 1]) - (UDiag[iReduce] * newResult[iReduce + 1])) / Diag[iReduce];
 			}
-			
+
 
 		}
 
+
 	}
 
-	//Backward Substitution Phase
 
-	int backSubPlus, backSubMinus;
+//Backward Substitution phase
+
+
+//newResult.back() = (oldResult.back()) / Diag.back();
+//newResult[pow(2, Step - 1) - 1] = (oldResult[pow(2, Step - 1) - 1] - (UDiag[(2, Step - 1) - 1] * newResult.back())) / Diag.back();
 
 #pragma omp parallel for collapse(2)
-	for (int Step = log2(size + 1) - 2; Step >= 0; Step--)
+	for (int Step = log2(size); Step >= 0; Step--)
 	{
 		for (int backSub = pow(2, Step + 1) - 1; backSub < size; backSub += pow(2, Step))
 		{
@@ -181,7 +214,7 @@ void CyclicReduction(std::vector<double> LDiag, std::vector<double> Diag, std::v
 			}
 		}
 	}
-	LDiag.erase(LDiag.begin());
-	UDiag.pop_back();
+	//LDiag.erase(LDiag.begin());
+	//UDiag.pop_back();
 
 }
