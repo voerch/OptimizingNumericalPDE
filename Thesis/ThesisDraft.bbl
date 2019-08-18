@@ -6,16 +6,35 @@ Saeed Amen.
   Trading Today}, pages 39--60.
 \newblock Palgrave Macmillan UK, London, 2014.
 
+\bibitem{austin}
+TRAVIS~M Austin, Markus Berndt, and J~David Moulton.
+\newblock A memory efficient parallel tridiagonal solver.
+\newblock {\em Preprint LA-VR-03-4149}, 2004.
+
 \bibitem{BS}
 Fischer Black and Myron Scholes.
 \newblock The pricing of options and corporate liabilities.
 \newblock {\em Journal of Political Economy}, 81(3):637--654, 1973.
+
+\bibitem{openmp}
+Barbara Chapman, Gabriele Jost, and Ruud van~der Pas.
+\newblock {\em Using OpenMP: Portable Shared Memory Parallel Programming
+  (Scientific and Engineering Computation)}, pages 23 -- 25.
+\newblock The MIT Press, 2007.
 
 \bibitem{basket}
 Jaehyuk Choi.
 \newblock Sum of all black–scholes–merton models: An efficient pricing
   method for spread, basket, and asian options.
 \newblock {\em Journal of Futures Markets}, 38(6):627--644, 2018.
+
+\bibitem{chavez}
+Gustavo Chávez, George Turkiyyah, Stefano Zampini, Hatem Ltaief, and David
+  Keyes.
+\newblock Accelerated cyclic reduction: A distributed-memory fast solver for
+  structured linear systems.
+\newblock {\em Parallel Computing}, 74:65 -- 83, 2018.
+\newblock Parallel Matrix Algorithms and Applications (PMAA'16).
 
 \bibitem{cn}
 J.~Crank and P.~Nicolson.
@@ -27,12 +46,6 @@ J.~Crank and P.~Nicolson.
 Jim Douglas, Jr.
 \newblock Alternating direction methods for three space variables.
 \newblock {\em Numer. Math.}, 4(1):41--63, December 1962.
-
-\bibitem{duffyfinite}
-D.J. Duffy.
-\newblock {\em Finite Difference Methods in Financial Engineering: A Partial
-  Differential Equation Approach}.
-\newblock The Wiley Finance Series. Wiley, 2006.
 
 \bibitem{evans}
 G.~Evans, J.M. Blackledge, and P.~Yardley.
@@ -84,6 +97,46 @@ Robert~C. Merton.
 \newblock Option pricing when underlying stock returns are discontinuous.
 \newblock {\em Journal of Financial Economics}, 3(1):125 -- 144, 1976.
 
+\bibitem{gf}
+{Microsoft}.
+\newblock /gf (eliminate duplicate strings).
+\newblock
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/gf-eliminate-duplicate-strings?view=vs-2019},
+  2016.
+\newblock [Online; accessed 10-August-2019].
+
+\bibitem{gy}
+{Microsoft}.
+\newblock /gy (enable function-level linking).
+\newblock
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/gy-enable-function-level-linking?view=vs-2019},
+  2016.
+\newblock [Online; accessed 10-August-2019].
+
+\bibitem{ob}
+{Microsoft}.
+\newblock /ob (inline function expansion).
+\newblock
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/ob-inline-function-expansion?view=vs-2019},
+  2016.
+\newblock [Online; accessed 10-August-2019].
+
+\bibitem{oi}
+{Microsoft}.
+\newblock /oi (generate intrinsic functions).
+\newblock
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/oi-generate-intrinsic-functions?view=vs-2019},
+  2016.
+\newblock [Online; accessed10-August-2019].
+
+\bibitem{ot}
+{Microsoft}.
+\newblock /os, /ot (favor small code, favor fast code).
+\newblock
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/os-ot-favor-small-code-favor-fast-code?view=vs-2019},
+  2016.
+\newblock [Online; accessed 10-August-2019].
+
 \bibitem{vsopt}
 {Microsoft}.
 \newblock /o options (optimize code).
@@ -92,11 +145,33 @@ Robert~C. Merton.
   2017.
 \newblock [Online; accessed 10-August-2019].
 
+\bibitem{og}
+{Microsoft}.
+\newblock /og (global optimizations).
+\newblock
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/og-global-optimizations?view=vs-2019},
+  2017.
+\newblock [Online; accessed 10-August-2019].
+
+\bibitem{oy}
+{Microsoft}.
+\newblock /oy (frame-pointer omission).
+\newblock
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/oy-frame-pointer-omission?view=vs-2019},
+  2018.
+\newblock [Online; accessed 10-August-2019].
+
 \bibitem{morton}
 K.~W. Morton and D.~F. Mayers.
 \newblock {\em Numerical Solution of Partial Differential Equations: An
   Introduction}.
 \newblock Cambridge University Press, 2 edition, 2005.
+
+\bibitem{hofen}
+Martin Neuenhofen.
+\newblock A time-optimal algorithm for solving (block-) tridiagonal linear
+  systems of dimension n on a distributed computer of n nodes.
+\newblock {\em arXiv preprint arXiv:1801.09840}, 2018.
 
 \bibitem{fpga}
 Samuel Palmer.
@@ -133,6 +208,12 @@ D.~Tavella and C.~Randall.
 \newblock {\em Pricing Financial Instruments: The Finite Difference Method}.
 \newblock Wiley Series in Financial Engineering. Wiley, 2000.
 
+\bibitem{terekhov}
+Andrew~V Terekhov.
+\newblock Parallel dichotomy algorithm for solving tridiagonal system of linear
+  equations with multiple right-hand sides.
+\newblock {\em Parallel Computing}, 36(8):423--438, 2010.
+
 \bibitem{jwthomas}
 J.W. Thomas.
 \newblock {\em Numerical Partial Differential Equations: Finite Difference
@@ -144,6 +225,12 @@ Llewellyn~Hilleth Thomas.
 \newblock Elliptic problems in linear difference equations over a network.
 \newblock {\em Watson Sci. Comput. Lab. Rept., Columbia University, New York},
   1, 1949.
+
+\bibitem{openmpnext}
+Ruud van~der Pas, Eric Stotzer, and Christian Terboven.
+\newblock {\em Using OpenMP -- The Next Step: Affinity, Accelerators, Tasking,
+  and SIMD}, pages 25 -- 28.
+\newblock The MIT Press, 1st edition, 2017.
 
 \bibitem{wilmott}
 Paul Wilmott.

@@ -140,9 +140,6 @@ Derivative pricing in the real world is a computationally intensive task. The ex
 Purpose of this project to optimize numerical solutions of parabolic PDEs by testing high performance computing techniques and comparing compilers/os/32bit/64bit.
 The idea of this project is to study how to take advantage of this parallelism and explore how much faster we can make these calculations.
 
-\section{Literature Review}
-Bakılacak paperlar ekle.
-
 \section{Contents of the Thesis}
 Included in your ‘Introduction’ section should be a clear summary of  what  you  have  achieved  in  the  project  work  presented,  such  as  any  new  results, generalisations, corollaries, examples, new connections, or computer investigations.  The thesis is organized as follows.  Chapter 2 presents an introduction to financial derivatives, Black-Scholes model and finite difference models.  Chapter3 extends the 2d and gives examples of two dimensional heat equation.  Chapter 4 develops the numerical methods and techniques considered to solve the PDE-based models for the option pricing problems.  In the same chapter,  finite difference method with improved algorithms to solve a large tridiagonal systems is discussed.  Chapter 5 shows the numerical results of our numerical methods with several examples of.  Chapter 6 concludes the thesis.
 
@@ -275,7 +272,7 @@ The finite difference method has become a very popular for approximating the Bla
 The heat equation is fundamental to financial engineering. Heat equation is a component in the Black-Schole equation and Black-Scholes equation can be transformed to the heat equation by changing variables \cite{capinski}. Thus understanding  of  heat equation  helps  in  our appreciation of Black–Scholes. In the experiments the following initial and boundary conditions for the heat equation will be used.
 
 
-\begin{eqnarray}
+\begin{eqnarray} \label{HeatBase}
 u_t(x,t) &=& u_{xx}(x, t) \\[10pt]
 u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
 u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
@@ -338,7 +335,7 @@ The natural extension of our study of the one-dimensional problem would now be t
 \frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2} +\frac{\partial^2 u}{\partial y^2}
 \end{equation}$  $
 Initial and boundary condition
-\begin{eqnarray}
+\begin{eqnarray} \label{HeatTwoBase}
 u(x,y,0) = 1, \hspace{10pt} 0 \leq x \leq x_{\max}, \hspace{10pt} 0 \leq y \leq y_{\max} \\[10pt]
 u(x, 0, t) = u(x, y_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
 u(x, 0, t) = u(x, 1, t) = 0 , \hspace{10pt} 0 \leq t \leq T
@@ -380,6 +377,8 @@ u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 
 \end{multline}
 
 \end{definition}
+
+
 
 \section{Finite Difference Methods}
 \subsection{Discretization}
@@ -426,10 +425,10 @@ u^{n+1}_i = u^n_{i + 1} (\frac{-r b(t,x)}{\Delta x} - r a(t, x)) + u^n_{i}(1 + 2
 + u^n_{i - 1} (-r a(t, x) + \frac{r b(t, x)}{\Delta x})
 \end{multline}
 
-We will replace the coefficients of $ u^n_{i + 1},  u^n_i,  u^n_{i - 1}$  terms with $\gamma,  \alpha, \beta$ respectively.If we rearrange the formula, it can be summarised as
+We will replace the coefficients of $ u^n_{i + 1},  u^n_i,  u^n_{i - 1}$  terms with $\gamma,  \alpha, \beta$ respectively. The formula reduces to
 
 \begin{equation}
-u_j^{n+1} = \gamma u_{j+1}^{n} + \beta u_{j}^{n} + \alpha u_{j-1}^{n} 
+u_j^{n+1} = \gamma u_{j+1}^{n} + \beta u_{j}^{n} + \alpha u_{j-1}^{n} .
 \end{equation}
 
 The formula expresses one unknown nodal value directly in terms of known nodal values  \cite{evans}. It can be expanded as
@@ -501,6 +500,17 @@ Lastly, solving heat equation and Black-Scholes differs in time stepping. Black-
   \begin{minipage}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth]{ExplicitBS.png}
     \caption{Computational stencil \\of Black-Scholes.}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGrid.png}
+    \caption{Output grid of heat equation.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSExplicitGrid.png}
+    \caption{Output grid of Black-Scholes equation.}
   \end{minipage}
 \end{figure}
 
@@ -581,21 +591,31 @@ $$
 
 The problem reduces to a tridiagonal matrix system. This system of equations can be solved by various algorithms such as Gaussian elimination or Thomas algorithm.
 
-\subsection{Alternating Direction Implicit Method}
-The alternating direction implicit (ADI) method is one of the most common techniques to numerically solve two dimensional parabolic PDEs. ADI schemes give us advantages of implicit finite difference method and computationally only requires to solve tridiagonal matrices.  The scheme was first proposed by Peaceman and Rachford in 1955 for oil reservoir modelling \cite{peace}. Basically the methods to split the spatial dimensions and solve a two dimensional problem as two consecutive one dimensional problems. It is possible to use ADI in more than three dimensions which produces the same number of consecutive one dimensional problems \cite{DougADI}.
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatCNGrid.png}
+    \caption{Output grid of heat equation.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSCNGrid.png}
+    \caption{Output grid of Black-Scholes equation.}
+  \end{minipage}
+\end{figure}
 
-In order to develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
+\subsection{Alternating Direction Implicit Method}
+The alternating direction implicit (ADI) method is one of the most common techniques to numerically solve two dimensional parabolic PDEs. ADI scheme give us advantages of the implicit finite difference method and computationally requires to solve only tridiagonal matrices. The scheme was first proposed by Peaceman and Rachford in 1955 for oil reservoir modelling \cite{peace}. Basically the methods to split the spatial dimensions and solve a two dimensional problem as two consecutive one dimensional problems. It is possible to use ADI in more than three dimensions which produces the same number of consecutive one dimensional problems \cite{DougADI}. In order to develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
+
 \begin{equation}
 \delta x^2 u^{n}_{i,j}  = \frac{u^{n}_{i+1,j} - 2u^{n}_{i,j} + u^{n}_{i-1,j}}{\Delta x^2}
 \end{equation}
 
-Explicit approximation of the derivatives can be written as
+Thus Explicit method in two space dimensions can be abbreviated as
 \begin{equation}
 \frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n}_{i,j} + \delta y^2 u^{n}_{i,j}
 \end{equation}
-Implicit  approximation of the derivatives can be written as
+and implicit method in two space dimensions can be written as
 \begin{equation}
-\frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n+1}_{i,j} + \delta y^2 u^{n+1}_{i,j}
+\frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n+1}_{i,j} + \delta y^2 u^{n+1}_{i,j} .
 \end{equation}
 
 Dividing each time step in half we introduce a temporary intermediate unknown $u^{n+1/2}_{i,j}$. Firstly, the two dimensional heat equation is approximating implicitly x and explicitly over y. The total work involved in one time step amounts to solving $ N_{steps} - 1$ tridiagonal systems \cite{morton}. 
@@ -607,7 +627,13 @@ Rearranging the set of equations yields a tridiagonal system which is solved for
 - r_x * u^{n+1/2}_{i+1,j} + (1 + 2r_x) u^{n+1/2}_{i,j}  - r_x u^{n+1/2}_{i,j}  = r_y u^{n}_{i,j+1} + (1 + 2r_y) u^{n}_{i,j} + r_y u^{n}_{i,j-1}
 \end{equation}
 
-In order to calculate the solution $u^{n+1}_{i,j}$ by approximating explicitly x and implicitly over y.
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.7]{ADI.png}
+    \caption{Computational stencil of alternating direction implicit method}
+\end{figure}
+
+Next step of the grid $u^{n+1}_{i,j}$ is calculated by approximating explicitly x and implicitly over y.
 \begin{equation}
 \frac{u^{n+1}_{i,j} + u^{n+1/2}_{i,j}}{0.5 \Delta t} = \frac{\delta x^2 u^{n+1/2}_{i,j} }{\Delta x^2} + \frac{\delta y^2 u^{n+1}_{i,j}}{\Delta y^2}
 \end{equation}
@@ -616,32 +642,51 @@ Rearranging the set of equations yields a tridiagonal system which can be solved
 -r_y u^{n+1}_{i,j+1} + (1 + 2r_y) u^{n+1}_{i,j} - r_y u^{n+1}_{i,j-1} = r_x * u^{n+1/2}_{i+1,j} + (1 + 2r_x) u^{n+1/2}_{i,j} + r_x u^{n+1/2}_{i,j}
 \end{equation}
 
+
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.8]{ADI.png}
-    \caption{Computational stencil of alternating direction implicit method}
+        \includegraphics[scale=0.6]{ADIHeat.png}
+    \caption{Solution of two dimensional heat equation using ADI.}
 \end{figure}
 
 \chapter{Optimizing Solvers}
-Numerical analysis and computer simulations will be undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was deriving toy examples that can be calculated by hand and Excel. Following the verifications, porting the toy examples in C++ and utilize high performance computing principles.
 
-This section documents the performance of attempted optimizations. Experiments  are  conducted  at  W307 computer laboratory, Queen Mary University of London.  Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7-6700 CPU with 4 cores clocked at 3.40 GHz.  The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized  in  the  tests  include   Intel Compiler, version 18.0.3 and Intel Math  Kernel  Library, version X .  
+Attempting to progress in solving complex problems using numerical methods is impossible without applying optimizations. However, nowadays the problem is not to solve a given problem but rather solve it in a given computing environment while exploiting the resources in an optimal way. Thus, it is necessary to investigate methods that allow for efficient implementations. The aim of this section is to introduce practical optimization techniques that can be easily accessed on a regular trading floor. Main optimization techniques that will be tested are parallelizing tridiagonal solvers, Visual Studio optimization switches, different compilers and different solution platforms.
 
-\section{Timing the Code}
-Measuring execution time intervals accurately is an important aspect to compare the efficiency and speed of different environments and implementations.
+\section{Compilers and Solution Platforms}
+Firstly, different solution platforms and compilers will be tested against each other.
+Regardless of the implementation of the program, the performance can be different under varying solution platforms and compilers.  
+Intel compiler vs visual studio compiler.
 
-\subsection{Windows Application Programming Interface}
-Windows Application Programming Interface (API) is the lowest level of interaction between applications and the windows operating system. Thus every program is built upon  the API. Mostly, the interaction is hidden, the runtime and support libraries manage it in the background \cite{windows}. The APIs can be used in the C++ environment. Runtime can be calculated by "QueryPerformanceCounter" or "QueryPerformanceFrequency"  functions. Respectively, the functions retrieve a high resolution time stamp and the frequency of the performance counter. 
+The CPU accesses data from RAM using the register that stores memory addresses. 32 bit and 64 bit refers to the amount of data the system can access. so a 32-bit system can address a maximum of 4 GB (4,294,967,296 bytes) of RAM where a 64-bit register can theoretically reference 18,446,744,073,709,551,616 bytes, or 17,179,869,184 GB (16 exabytes) of memory. Since 32 bit does not have access to more than 4 GB, if the system has more than 4 GB of RAM, it will be inaccesible by the CPU, thus A 64 bit system will be needed. The memory increase of 64 bit systems means it is capable of very fast processing of numerical quantities.
 
-\subsection{Chrono Library}
-Using the Windows API for just timing the code is slightly excessive given the amount of work it takes. Luckily, Chrono library was introduced part of the C++11’s standard library.  Timers and clocks might differ on distinct systems, thus Chrono library is designed to work effortlessly with date and time. The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
+One disadvantage of the 64 bit systems is more requirement of memory because addresses are 64 bits (8 bytes) wide instead of 32 bits (4 bytes) wide. Due to the increased size of pointers and data structures, 64-bit programs will occupy more memory than an 32-bit version.
 
-\section{Optimization Experiments}
-Main optimization techniques that can be implemented are parallelizing tridiagonal solvers, Visual Studio optimization switches, different compilers and different solution platforms.
-\subsection{Tridiagonal Solvers}
+\section{Visual Studio Optimization Switches}
+Visual Studio Optimization Switches, also known as /O options controls various optimizations to be chosen according to the needs of the project. There are various switches for different goals such as minimizing the size of the code (/O1) but since the scope of this project is limited with speed optimizations. Speed optimization flags are /O2 and /Ox. /O2 is a combination of /Og, /Oi, /Ot, /Oy, /Ob2, /GF and /Gy flags. /Ox is a subset of /O2 without the  /GF and /Gy flags. These additional options applied by /O2 can cause pointers to strings or to functions to share a target address, which can affect debugging and strict language conformance  \cite{vsopt}. 
+
+\begin{itemize}
+\item /Og: Enables local and global optimizations (subexpression elimination), automatic-register allocation, and loop optimization \cite{og}. 
+\item /Oi: Generates intrinsic functions for appropriate function calls. Compiler may not replace the function call with an intrinsic if it will result in better performance \cite{oi}.
+\item /Ot: Favors optimizations for speed over optimizations for size by instructing the compiler to reduce many C and C++ constructs to functionally similar sequences of machine code. If /Ot is used, /Og must be specified to optimize the code \cite{ot}.
+\item /Oy: Suppresses the creation of frame (base) pointers on the call stack for quicker function calls.  Frees one register for general usage \cite{oy}.
+\item /Ob2: Controls inline expansion of functions. Under /O2 and /Ox, allows the compiler to expand any function including the ones  that are not explicitly marked for no inlining. Function-calling-overheads are saved thus inline functions run faster than the normal functions with a memory penalty \cite{ob}.
+\item /GF:  Enables the compiler to create a single copy of identical strings in the program image and in memory during execution. This is an optimization called string pooling that can create smaller programs. Under this flag, strings are pooled as read-only, trying to modify strings throws an error \cite{gf}.
+\item /Gy: Enables function-level linking. Allows the compiler to package individual functions in the form of packaged functions  (COMDATs) or order individual functions in a DLL or .exe file \cite{gy}.
+\end{itemize}
+
+/O2 and /Ox flags are tested for maximum speed against the /Od flag which disables all the optimizations.
+ 
+\section{Tridiagonal Solvers}
+Tridiagonal solvers are the most demanding part of the solvers. Hence, development and improvement of such solvers is of great interest \cite{terekhov} \cite{chavez} \cite{hofen} \cite{austin} concerned with this problem. 
+
+Large tridiagonal systems of linear equations appear in many numerical analysis applications. In our work, they arise in 
 Implementing Crank Nicolson and Alternating Direction Implicit methods requires to solve tridiagonal systems which is the most computationally intensive part of the program.  Therefore, choosing efficient tridiagonal solvers is crucial for the speed of the solver. In this experiment three different algorithms will be tested.
+we present a new memory efficient partitioning algorithm for the solutionof diagonally dominant tridiagonal linear systems of equations thomas O(N) steps
 
-\subsubsection{Thomas Algorithm}
+The Thomas algorithm is avery efficient algorithm for solving tridiagonal systems of equations in serial [15].It is equivalent to Gaussian elimination without pivoting;
+
+\subsection{Thomas Algorithm}
 Thomas Algorithm is the most commonly used method for solving tridiagonal system of equations. The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The algorithm is a simplified version of the gaussian elimination.
 
 The system equations can be written as
@@ -722,67 +767,55 @@ The algorithm for the solution of these equations is now straightforward and wor
 
 \[ f_k = d^{*}_k, \qquad f_i = d^{*}_k - c^{*}_i x_{i+1}, \qquad i = k-1, k-2, ... ,2,1 \]
 
-
- \subsubsection{Intel Math Kernel Library}
+ \subsection{Intel Math Kernel Library}
 Intel Math Kernel Library implements routines for solving systems of linear equations from the standard LAPACK library. Variety of atrix types are supported by the routines.  Specifically gtsv function is utilized from the package. Using Gaussian elimination with partial pivoting, gstv computes the solution to the system of linear equations with a tridiagonal coefficient matrix \cite{gtsv}.  
- 
- \subsubsection{Cyclic Reduction}
+
+\subsection{Cyclic Reduction}\label{cyclic}
 Cyclic reduction was proposed by R. W. Hockney in the 1960s for solving the resulting linear systems from the  discretization of the Poisson equation \cite{Hockney}. 
+Both cyclic reductionand recursive doubling are designed for fine grained parallelism, where each process or owns exactly one row of the tridiagonal matrix. 
 
-\subsection{32 bit and 64 bit}
+If we number equations succesively, then in cyclic reduction the odd-neighbor equations of an even equation are used to eliminate the off-diagonal entries in the even equation.In this step, a tridiagonal system of linear equations for the even equation is gener-ated. This reduced system has only about one-half as many equations as the originalsystem. Now the same procedure is applied recursively to the reduced system untilthere remains only one linear equation with one unknown. The solution of successivereduced systems can be computed to finally yield the solution of the original system.Cyclic reduction requires $2log2NPsteps$
+Cyclic reduction takes more steps so it requires parallelization to be effective CPU parallelization will be used to make cyclic reduction work.
 
-The CPU accesses data from RAM using the register that stores memory addresses. 32 bit and 64 bit refers to the amount of data the system can access. so a 32-bit system can address a maximum of 4 GB (4,294,967,296 bytes) of RAM where a 64-bit register can theoretically reference 18,446,744,073,709,551,616 bytes, or 17,179,869,184 GB (16 exabytes) of memory. Since 32 bit does not have access to more than 4 GB, if the system has more than 4 GB of RAM, it will be inaccesible by the CPU, thus A 64 bit system will be needed. The memory increase of 64 bit systems means it is capable of very fast processing of numerical quantities.
+\section{Open Multi-Processing}
+Traditionally, programs are serially computed on a single processor. On the other hand, parallel computation is breaking our code execution so that it utilizes parallelism. Multithreading utilizes the CPUs cores to run calculations concurrently in each core. The concurrent programs are called a thread.  Open Multi-Processing (OpenMP) library, is an implementation of multithreading for C, C++ and Fortran. 
 
-One disadvantage of the 64 bit systems is more requirement of memory because addresses are 64 bits (8 bytes) wide instead of 32 bits (4 bytes) wide. Due to the increased size of pointers and data structures, 64-bit programs will occupy more memory than an 32-bit version.
+OpenMP approach to multithreading is the fork-join programming model. Firstly, the program start as a single thread of execution called the initial thread. The fork stage begins when the program encounters an OpenMP parallel construct. Parallel execution takes place and multiple threads are created in the parallel region. The initial thread becomes the master and collaborates with the newly created threads to execute the code dynamically. Finally, at the join stage all threads are synchronized, threads are terminated except the original thread \cite{openmp}.
 
-\subsection{Visual Studio Optimization Switches}
-Visual Studio Optimization Switches, also known as /O options controls various optimizations to be chosen according to the needs of the project \cite{vsopt}.
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.7]{openmp.png}
+    \caption{The fork-join programming model.}
+\end{figure}
 
-\begin{itemize}
-\item /O1: generates minimum size code.
-\item /O2: optimizes for maximum speed.
-\item /Ob: controls inline function expansion.
-\item /Od: disables optimizations.
-\item /Og: enables global optimizations.
-\item /Oi: generates intrinsic functions for appropriate function calls.
-\item /Os: favors optimizations for size over optimizations for speed.
-\item /Ot: favors optimizations for speed over optimizations for size.
-\item /Ox: selects several of the optimizations with an emphasis on speed. It is a strict subset of the /O2 optimizations.
-\item /Oy: suppresses the creation of frame pointers on the call stack for quicker function calls. 
-\end{itemize}
+Algorithms like cyclic reduction \ref{cyclic} uses nested loops to calculate the solution. Therefore nested parallelism is needed to build efficient programs. Nesting the parallel constructs results in nested parallelism. Each thread that encounters the next parallel region creates a new parallel region at runtime \cite{openmpnext}.
 
-Since the aim of this project is to be as fast as possible, the default case(/Ot) will be tested against /O2.
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.7]{openmpnested.png}
+    \caption{3 threads create 2 threads, nested parallelism.}
+\end{figure}
 
-\subsection{OpenMP}
-Threading
-High performance computing techniques that can be implemented for multithreading with Open Multi-Processing(OpenMP) and compiler intrinsics.
-OpenMP is used for parallelism within a (multi-core) node 
-\section{Comparison of methods}
+In order to specify and control the paralelization procedure, OpenMP uses compiler directives, runtime functions, and  envi­ronment variables. OpenMP enables developers to just give a high-level specification of the parallelism by indicating the regions to be executed in parallel using compiler directives, runtime library routines, and environment variables. The details of the parallelism is up to the compiler which makes OpenMP comparatively easy to use. 
+
+\section{Timing the Code}
+Measuring execution time intervals accurately is an important aspect to compare the efficiency and speed of different environments and implementations.
+
+\subsection{Windows Application Programming Interface}
+Windows Application Programming Interface (API) is the lowest level of interaction between applications and the windows operating system. Thus every program is built upon  the API. Mostly, the interaction is hidden, the runtime and support libraries manage it in the background \cite{windows}. The APIs can be used in the C++ environment. Runtime can be calculated by "QueryPerformanceCounter" or "QueryPerformanceFrequency"  functions. Respectively, the functions retrieve a high resolution time stamp and the frequency of the performance counter. 
+
+\subsection{Chrono Library}
+Using the Windows API for just timing the code is slightly excessive given the amount of work it takes. Luckily, Chrono library was introduced part of the C++11’s standard library.  Timers and clocks might differ on distinct systems, thus Chrono library is designed to work effortlessly with date and time. The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
+
+
+\section{Comparison of Optimizations}
+This section documents the performance of attempted optimizations. Experiments  are  conducted  at  W307 computer laboratory, Queen Mary University of London.  Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7-6700 CPU with 4 cores clocked at 3.40 GHz.  The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized  in  the  tests  include Intel Compiler, version 18.0.3 and Intel Math Kernel  Library. 
+
+Numerical analysis and computer simulations is undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was solving the base cases \ref{bsAnal}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance.
+Different solution platforms, compilers, optimization flags and tridiagonal solvers will be tested against each other.
+ 
 \subsection{Optimal Grid Size}
-Previously defined analytical solutions (\ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal}) are utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. Figure X and X demonstrates the error compared to the grid sizes. The optimal grid size for heat equation and Black-Scholes equation is 50 by 50.
-
-\begin{figure}[!htb]
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{HeatExplicitGridError.png}
-    \caption{Error of grid sizes.}
-  \end{minipage}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{HeatExplicitGridTimer.png}
-    \caption{Timing grid sizes.}
-  \end{minipage}
-\end{figure}
-
-After choosing the optimal grid size the resulting grids can be visualized as
-\begin{figure}[!htb]
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{HeatExplicitGrid.png}
-    \caption{Explicit method.}
-  \end{minipage}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{HeatCNGrid.png}
-    \caption{Crank nicolson method.}
-  \end{minipage}
-\end{figure}
+Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. Figure X and X demonstrates the error compared to the grid sizes. The optimal grid size for heat equation and Black-Scholes equation is 50 by 50.
 
 \begin{table}[h!]
 \centering
@@ -799,33 +832,30 @@ After choosing the optimal grid size the resulting grids can be visualized as
  \end{tabular}
  \caption{Black-Scholes model testing parameters.}
 \end{table}
-
 \begin{table}[h!]
 \centering
- \begin{tabular}{||c c||} 
+ \begin{tabular}{||c c c||} 
  \hline
- Parameter & Value\\ [0.5ex]
+ Parameter & One Dimension & Two Dimensions\\ [0.5ex]
  \hline\hline
-  $T$ & 0.075\\ 
-  $ x_{max} $  & 1.0  \\ [1ex] 
+  $T$ & 0.075 & 0.075\\ 
+  $ x_{max} $ & 1.0  & 1.0  \\ 
+   $ y_{max} $  &   & 1.0  \\ [1ex] 
  \hline
  \end{tabular}
- \caption{One dimensional heat equation testing parameters.}
+ \caption{Heat equation testing parameters.}
 \end{table}
-
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c||} 
- \hline
- Parameter & Value\\ [0.5ex]
- \hline\hline
-  $T$ & 0.075\\ 
-  $ x_{max} $  & 1.0  \\ 
-   $ y_{max} $  & 1.0  \\ [1ex] 
- \hline
- \end{tabular}
- \caption{Two dimensional heat equation testing parameters.}
-\end{table}
+ 
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGridError.png}
+    \caption{Error of grid sizes.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGridTimer.png}
+    \caption{Timing grid sizes.}
+  \end{minipage}
+\end{figure}
 
 
 \begin{figure}[!htb]
@@ -838,25 +868,6 @@ After choosing the optimal grid size the resulting grids can be visualized as
     \caption{Timing grid sizes.}
   \end{minipage}
 \end{figure}
-
-After choosing the optimal grid size the resulting grids can be visualized as
-\begin{figure}[!htb]
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{BSExplicitGrid.png}
-    \caption{Explicit method.}
-  \end{minipage}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{BSCNGrid.png}
-    \caption{Crank nicolson method.}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{ADIHeat.png}
-    \caption{Solution of two dimensional heat equation using ADI.}
-\end{figure}
-
 
 \subsection{Base Case}
 Timing the base case for thomas algorithm, intel solver and cyclic reduction. The timings are mean of 1000 trials and each trial adds a random number $ 0 < \epsilon < 10^-7 $ to the step size to avoid compiler optimizations.

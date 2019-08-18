@@ -328,6 +328,57 @@ year={2005}
     note = "[Online; accessed 10-August-2019]"
 }
 
+@misc{gy,
+    author = "{Microsoft}",
+    title = "/Gy (Enable Function-Level Linking)",
+    year = "2016",
+    howpublished = "\url{https://docs.microsoft.com/en-us/cpp/build/reference/gy-enable-function-level-linking?view=vs-2019}",
+    note = "[Online; accessed 10-August-2019]"
+}
+@misc{gf,
+    author = "{Microsoft}",
+    title = "/GF (Eliminate Duplicate Strings)",
+    year = "2016",
+    howpublished = "\url{https://docs.microsoft.com/en-us/cpp/build/reference/gf-eliminate-duplicate-strings?view=vs-2019}",
+    note = "[Online; accessed 10-August-2019]"
+}
+@misc{ob,
+    author = "{Microsoft}",
+    title = "/Ob (Inline Function Expansion)",
+    year = "2016",
+    howpublished = "\url{https://docs.microsoft.com/en-us/cpp/build/reference/ob-inline-function-expansion?view=vs-2019}",
+    note = "[Online; accessed 10-August-2019]"
+}
+@misc{oy,
+    author = "{Microsoft}",
+    title = "/Oy (Frame-Pointer Omission)",
+    year = "2018",
+    howpublished = "\url{https://docs.microsoft.com/en-us/cpp/build/reference/oy-frame-pointer-omission?view=vs-2019}",
+    note = "[Online; accessed 10-August-2019]"
+}
+@misc{ot,
+    author = "{Microsoft}",
+    title = "/Os, /Ot (Favor Small Code, Favor Fast Code)",
+    year = "2016",
+    howpublished = "\url{https://docs.microsoft.com/en-us/cpp/build/reference/os-ot-favor-small-code-favor-fast-code?view=vs-2019}",
+    note = "[Online; accessed 10-August-2019]"
+}
+
+@misc{oi,
+    author = "{Microsoft}",
+    title = "/Oi (Generate Intrinsic Functions)",
+    year = "2016",
+    howpublished = "\url{https://docs.microsoft.com/en-us/cpp/build/reference/oi-generate-intrinsic-functions?view=vs-2019}",
+    note = "[Online; accessed10-August-2019]"
+}
+@misc{og,
+    author = "{Microsoft}",
+    title = "/Og (Global Optimizations)",
+    year = "2017",
+    howpublished = "\url{https://docs.microsoft.com/en-us/cpp/build/reference/og-global-optimizations?view=vs-2019}",
+    note = "[Online; accessed 10-August-2019]"
+}
+
 @InBook{capinski,
 title = "Numerical Methods in Finance with C++",
 author = "Tomasz Zastawniak and Capinski, {Maciej J.}",
@@ -340,3 +391,58 @@ series = "Mastering Mathematical Finance",
 publisher = "Cambridge University Press",
 
 }
+@article{terekhov,
+  title={Parallel Dichotomy Algorithm for solving tridiagonal system of linear equations with multiple right-hand sides},
+  author={Terekhov, Andrew V},
+  journal={Parallel Computing},
+  volume={36},
+  number={8},
+  pages={423--438},
+  year={2010},
+  publisher={Elsevier}
+}
+
+@article{chavez,
+title = "Accelerated Cyclic Reduction: A distributed-memory fast solver for structured linear systems",
+journal = "Parallel Computing",
+volume = "74",
+pages = "65 - 83",
+year = "2018",
+note = "Parallel Matrix Algorithms and Applications (PMAA'16)",
+issn = "0167-8191",
+doi = "https://doi.org/10.1016/j.parco.2017.12.001",
+url = "http://www.sciencedirect.com/science/article/pii/S0167819117302041",
+author = "Gustavo Chávez and George Turkiyyah and Stefano Zampini and Hatem Ltaief and David Keyes"
+}
+
+@article{hofen,
+  title={A time-optimal algorithm for solving (block-) tridiagonal linear systems of dimension N on a distributed computer of N nodes},
+  author={Neuenhofen, Martin},
+  journal={arXiv preprint arXiv:1801.09840},
+  year={2018}
+}
+
+@article{austin,
+  title={A memory efficient parallel tridiagonal solver},
+  author={Austin, TRAVIS M and Berndt, Markus and Moulton, J David},
+  journal={Preprint LA-VR-03-4149},
+  year={2004}
+}
+@InBook{openmp,
+ author = {Chapman, Barbara and Jost, Gabriele and Pas, Ruud van der},
+ title = {Using OpenMP: Portable Shared Memory Parallel Programming (Scientific and Engineering Computation)},
+ year = {2007},
+ isbn = {0262533022, 9780262533027},
+ publisher = {The MIT Press},
+ Pages = {23 - 25}
+} 
+
+@InBook{openmpnext,
+ author = {van der Pas, Ruud and Stotzer, Eric and Terboven, Christian},
+ title = {Using OpenMP -- The Next Step: Affinity, Accelerators, Tasking, and SIMD},
+ year = {2017},
+ isbn = {0262534789, 9780262534789},
+ edition = {1st},
+ publisher = {The MIT Press},
+ Pages = {25 - 28}
+} 

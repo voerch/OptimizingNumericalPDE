@@ -1,19 +1,26 @@
-﻿
-# TODO #
+﻿# TODO #
+Pazartesi
 Grid size depends on the parameters prove this duffy book. Error hesaplamayi dusun / duffy optimal grid
+Root mean squared relative error testing
+why uniform grid olunca daha iyi oluyor araştır??
+
+Haftasonu
+Cyclic reduction yaz
 black scholes log pde
 O(n) tri algoları karşılaştır
-
 Fix 1d/2d sep vars mathematica
-
 stability/consistency analysis??
 
-* Timinge gore heatmap hazirla
-* kodlarin basina author date description ekle
+Sorular
+Parameters table nereye koymalı?
 
-Root mean squared relative error testing
- why uniform grid olunca daha iyi oluyor araştır??
 
+Toparlama
+bibtex ref düzelt
+figure cyclic + openmp
+grammarlyden geçir
+kodlarin basina author date description ekle
+Timinge gore heatmap hazirla
 
 # Further Studies #
 More type of options BSPde bdegistir callputflag duffy c++ 677 
