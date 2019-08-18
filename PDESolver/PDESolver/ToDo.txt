@@ -5,14 +5,15 @@ Root mean squared relative error testing
 why uniform grid olunca daha iyi oluyor araştır??
 
 Haftasonu
-Cyclic reduction yaz
-black scholes log pde
-O(n) tri algoları karşılaştır
-Fix 1d/2d sep vars mathematica
-stability/consistency analysis??
+Cyclic reduction yaz / O(n) tri algoları karşılaştır
+Fix 2d sep vars mathematica
+MC vs FDM
+Introduction + solving pdes paragrafları toparla
+Figürler ece
 
 Sorular
 Parameters table nereye koymalı?
+stability/consistency analysis??
 
 
 Toparlama

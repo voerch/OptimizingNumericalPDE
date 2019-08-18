@@ -140,9 +140,6 @@ Derivative pricing in the real world is a computationally intensive task. The ex
 Purpose of this project to optimize numerical solutions of parabolic PDEs by testing high performance computing techniques and comparing compilers/os/32bit/64bit.
 The idea of this project is to study how to take advantage of this parallelism and explore how much faster we can make these calculations.
 
-\section{Literature Review}
-Bakılacak paperlar ekle.
-
 \section{Contents of the Thesis}
 Included in your ‘Introduction’ section should be a clear summary of  what  you  have  achieved  in  the  project  work  presented,  such  as  any  new  results, generalisations, corollaries, examples, new connections, or computer investigations.  The thesis is organized as follows.  Chapter 2 presents an introduction to financial derivatives, Black-Scholes model and finite difference models.  Chapter3 extends the 2d and gives examples of two dimensional heat equation.  Chapter 4 develops the numerical methods and techniques considered to solve the PDE-based models for the option pricing problems.  In the same chapter,  finite difference method with improved algorithms to solve a large tridiagonal systems is discussed.  Chapter 5 shows the numerical results of our numerical methods with several examples of.  Chapter 6 concludes the thesis.
 
@@ -252,6 +249,26 @@ d_2 = d_1 - \sigma \sqrt{T-t}
 
 \end{definition}
 
+\begin{definition} 
+Black-Scholes PDE has coefficient that depend on $S$. Meaning that PDE is not space homogeneous. Log spot Black-Scholes PDE is an economically intrinsic way of looking at numbers, if two assets are similar it is conventional to investigate using the $x = ln S$ conversion. 
+
+Applying the chain rule to the first and second order derivatives
+\begin{equation}
+\frac{\partial C}{\partial S} = \frac{\partial C}{\partial x} \frac{\partial x}{\partial S} = \frac{\partial C}{\partial x} \frac{1}{S}
+\end{equation}
+\begin{eqnarray}
+\frac{\partial^2 C}{\partial S^2} = \frac{\partial }{\partial S} (\frac{\partial C}{\partial S}) = \frac{\partial }{\partial S} (\frac{\partial C}{\partial x} \frac{1}{S}) = -\frac{1}{S^2} \frac{\partial C}{\partial x} + \frac{\partial }{\partial S} \frac{\partial C}{\partial x} \frac{1}{S} = \\
+ = -\frac{1}{S^2} \frac{\partial C}{\partial x} + \frac{\partial^2 C}{\partial x^2} \frac{1}{S^2} 
+\end{eqnarray}
+
+Substituting the transformed derivatives into the original PDE 
+\begin{equation}
+\frac{\partial C}{\partial t} = (r - \frac{\sigma^2}{2})\frac{\partial C}{\partial x}+\frac{1}{2} \sigma^2 \frac{\partial^2 C}{\partial x^2} - rC
+\end{equation}
+
+The transformation creates a PDE with constant coefficients rather than coefficients that depend on S. 
+
+\end{definition}
 \begin{remark}Untradable Assets\\ Modern financial engineering created derivatives using untradable assets as an underlying such as multi asset derivatives like equity baskets, weather derivatives and non-deliverable forwards. Non-deliverable forwards are for offshore investors that want to trade non-convertible currencies such as Brazilian Real, South Korean Won.  The Black-Scholes model is still used in these cases \cite{weather} \cite{basket} but not entirely applicable to assets that cannot be hedged.
 \end{remark}
 
@@ -298,36 +315,72 @@ Using the partial derivatives the equation $ u_t = u_{xx} $ becomes
 
 Right hand side only depends on $x$ and the left hand side depends only on $t$. Therefore, the equation is valid only when each side is equal to a constant, which we set to $ \lambda $. Rearranging terms gives us the following equations:
 
-\begin{eqnarray}
-\frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)} = \lambda \\[10pt]
-X^{''}(x) = \lambda X(x), \hspace{10pt} T^{'}(t) = \lambda T(t) \\[10pt]
+\begin{equation}
+\frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)} = -\lambda \\[10pt]
+\end{equation}
+\begin{equation}\label{xlambda}
+X^{''}(x)  + \lambda X(x) = 0 
+\end{equation}
+\begin{equation}\label{tlambda}
+T^{'}(t) + \lambda T(t) = 0
+\end{equation}
+
+\begin{equation}
 X(0) = X(1) = 0
-\end{eqnarray}
-
-Solving for X(x) is an example case of Sturm-Liouville problem \cite{sepvar}. However the $\lambda < 0$ and $\lambda = 0$ cases result in trivial solutions, thus they are discarded. Solving for $\lambda > 0$ yields
-\begin{equation}
-X(x)= c_1 sin(kx) + c_2 cos(kx)
 \end{equation}
 
-The boundary conditions leads to $ c_2 = 0, c_1 sin(k) = 0 \rightarrow k = 0, \pi, 2\pi, ...n\pi$ where n is an integer.
+Solving for X(x) is an example case of Sturm-Liouville problem \cite{sepvar} with three cases. 
+\begin{itemize}
+\item Let $\lambda < 0$ and $\lambda = -k^2$. Then the solution to \ref{xlambda} is
+$$ X = Ae^{kx} + Be^{-kx} $$
+Using the boundary conditions yield $X(0) = A + B = 0 $ and $X(1) = Ae^{k} + Be^{-k} = 0$. Solving the equations $A=B=u=0$ which is a trivial solution, thus discarded.
+\item Let $\lambda = 0$, the solution to \ref{xlambda} is
+$$ X(x) = Ax + B $$
+The boundary conditions imply $X(0) = B = 0$ and $X(1) = A= 0$. Thus this case is  discarded too.
+\item Finally, let $\lambda>0$,the solution to \ref{xlambda} is
+$$ X(x) = Acos(\sqrt{\lambda}x) + Bsin(\sqrt{\lambda}x) $$
 
-Solving for $T(t)$ gives the solution
+The boundary conditions leads to $
+X(0) = A = 0$ and $ X(1) = Bsin(\sqrt{\lambda}) = 0 $
+Since we do not want a trivial solution where $B = 0$, the equation reduces to 
+\begin{equation}
+sin(\sqrt{\lambda}) = 0
+\end{equation} 
+Thus $ \sqrt{\lambda} = n \pi $ for $n = 1,2,3, ...$. 
+Solution to \ref{xlambda} becomes,
+\begin{equation}
+X_n = b_n sin(n \pi x), \hspace{10pt} n=1,2,3, ...
+\end{equation}
+\end{itemize}
+
+As we determined $ \lambda = n^2 \pi^2 $ for $n = 1,2,3, ...$.  Solving \ref{tlambda} for $T(t)$ gives the solution
 \begin{eqnarray}
-T(t) = c_3 exp(-n^2 \pi ^2 t) \\[10pt]
-u(x,t) = \sum_{n=1}^{\infty} b_n exp(-n^2 \pi ^2 t) sin(n \pi x)
+T^{'}(t) = -n^2 \pi^2 T(t)
+T_n = c_n exp(-n^2 \pi ^2 t) \\[10pt]
 \end{eqnarray}
+where $c_n$'s are integration constants.
 
-where we have set $b_n = c_1 c_3$. The initial condition gives
+Putting the solution of $T(t)$ and $X(x)$ together,
 \begin{equation}
-u(x,0) = sin(\pi x) = \sum_{n=1}^{\infty} b_n sin(n \pi x)
+u(x,t) = \sum_{n=1}^{\infty} B_n exp(-n^2 \pi ^2 t) sin(n \pi x)
 \end{equation}
-which is a Fourier sine series. Thus, the coefficient $b_n$ is chosen such that
-\begin{equation}
-b_n = 2 \int_{0}^{1} sin(\pi x) sin(\pi n x) dx = \frac{2sin(\pi n)}{\pi - \pi n^2}
+where we have set $B_n = c_n b_n$. The initial condition gives
+\begin{equation} \label{initB}
+u(x,0) = sin(\pi x) = \sum_{n=1}^{\infty} B_n sin(n \pi x)
+\end{equation}
+which is a Fourier sine series.  Solving for the $B_n$’s, we use the orthogonality property for the eigenfunctions $sin(n \pi x)$ 
+    \[ \int_{0}^{1} sin(m \pi x) sin(\pi n x) dx = \begin{cases} \mbox{0,} & \mbox{if } m \neq n \\ \mbox{1/2,} & \mbox{m = n} \end{cases} = 0.5 \delta _{mn} \]
+    
+where $ \delta _{mn}$ is the kronecker delta,  
+\[  \delta _{mn} = \begin{cases} \mbox{0,} & \mbox{if } m \neq n \\ \mbox{1,} & \mbox{m = n} \end{cases} \]
+
+Solving \ref{initB} for $B_n$, multiplying both sides with $sin(m \pi x)$ and integrate from $0$ to $1$ and from the definition of kronecker delta yields
+\begin{equation}    
+B_n = 2 \int_{0}^{1} sin(\pi x) sin(\pi n x) dx = \frac{2sin(\pi n)}{\pi - \pi n^2}
 \end{equation}
 Combining the solutions
 \begin{equation}
-u_n(x,t) = \sum_{n=1}^{\infty} \frac{2sin(\pi n)}{\pi - \pi n^2} exp(-n^2 \pi ^2 t) sin(n \pi x)= exp(-\pi t) sin(\pi x)
+u(x,t) = \sum_{n=1}^{\infty} \frac{2sin(\pi n)}{\pi - \pi n^2} exp(-n^2 \pi ^2 t) sin(n \pi x)= exp(-\pi^2 t) sin(\pi x) 
 \end{equation}
 \end{definition}
 
@@ -526,12 +579,10 @@ The explicit method is computationally cheap. However, this brings a serious dra
 \end{equation}
 
 Crank-Nicolson method takes a weighted average of the FTCS and BTCS schemes. Therefore the approximations become
-\begin{itemize}
- \item $ u(t,x) \approx \frac{1}{2} ( u^{n+1}_i +  u^n_i) $
- \item $   \frac{\partial u}{\partial t} \approx \frac{u^{n+1}_i - u^n_i}{\Delta t} $
- \item $   \frac{\partial u}{\partial x} \approx \frac{u^n_{i+1} - u^n_{i-1} + u^{n+1}_{i+1} - u^{n+1}_{i-1}}{4\Delta x} $
- \item $ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1} + u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{2(\Delta x)^2} $
-\end{itemize}
+$$ u(t,x) \approx \frac{1}{2} ( u^{n+1}_i +  u^n_i) $$
+$$ \frac{\partial u}{\partial t} \approx \frac{u^{n+1}_i - u^n_i}{\Delta t} $$
+$$ \frac{\partial u}{\partial x} \approx \frac{u^n_{i+1} - u^n_{i-1} + u^{n+1}_{i+1} - u^{n+1}_{i-1}}{4\Delta x} $$
+$$ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1} + u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{2(\Delta x)^2} $$
 
 Applying the new finite differences to the base partial differential equation equation \ref{gen}
 \begin{multline}
@@ -654,24 +705,11 @@ Rearranging the set of equations yields a tridiagonal system which can be solved
 
 \chapter{Optimizing Solvers}
 
-Attempting to progress in solving complex problems using numerical methods is impossible without applying optimizations. However, nowadays the problem is not to solve a given problem but rather solve it in a given computing environment while exploiting the resources in an optimal way. Thus, it is necessary to investigate methods that allow for efficient implementations. The aim of this section is to introduce practical optimization techniques that can be easily accessed on a regular trading floor. 
+Attempting to progress in solving complex problems using numerical methods is impossible without applying optimizations. However, nowadays the problem is not to solve a given problem but rather solve it in a given computing environment while exploiting the resources in an optimal way. Thus, it is necessary to investigate methods that allow for efficient implementations. The aim of this section is to introduce practical optimization techniques that can be easily accessed on a regular trading floor. Main optimization techniques that will be tested are parallelizing tridiagonal solvers, Visual Studio optimization switches, different compilers and different solution platforms.
 
-Firstly, different solution platforms and compilers will be tested against each other.
-
-Regardless of the implementation of the program, the performance can be different under solut 
-Execution of a program  
-
-Tridiagonal solvers are the most demanding part of the solvers. Hence, development and improvement of such solvers is of great interest \cite{terekhov} \cite{chavez} \cite{hofen} \cite{austin} concerned with this problem. 
-
-Main optimization techniques that can be implemented are parallelizing tridiagonal solvers, Visual Studio optimization switches, different compilers and different solution platforms.
-
-
-
-Finally, CPU parallelism is investigated. In the world many complex events happen at the same time, therefore parallel computing is a better tool for modelling and simulating such phenomena.
-
- 
-    
 \section{Compilers and Solution Platforms}
+Firstly, different solution platforms and compilers will be tested against each other.
+Regardless of the implementation of the program, the performance can be different under varying solution platforms and compilers.  
 Intel compiler vs visual studio compiler.
 
 The CPU accesses data from RAM using the register that stores memory addresses. 32 bit and 64 bit refers to the amount of data the system can access. so a 32-bit system can address a maximum of 4 GB (4,294,967,296 bytes) of RAM where a 64-bit register can theoretically reference 18,446,744,073,709,551,616 bytes, or 17,179,869,184 GB (16 exabytes) of memory. Since 32 bit does not have access to more than 4 GB, if the system has more than 4 GB of RAM, it will be inaccesible by the CPU, thus A 64 bit system will be needed. The memory increase of 64 bit systems means it is capable of very fast processing of numerical quantities.
@@ -694,6 +732,8 @@ Visual Studio Optimization Switches, also known as /O options controls various o
 /O2 and /Ox flags are tested for maximum speed against the /Od flag which disables all the optimizations.
  
 \section{Tridiagonal Solvers}
+Tridiagonal solvers are the most demanding part of the solvers. Hence, development and improvement of such solvers is of great interest \cite{terekhov} \cite{chavez} \cite{hofen} \cite{austin} concerned with this problem. 
+
 Large tridiagonal systems of linear equations appear in many numerical analysis applications. In our work, they arise in 
 Implementing Crank Nicolson and Alternating Direction Implicit methods requires to solve tridiagonal systems which is the most computationally intensive part of the program.  Therefore, choosing efficient tridiagonal solvers is crucial for the speed of the solver. In this experiment three different algorithms will be tested.
 we present a new memory efficient partitioning algorithm for the solutionof diagonally dominant tridiagonal linear systems of equations thomas O(N) steps
@@ -792,8 +832,7 @@ If we number equations succesively, then in cyclic reduction the odd-neighbor eq
 Cyclic reduction takes more steps so it requires parallelization to be effective CPU parallelization will be used to make cyclic reduction work.
 
 \section{Open Multi-Processing}
-
-Traditionally, programs are serially computed on a single processor. On the other hand, parallel compuation is breaking our code execution so that it utilizes parallelism. Multithreading utilizes the CPUs cores to run calculations concurrently in each core. The concurrent programs are called a thread.  Open Multi-Processing (OpenMP) library, is an implementation of multithreading for C, C++ and Fortran. 
+Traditionally, programs are serially computed on a single processor. On the other hand, parallel computation is breaking our code execution so that it utilizes parallelism. Multithreading utilizes the CPUs cores to run calculations concurrently in each core. The concurrent programs are called a thread.  Open Multi-Processing (OpenMP) library, is an implementation of multithreading for C, C++ and Fortran. 
 
 OpenMP approach to multithreading is the fork-join programming model. Firstly, the program start as a single thread of execution called the initial thread. The fork stage begins when the program encounters an OpenMP parallel construct. Parallel execution takes place and multiple threads are created in the parallel region. The initial thread becomes the master and collaborates with the newly created threads to execute the code dynamically. Finally, at the join stage all threads are synchronized, threads are terminated except the original thread \cite{openmp}.
 
@@ -827,7 +866,7 @@ Using the Windows API for just timing the code is slightly excessive given the a
 This section documents the performance of attempted optimizations. Experiments  are  conducted  at  W307 computer laboratory, Queen Mary University of London.  Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7-6700 CPU with 4 cores clocked at 3.40 GHz.  The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized  in  the  tests  include Intel Compiler, version 18.0.3 and Intel Math Kernel  Library. 
 
 Numerical analysis and computer simulations is undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was solving the base cases \ref{bsAnal}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance.
-
+Different solution platforms, compilers, optimization flags and tridiagonal solvers will be tested against each other.
  
 \subsection{Optimal Grid Size}
 Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. Figure X and X demonstrates the error compared to the grid sizes. The optimal grid size for heat equation and Black-Scholes equation is 50 by 50.

@@ -249,6 +249,26 @@ d_2 = d_1 - \sigma \sqrt{T-t}
 
 \end{definition}
 
+\begin{definition} 
+Black-Scholes PDE has coefficient that depend on $S$. Meaning that PDE is not space homogeneous. Log spot Black-Scholes PDE is an economically intrinsic way of looking at numbers, if two assets are similar it is conventional to investigate using the $x = ln S$ conversion. 
+
+Applying the chain rule to the first and second order derivatives
+\begin{equation}
+\frac{\partial C}{\partial S} = \frac{\partial C}{\partial x} \frac{\partial x}{\partial S} = \frac{\partial C}{\partial x} \frac{1}{S}
+\end{equation}
+\begin{eqnarray}
+\frac{\partial^2 C}{\partial S^2} = \frac{\partial }{\partial S} (\frac{\partial C}{\partial S}) = \frac{\partial }{\partial S} (\frac{\partial C}{\partial x} \frac{1}{S}) = -\frac{1}{S^2} \frac{\partial C}{\partial x} + \frac{\partial }{\partial S} \frac{\partial C}{\partial x} \frac{1}{S} = \\
+ = -\frac{1}{S^2} \frac{\partial C}{\partial x} + \frac{\partial^2 C}{\partial x^2} \frac{1}{S^2} 
+\end{eqnarray}
+
+Substituting the transformed derivatives into the original PDE 
+\begin{equation}
+\frac{\partial C}{\partial t} = (r - \frac{\sigma^2}{2})\frac{\partial C}{\partial x}+\frac{1}{2} \sigma^2 \frac{\partial^2 C}{\partial x^2} - rC
+\end{equation}
+
+The transformation creates a PDE with constant coefficients rather than coefficients that depend on S. 
+
+\end{definition}
 \begin{remark}Untradable Assets\\ Modern financial engineering created derivatives using untradable assets as an underlying such as multi asset derivatives like equity baskets, weather derivatives and non-deliverable forwards. Non-deliverable forwards are for offshore investors that want to trade non-convertible currencies such as Brazilian Real, South Korean Won.  The Black-Scholes model is still used in these cases \cite{weather} \cite{basket} but not entirely applicable to assets that cannot be hedged.
 \end{remark}
 
@@ -295,36 +315,72 @@ Using the partial derivatives the equation $ u_t = u_{xx} $ becomes
 
 Right hand side only depends on $x$ and the left hand side depends only on $t$. Therefore, the equation is valid only when each side is equal to a constant, which we set to $ \lambda $. Rearranging terms gives us the following equations:
 
-\begin{eqnarray}
-\frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)} = \lambda \\[10pt]
-X^{''}(x) = \lambda X(x), \hspace{10pt} T^{'}(t) = \lambda T(t) \\[10pt]
+\begin{equation}
+\frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)} = -\lambda \\[10pt]
+\end{equation}
+\begin{equation}\label{xlambda}
+X^{''}(x)  + \lambda X(x) = 0 
+\end{equation}
+\begin{equation}\label{tlambda}
+T^{'}(t) + \lambda T(t) = 0
+\end{equation}
+
+\begin{equation}
 X(0) = X(1) = 0
-\end{eqnarray}
-
-Solving for X(x) is an example case of Sturm-Liouville problem \cite{sepvar}. However the $\lambda < 0$ and $\lambda = 0$ cases result in trivial solutions, thus they are discarded. Solving for $\lambda > 0$ yields
-\begin{equation}
-X(x)= c_1 sin(kx) + c_2 cos(kx)
 \end{equation}
 
-The boundary conditions leads to $ c_2 = 0, c_1 sin(k) = 0 \rightarrow k = 0, \pi, 2\pi, ...n\pi$ where n is an integer.
+Solving for X(x) is an example case of Sturm-Liouville problem \cite{sepvar} with three cases. 
+\begin{itemize}
+\item Let $\lambda < 0$ and $\lambda = -k^2$. Then the solution to \ref{xlambda} is
+$$ X = Ae^{kx} + Be^{-kx} $$
+Using the boundary conditions yield $X(0) = A + B = 0 $ and $X(1) = Ae^{k} + Be^{-k} = 0$. Solving the equations $A=B=u=0$ which is a trivial solution, thus discarded.
+\item Let $\lambda = 0$, the solution to \ref{xlambda} is
+$$ X(x) = Ax + B $$
+The boundary conditions imply $X(0) = B = 0$ and $X(1) = A= 0$. Thus this case is  discarded too.
+\item Finally, let $\lambda>0$,the solution to \ref{xlambda} is
+$$ X(x) = Acos(\sqrt{\lambda}x) + Bsin(\sqrt{\lambda}x) $$
 
-Solving for $T(t)$ gives the solution
+The boundary conditions leads to $
+X(0) = A = 0$ and $ X(1) = Bsin(\sqrt{\lambda}) = 0 $
+Since we do not want a trivial solution where $B = 0$, the equation reduces to 
+\begin{equation}
+sin(\sqrt{\lambda}) = 0
+\end{equation} 
+Thus $ \sqrt{\lambda} = n \pi $ for $n = 1,2,3, ...$. 
+Solution to \ref{xlambda} becomes,
+\begin{equation}
+X_n = b_n sin(n \pi x), \hspace{10pt} n=1,2,3, ...
+\end{equation}
+\end{itemize}
+
+As we determined $ \lambda = n^2 \pi^2 $ for $n = 1,2,3, ...$.  Solving \ref{tlambda} for $T(t)$ gives the solution
 \begin{eqnarray}
-T(t) = c_3 exp(-n^2 \pi ^2 t) \\[10pt]
-u(x,t) = \sum_{n=1}^{\infty} b_n exp(-n^2 \pi ^2 t) sin(n \pi x)
+T^{'}(t) = -n^2 \pi^2 T(t)
+T_n = c_n exp(-n^2 \pi ^2 t) \\[10pt]
 \end{eqnarray}
+where $c_n$'s are integration constants.
 
-where we have set $b_n = c_1 c_3$. The initial condition gives
+Putting the solution of $T(t)$ and $X(x)$ together,
 \begin{equation}
-u(x,0) = sin(\pi x) = \sum_{n=1}^{\infty} b_n sin(n \pi x)
+u(x,t) = \sum_{n=1}^{\infty} B_n exp(-n^2 \pi ^2 t) sin(n \pi x)
 \end{equation}
-which is a Fourier sine series. Thus, the coefficient $b_n$ is chosen such that
-\begin{equation}
-b_n = 2 \int_{0}^{1} sin(\pi x) sin(\pi n x) dx = \frac{2sin(\pi n)}{\pi - \pi n^2}
+where we have set $B_n = c_n b_n$. The initial condition gives
+\begin{equation} \label{initB}
+u(x,0) = sin(\pi x) = \sum_{n=1}^{\infty} B_n sin(n \pi x)
+\end{equation}
+which is a Fourier sine series.  Solving for the $B_n$’s, we use the orthogonality property for the eigenfunctions $sin(n \pi x)$ 
+    \[ \int_{0}^{1} sin(m \pi x) sin(\pi n x) dx = \begin{cases} \mbox{0,} & \mbox{if } m \neq n \\ \mbox{1/2,} & \mbox{m = n} \end{cases} = 0.5 \delta _{mn} \]
+    
+where $ \delta _{mn}$ is the kronecker delta,  
+\[  \delta _{mn} = \begin{cases} \mbox{0,} & \mbox{if } m \neq n \\ \mbox{1,} & \mbox{m = n} \end{cases} \]
+
+Solving \ref{initB} for $B_n$, multiplying both sides with $sin(m \pi x)$ and integrate from $0$ to $1$ and from the definition of kronecker delta yields
+\begin{equation}    
+B_n = 2 \int_{0}^{1} sin(\pi x) sin(\pi n x) dx = \frac{2sin(\pi n)}{\pi - \pi n^2}
 \end{equation}
 Combining the solutions
 \begin{equation}
-u_n(x,t) = \sum_{n=1}^{\infty} \frac{2sin(\pi n)}{\pi - \pi n^2} exp(-n^2 \pi ^2 t) sin(n \pi x)= exp(-\pi t) sin(\pi x)
+u(x,t) = \sum_{n=1}^{\infty} \frac{2sin(\pi n)}{\pi - \pi n^2} exp(-n^2 \pi ^2 t) sin(n \pi x)= exp(-\pi^2 t) sin(\pi x) 
 \end{equation}
 \end{definition}
 
@@ -523,12 +579,10 @@ The explicit method is computationally cheap. However, this brings a serious dra
 \end{equation}
 
 Crank-Nicolson method takes a weighted average of the FTCS and BTCS schemes. Therefore the approximations become
-\begin{itemize}
- \item $ u(t,x) \approx \frac{1}{2} ( u^{n+1}_i +  u^n_i) $
- \item $   \frac{\partial u}{\partial t} \approx \frac{u^{n+1}_i - u^n_i}{\Delta t} $
- \item $   \frac{\partial u}{\partial x} \approx \frac{u^n_{i+1} - u^n_{i-1} + u^{n+1}_{i+1} - u^{n+1}_{i-1}}{4\Delta x} $
- \item $ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1} + u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{2(\Delta x)^2} $
-\end{itemize}
+$$ u(t,x) \approx \frac{1}{2} ( u^{n+1}_i +  u^n_i) $$
+$$ \frac{\partial u}{\partial t} \approx \frac{u^{n+1}_i - u^n_i}{\Delta t} $$
+$$ \frac{\partial u}{\partial x} \approx \frac{u^n_{i+1} - u^n_{i-1} + u^{n+1}_{i+1} - u^{n+1}_{i-1}}{4\Delta x} $$
+$$ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1} + u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{2(\Delta x)^2} $$
 
 Applying the new finite differences to the base partial differential equation equation \ref{gen}
 \begin{multline}
