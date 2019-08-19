@@ -1,10 +1,2 @@
 ﻿icl: : warning #10182: disabling optimization; runtime debug checks enabled
-  FDM.cpp
-C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\PDESolver\TridiagonalSolvers.h(118): warning #3180: unrecognized OpenMP #pragma
-    #pragma omp parallel for collapse(2)
-            ^
-  
-C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\PDESolver\TridiagonalSolvers.h(193): warning #3180: unrecognized OpenMP #pragma
-    #pragma omp parallel for collapse(2)
-            ^
-  
+  mainOptimalGrid.cpp

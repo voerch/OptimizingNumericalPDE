@@ -5,13 +5,12 @@
 #include <chrono>
 #include <fstream>
 
-#include <thread>
-
 
 int main()
 {
 	long xStep = 64;
-	long tStep = 64;
+	long tStep = 64; 
+
 
 	///////////////////////////////////////
 
@@ -29,6 +28,21 @@ int main()
 	std::chrono::duration<double> CNTime = CNFinish - CNStart;
 
 	std::cout << CNTime.count() << std::endl;
+
+	double xValue, tValue;
+
+	for (unsigned long tCounter = 0; tCounter < tStep; tCounter++)
+	{
+		for (unsigned long xCounter = 0; xCounter < xStep; xCounter++)
+		{
+
+			xValue = static_cast<double>(xCounter) *  x_dom / static_cast<double>(xStep - 1);
+			tValue = static_cast<double>(tCounter) *  t_dom / static_cast<double>(tStep - 1);
+			heat_pde->AnalyticSol(tValue, xValue);
+	}
+
+
+
 
 	delete heat_pde;
 

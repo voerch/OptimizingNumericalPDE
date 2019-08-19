@@ -2,7 +2,7 @@
 Pazartesi
 Grid size depends on the parameters prove this duffy book. Error hesaplamayi dusun / duffy optimal grid
 Root mean squared relative error testing
-why uniform grid olunca daha iyi oluyor araştır??
+
 
 Haftasonu
 Cyclic reduction yaz / O(n) tri algoları karşılaştır
@@ -12,9 +12,9 @@ Introduction + solving pdes paragrafları toparla
 Figürler ece
 
 Sorular
-Parameters table nereye koymalı?
 stability/consistency analysis??
-
+appendixe code bits lazim mi hangileri?
+why uniform grid olunca daha iyi oluyor araştır?? Formula to determine optimal grid sizing?
 
 Toparlama
 bibtex ref düzelt

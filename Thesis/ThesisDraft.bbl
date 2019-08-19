@@ -47,6 +47,11 @@ Jim Douglas, Jr.
 \newblock Alternating direction methods for three space variables.
 \newblock {\em Numer. Math.}, 4(1):41--63, December 1962.
 
+\bibitem{duffycpp}
+D.J. Duffy.
+\newblock {\em Financial Instrument Pricing Using C++}.
+\newblock The Wiley Finance Series. Wiley, 2013.
+
 \bibitem{evans}
 G.~Evans, J.M. Blackledge, and P.~Yardley.
 \newblock {\em Numerical methods for partial differential equations}.
@@ -82,6 +87,12 @@ F.C. Klebaner.
 \newblock {\em Introduction to Stochastic Calculus with Applications}.
 \newblock Introduction to Stochastic Calculus with Applications. Imperial
   College Press, 2005.
+
+\bibitem{kohl}
+P.~Kohl-Landgraf.
+\newblock {\em PDE Valuation of Interest Rate Derivatives: From Theory to
+  Implementation}, pages 423--438.
+\newblock Books on Demand, 2007.
 
 \bibitem{sepvar}
 {Matthew J. Hancock}.
@@ -213,6 +224,12 @@ Andrew~V Terekhov.
 \newblock Parallel dichotomy algorithm for solving tridiagonal system of linear
   equations with multiple right-hand sides.
 \newblock {\em Parallel Computing}, 36(8):423--438, 2010.
+
+\bibitem{openmpfaq}
+{The OpenMP Architecture Review Board}.
+\newblock What problem does openmp solve?
+\newblock \url{https://www.openmp.org/about/openmp-faq/}, 2018.
+\newblock [Online; accessed 10-August-2019].
 
 \bibitem{jwthomas}
 J.W. Thomas.
