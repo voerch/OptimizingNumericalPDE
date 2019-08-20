@@ -1,13 +1,7 @@
 ﻿# TODO #
-Pazartesi
-Grid size depends on the parameters prove this duffy book. Error hesaplamayi dusun / duffy optimal grid
-Root mean squared relative error testing
 
-
-Haftasonu
+adi matrisi yaz
 Cyclic reduction yaz / O(n) tri algoları karşılaştır
-Fix 2d sep vars mathematica
-MC vs FDM
 Introduction + solving pdes paragrafları toparla
 Figürler ece
 
@@ -15,13 +9,14 @@ Sorular
 stability/consistency analysis??
 appendixe code bits lazim mi hangileri?
 why uniform grid olunca daha iyi oluyor araştır?? Formula to determine optimal grid sizing?
+openmp collapse only in intel compiler how to go ahead
 
 Toparlama
 bibtex ref düzelt
-figure cyclic + openmp
 grammarlyden geçir
 kodlarin basina author date description ekle
 Timinge gore heatmap hazirla
+Root mean squared relative error testing
 
 # Further Studies #
 More type of options BSPde bdegistir callputflag duffy c++ 677 

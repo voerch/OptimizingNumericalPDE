@@ -261,7 +261,8 @@ void ADI::InnerDomain()
 		}
 
 		//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-		IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 		for (long xCounter = 1; xCounter < xNumberSteps - 1; xCounter++)
 		{
 			HalfStep[xCounter][yCounter] = newResult[xCounter];
@@ -284,7 +285,8 @@ void ADI::InnerDomain()
 		}
 
 		//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-		IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 		for (long yCounter = 1; yCounter < yNumberSteps - 1; yCounter++)
 		{
 			FullStep[xCounter][yCounter] = newResult[xCounter];

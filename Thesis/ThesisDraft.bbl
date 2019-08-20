@@ -265,4 +265,9 @@ Tomasz Zastawniak and {Maciej J.} Capinski.
 \newblock {\em Numerical Methods in Finance with C++}, pages 149 -- 150.
 \newblock Mastering Mathematical Finance. Cambridge University Press, 7 2012.
 
+\bibitem{gputri}
+Yao Zhang, Jonathan Cohen, and John~D. Owens.
+\newblock Fast tridiagonal solvers on the gpu.
+\newblock {\em SIGPLAN Not.}, 45(5):127--136, January 2010.
+
 \end{thebibliography}

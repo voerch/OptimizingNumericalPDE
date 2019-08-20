@@ -61,56 +61,13 @@ void IntelSolver(std::vector<double>& a, std::vector<double>& b, std::vector<dou
 
 }
 
-////Implementation of cyclic reduction from the package ScaLAPACK
-//// https://software.intel.com/en-us/mkl-developer-reference-c-scalapack-routines
-//// https://software.intel.com/en-us/mkl-developer-reference-c-p-dbtrs
-//// https://software.intel.com/en-us/mkl-developer-reference-fortran-p-dbtrf
-//void IntelParallelSolver(std::vector<double>& a, std::vector<double>& b, std::vector<double>& c, std::vector<double>& d, std::vector<double>& f)
-//{
-//	//Pointers to vectors as the function requires double arrays.
-//	double * LowerDiag = &a[0];
-//	double * Diag = &b[0];
-//	double * UpperDiag = &c[0];
-//	double * oldResult = &d[0];
-//	
-//	char trans = 'N';
-//	MKL_INT n = a.size();
-//
-//
-//	//Number of upper and lower diagonals of A.
-//	MKL_INT bwl = 1;
-//	MKL_INT bwu = 1;
-//
-//	//The number of right-hand sides, the number of columns in B
-//	MKL_INT nrhs = 1;
-//
-//	
-//	double * ab;
-//
-//	MKL_INT ja;
-//	MKL_INT desca;
-//
-//	MKL_INT ib = 0;
-//	MKL_INT descb = d.size();
-//
-//	double af;
-//	MKL_INT laf;
-//	
-//	double * work = &f[0];
-//	MKL_INT lwork = f.size();
-//
-//	MKL_INT info;
-//
-//	pddbtrs(&trans, &n, &bwl, &bwu, &nrhs, ab, &ja, &desca, oldResult, &ib, &descb, &af, &laf, work, &lwork, &info);
-//
-//}
-
+//Cyclic reduction implementation using OpenMP.
 void CyclicReduction(std::vector<double> LDiag, std::vector<double> Diag, std::vector<double> UDiag, std::vector<double>  oldResult, std::vector<double>& newResult)
 {
 	double Temp1, Temp2;
-	int iReducePlus, iReduceMinus, offset, backSubPlus, backSubMinus;
+	int iReducePlus, iReduceMinus, offset, backSubPlus, backSubMinus, iReduce, Step;
 	int size = newResult.size();
-	int iReduce, Step;
+
 	LDiag.insert(LDiag.begin(), 0.0);
 	UDiag.push_back(0.0);
 	
@@ -124,97 +81,56 @@ void CyclicReduction(std::vector<double> LDiag, std::vector<double> Diag, std::v
 			iReduceMinus = iReduce - offset;
 			iReducePlus = iReduce + offset;
 
-			//if (iReduce == Diag.size() - 1)
-			//{
-			//	Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
-			//	LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
-			//	UDiag[iReduce] = 0;
-			//	Diag[iReduce] = Diag[iReduce] - (UDiag[iReduceMinus] * Temp1);
-
-			//	oldResult[iReduce] = oldResult[iReduce] - oldResult[iReduceMinus] * Temp1;
-
-			//	//newResult[iReduce] = (oldResult[iReduce] - (LDiag[iReduce] * newResult[iReduce - 1])) / Diag[iReduce];
-			//}
-			//else
-			//{
-			//	Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
-			//	Temp2 = UDiag[iReduce] / Diag[iReducePlus];
-
-			//	LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
-			//	UDiag[iReduce] = -UDiag[iReducePlus] * Temp2;
-			//	Diag[iReduce] = Diag[iReduce] - (LDiag[iReducePlus] * Temp2) - (UDiag[iReduceMinus] * Temp1);
-			//	oldResult[iReduce] = oldResult[iReduce] - (oldResult[iReduceMinus] * Temp1) - (oldResult[iReducePlus] * Temp2);
-
-
-			//}
-
-			//newResult[iReduce] = (oldResult[iReduce] - (LDiag[iReduce] * newResult[iReduceMinus]) - (UDiag[iReduce] * newResult[iReducePlus])) / Diag[iReduce];
-
-
-			if (iReduceMinus <= 0)
-			{
-				Temp2 = UDiag[iReduce] / Diag[iReducePlus];
-				LDiag[iReduce] = 0;
-				UDiag[iReduce] = -UDiag[iReducePlus] * Temp2;
-				Diag[iReduce] = Diag[iReduce] - (LDiag[iReducePlus] * Temp2);
-				oldResult[iReduce] = oldResult[iReduce] - (oldResult[iReducePlus] * Temp2);
-			}
-			else if (iReducePlus >= size)
+			if (iReduce == Diag.size() - 1)
 			{
 				Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
 				LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
 				UDiag[iReduce] = 0;
 				Diag[iReduce] = Diag[iReduce] - (UDiag[iReduceMinus] * Temp1);
+
 				oldResult[iReduce] = oldResult[iReduce] - oldResult[iReduceMinus] * Temp1;
 			}
 			else
 			{
 				Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
 				Temp2 = UDiag[iReduce] / Diag[iReducePlus];
+
 				LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
 				UDiag[iReduce] = -UDiag[iReducePlus] * Temp2;
 				Diag[iReduce] = Diag[iReduce] - (LDiag[iReducePlus] * Temp2) - (UDiag[iReduceMinus] * Temp1);
 				oldResult[iReduce] = oldResult[iReduce] - (oldResult[iReduceMinus] * Temp1) - (oldResult[iReducePlus] * Temp2);
+
 			}
-
-
 		}
-
-
 	}
 
 
 //Backward Substitution phase
-
-
-//newResult.back() = (oldResult.back()) / Diag.back();
-//newResult[pow(2, Step - 1) - 1] = (oldResult[pow(2, Step - 1) - 1] - (UDiag[(2, Step - 1) - 1] * newResult.back())) / Diag.back();
-
+newResult[(size - 1) / 2] = oldResult[(size - 1) / 2] / Diag[(size - 1) / 2];
 #pragma omp parallel for collapse(2)
-	for (int Step = log2(size); Step >= 0; Step--)
+	for (int Step = log2(size + 1) - 2; Step >= 0; Step--)
 	{
-		for (int backSub = pow(2, Step + 1) - 1; backSub < size; backSub += pow(2, Step))
+		for (int backSub = pow(2, Step + 1) - 1; backSub < size; backSub += pow(2, Step + 1))
 		{
-			offset = pow(2, Step - 1);
+			offset = pow(2, Step);
 			backSubMinus = backSub - offset;
 			backSubPlus = backSub + offset;
 
-			if (backSubMinus <= 0)
+			if (backSubMinus - offset < 0)
 			{
-				newResult[backSub] = (oldResult[backSub] - (UDiag[backSub] * newResult[backSubPlus])) / Diag[backSub];
+				newResult[backSubPlus] = (oldResult[backSubPlus] - (UDiag[backSubPlus] * newResult[backSubPlus + offset])) / Diag[backSubPlus];
 			}
-			else if (backSubPlus >= size)
+			else if (backSubPlus + offset >= size)
 			{
-				newResult[backSub] = (oldResult[backSub] - (newResult[backSubMinus] * LDiag[backSub])) / Diag[backSub];
+				newResult[backSubMinus] = (oldResult[backSubMinus] - (newResult[backSubMinus - offset] * LDiag[backSubMinus])) / Diag[backSubMinus];
 
 			}
 			else
 			{
-				newResult[backSub] = (oldResult[backSub] - (newResult[backSubMinus] * LDiag[backSub]) - (UDiag[backSub] * newResult[backSubPlus])) / Diag[backSub];
+				newResult[backSubPlus] = (oldResult[backSubPlus] - (newResult[backSubPlus - offset] * LDiag[backSubPlus]) - (UDiag[backSubPlus] * newResult[backSubPlus + offset])) / Diag[backSubPlus];
+				newResult[backSubMinus] = (oldResult[backSubMinus] - (newResult[backSubMinus - offset] * LDiag[backSubMinus]) - (UDiag[backSubMinus] * newResult[backSubMinus + offset])) / Diag[backSubMinus];
 			}
 		}
 	}
-	//LDiag.erase(LDiag.begin());
-	//UDiag.pop_back();
 
 }

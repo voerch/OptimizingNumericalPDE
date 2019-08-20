@@ -441,7 +441,7 @@ which is a double Fourier sine series. Thus, the coefficient $A_{mn}$ is chosen 
 \end{equation}
 Combining the solutions
 \begin{multline}
-u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n}  \\ sin(m \pi x) sin(n \pi y)     exp(- \pi^2 (m^2 + n^2)t) = 0
+u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n}  \\ sin(m \pi x) sin(n \pi y)     exp(- \pi^2 (m^2 + n^2)t)
 \end{multline}
 
 \end{definition}
@@ -703,17 +703,63 @@ Next step of the grid $u^{n+1}_{i,j}$ is calculated by approximating explicitly 
 \begin{equation}
 \frac{u^{n+1}_{i,j} + u^{n+1/2}_{i,j}}{0.5 \Delta t} = \frac{\delta x^2 u^{n+1/2}_{i,j} }{\Delta x^2} + \frac{\delta y^2 u^{n+1}_{i,j}}{\Delta y^2}
 \end{equation}
-Rearranging the set of equations yields a tridiagonal system which can be solved using Gaussian elimination, cyclic reduction or Thomas algorithm.
-\begin{equation}
--r_y u^{n+1}_{i,j+1} + (1 + 2r_y) u^{n+1}_{i,j} - r_y u^{n+1}_{i,j-1} = r_x * u^{n+1/2}_{i+1,j} + (1 + 2r_x) u^{n+1/2}_{i,j} + r_x u^{n+1/2}_{i,j}
-\end{equation}
-
 
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.6]{ADIHeat.png}
     \caption{Solution of two dimensional heat equation using ADI.}
 \end{figure}
+
+
+Rearranging the set of equations yields a tridiagonal system which can be solved using Gaussian elimination, cyclic reduction or Thomas algorithm.
+\begin{equation}
+-r_y u^{n+1}_{i,j+1} + (1 + 2r_y) u^{n+1}_{i,j} - r_y u^{n+1}_{i,j-1} = r_x * u^{n+1/2}_{i+1,j} + (1 + 2r_x) u^{n+1/2}_{i,j} + r_x u^{n+1/2}_{i,j}
+\end{equation}
+
+$$
+\begin{bmatrix}  
+\theta & \lambda & 0 & . & . & 0 \\ 
+\omega & \theta & \lambda & 0 & ... & . \\ 
+0 & \omega & \theta & \lambda & 0 & . \\ 
+. & . & .  & . & . & . \\ 
+. & . & .  & . & . & . \\ 
+. & . & .  & . & . & \lambda \\ 
+0 & 0 & 0 & 0 & \omega & \theta \\ 
+\end{bmatrix}  \begin{bmatrix} 
+u_{1}^{n + 1} \\ 
+u_{2}^{n + 1} \\ 
+u_{3}^{n + 1} \\ 
+.\\ 
+.\\ 
+.\\ 
+u_{j - 1}^{n + 1}\\ 
+\end{bmatrix}= \begin{bmatrix}
+\alpha u_{0}^{n} \\ 
+0 \\ 
+0 \\ 
+.\\ 
+.\\ 
+.\\ 
+\gamma u_{j}^{n} \\ 
+\end{bmatrix}  + \begin{bmatrix}  
+\beta & \gamma & 0 & . & . & 0 \\ 
+\alpha & \beta & \gamma & 0 & ... & . \\ 
+0 & \alpha & \beta & \gamma & 0 & . \\ 
+. & . & .  & . & . & . \\ 
+. & . & .  & . & . & . \\ 
+. & . & .  & . & . & \gamma \\ 
+0 & 0 & 0 & 0 & \alpha & \beta \\ 
+\end{bmatrix} \begin{bmatrix}  
+u_{1}^{n} \\ 
+u_{2}^{n} \\ 
+u_{3}^{n} \\ 
+.\\ 
+.\\ 
+.\\ 
+u_{j - 1}^{n} \\ 
+\end{bmatrix}
+$$
+
 
 \chapter{Optimizing Solvers}
 
@@ -846,24 +892,51 @@ Intel Math Kernel Library implements routines for solving systems of linear equa
 
 \subsection{Cyclic Reduction}\label{cyclic}
 Cyclic reduction was proposed by R. W. Hockney in the 1960s for solving the resulting linear systems from the  discretization of the Poisson equation \cite{Hockney}. 
-Both cyclic reductionand recursive doubling are designed for fine grained parallelism, where each process or owns exactly one row of the tridiagonal matrix. 
 
-If we number equations succesively, then in cyclic reduction the odd-neighbor equations of an even equation are used to eliminate the off-diagonal entries in the even equation.In this step, a tridiagonal system of linear equations for the even equation is gener-ated. This reduced system has only about one-half as many equations as the originalsystem. Now the same procedure is applied recursively to the reduced system untilthere remains only one linear equation with one unknown. The solution of successivereduced systems can be computed to finally yield the solution of the original system.Cyclic reduction requires $2log2NPsteps$
-Cyclic reduction takes more steps so it requires parallelization to be effective CPU parallelization will be used to make cyclic reduction work.
+$$
+\begin{bmatrix}  
+1 & c^{*}_1 & 0 & 0 & ... & 0 \\ 
+0 & 1 & c^{*}_2 & 0 & ... & 0 \\ 
+0 & 0 & 1 & c^{*}_3 & 0 & 0 \\ 
+. & . &  &  &  & . \\ 
+. & . &  &  &  & . \\ 
+. & . &  &  &  & c^{*}_{k-1} \\ 
+0 & 0 & 0 & 0 & 0 & 1 \\ 
+\end{bmatrix} \begin{bmatrix}  
+f_1 \\ 
+f_2 \\ 
+f_3 \\ 
+.\\ 
+.\\ 
+.\\ 
+f_k \\ 
+\end{bmatrix} = \begin{bmatrix} 
+d^{*}_1 \\ 
+d^{*}_2 \\ 
+d^{*}_3 \\ 
+.\\ 
+.\\ 
+.\\ 
+d^{*}_k \\ 
+\end{bmatrix}
+$$
+
+Let $a$, $b$, 
+
+If we number equations succesively, then in cyclic reduction the odd-neighbor equations of an even equation are used to eliminate the off-diagonal entries in the even equation.In this step, a tridiagonal system of linear equations for the even equation is gener-ated. This reduced system has only about one-half as many equations as the originalsystem. Now the same procedure is applied recursively to the reduced system untilthere remains only one linear equation with one unknown. The solution of successivereduced systems can be computed to finally yield the solution of the original system.
+
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.8]{cyclic.png}
+        \includegraphics[scale=0.6]{cyclic.png}
     \caption{Cyclic reduction for an eight equation system.}
 \end{figure}
 
+If serially computed, Thomas algorithm performs $8n$ operations while CR performs $17n$ operations. On the other hand,if parallel computing is used with $n$ cores, CR requires $2 log_2 n − 1$ steps  while  the  Thomas algorithm requires $2n$ steps \cite{gputri}. CPU parallelism will be used to test cyclic reduction.
+
+
 \section{Open Multi-Processing}
 Traditionally, programs are serially computed on a single processor. On the other hand, parallel computation is used to break our code execution in pieces so that it utilizes parallelism. Multithreading uses the CPUs cores to run calculations concurrently in each core. The concurrent programs are called a thread. If the code is executed on parallel processors, one of the biggest problem is the processors generally require results that have been calculated on other processors. The main issue in this case is that processors clocks are not synchronized and execute the code at minimally different speeds.
-
-
-In order to solve this problem, a group of major computer hardware and software vendors and major parallel computing user facilities joined forces to form The Open Multi-Processing Architecture Review Board (The OpenMP ARB)\cite{openmpfaq}. Open Multi-Processing (OpenMP) is an implementation of multithreading for C, C++ and Fortran and it was introduced to public in 1997. OpenMP is aiming to standardize high level parallelism that is performant, productive and portable.
-
- OpenMP approach to multithreading is the fork-join programming model. Firstly, the program start as a single thread of execution called the initial thread. The fork stage begins when the program encounters an OpenMP parallel construct. Parallel execution takes place and multiple threads are created in the parallel region. The initial thread becomes the master and collaborates with the newly created threads to execute the code dynamically. Finally, at the join stage all threads are synchronized, threads are terminated except the original thread \cite{openmp}.
 
 \begin{figure}[!htb]
     \centering
@@ -871,12 +944,17 @@ In order to solve this problem, a group of major computer hardware and software 
     \caption{The fork-join programming model.}
 \end{figure}
 
+In order to solve this problem, a group of major computer hardware and software vendors and major parallel computing user facilities joined forces to form The Open Multi-Processing Architecture Review Board (The OpenMP ARB)\cite{openmpfaq}. Open Multi-Processing (OpenMP) is an implementation of multithreading for C, C++ and Fortran and it was introduced to public in 1997. OpenMP is aiming to standardize high level parallelism that is performant, productive and portable.
+
+ OpenMP approach to multithreading is the fork-join programming model. Firstly, the program start as a single thread of execution called the initial thread. The fork stage begins when the program encounters an OpenMP parallel construct. Parallel execution takes place and multiple threads are created in the parallel region. The initial thread becomes the master and collaborates with the newly created threads to execute the code dynamically. Finally, at the join stage all threads are synchronized, threads are terminated except the original thread \cite{openmp}.
+
+
 Algorithms like cyclic reduction \ref{cyclic} uses nested loops to calculate the solution. Therefore nested parallelism is needed to build efficient programs. Nesting the parallel constructs results in nested parallelism. Each thread that encounters the next parallel region creates a new parallel region at runtime \cite{openmpnext}.
 
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.7]{openmpnested.png}
-    \caption{3 threads create 2 threads, nested parallelism.}
+    \caption{4 threads create 2 threads, nested parallelism.}
 \end{figure}
 
 In order to specify and control the paralelization procedure, OpenMP uses compiler directives, runtime functions, and  envi­ronment variables. OpenMP enables developers to just give a high-level specification of the parallelism by indicating the regions to be executed in parallel using compiler directives, runtime library routines, and environment variables. The details of the parallelism is up to the compiler which makes OpenMP comparatively easy to use. 
