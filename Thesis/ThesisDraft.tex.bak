@@ -115,11 +115,6 @@ Here you write a short summary, around 10 lines, of your work. \\
 \end{center}       
 
 
-\chapter*{Preface}
-Here  you write a summary of the work. A paragraph on the motivation, previous work, then maybe a brief chapter by chapter summary. 
-
-\lipsum[100]% replace this by your text
-
 \begin{flushright}
 Queen Mary University of London\\
 12${}^{\text{th}}$ August 2019
@@ -140,7 +135,7 @@ Derivative pricing in the real world is a computationally intensive task. The ex
 Purpose of this project to optimize numerical solutions of parabolic PDEs by testing high performance computing techniques and comparing compilers/os/32bit/64bit.
 The idea of this project is to study how to take advantage of this parallelism and explore how much faster we can make these calculations.
 
-\section{Contents of the Thesis}
+
 Included in your ‘Introduction’ section should be a clear summary of  what  you  have  achieved  in  the  project  work  presented,  such  as  any  new  results, generalisations, corollaries, examples, new connections, or computer investigations.  The thesis is organized as follows.  Chapter 2 presents an introduction to financial derivatives, Black-Scholes model and finite difference models.  Chapter3 extends the 2d and gives examples of two dimensional heat equation.  Chapter 4 develops the numerical methods and techniques considered to solve the PDE-based models for the option pricing problems.  In the same chapter,  finite difference method with improved algorithms to solve a large tridiagonal systems is discussed.  Chapter 5 shows the numerical results of our numerical methods with several examples of.  Chapter 6 concludes the thesis.
 
 \chapter{Pricing Financial Derivatives}\label{Pricing Financial Derivatives}
@@ -180,12 +175,12 @@ Brownian motion (also known as Wiener Process) was discovered by botanist Robert
 Brownian motion is the basic building block in stochastic calculus and geometric Brownian motion is used to model the stock prices in Black-Scholes model.
 \end{definition}
 
-\begin{lemma} It\^{o}'s Lemma
+\begin{lemma} It\^{o}'s Lemma:
 Let $B(t)$ be a Brownian motion and $X(t)$ be an Ito process which satisfies the stochastic differential equation:
 \begin{equation}
 dX(t) = \mu(X(t),t)dt + \sigma(X(t),t)dB(t)
 \end{equation} 
-If $f(x, t) \in C^2(\mathbb{R}^2,\mathbb{R})$ then $f(X(t),t)$ is also an Ito drift-diffusion process, with its differential given by:
+If $f(x, t)$ is twice continuously differentiable function then $f(X(t),t)$ is also an Ito drift-diffusion process \cite{klebaner}, with its differential given by:
 \begin{equation}
 d(f(X(t),t)) = \frac{\partial f}{\partial t}(X(t),t)dt + f'(X(t),t)dX + \frac{1}{2}f''(X(t),t)dX(t)^2
 \end{equation} 
@@ -247,6 +242,21 @@ d_1 = \frac{log(S/K) + (r + \sigma^2/2)(T - t)}{\sigma \sqrt{T-t}} \\[10pt]
 d_2 = d_1 - \sigma \sqrt{T-t}
 \end{eqnarray}
 
+The following parameters will be used for the research purposes of this project.
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c||} 
+ \hline
+ Parameter & Value\\ [0.5ex]
+ \hline\hline
+ Strike Price ($K$) & 1.0\\ 
+ Volatility ($\sigma$) & 20 \% \\
+ Risk Free Rate ($r$) & 5 \% \\
+ Time to Expiry ($T$) & 2.0\\
+ Maximum Share Price ($S_{max}$) & 2.0\\ [1ex] 
+ \hline
+ \end{tabular}
+\end{table}
 \end{definition}
 
 \begin{definition} 
@@ -269,34 +279,28 @@ Substituting the transformed derivatives into the original PDE
 The transformation creates a PDE with constant coefficients rather than coefficients that depend on S. 
 
 \end{definition}
-\begin{remark}Untradable Assets\\ Modern financial engineering created derivatives using untradable assets as an underlying such as multi asset derivatives like equity baskets, weather derivatives and non-deliverable forwards. Non-deliverable forwards are for offshore investors that want to trade non-convertible currencies such as Brazilian Real, South Korean Won.  The Black-Scholes model is still used in these cases \cite{weather} \cite{basket} but not entirely applicable to assets that cannot be hedged.
+\begin{remark}Untradable Assets\\ Modern financial engineering created derivatives using untradable assets as an underlying such as multi asset derivatives like equity baskets, weather derivatives, non-deliverable swaps and non-deliverable forwards. Non-deliverable forwards are for offshore investors that want to trade non-convertible currencies such as Brazilian Real, South Korean Won.  The Black-Scholes model is still used in these cases \cite{weather} \cite{basket} but not entirely applicable to assets that cannot be hedged.
 \end{remark}
 
 
-\section{Solving Partial Differential Equations}
-Since the foundation of the world humanity tried to understand and model the nature. Differential equations serves this purpose by enabling us to describe natural phenomena for instance, heat, sound and fluid flow. 
-Differential equations can be classified in to two categories. Ordinary differential equations serve to model a movement space or plane, an example would be the trajectory of a projectile launched from a cannon follows a curve determined by an ordinary differential equation that is derived from Newton's second law.
-On the other hand, partial differential equations modelles a function, a typical example is the heat distribution. This distinction usually makes PDEs much harder to solve than ordinary differential equations.
+\section{Partial Differential Equations}
+Since the foundation of the world humanity tried to understand and model the nature. Differential equations serves this purpose by enabling us to describe natural phenomena for instance, heat, sound and fluid flow. Differential equations can be classified in to two categories. Ordinary differential equations serve to model a movement space or plane, an example would be the trajectory of a projectile launched from a cannon follows a curve determined by an ordinary differential equation that is derived from Newton's second law.
 
-General form of 2nd order PDEs of two independent variables is $$ au_{xx} + bu_{xy} + cu_{yy} + du_x + eu_y + fu + g = 0 $$ If the equation satisfies the condition $ b^2 - 4ac = 0 $  it is considered a parabolic partial differential equation. Generally, financial partial differential equations can be classified as parabolic partial differential equations. Generally, partial differential equations are too complicated to work out an analytical solution. Thus, we need to achieve a numerical solution to the problem. Numerical partial differential equations includes components in the areas of applications, mathematics and computers. The most common framework is finite difference method which tries to find approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. Instead we try to find approximate solutions of the problem at a discrete set of points in the $(x, t)$ plane, normally a rectangular grid of points. It is simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. 
+On the other hand, partial differential equations modelles a function, a typical example is the heat distribution. This distinction usually makes PDEs much harder to determine an analytical solution than ordinary differential equations.  Therefore, we need to achieve a numerical solution to the problem. One of the most commong numerical method for partial differential equations is the finite difference methods. The methods consist of finding approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. Finite difference methods are simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. 
 
-Multidimensional finite differences (such as ADI schemes) are only practical up to 3 dimensions, higher dimension are too demanding in terms of computer memory and computing time.
-
-For higher order problems Monte Carlo is usually the method of choice. Using low discrepancy quasi random suites (e.g. Sobol) along with the Brownian bridge technique leads to reasonable computing times. See for instance Jaeckel's book "monte carlo methods in finance".
-
-Feynman-Kac theorem \cite{klebaner}, establishes a link between parabolic partial differential equations and stochastic processes by writing the solution as a conditional expectation. Thanks to the theorem, Monte Carlo method is also utilized to find the numerical solutions to the partial differential equations.  Monte Carlo method is preferred when the dimensions are too high !!Glassermann MC book rough calculation of error MC vs PDE grids(1-2 pages)!!
-
-The finite difference method has become a very popular for approximating the Black Scholes equation. This equation is an example of a convection-diffusion equation. Heat equation is the most basic convection-diffusion equation, we will be using it as a benchmark to test the methods. 
+Feynman-Kac theorem \cite{klebaner}, establishes a link between partial differential equations and stochastic processes by writing the solution as a conditional expectation. Thanks to the theorem, Monte Carlo method is also utilized to find the numerical solutions to the partial differential equations. The convergence rate of Monte Carlo method for $n$ simulations can be denoted as $\mathcal{O}(n^{\frac{-1}{2}}) $ which holds for all dimensions ($d$).
+The error in $d$ dimensional trapezoidal rule for twice continuously differentiable integrands is $\mathcal{O}(n^{\frac{-2}{d}}) $ \cite{glasserman}. Thus, Monte Carlo is a method of choice when evaluating higher dimensions.
 
 \subsection{Heat Equation}
-The heat equation is fundamental to financial engineering. Heat equation is a component in the Black-Schole equation and Black-Scholes equation can be transformed to the heat equation by changing variables \cite{capinski}. Thus understanding  of  heat equation  helps  in  our appreciation of Black–Scholes. In the experiments the following initial and boundary conditions for the heat equation will be used.
-
+The heat equation is fundamental to financial engineering. Heat equation is a component in the Black-Schole equation and Black-Scholes equation can be transformed to the heat equation by changing variables \cite{capinski}. Therefore, understanding heat equation is crucial to grasping concepts of partial differential equations. Heat equation will serve as a benchmark with the following initial and boundary conditions.
 
 \begin{eqnarray} \label{HeatBase}
 u_t(x,t) &=& u_{xx}(x, t) \\[10pt]
 u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
 u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
 \end{eqnarray}
+
+In our calculations, we will test the case where $T = 0.06$ and $x_{max} = 1.0$.
 
 \begin{definition}\label{heatAnal} Analytical Solution of Heat Equation
 
@@ -396,6 +400,7 @@ u(x,y,0) = 1, \hspace{10pt} 0 \leq x \leq x_{\max}, \hspace{10pt} 0 \leq y \leq 
 u(x, 0, t) = u(x, y_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
 u(x, 0, t) = u(x, 1, t) = 0 , \hspace{10pt} 0 \leq t \leq T
 \end{eqnarray}
+In the calculations, we will test the case where $T = 0.06$, $x_{max} = 1.0$ and $y_{max} = 1.0$.
 
 \begin{definition}\label{heat2Anal} Analytical Solution of Two Dimensional Heat Equation
 Similarly, applying separation of variables method to the equation
@@ -407,29 +412,36 @@ T^{'}(t) - (B + C) T(t) = 0 \\[10pt]
 X(0) = X(1) = 0, \hspace{10pt} Y(0) = Y(1) = 0
 \end{eqnarray}
 
-We have solved for X(x) and Y(y) in Analytical Solution of Heat Equation:
+In \ref{heatAnal}, we have already seen that the solutions to X(x) and Y(y) are
 \begin{eqnarray} 
-X_n (x)=  sin(n \pi x), \hspace{10pt} B = n \pi
-Y_m (x)=  sin(m \pi y), \hspace{10pt} C = m \pi
+X_m (x) =  b_n sin(m \pi x) \\
+Y_n (x) =  a_m sin(n \pi y)
 \end{eqnarray}
 
-Solving for $T(t)$ gives the solution
-\begin{eqnarray}
-T(t) = exp(- \pi \sqrt{m^2 + n^2}) \\[10pt]
-u(x, y, t) =\sum_{m=1}^{\infty} \sum_{n=1}^{\infty} A_{mn}  sin(n \pi x) sin(m \pi y) exp(- \pi \sqrt{m^2 + n^2})
-\end{eqnarray}
+Using these values to solve for $T(t)$ gives
+\begin{equation}
+T_{mn}(t) = c_{mn} exp(- \pi^2 (m^2 + n^2)t)
+\end{equation}
 
+Substituting the solutions yields
+\begin{equation}
+u_{mn}(x, y, t) = X_m(x) Y_n(y) T_{mn}(t)
+\end{equation}
+\begin{equation}
+u(x, y, t) = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} A_{mn}  sin(m \pi x) sin(n \pi y) exp(- \pi^2 (m^2 + n^2)t)
+\end{equation}
+where $A_{mn} = b_n a_m c_{mn}$.
 The initial condition gives
 \begin{equation}
-u(x, y, 0) = 1 = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty}  A_{mn} sin(n \pi x) sin(m \pi y)
+u(x, y, 0) = 1 = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty}  A_{mn} sin(m \pi x) sin(n \pi y)
 \end{equation}
 which is a double Fourier sine series. Thus, the coefficient $A_{mn}$ is chosen such that
 \begin{equation}
- A_{mn} = 4 \int_{0}^{1}  \int_{0}^{1} sin(\pi n x)  sin(\pi n y) dx dy = \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n} 
+ A_{mn} = 4 \int_{0}^{1}  \int_{0}^{1} sin(\pi m x)  sin(\pi n y) dx dy = \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n} 
 \end{equation}
 Combining the solutions
 \begin{multline}
-u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n}  \\ sin(n \pi x) sin(m \pi y) exp(- \pi \sqrt{m^2 + n^2}) = 0
+u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n}  \\ sin(m \pi x) sin(n \pi y)     exp(- \pi^2 (m^2 + n^2)t) = 0
 \end{multline}
 
 \end{definition}
@@ -663,7 +675,7 @@ The alternating direction implicit (ADI) method is one of the most common techni
 \delta x^2 u^{n}_{i,j}  = \frac{u^{n}_{i+1,j} - 2u^{n}_{i,j} + u^{n}_{i-1,j}}{\Delta x^2}
 \end{equation}
 
-Thus Explicit method in two space dimensions can be abbreviated as
+Explicit method in two space dimensions can be abbreviated as
 \begin{equation}
 \frac{u^{n+1}_{i,j} + u^{n}_{i,j}}{\Delta t} = \delta x^2 u^{n}_{i,j} + \delta y^2 u^{n}_{i,j}
 \end{equation}
@@ -678,7 +690,7 @@ Dividing each time step in half we introduce a temporary intermediate unknown $u
 \end{equation}
 Rearranging the set of equations yields a tridiagonal system which is solved for the temporary intermediate unknown $u^{n+1/2}_{i,j}$.
 \begin{equation}
-- r_x * u^{n+1/2}_{i+1,j} + (1 + 2r_x) u^{n+1/2}_{i,j}  - r_x u^{n+1/2}_{i,j}  = r_y u^{n}_{i,j+1} + (1 + 2r_y) u^{n}_{i,j} + r_y u^{n}_{i,j-1}
+- r_x u^{n+1/2}_{i+1,j} + (1 + 2r_x) u^{n+1/2}_{i,j}  - r_x u^{n+1/2}_{i,j}  = r_y u^{n}_{i,j+1} + (1 + 2r_y) u^{n}_{i,j} + r_y u^{n}_{i,j-1}
 \end{equation}
 
 \begin{figure}[!htb]
@@ -705,16 +717,18 @@ Rearranging the set of equations yields a tridiagonal system which can be solved
 
 \chapter{Optimizing Solvers}
 
-Attempting to progress in solving complex problems using numerical methods is impossible without applying optimizations. However, nowadays the problem is not to solve a given problem but rather solve it in a given computing environment while exploiting the resources in an optimal way. Thus, it is necessary to investigate methods that allow for efficient implementations. The aim of this section is to introduce practical optimization techniques that can be easily accessed on a regular trading floor. Main optimization techniques that will be tested are parallelizing tridiagonal solvers, Visual Studio optimization switches, different compilers and different solution platforms.
+Attempting to progress in solving complex problems using numerical methods is impossible without applying optimizations. However, nowadays the problem is not to solve a given problem but rather solve it in a given computing environment while exploiting the resources in an optimal way. Thus, it is necessary to investigate methods that allow for efficient implementations. The aim of this section is to introduce practical optimization techniques that can be easily implemented on a regular trading floor. Main optimization techniques that will be tested are parallelizing tridiagonal solvers, Visual Studio optimization switches, compilers and solution platforms.
 
-\section{Compilers and Solution Platforms}
-Firstly, different solution platforms and compilers will be tested against each other.
-Regardless of the implementation of the program, the performance can be different under varying solution platforms and compilers.  
-Intel compiler vs visual studio compiler.
+\section{Solution Platforms}
+The CPU accesses data from RAM using the register that stores memory addresses. 32 bit and 64 bit refers to the amount of data the system can access. so a 32-bit system can address a maximum of 4 GB (4,294,967,296 bytes) of RAM where a 64-bit register can theoretically reference 18,446,744,073,709,551,616 bytes, or 17,179,869,184 GB (16 exabytes) of memory. Since 32 bit does not have access to more than 4 GB, if the system has more than 4 GB of RAM, it will be inaccesible by the CPU, thus A 64 bit system will be needed. The memory increase of 64 bit systems means it is capable of very fast processing of numerical quantities. One disadvantage of the 64 bit systems is more requirement of memory because addresses are 64 bits (8 bytes) wide instead of 32 bits (4 bytes) wide. Due to the increased size of pointers and data structures, 64-bit programs will occupy more memory than an 32-bit version.
 
-The CPU accesses data from RAM using the register that stores memory addresses. 32 bit and 64 bit refers to the amount of data the system can access. so a 32-bit system can address a maximum of 4 GB (4,294,967,296 bytes) of RAM where a 64-bit register can theoretically reference 18,446,744,073,709,551,616 bytes, or 17,179,869,184 GB (16 exabytes) of memory. Since 32 bit does not have access to more than 4 GB, if the system has more than 4 GB of RAM, it will be inaccesible by the CPU, thus A 64 bit system will be needed. The memory increase of 64 bit systems means it is capable of very fast processing of numerical quantities.
+\section{Compilers}
+A good compiler should let us focus on the process of writing programs rather than struggling with the inadequacies of the compiler. It should compile the most recent language standards without complaint. We should feel confident in its ability to produce well-optimized code from even the most abstract codebase. Lastly, it should compile source code as quickly as possible.
 
-One disadvantage of the 64 bit systems is more requirement of memory because addresses are 64 bits (8 bytes) wide instead of 32 bits (4 bytes) wide. Due to the increased size of pointers and data structures, 64-bit programs will occupy more memory than an 32-bit version.
+Regardless of the implementation of the program, the performance can be different under varying compilers. 
+
+Modern CPUs are highly pipelined, superscalar machines that execute instructions out-of-order, use speculative execution, prefetching, and other performance-enhancing techniques. This makes it difficult to predict exactly how well a sequence of instructions will execute on any given microarchitecture. Hardware engineers use highly sophisticated simulations to overcome these problems when designing new CPUs. Compilers have to use heuristics to decide how to target specific CPU microarchitectures and thus have to be tuned to produce good code. Furthermore, the tuning is workload-specific, i.e., a generally sub-par compiler may produce the best code for certain workloads, even though it generally produces poorer code on average.
+
 
 \section{Visual Studio Optimization Switches}
 Visual Studio Optimization Switches, also known as /O options controls various optimizations to be chosen according to the needs of the project. There are various switches for different goals such as minimizing the size of the code (/O1) but since the scope of this project is limited with speed optimizations. Speed optimization flags are /O2 and /Ox. /O2 is a combination of /Og, /Oi, /Ot, /Oy, /Ob2, /GF and /Gy flags. /Ox is a subset of /O2 without the  /GF and /Gy flags. These additional options applied by /O2 can cause pointers to strings or to functions to share a target address, which can affect debugging and strict language conformance  \cite{vsopt}. 
@@ -734,11 +748,17 @@ Visual Studio Optimization Switches, also known as /O options controls various o
 \section{Tridiagonal Solvers}
 Tridiagonal solvers are the most demanding part of the solvers. Hence, development and improvement of such solvers is of great interest \cite{terekhov} \cite{chavez} \cite{hofen} \cite{austin} concerned with this problem. 
 
+
 Large tridiagonal systems of linear equations appear in many numerical analysis applications. In our work, they arise in 
+
 Implementing Crank Nicolson and Alternating Direction Implicit methods requires to solve tridiagonal systems which is the most computationally intensive part of the program.  Therefore, choosing efficient tridiagonal solvers is crucial for the speed of the solver. In this experiment three different algorithms will be tested.
-we present a new memory efficient partitioning algorithm for the solutionof diagonally dominant tridiagonal linear systems of equations thomas O(N) steps
+
+Thomas algorithm which takes $O(N)$ steps and cyclic reduction which takes $2log_2 N$ steps
 
 The Thomas algorithm is avery efficient algorithm for solving tridiagonal systems of equations in serial [15].It is equivalent to Gaussian elimination without pivoting;
+\cite{duffycpp}
+
+In this book we are mainly interested in solving tridiagonal systems of equations that arisewhen we discretise PDEs and two-point boundary value problems. In particular, these systemsarise when we approximate partial derivatives in the space dimension by three-point divideddifferences. In most cases we can use the popular Thomas algorithm to solve the resultinglinear system, although the Double Sweep method performs better. In particular, the Thomasalgorithm is used in the Alternating Direction Implicit (ADI) method which is one of the pop-ular schemes in computational finance
 
 \subsection{Thomas Algorithm}
 Thomas Algorithm is the most commonly used method for solving tridiagonal system of equations. The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The algorithm is a simplified version of the gaussian elimination.
@@ -831,10 +851,19 @@ Both cyclic reductionand recursive doubling are designed for fine grained parall
 If we number equations succesively, then in cyclic reduction the odd-neighbor equations of an even equation are used to eliminate the off-diagonal entries in the even equation.In this step, a tridiagonal system of linear equations for the even equation is gener-ated. This reduced system has only about one-half as many equations as the originalsystem. Now the same procedure is applied recursively to the reduced system untilthere remains only one linear equation with one unknown. The solution of successivereduced systems can be computed to finally yield the solution of the original system.Cyclic reduction requires $2log2NPsteps$
 Cyclic reduction takes more steps so it requires parallelization to be effective CPU parallelization will be used to make cyclic reduction work.
 
-\section{Open Multi-Processing}
-Traditionally, programs are serially computed on a single processor. On the other hand, parallel computation is breaking our code execution so that it utilizes parallelism. Multithreading utilizes the CPUs cores to run calculations concurrently in each core. The concurrent programs are called a thread.  Open Multi-Processing (OpenMP) library, is an implementation of multithreading for C, C++ and Fortran. 
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.8]{cyclic.png}
+    \caption{Cyclic reduction for an eight equation system.}
+\end{figure}
 
-OpenMP approach to multithreading is the fork-join programming model. Firstly, the program start as a single thread of execution called the initial thread. The fork stage begins when the program encounters an OpenMP parallel construct. Parallel execution takes place and multiple threads are created in the parallel region. The initial thread becomes the master and collaborates with the newly created threads to execute the code dynamically. Finally, at the join stage all threads are synchronized, threads are terminated except the original thread \cite{openmp}.
+\section{Open Multi-Processing}
+Traditionally, programs are serially computed on a single processor. On the other hand, parallel computation is used to break our code execution in pieces so that it utilizes parallelism. Multithreading uses the CPUs cores to run calculations concurrently in each core. The concurrent programs are called a thread. If the code is executed on parallel processors, one of the biggest problem is the processors generally require results that have been calculated on other processors. The main issue in this case is that processors clocks are not synchronized and execute the code at minimally different speeds.
+
+
+In order to solve this problem, a group of major computer hardware and software vendors and major parallel computing user facilities joined forces to form The Open Multi-Processing Architecture Review Board (The OpenMP ARB)\cite{openmpfaq}. Open Multi-Processing (OpenMP) is an implementation of multithreading for C, C++ and Fortran and it was introduced to public in 1997. OpenMP is aiming to standardize high level parallelism that is performant, productive and portable.
+
+ OpenMP approach to multithreading is the fork-join programming model. Firstly, the program start as a single thread of execution called the initial thread. The fork stage begins when the program encounters an OpenMP parallel construct. Parallel execution takes place and multiple threads are created in the parallel region. The initial thread becomes the master and collaborates with the newly created threads to execute the code dynamically. Finally, at the join stage all threads are synchronized, threads are terminated except the original thread \cite{openmp}.
 
 \begin{figure}[!htb]
     \centering
@@ -871,34 +900,7 @@ Different solution platforms, compilers, optimization flags and tridiagonal solv
 \subsection{Optimal Grid Size}
 Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. Figure X and X demonstrates the error compared to the grid sizes. The optimal grid size for heat equation and Black-Scholes equation is 50 by 50.
 
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c||} 
- \hline
- Parameter & Value\\ [0.5ex]
- \hline\hline
- Strike Price & 1.0\\ 
- Volatility & 20 \% \\
- Risk Free Rate & 5 \% \\
- Time to Expiry & 2.0\\
- Maximum Share Price & 2.0\\ [1ex] 
- \hline
- \end{tabular}
- \caption{Black-Scholes model testing parameters.}
-\end{table}
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c c||} 
- \hline
- Parameter & One Dimension & Two Dimensions\\ [0.5ex]
- \hline\hline
-  $T$ & 0.075 & 0.075\\ 
-  $ x_{max} $ & 1.0  & 1.0  \\ 
-   $ y_{max} $  &   & 1.0  \\ [1ex] 
- \hline
- \end{tabular}
- \caption{Heat equation testing parameters.}
-\end{table}
+
  
 \begin{figure}[!htb]
   \begin{minipage}[b]{0.5\textwidth}
@@ -1083,9 +1085,11 @@ Timing the base case for thomas algorithm, intel solver and cyclic reduction. Th
  \caption{Solving heat equation with cyclic reduction.}
 \end{table}
 
-\section{Further Work}
+\chapter{Conclusion}
+A Critique of the Crank Nicolson Scheme Strengths and Weaknesses for FinancialInstrument Pricing + rannacher 
 AVX and Intrinsics CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512)GPGPU In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management. \cite{fpga},  cloud functions \cite{cloudfunc}.
-
+change black scholes to a different pricing pde like interest rate derivatives The HJM model \cite{kohl}
+Results concludela
 
 \appendix
 \chapter{Usage of chrono class}

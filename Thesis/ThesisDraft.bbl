@@ -65,6 +65,12 @@ Sadjad Fouladi, Francisco Romero, Dan Iter, Qian Li, Shuvo Chatterjee, Christos
 \newblock In {\em 2019 {USENIX} Annual Technical Conference ({USENIX} {ATC}
   19)}, pages 475--488, Renton, WA, July 2019. {USENIX} Association.
 
+\bibitem{glasserman}
+P.~Glasserman.
+\newblock {\em Monte Carlo Methods in Financial Engineering}, pages 2 -- 3.
+\newblock Applications of mathematics : stochastic modelling and applied
+  probability. Springer, 2004.
+
 \bibitem{Hockney}
 R.~W. Hockney.
 \newblock A fast direct solution of poisson's equation using fourier analysis.
