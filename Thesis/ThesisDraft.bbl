@@ -208,6 +208,16 @@ Charles Petzold.
 \newblock {\em Programming Windows, Fifth Edition}.
 \newblock Microsoft Press, Redmond, WA, USA, 5th edition, 1998.
 
+\bibitem{seltri}
+Pablo Quesada-Barriuso, Juli{\'a}n Lamas-Rodr{\'\i}guez, Dora~B Heras,
+  Montserrat B{\'o}o, and Francisco Arg{\"u}ello.
+\newblock Selecting the best tridiagonal system solver projected on multi-core
+  cpu and gpu platforms.
+\newblock In {\em Proceedings of the International Conference on Parallel and
+  Distributed Processing Techniques and Applications (PDPTA)}, page~1. The
+  Steering Committee of The World Congress in Computer Science, Computer~…,
+  2011.
+
 \bibitem{BM}
 Sriram Ramaswamy.
 \newblock Pollen grains, random walks and einstein.
@@ -248,6 +258,12 @@ Llewellyn~Hilleth Thomas.
 \newblock Elliptic problems in linear difference equations over a network.
 \newblock {\em Watson Sci. Comput. Lab. Rept., Columbia University, New York},
   1, 1949.
+
+\bibitem{compiler}
+Linda Torczon and Keith Cooper.
+\newblock {\em Engineering A Compiler}, pages 19--21.
+\newblock Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 2nd edition,
+  2011.
 
 \bibitem{openmpnext}
 Ruud van~der Pas, Eric Stotzer, and Christian Terboven.

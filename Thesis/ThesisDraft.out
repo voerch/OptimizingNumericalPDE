@@ -24,12 +24,11 @@
 \BOOKMARK [1][-]{section.3.6}{Timing the Code}{chapter.3}% 24
 \BOOKMARK [2][-]{subsection.3.6.1}{Windows Application Programming Interface}{section.3.6}% 25
 \BOOKMARK [2][-]{subsection.3.6.2}{Chrono Library}{section.3.6}% 26
-\BOOKMARK [1][-]{section.3.7}{Comparison of Optimizations}{chapter.3}% 27
-\BOOKMARK [2][-]{subsection.3.7.1}{Optimal Grid Size}{section.3.7}% 28
-\BOOKMARK [2][-]{subsection.3.7.2}{Base Case}{section.3.7}% 29
-\BOOKMARK [2][-]{subsection.3.7.3}{Visual Studio Optimizations}{section.3.7}% 30
-\BOOKMARK [2][-]{subsection.3.7.4}{Cyclic Reduction with OpenMP}{section.3.7}% 31
-\BOOKMARK [0][-]{chapter.4}{Conclusion}{}% 32
-\BOOKMARK [0][-]{appendix.A}{Usage of chrono class}{}% 33
-\BOOKMARK [0][-]{appendix.B}{Implementation of the PDE class}{}% 34
-\BOOKMARK [0][-]{appendix.C}{Implementation of the FiniteDifferenceMethod class}{}% 35
+\BOOKMARK [0][-]{chapter.4}{Comparison of Optimizations}{}% 27
+\BOOKMARK [1][-]{subsection.4.0.1}{Base Case}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.0.2}{Visual Studio Optimizations}{subsection.4.0.1}% 29
+\BOOKMARK [2][-]{subsection.4.0.3}{Cyclic Reduction with OpenMP}{subsection.4.0.1}% 30
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 31
+\BOOKMARK [0][-]{appendix.A}{Usage of chrono class}{}% 32
+\BOOKMARK [0][-]{appendix.B}{Implementation of the PDE class}{}% 33
+\BOOKMARK [0][-]{appendix.C}{Implementation of the FiniteDifferenceMethod class}{}% 34

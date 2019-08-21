@@ -441,7 +441,7 @@ which is a double Fourier sine series. Thus, the coefficient $A_{mn}$ is chosen 
 \end{equation}
 Combining the solutions
 \begin{multline}
-u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n}  \\ sin(m \pi x) sin(n \pi y)     exp(- \pi^2 (m^2 + n^2)t) = 0
+u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n}  \\ sin(m \pi x) sin(n \pi y)     exp(- \pi^2 (m^2 + n^2)t)
 \end{multline}
 
 \end{definition}
@@ -669,7 +669,7 @@ The problem reduces to a tridiagonal matrix system. This system of equations can
 \end{figure}
 
 \subsection{Alternating Direction Implicit Method}
-The alternating direction implicit (ADI) method is one of the most common techniques to numerically solve two dimensional parabolic PDEs. ADI scheme give us advantages of the implicit finite difference method and computationally requires to solve only tridiagonal matrices. The scheme was first proposed by Peaceman and Rachford in 1955 for oil reservoir modelling \cite{peace}. Basically the methods to split the spatial dimensions and solve a two dimensional problem as two consecutive one dimensional problems. It is possible to use ADI in more than three dimensions which produces the same number of consecutive one dimensional problems \cite{DougADI}. In order to develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
+Curse of dimensionality effects finite difference schemes as they tend to become more difficult to set up, understand and implement as the dimensionality of the space increases \cite{duffyfinite}. The alternating direction implicit (ADI) method is one of the most common techniques to numerically solve two dimensional parabolic PDEs. ADI scheme give us advantages of the implicit finite difference method and computationally requires to solve only tridiagonal matrices. The scheme was first proposed by Peaceman and Rachford in 1955 for oil reservoir modelling \cite{peace}. Basically the methods to split the spatial dimensions and solve a two dimensional problem as two consecutive one dimensional problems. It is possible to use ADI in more than three dimensions which produces the same number of consecutive one dimensional problems \cite{DougADI}. In order to develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
 
 \begin{equation}
 \delta x^2 u^{n}_{i,j}  = \frac{u^{n}_{i+1,j} - 2u^{n}_{i,j} + u^{n}_{i-1,j}}{\Delta x^2}
@@ -703,11 +703,6 @@ Next step of the grid $u^{n+1}_{i,j}$ is calculated by approximating explicitly 
 \begin{equation}
 \frac{u^{n+1}_{i,j} + u^{n+1/2}_{i,j}}{0.5 \Delta t} = \frac{\delta x^2 u^{n+1/2}_{i,j} }{\Delta x^2} + \frac{\delta y^2 u^{n+1}_{i,j}}{\Delta y^2}
 \end{equation}
-Rearranging the set of equations yields a tridiagonal system which can be solved using Gaussian elimination, cyclic reduction or Thomas algorithm.
-\begin{equation}
--r_y u^{n+1}_{i,j+1} + (1 + 2r_y) u^{n+1}_{i,j} - r_y u^{n+1}_{i,j-1} = r_x * u^{n+1/2}_{i+1,j} + (1 + 2r_x) u^{n+1/2}_{i,j} + r_x u^{n+1/2}_{i,j}
-\end{equation}
-
 
 \begin{figure}[!htb]
     \centering
@@ -715,20 +710,28 @@ Rearranging the set of equations yields a tridiagonal system which can be solved
     \caption{Solution of two dimensional heat equation using ADI.}
 \end{figure}
 
+Rearranging the set of equations yields a tridiagonal system which can be solved using Gaussian elimination, cyclic reduction or Thomas algorithm.
+\begin{equation}
+-r_y u^{n+1}_{i,j+1} + (1 + 2r_y) u^{n+1}_{i,j} - r_y u^{n+1}_{i,j-1} = r_x * u^{n+1/2}_{i+1,j} + (1 + 2r_x) u^{n+1/2}_{i,j} + r_x u^{n+1/2}_{i,j}
+\end{equation}
+
 \chapter{Optimizing Solvers}
 
 Attempting to progress in solving complex problems using numerical methods is impossible without applying optimizations. However, nowadays the problem is not to solve a given problem but rather solve it in a given computing environment while exploiting the resources in an optimal way. Thus, it is necessary to investigate methods that allow for efficient implementations. The aim of this section is to introduce practical optimization techniques that can be easily implemented on a regular trading floor. Main optimization techniques that will be tested are parallelizing tridiagonal solvers, Visual Studio optimization switches, compilers and solution platforms.
 
 \section{Solution Platforms}
-The CPU accesses data from RAM using the register that stores memory addresses. 32 bit and 64 bit refers to the amount of data the system can access. so a 32-bit system can address a maximum of 4 GB (4,294,967,296 bytes) of RAM where a 64-bit register can theoretically reference 18,446,744,073,709,551,616 bytes, or 17,179,869,184 GB (16 exabytes) of memory. Since 32 bit does not have access to more than 4 GB, if the system has more than 4 GB of RAM, it will be inaccesible by the CPU, thus A 64 bit system will be needed. The memory increase of 64 bit systems means it is capable of very fast processing of numerical quantities. One disadvantage of the 64 bit systems is more requirement of memory because addresses are 64 bits (8 bytes) wide instead of 32 bits (4 bytes) wide. Due to the increased size of pointers and data structures, 64-bit programs will occupy more memory than an 32-bit version.
+The CPU accesses data from RAM using the register that stores memory addresses. 32 bit and 64 bit refers to the amount of data the system can access. so a 32-bit system can address a maximum of 4 GB (4,294,967,296 bytes) of RAM where a 64-bit register can theoretically reference 18,446,744,073,709,551,616 bytes, or 17,179,869,184 GB (16 exabytes) of memory. Since 32 bit does not have access to more than 4 GB, if the system has more than 4 GB of RAM, it will be inaccesible by the CPU, thus A 64 bit system will be needed. The memory increase of 64 bit systems means it is capable of very fast processing of numerical quantities. One disadvantage of the 64 bit systems is more requirement of memory because addresses are 64 bits (8 bytes) wide instead of 32 bits (4 bytes) wide. Due to the increased size of pointers and data structures, 64-bit programs will occupy more memory than an 32-bit version. Visual Studio offers the the x86 and x64 solution platforms which corresponds to 32-bit and 64-bit respectively. The solution platforms will be tested against to determine the optimal solution platform.
 
 \section{Compilers}
-A good compiler should let us focus on the process of writing programs rather than struggling with the inadequacies of the compiler. It should compile the most recent language standards without complaint. We should feel confident in its ability to produce well-optimized code from even the most abstract codebase. Lastly, it should compile source code as quickly as possible.
+The software we write is translated into low level abstractions by a compiler. The quality of the translation plays a crucial role in how the software performs. Commonly, compilers are comprises of three stages, front end, optimization and the back end.  First step is to understand the source code translate it into intermediate representation using data structures and formal language theory. The intermediate representation generated in the front end is later used by the back end. In the middle, optimizer is focused on efficiency. It transforms the intermediate representation by deriving knowledge about runtime behaviour and improve the behaviour. Finally, the back end map the functionality to the instruction set of the processor \cite{compiler}. 
 
-Regardless of the implementation of the program, the performance can be different under varying compilers. 
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=1]{compiler.png}
+    \caption{Basic structure of a compiler.}
+\end{figure}
 
-Modern CPUs are highly pipelined, superscalar machines that execute instructions out-of-order, use speculative execution, prefetching, and other performance-enhancing techniques. This makes it difficult to predict exactly how well a sequence of instructions will execute on any given microarchitecture. Hardware engineers use highly sophisticated simulations to overcome these problems when designing new CPUs. Compilers have to use heuristics to decide how to target specific CPU microarchitectures and thus have to be tuned to produce good code. Furthermore, the tuning is workload-specific, i.e., a generally sub-par compiler may produce the best code for certain workloads, even though it generally produces poorer code on average.
-
+During the back end stage, the compiler approximates the allocation and scheduling. The speed and size of the code is a direct result of the ability to approximate correctly. This produces complex interactions that can lead to problematic results. Therefore, regardless of the implementation of the program, the performance can be different under varying compilers and they are an important factor for time constrained tasks such as option pricing.  Well designed and implemented compilers savings accumulate over time. It should be able to produce well-optimized code and let us focus on the process of writing programs rather than struggling with the inadequacies of the compiler.  In this project Visual C++ and Intel C++ compiler will be tested against each other. 
 
 \section{Visual Studio Optimization Switches}
 Visual Studio Optimization Switches, also known as /O options controls various optimizations to be chosen according to the needs of the project. There are various switches for different goals such as minimizing the size of the code (/O1) but since the scope of this project is limited with speed optimizations. Speed optimization flags are /O2 and /Ox. /O2 is a combination of /Og, /Oi, /Ot, /Oy, /Ob2, /GF and /Gy flags. /Ox is a subset of /O2 without the  /GF and /Gy flags. These additional options applied by /O2 can cause pointers to strings or to functions to share a target address, which can affect debugging and strict language conformance  \cite{vsopt}. 
@@ -746,22 +749,10 @@ Visual Studio Optimization Switches, also known as /O options controls various o
 /O2 and /Ox flags are tested for maximum speed against the /Od flag which disables all the optimizations.
  
 \section{Tridiagonal Solvers}
-Tridiagonal solvers are the most demanding part of the solvers. Hence, development and improvement of such solvers is of great interest \cite{terekhov} \cite{chavez} \cite{hofen} \cite{austin} concerned with this problem. 
-
-
-Large tridiagonal systems of linear equations appear in many numerical analysis applications. In our work, they arise in 
-
-Implementing Crank Nicolson and Alternating Direction Implicit methods requires to solve tridiagonal systems which is the most computationally intensive part of the program.  Therefore, choosing efficient tridiagonal solvers is crucial for the speed of the solver. In this experiment three different algorithms will be tested.
-
-Thomas algorithm which takes $O(N)$ steps and cyclic reduction which takes $2log_2 N$ steps
-
-The Thomas algorithm is avery efficient algorithm for solving tridiagonal systems of equations in serial [15].It is equivalent to Gaussian elimination without pivoting;
-\cite{duffycpp}
-
-In this book we are mainly interested in solving tridiagonal systems of equations that arisewhen we discretise PDEs and two-point boundary value problems. In particular, these systemsarise when we approximate partial derivatives in the space dimension by three-point divideddifferences. In most cases we can use the popular Thomas algorithm to solve the resultinglinear system, although the Double Sweep method performs better. In particular, the Thomasalgorithm is used in the Alternating Direction Implicit (ADI) method which is one of the pop-ular schemes in computational finance
+Tridiagonal solvers are the most demanding part of the solvers. Hence, development and improvement of such solvers is of great interest \cite{terekhov} \cite{chavez} \cite{hofen} \cite{austin} concerned with this problem.  Large tridiagonal systems appear in many numerical analysis applications. In our work, they arise in the Crank-Nicolson and Alternating Direction Implicit schemes.  Solving tridiagonal systems is the most computationally intensive part of the schemes. Therefore, choosing efficient tridiagonal solvers is crucial for the speed of the solver. In this experiment two implementations of Thomas Algorithm and Cyclic Reduction will be tested.
 
 \subsection{Thomas Algorithm}
-Thomas Algorithm is the most commonly used method for solving tridiagonal system of equations. The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The algorithm is a simplified version of the gaussian elimination.
+Thomas Algorithm is the most commonly used method for solving tridiagonal system of equations. The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The algorithm is equivalent to Gaussian elimination without pivoting.   
 
 The system equations can be written as
 $$
@@ -792,7 +783,7 @@ d_k \\
 \end{bmatrix}
 $$
 
-The method begins by forming coefficients \(c^{*}_i\) and \(d^{*}_i\) in place of \(a_i\), \(b_i\) and \(c_i\) as follows:
+The method begins by calculating coefficients \(c^{*}_i\) and \(d^{*}_i\) replacing \(a_i\), \(b_i\) and \(c_i\) \cite{duffycpp}.
 $$
 c^{*}_i = \left\{
      \begin{array}{lr}
@@ -809,7 +800,7 @@ d^{*}_i = \left\{
      \end{array}
    \right.
    $$
-With these new coefficients, the matrix equation can be rewritten as:
+The equations can be rewritten as 
 $$
 \begin{bmatrix}  
 1 & c^{*}_1 & 0 & 0 & ... & 0 \\ 
@@ -837,29 +828,84 @@ d^{*}_3 \\
 d^{*}_k \\ 
 \end{bmatrix}
 $$
-The algorithm for the solution of these equations is now straightforward and works 'in reverse':
 
+The last step is to work in reverse with the following equations.
 \[ f_k = d^{*}_k, \qquad f_i = d^{*}_k - c^{*}_i x_{i+1}, \qquad i = k-1, k-2, ... ,2,1 \]
 
  \subsection{Intel Math Kernel Library}
 Intel Math Kernel Library implements routines for solving systems of linear equations from the standard LAPACK library. Variety of atrix types are supported by the routines.  Specifically gtsv function is utilized from the package. Using Gaussian elimination with partial pivoting, gstv computes the solution to the system of linear equations with a tridiagonal coefficient matrix \cite{gtsv}.  
 
 \subsection{Cyclic Reduction}\label{cyclic}
-Cyclic reduction was proposed by R. W. Hockney in the 1960s for solving the resulting linear systems from the  discretization of the Poisson equation \cite{Hockney}. 
-Both cyclic reductionand recursive doubling are designed for fine grained parallelism, where each process or owns exactly one row of the tridiagonal matrix. 
+Cyclic reduction was proposed by R. W. Hockney in the 1960s for solving the resulting linear systems from the  discretization of the Poisson equation \cite{Hockney}. Cyclic reduction consists of two stages, forward reduction and back substitution.
 
-If we number equations succesively, then in cyclic reduction the odd-neighbor equations of an even equation are used to eliminate the off-diagonal entries in the even equation.In this step, a tridiagonal system of linear equations for the even equation is gener-ated. This reduced system has only about one-half as many equations as the originalsystem. Now the same procedure is applied recursively to the reduced system untilthere remains only one linear equation with one unknown. The solution of successivereduced systems can be computed to finally yield the solution of the original system.Cyclic reduction requires $2log2NPsteps$
-Cyclic reduction takes more steps so it requires parallelization to be effective CPU parallelization will be used to make cyclic reduction work.
+Given an $n$ sized system, we will model the matrix as three vectors, lower diagonal $a$ of size $n - 1$, diagonal $b$ of size $n$ and upper diagonal $c$ of size $n - 1$. 
+$$
+\begin{bmatrix}  
+b_1 & c_1 & 0 & 0 & ... & 0 \\ 
+a_2 & b_2 & c_2 & 0 & ... & 0 \\ 
+0 & a_3 & b_3 & c_3 & 0 & 0 \\ 
+. & . &  &  &  & . \\ 
+. & . &  &  &  & . \\ 
+. & . &  &  &  & c_{k-1} \\ 
+0 & 0 & 0 & 0 & a_k & b_k \\ 
+\end{bmatrix} \begin{bmatrix}  
+f_1 \\ 
+f_2 \\ 
+f_3 \\ 
+.\\ 
+.\\ 
+.\\ 
+f_k \\ 
+\end{bmatrix} = \begin{bmatrix} 
+d_1 \\ 
+d_2 \\ 
+d_3 \\ 
+.\\ 
+.\\ 
+.\\ 
+d_k \\ 
+\end{bmatrix}
+$$
+
+
+During the forward reduction stage  at each step $s$ the odd number equations are reduced and even-indexed equations are updated. Thus, the number of unknows are reduced by half and new equations of the form
+\begin{equation}
+a_i^{s} f_{i - 2^{s - 1}}^{s} + f_i^{s} + c^{s}  x_{i + 2^{s - 1}} = d_i^s
+\end{equation}
+are generated where $ i = 2^s, 2^s + 2^s, ... , n$ and $s = 1, 2, ... , log_2 n$ .
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.8]{cyclic.png}
+        \includegraphics[scale=0.6]{cyclic.png}
     \caption{Cyclic reduction for an eight equation system.}
 \end{figure}
+
+The updated values at each step are  
+\begin{eqnarray}
+k_1 = \frac{ a_{i}^{s - 1}}{b_{i-1}^{s - 1}} \hspace{10pt} k_2 = \frac{ c_{i}^{s - 1}}{b_{i+1}^{s - 1}} \\
+a_i^{s} = -a_{i-1}^{s - 1}  k_1\\
+c_i^{s} = -c_{i+1}^{s - 1}  k_2\\
+b_i^{s} = b_{i}^{s - 1} -c_{i-1}^{s - 1} k_1 - a_{i+1}^{s - 1}  k_2  \\
+d_i^{s} = d_i^{s - 1} - d_{i- 1}^{s - 1}  k_1 - d_{i + 1}^{s - 1}   k_2
+\end{eqnarray}
+The same procedure is applied recursively until there remains only one equation with one unknown. 
+
+During each step of backward substitution, we solve all rest of the unknowns by substituting the already solved value. As the name implies the steps go backwards as $s = log_2 n - 1, ... , 0$
+\begin{equation}
+f_i = \frac{d_i^{s} - a_i^{s} f_{i - 2^s}  - c_i^{s} f_{i + 2^s}}{b_i^s}
+\end{equation}
+where  $ i = 2^s, 2^s + 2^{s+1}, ... , n$ 
+
+If serially computed, Thomas algorithm performs $ 8 n $ operations while cyclic reduction performs $17n$ operations. On the other hand,if parallel computing is used with $n$ cores, cyclic reduction requires $2 log_2 n - 1$ steps  while the Thomas algorithm requires $2n$ steps \cite{gputri}. The cyclic reduction algorithm was focused towards fine-grained parallelism which could be achieved using CPU parallelism \cite{seltri}.
 
 \section{Open Multi-Processing}
 Traditionally, programs are serially computed on a single processor. On the other hand, parallel computation is used to break our code execution in pieces so that it utilizes parallelism. Multithreading uses the CPUs cores to run calculations concurrently in each core. The concurrent programs are called a thread. If the code is executed on parallel processors, one of the biggest problem is the processors generally require results that have been calculated on other processors. The main issue in this case is that processors clocks are not synchronized and execute the code at minimally different speeds.
 
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{openmp.png}
+    \caption{The fork-join programming model.}
+\end{figure}
 
 In order to solve this problem, a group of major computer hardware and software vendors and major parallel computing user facilities joined forces to form The Open Multi-Processing Architecture Review Board (The OpenMP ARB)\cite{openmpfaq}. Open Multi-Processing (OpenMP) is an implementation of multithreading for C, C++ and Fortran and it was introduced to public in 1997. OpenMP is aiming to standardize high level parallelism that is performant, productive and portable.
 
@@ -867,8 +913,8 @@ In order to solve this problem, a group of major computer hardware and software 
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.7]{openmp.png}
-    \caption{The fork-join programming model.}
+        \includegraphics[scale=0.6]{cyclicopenmp.png}
+    \caption{Implementation of cyclic reduction using OpenMP.}
 \end{figure}
 
 Algorithms like cyclic reduction \ref{cyclic} uses nested loops to calculate the solution. Therefore nested parallelism is needed to build efficient programs. Nesting the parallel constructs results in nested parallelism. Each thread that encounters the next parallel region creates a new parallel region at runtime \cite{openmpnext}.
@@ -876,7 +922,7 @@ Algorithms like cyclic reduction \ref{cyclic} uses nested loops to calculate the
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.7]{openmpnested.png}
-    \caption{3 threads create 2 threads, nested parallelism.}
+    \caption{4 threads create 2 threads, nested parallelism.}
 \end{figure}
 
 In order to specify and control the paralelization procedure, OpenMP uses compiler directives, runtime functions, and  envi­ronment variables. OpenMP enables developers to just give a high-level specification of the parallelism by indicating the regions to be executed in parallel using compiler directives, runtime library routines, and environment variables. The details of the parallelism is up to the compiler which makes OpenMP comparatively easy to use. 
@@ -891,167 +937,21 @@ Windows Application Programming Interface (API) is the lowest level of interacti
 Using the Windows API for just timing the code is slightly excessive given the amount of work it takes. Luckily, Chrono library was introduced part of the C++11’s standard library.  Timers and clocks might differ on distinct systems, thus Chrono library is designed to work effortlessly with date and time. The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
 
 
-\section{Comparison of Optimizations}
+\chapter{Comparison of Optimizations}
 This section documents the performance of attempted optimizations. Experiments  are  conducted  at  W307 computer laboratory, Queen Mary University of London.  Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7-6700 CPU with 4 cores clocked at 3.40 GHz.  The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized  in  the  tests  include Intel Compiler, version 18.0.3 and Intel Math Kernel  Library. 
 
-Numerical analysis and computer simulations is undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was solving the base cases \ref{bsAnal}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance.
-Different solution platforms, compilers, optimization flags and tridiagonal solvers will be tested against each other.
+Numerical analysis and computer simulations is undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was solving the base cases \ref{bsAnal}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance. Different solution platforms, compilers, optimization flags and tridiagonal solvers will be tested against each other.
  
-\subsection{Optimal Grid Size}
-Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. Figure X and X demonstrates the error compared to the grid sizes. The optimal grid size for heat equation and Black-Scholes equation is 50 by 50.
-
-
- 
-\begin{figure}[!htb]
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{HeatExplicitGridError.png}
-    \caption{Error of grid sizes.}
-  \end{minipage}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{HeatExplicitGridTimer.png}
-    \caption{Timing grid sizes.}
-  \end{minipage}
-\end{figure}
-
-
-\begin{figure}[!htb]
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{BSExplicitGridError.png}
-    \caption{Error of grid sizes.}
-  \end{minipage}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{BSExplicitGridTimer.png}
-    \caption{Timing grid sizes.}
-  \end{minipage}
-\end{figure}
+Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. The 64 by 64 grid will be used for one dimensional heat equation and Black-Scholes equation. Two dimensional heat equations solution will discretize the two space dimensions and the time dimension by 32 steps.
 
 \subsection{Base Case}
-Timing the base case for thomas algorithm, intel solver and cyclic reduction. The timings are mean of 1000 trials and each trial adds a random number $ 0 < \epsilon < 10^-7 $ to the step size to avoid compiler optimizations.
+The base case consists of disabled optimizations of Visual Studio (/Od flag). An average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.
 
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c c||} 
- \hline
- Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
- \hline\hline\hline
- Visual Studio Compiler x86 & 0.02496743 & 0.02590181 \\ 
- Visual Studio Compiler x64 & 0.02105383 & 0.02216256 \\
- Intel Compiler x86 & 0.02563324 & 0.02633357 \\
- Intel Compiler x64 & 0.02210323 & 0.02298945\\ [1ex] 
- \hline
- \end{tabular}
- \caption{Solving Black-Scholes with Thomas Algorithm base case.}
-\end{table}
+\subsection{Visual Studio Optimizations}
 
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c c||} 
- \hline
- Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
- \hline\hline\hline
- Visual Studio Compiler x86 &  \\ 
- Visual Studio Compiler x64 & \\
- Intel Compiler x86 & \\
- Intel Compiler x64 & 0.02171834 & 0.02286124\\ [1ex] 
- \hline
- \end{tabular}
- \caption{Solving Black-Scholes with Intel Solver base case.}
-\end{table}
+\subsubsection{/O2 Flag}
 
-\begin{table}[htp!]
-\centering
- \begin{tabular}{||c c c c||} 
- \hline
- Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
- \hline\hline\hline
- Visual Studio Compiler x86 & 0.02502006 & 0.02536817 & 0.07766176 \\ 
- Visual Studio Compiler x64 & 0.02185875 & 0.02211793 & 0.06512516 \\
- Intel Compiler x86 & 0.02685609 & 0.02694334 & 0.08277156\\
- Intel Compiler x64 & 0.0225934 & 0.0226115 & 0.06614703\\[1ex] 
- \hline
- \end{tabular}
- \caption{Solving heat equation with Thomas Algorithm base case.}
-\end{table}
- 
- 
-\begin{table}[htp!]
-\centering
- \begin{tabular}{||c c c c||} 
- \hline
- Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
- \hline\hline\hline
- Visual Studio Compiler x86 \\ 
- Visual Studio Compiler x64 &  \\
- Intel Compiler x86 & \\
- Intel Compiler x64 & 0.02239165 & 0.02195975 & 0.06337759\\[1ex] 
- \hline
- \end{tabular}
- \caption{Solving heat equation with Intel Solver base case.}
-\end{table}
- 
-
-\subsection{Visual Studio Optimizations} 
- The optimization switch for enabling most speed optimizations /Ox will be utilized in this section. 
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c c||} 
- \hline
- Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
- \hline\hline\hline
- Visual Studio Compiler x86 & \\ 
- Visual Studio Compiler x64 & \\
- Intel Compiler x86 & \\
- Intel Compiler x64 & \\ [1ex] 
- \hline
- \end{tabular}
- \caption{Solving Black-Scholes with Thomas Algorithm using Visual Studio optimizations.}
-\end{table}
-
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c c||} 
- \hline
- Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
- \hline\hline\hline
- Visual Studio Compiler x86 & \\ 
- Visual Studio Compiler x64 & \\
- Intel Compiler x86 & \\
- Intel Compiler x64 & \\ [1ex] 
- \hline
- \end{tabular}
- \caption{Solving Black-Scholes with Intel Solver using Visual Studio optimizations.}
-\end{table}
-
-\begin{table}[htp!]
-\centering
- \begin{tabular}{||c c c c||} 
- \hline
- Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
- \hline\hline\hline
- Visual Studio Compiler x86 \\ 
- Visual Studio Compiler x64 & \\
- Intel Compiler x86 & \\
- Intel Compiler x64 & \\[1ex] 
- \hline
- \end{tabular}
- \caption{Solving heat equation with Thomas Algorithm using Visual Studio optimizations.}
-\end{table}
- 
- 
-\begin{table}[htp!]
-\centering
- \begin{tabular}{||c c c c||} 
- \hline
- Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
- \hline\hline\hline
- Visual Studio Compiler x86 \\ 
- Visual Studio Compiler x64 & \\
- Intel Compiler x86 & \\
- Intel Compiler x64 & \\[1ex] 
- \hline
- \end{tabular}
- \caption{Solving heat equation with Intel Solver using Visual Studio optimizations.}
-\end{table}
+\subsubsection{/Ox Flag}
 
 \subsection{Cyclic Reduction with OpenMP} 
  
@@ -1067,28 +967,16 @@ Timing the base case for thomas algorithm, intel solver and cyclic reduction. Th
  Intel Compiler x64 &0 \\ [1ex] 
  \hline
  \end{tabular}
- \caption{Solving Black-Scholes with cyclic reduction.}
-\end{table}
-
-\begin{table}[h!]
-\centering
- \begin{tabular}{||c c c||} 
- \hline
- Environment & Cyclic Reduction\\ [0.5ex] 
- \hline\hline\hline
- Visual Studio Compiler x86 & 0\\ 
- Visual Studio Compiler x64 & 0 \\
- Intel Compiler x86 & 0\\
- Intel Compiler x64 &0 \\ [1ex] 
- \hline
- \end{tabular}
  \caption{Solving heat equation with cyclic reduction.}
 \end{table}
+
 
 \chapter{Conclusion}
 A Critique of the Crank Nicolson Scheme Strengths and Weaknesses for FinancialInstrument Pricing + rannacher 
 AVX and Intrinsics CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512)GPGPU In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management. \cite{fpga},  cloud functions \cite{cloudfunc}.
+
 change black scholes to a different pricing pde like interest rate derivatives The HJM model \cite{kohl}
+Parallel cyclic reductions is faster than thomas algorithm. 64 bit faster than 32 bit. 
 Results concludela
 
 \appendix

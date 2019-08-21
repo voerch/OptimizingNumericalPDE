@@ -1,0 +1,181 @@
+
+\subsection{Optimal Grid Size}
+Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are utilised to calculate errors for the solutions using different grid sizes, the grid with the lowest error is used for further tests. Figure X and X demonstrates the error compared to the grid sizes. The optimal grid size for heat equation and Black-Scholes equation is 50 by 50.
+
+
+ 
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGridError.png}
+    \caption{Error of grid sizes.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{HeatExplicitGridTimer.png}
+    \caption{Timing grid sizes.}
+  \end{minipage}
+\end{figure}
+
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSExplicitGridError.png}
+    \caption{Error of grid sizes.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{BSExplicitGridTimer.png}
+    \caption{Timing grid sizes.}
+  \end{minipage}
+\end{figure}
+
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & 0.02496743 & 0.02590181 \\ 
+ Visual Studio Compiler x64 & 0.02105383 & 0.02216256 \\
+ Intel Compiler x86 & 0.02563324 & 0.02633357 \\
+ Intel Compiler x64 & 0.02210323 & 0.02298945\\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving Black-Scholes with Thomas Algorithm base case.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 &  \\ 
+ Visual Studio Compiler x64 & \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & 0.02171834 & 0.02286124\\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving Black-Scholes with Intel Solver base case.}
+\end{table}
+
+\begin{table}[htp!]
+\centering
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & 0.02502006 & 0.02536817 & 0.07766176 \\ 
+ Visual Studio Compiler x64 & 0.02185875 & 0.02211793 & 0.06512516 \\
+ Intel Compiler x86 & 0.02685609 & 0.02694334 & 0.08277156\\
+ Intel Compiler x64 & 0.0225934 & 0.0226115 & 0.06614703\\[1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving heat equation with Thomas Algorithm base case.}
+\end{table}
+ 
+ 
+\begin{table}[htp!]
+\centering
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 \\ 
+ Visual Studio Compiler x64 &  \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & 0.02239165 & 0.02195975 & 0.06337759\\[1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving heat equation with Intel Solver base case.}
+\end{table}
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & \\ 
+ Visual Studio Compiler x64 & \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving Black-Scholes with Thomas Algorithm using Visual Studio optimizations.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Explicit Method & Crank Nicolson\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & \\ 
+ Visual Studio Compiler x64 & \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving Black-Scholes with Intel Solver using Visual Studio optimizations.}
+\end{table}
+
+\begin{table}[htp!]
+\centering
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 \\ 
+ Visual Studio Compiler x64 & \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & \\[1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving heat equation with Thomas Algorithm using Visual Studio optimizations.}
+\end{table}
+ 
+ 
+\begin{table}[htp!]
+\centering
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Testing & Explicit Method & Crank Nicolson & ADI\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 \\ 
+ Visual Studio Compiler x64 & \\
+ Intel Compiler x86 & \\
+ Intel Compiler x64 & \\[1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving heat equation with Intel Solver using Visual Studio optimizations.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Cyclic Reduction\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & 0\\ 
+ Visual Studio Compiler x64 & 0 \\
+ Intel Compiler x86 & 0\\
+ Intel Compiler x64 &0 \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving Black-Scholes with cyclic reduction.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c||} 
+ \hline
+ Environment & Cyclic Reduction\\ [0.5ex] 
+ \hline\hline\hline
+ Visual Studio Compiler x86 & 0\\ 
+ Visual Studio Compiler x64 & 0 \\
+ Intel Compiler x86 & 0\\
+ Intel Compiler x64 &0 \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Solving heat equation with cyclic reduction.}
+\end{table}
+

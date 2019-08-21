@@ -1,22 +1,20 @@
 ﻿# TODO #
+Cyclic reduction yaz 
+results
+conc + intro
 
-adi matrisi yaz
-Cyclic reduction yaz / O(n) tri algoları karşılaştır
-Introduction + solving pdes paragrafları toparla
-Figürler ece
-
-Sorular
-stability/consistency analysis??
-appendixe code bits lazim mi hangileri?
-why uniform grid olunca daha iyi oluyor araştır?? Formula to determine optimal grid sizing?
-openmp collapse only in intel compiler how to go ahead
 
 Toparlama
+ece figürler
+turn it in02
 bibtex ref düzelt
-grammarlyden geçir
+grammarlyden geçir + boşlukları kontrol + büyük küçük harf
 kodlarin basina author date description ekle
 Timinge gore heatmap hazirla
-Root mean squared relative error testing
+adi matrisi yaz
+
+ekstra
+grid sizing + Root mean squared relative error testing
 
 # Further Studies #
 More type of options BSPde bdegistir callputflag duffy c++ 677 

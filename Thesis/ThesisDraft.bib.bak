@@ -137,7 +137,7 @@ url="https://doi.org/10.1007/BF02127704"
   url={https://books.google.co.uk/books?id=0mEbvgAACAAJ},
   year={2006},
   publisher={Wiley},
-  pages={40--43}
+  pages={209--210}
 }
 
 @misc{gtsv,
@@ -285,7 +285,8 @@ year = {2018}
   series={The Wiley Finance Series},
   url={https://books.google.co.uk/books?id=-RW5AQAAQBAJ},
   year={2013},
-  publisher={Wiley}
+  publisher={Wiley},
+  pages == {397-- 401}
 }
 
 @book{evans,
@@ -476,4 +477,43 @@ author = "Gustavo Chávez and George Turkiyyah and Stefano Zampini and Hatem Lta
  Pages = {2 - 3}
 }
 
+@article{gputri,
+ author = {Zhang, Yao and Cohen, Jonathan and Owens, John D.},
+ title = {Fast Tridiagonal Solvers on the GPU},
+ journal = {SIGPLAN Not.},
+ issue_date = {May 2010},
+ volume = {45},
+ number = {5},
+ month = jan,
+ year = {2010},
+ issn = {0362-1340},
+ pages = {127--136},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/1837853.1693472},
+ doi = {10.1145/1837853.1693472},
+ acmid = {1693472},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {gpgpu, performance optimization, tridiagonal linear system}
+} 
+
+@Inbook{compiler,
+ author = {Torczon, Linda and Cooper, Keith},
+ title = {Engineering A Compiler},
+ year = {2011},
+ isbn = {012088478X},
+ edition = {2nd},
+ publisher = {Morgan Kaufmann Publishers Inc.},
+ address = {San Francisco, CA, USA},
+ pages = {19--21}
+} 
+
+@inproceedings{seltri,
+  title={Selecting the best tridiagonal system solver projected on multi-core CPU and GPU platforms},
+  author={Quesada-Barriuso, Pablo and Lamas-Rodr{\'\i}guez, Juli{\'a}n and Heras, Dora B and B{\'o}o, Montserrat and Arg{\"u}ello, Francisco},
+  booktitle={Proceedings of the International Conference on Parallel and Distributed Processing Techniques and Applications (PDPTA)},
+  pages={1},
+  year={2011},
+  organization={The Steering Committee of The World Congress in Computer Science, Computer~…}
+}
 
