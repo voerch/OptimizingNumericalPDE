@@ -15,6 +15,7 @@
 \usepackage{siunitx}
 \usetikzlibrary{calc,decorations.pathmorphing,patterns}
 
+%\usepackage[margin=1.2in]{geometry}
 
 \usepackage[colorlinks=true, urlcolor=blue, pdfborder={0 0 0}]{hyperref}
 \hypersetup{
@@ -139,8 +140,8 @@ Included in your ‘Introduction’ section should be a clear summary of  what  
 The Black-Scholes framework is a theoretical valuation formula for options. It reveals the relationship between the prices of the options and the underlying assets. Since almost all corporate liabilities can be viewed as combinations of options, the formula is applicable to common stocks and corporate bonds \cite{BS}. The Black-Scholes model makes the following assumptions:
 \begin{itemize}
 \item There does not exist any arbitrage opportunity in the financial market.  The traders can’t make instantaneous profit without any risk.
-\item The underlying asset value follows a geometric Brownian Motion $dS = \mu S dt + \sigma S dB $ where $\mu$ denotes the average rate of growth of the underlying assets, $\sigma$ denotes the volatility of the asset price and B is a Brownian Motion.
-\item The market is frictionless.  This means there are no transaction fees, the interest rates for borrowing and lending money from and to the bank are the same, every party  in  market  has  immediate  information  and  all  entities  are  available  at  anytime and in any size.
+\item The underlying asset value follows a geometric Brownian Motion $\mathrm{d}S = \mu S \mathrm{d}t + \sigma S \mathrm{d}B $ where $\mu$ denotes the average rate of growth of the underlying assets, $\sigma$ denotes the volatility of the asset price and B is a Brownian Motion.
+\item The market is frictionless.  This means there are no transaction fees, the interest rates for borrowing and lending money from and to the bank are the same, every party  in  market  has  immediate  information  and  all  entities  are  available  at  any time and in any size.
 \end{itemize}
 
 \subsection{Black-Scholes Partial Differential Equation}
@@ -174,13 +175,13 @@ Brownian motion is the basic building block in stochastic calculus and geometric
 \begin{lemma} It\^{o}'s Lemma:
 Let $B(t)$ be a Brownian motion and $X(t)$ be an Ito process which satisfies the stochastic differential equation:
 \begin{equation}
-dX(t) = \mu(X(t),t)dt + \sigma(X(t),t)dB(t)
+\mathrm{d} X(t) = \mu(X(t),t)\mathrm{d} t + \sigma(X(t),t) \mathrm{d} B(t)
 \end{equation} 
 If $f(x, t)$ is twice continuously differentiable function then $f(X(t),t)$ is also an Ito drift-diffusion process \cite{klebaner}, with its differential given by:
 \begin{equation}
-d(f(X(t),t)) = \frac{\partial f}{\partial t}(X(t),t)dt + f'(X(t),t)dX + \frac{1}{2}f''(X(t),t)dX(t)^2
+\mathrm{d}(f(X(t),t)) = \frac{\partial f}{\partial t}(X(t),t)\mathrm{d}t + f'(X(t),t)\mathrm{d}X + \frac{1}{2}f''(X(t),t)\mathrm{d} X(t)^2
 \end{equation} 
-With $dX(t)^2$ given by: $dt^2 = 0$, $dt dB(t) = 0$ and $dB(t)^2 = dt$.
+With $ \mathrm{d} X(t)^2$ given by: $ \mathrm{d}t^2 = 0$, $\mathrm{d}t \mathrm{d}B(t) = 0$ and $\mathrm{d}B(t)^2 = \mathrm{d}t$.
 \end{lemma}
 
 \begin{theorem}
@@ -194,25 +195,25 @@ Assume that the asset price $S$ follows a geometric Brownian motion.  Under the 
 Suppose an investor sets up a self-financing portfolio,  $ X(t)$, comprising one option and an $\Delta$ amount of the underlying asset. Therefore, value of the portfolio at time t is $X(t) = V(t) + \Delta S(t)$. 
 Since the self-financing trading strategy has no capital influx or consumption, the value of portfolio change can be written as 
 \begin{equation}
-dX = dV + \Delta dS
+\mathrm{d} X = \mathrm{d} V + \Delta \mathrm{d}S
 \end{equation}
 
 Applying the It\^{o}'s Lemma to the option price V(t,S)
 \begin{equation}
-dV = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial S} (S,t) dS + \frac{1}{2}\frac{\partial^2 V}{\partial S^2}(S,t)dS^2
+\mathrm{d}V = \frac{\partial V}{\partial t} \mathrm{d}t + \frac{\partial V}{\partial S} (S,t) \mathrm{d}S + \frac{1}{2}\frac{\partial^2 V}{\partial S^2}(S,t) \mathrm{d}S^2
 \end{equation}
 
 Since the Black-Scholes model assumes that the stock price under the "market probability measure" follows a gBM. 
 \begin{equation}
-dS = \mu S dt + \sigma S dW
+\mathrm{d}S = \mu S \mathrm{d}t + \sigma S \mathrm{d}W
 \end{equation}
 
 Putting (1.4) and (1.6) together yields
 \begin{equation}
-dV = (\frac{\partial V}{\partial t} + \mu S \frac{\partial V}{\partial S} + \frac{1}{2} \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + \Delta \mu S) dt + (\sigma S \frac{\partial V}{\partial S}+\Delta \sigma S) dW
+\mathrm{d}V = (\frac{\partial V}{\partial t} + \mu S \frac{\partial V}{\partial S} + \frac{1}{2} \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + \Delta \mu S) \mathrm{d}t + (\sigma S \frac{\partial V}{\partial S}+\Delta \sigma S) \mathrm{d}W
 \end{equation}
 
-The fact that portfolio is risk-free implies that the second term involving the Brownian Motion, $dW$, must be zero.  This technique is known as delta-hedging , otherwise, we would have an arbitrage opportunity. Thus, $ \Delta = - \frac{\partial V}{\partial S}$.  Hence, the growth rate of the portfolio must be the risk free rate which can be summarized as $ dX = r X dt $. Substituting $\Delta$ and $dX$ yields
+The fact that portfolio is risk-free implies that the second term involving the Brownian Motion, $\mathrm{d}W$, must be zero.  This technique is known as delta-hedging , otherwise, we would have an arbitrage opportunity. Thus, $ \Delta = - \frac{\partial V}{\partial S}$.  Hence, the growth rate of the portfolio must be the risk free rate which can be summarized as $ \mathrm{d}X = r X \mathrm{d}t $. Substituting $\Delta$ and $\mathrm{d}X$ yields
 
 \begin{equation}
 \frac{\partial V}{\partial t} + \frac{1}{2} \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} = r(V-S\frac{\partial V}{\partial S})
@@ -234,7 +235,7 @@ C(S,T) &=& \max(S-K,0), \hspace{10pt} 0 \leq S \leq S_{\max}
 Solving the equations, the formulae \cite{wilmott} for European call is
 \begin{eqnarray}
 C = S \Phi (d_1) - K e^{-r(T-t)} \Phi (d_2) \\[10pt]
-d_1 = \frac{log(S/K) + (r + \sigma^2/2)(T - t)}{\sigma \sqrt{T-t}} \\[10pt]
+d_1 = \frac{\log(S/K) + (r + \sigma^2/2)(T - t)}{\sigma \sqrt{T-t}} \\[10pt]
 d_2 = d_1 - \sigma \sqrt{T-t}
 \end{eqnarray}
 
@@ -293,7 +294,7 @@ The heat equation is fundamental to financial engineering. Heat equation is a co
 \begin{eqnarray} \label{HeatBase}
 u_t(x,t) &=& u_{xx}(x, t) \\[10pt]
 u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
-u(x, 0) &=& sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
+u(x, 0) &=& \sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
 \end{eqnarray}
 
 In our calculations, we will test the case where $T = 0.06$ and $x_{max} = 1.0$.
@@ -338,49 +339,47 @@ Using the boundary conditions yield $X(0) = A + B = 0 $ and $X(1) = Ae^{k} + Be^
 $$ X(x) = Ax + B $$
 The boundary conditions imply $X(0) = B = 0$ and $X(1) = A= 0$. Thus this case is  discarded too.
 \item Finally, let $\lambda>0$,the solution to \ref{xlambda} is
-$$ X(x) = Acos(\sqrt{\lambda}x) + Bsin(\sqrt{\lambda}x) $$
+$$ X(x) = A \cos(\sqrt{\lambda}x) + B \sin(\sqrt{\lambda}x) $$
 
-The boundary conditions leads to $
-X(0) = A = 0$ and $ X(1) = Bsin(\sqrt{\lambda}) = 0 $
-Since we do not want a trivial solution where $B = 0$, the equation reduces to 
+The boundary conditions leads to $ X(0) = A = 0$ and $ X(1) = B \sin(\sqrt{\lambda}) = 0$. Since we do not want a trivial solution where $B = 0$, the equation reduces to 
 \begin{equation}
-sin(\sqrt{\lambda}) = 0
+\sin(\sqrt{\lambda}) = 0
 \end{equation} 
 Thus $ \sqrt{\lambda} = n \pi $ for $n = 1,2,3, ...$. 
 Solution to \ref{xlambda} becomes,
 \begin{equation}
-X_n = b_n sin(n \pi x), \hspace{10pt} n=1,2,3, ...
+X_n = b_n \sin(n \pi x), \hspace{10pt} n=1,2,3, ...
 \end{equation}
 \end{itemize}
 
 As we determined $ \lambda = n^2 \pi^2 $ for $n = 1,2,3, ...$.  Solving \ref{tlambda} for $T(t)$ gives the solution
 \begin{eqnarray}
 T^{'}(t) = -n^2 \pi^2 T(t)
-T_n = c_n exp(-n^2 \pi ^2 t) \\[10pt]
+T_n = c_n \exp(-n^2 \pi ^2 t) \\[10pt]
 \end{eqnarray}
 where $c_n$'s are integration constants.
 
 Putting the solution of $T(t)$ and $X(x)$ together,
 \begin{equation}
-u(x,t) = \sum_{n=1}^{\infty} B_n exp(-n^2 \pi ^2 t) sin(n \pi x)
+u(x,t) = \sum_{n=1}^{\infty} B_n \exp(-n^2 \pi ^2 t) \sin(n \pi x)
 \end{equation}
 where we have set $B_n = c_n b_n$. The initial condition gives
 \begin{equation} \label{initB}
-u(x,0) = sin(\pi x) = \sum_{n=1}^{\infty} B_n sin(n \pi x)
+u(x,0) = \sin(\pi x) = \sum_{n=1}^{\infty} B_n \sin(n \pi x)
 \end{equation}
-which is a Fourier sine series.  Solving for the $B_n$’s, we use the orthogonality property for the eigenfunctions $sin(n \pi x)$ 
-    \[ \int_{0}^{1} sin(m \pi x) sin(\pi n x) dx = \begin{cases} \mbox{0,} & \mbox{if } m \neq n \\ \mbox{1/2,} & \mbox{m = n} \end{cases} = 0.5 \delta _{mn} \]
+which is a Fourier sine series.  Solving for the $B_n$’s, we use the orthogonality property for the eigenfunctions $\sin(n \pi x)$.
+    \[ \int_{0}^{1} \sin(m \pi x) \sin(\pi n x) \mathrm{d}x = \begin{cases} \mbox{0,} & \mbox{if } m \neq n \\ \mbox{1/2,} & \mbox{m = n} \end{cases} = 0.5 \delta _{mn} \]
     
 where $ \delta _{mn}$ is the kronecker delta,  
 \[  \delta _{mn} = \begin{cases} \mbox{0,} & \mbox{if } m \neq n \\ \mbox{1,} & \mbox{m = n} \end{cases} \]
 
-Solving \ref{initB} for $B_n$, multiplying both sides with $sin(m \pi x)$ and integrate from $0$ to $1$ and from the definition of kronecker delta yields
-\begin{equation}    
-B_n = 2 \int_{0}^{1} sin(\pi x) sin(\pi n x) dx = \frac{2sin(\pi n)}{\pi - \pi n^2}
+Solving \ref{initB} for $B_n$, multiplying both sides with $\sin(m \pi x)$ and integrate from $0$ to $1$ and from the definition of kronecker delta yields
+\begin{equation}
+B_n = 2 \int_{0}^{1} \sin(\pi x) \sin(\pi n x) \mathrm{d}x = \frac{2 \sin(\pi n)}{\pi - \pi n^2}
 \end{equation}
 Combining the solutions
 \begin{equation}
-u(x,t) = \sum_{n=1}^{\infty} \frac{2sin(\pi n)}{\pi - \pi n^2} exp(-n^2 \pi ^2 t) sin(n \pi x)= exp(-\pi^2 t) sin(\pi x) 
+u(x,t) = \sum_{n=1}^{\infty} \frac{2 \sin(\pi n)}{\pi - \pi n^2} \exp(-n^2 \pi ^2 t) \sin(n \pi x)= \exp(-\pi^2 t) \sin(\pi x) 
 \end{equation}
 \end{definition}
 
@@ -410,13 +409,13 @@ X(0) = X(1) = 0, \hspace{10pt} Y(0) = Y(1) = 0
 
 In \ref{heatAnal}, we have already seen that the solutions to X(x) and Y(y) are
 \begin{eqnarray} 
-X_m (x) =  b_n sin(m \pi x) \\
-Y_n (x) =  a_m sin(n \pi y)
+X_m (x) =  b_n \sin(m \pi x) \\
+Y_n (x) =  a_m \sin(n \pi y)
 \end{eqnarray}
 
 Using these values to solve for $T(t)$ gives
 \begin{equation}
-T_{mn}(t) = c_{mn} exp(- \pi^2 (m^2 + n^2)t)
+T_{mn}(t) = c_{mn} \exp(- \pi^2 (m^2 + n^2)t)
 \end{equation}
 
 Substituting the solutions yields
@@ -424,20 +423,20 @@ Substituting the solutions yields
 u_{mn}(x, y, t) = X_m(x) Y_n(y) T_{mn}(t)
 \end{equation}
 \begin{equation}
-u(x, y, t) = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} A_{mn}  sin(m \pi x) sin(n \pi y) exp(- \pi^2 (m^2 + n^2)t)
+u(x, y, t) = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} A_{mn} \sin(m \pi x) \sin(n \pi y) \exp(- \pi^2 (m^2 + n^2)t)
 \end{equation}
 where $A_{mn} = b_n a_m c_{mn}$.
 The initial condition gives
 \begin{equation}
-u(x, y, 0) = 1 = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty}  A_{mn} sin(m \pi x) sin(n \pi y)
+u(x, y, 0) = 1 = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty}  A_{mn} \sin(m \pi x) \sin(n \pi y)
 \end{equation}
 which is a double Fourier sine series. Thus, the coefficient $A_{mn}$ is chosen such that
 \begin{equation}
- A_{mn} = 4 \int_{0}^{1}  \int_{0}^{1} sin(\pi m x)  sin(\pi n y) dx dy = \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n} 
+ A_{mn} = 4 \int_{0}^{1}  \int_{0}^{1} \sin(\pi m x) \sin(\pi n y) \mathrm{d}x \mathrm{d}y = \frac{4(\cos(\pi n) - 1)(\cos(\pi m) - 1)}{\pi^2 m n} 
 \end{equation}
 Combining the solutions
 \begin{multline}
-u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(cos(\pi n) - 1)(cos(\pi m) - 1)}{\pi^2 m n}  \\ sin(m \pi x) sin(n \pi y)     exp(- \pi^2 (m^2 + n^2)t)
+u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(\cos(\pi n) - 1)(\cos(\pi m) - 1)}{\pi^2 m n}  \\ \sin(m \pi x) \sin(n \pi y) \exp(- \pi^2 (m^2 + n^2)t)
 \end{multline}
 
 \end{definition}
@@ -578,10 +577,10 @@ Lastly, solving heat equation and Black-Scholes differs in time stepping. Black-
   \end{minipage}
 \end{figure}
 
-\subsection{Crank-Nicholson Method}
+\subsection{Crank-Nicolson Method}
 The explicit method is computationally cheap. However, this brings a serious drawback, for explicit method to attain reasonable accuracy the step size must be kept small \cite{gdsmith}. Thankfully, the Crank-Nicolson finite difference scheme was introduced by John Crank and Phyllis Nicolson \cite{cn}. Considering numerous articles and publications in the financial engineering literature use Crank-Nicolson as the de-facto scheme for time discretisation, the method has become one of the most popular finite difference schemes for approximating the solution of the Black - Scholes equation and its generalisations \cite{tavella}.
 
- If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. Applying the BTCS to the base equation \ref{gen}. yields
+ If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. Applying the BTCS to the base equation \ref{gen} yields
     \begin{equation}
 \frac{u^{n+1}_i - u^n_i}{\Delta t}  = a(t, x)  \frac{u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{(\Delta x)^2}  + b(t, x)  \frac{u^{n+1}_i - u^{n+1}_i}{\Delta t}  + c(t, x)  u^{n+1}_i
 \end{equation}
@@ -594,18 +593,18 @@ $$ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}
 
 Applying the new finite differences to the base partial differential equation equation \ref{gen}
 \begin{multline}
- (-A -B) u^{n+1}_{i+1} + (1 + 2A - C) u^{n+1}_i + (-A + B) u^{n+1}_{i-1} =  \\
+ (-A -B) u^{n+1}_{i+1} + (1 + 2A - C) u^{n+1}_i + (-A + B) u^{n+1}_{i-1} \\
 =  (A+B) u^{n}_{i+1} + (1 - 2A + C) u^{n}_i + (A - B) u^{n}_{i-1}
 \end{multline}
 $$ A = a(t,x) \frac{\Delta t}{\Delta x^2},  B = b(t,x) \frac{\Delta t}{4\Delta x}, C = c(t,x) \frac{\Delta t}{2}$$ 
 
 Note that in contrast to the FTCS scheme, we now have three unknowns in this equation, the three values of $u$ at the higher time level.  We respectively denote the coefficients in the right hand side as $\gamma, \beta, \alpha$ and coefficients in the left hand side as $\lambda, \theta, \omega$ for simplicity.
 \begin{equation}
-\lambda u^{n+1}_{i+1} + \theta u^{n+1}_i + \omega u^{n+1}_{i-1} =  \\
+\lambda u^{n+1}_{i+1} + \theta u^{n+1}_i + \omega u^{n+1}_{i-1} \\
 =  \gamma u^{n}_{i+1} + \beta u^{n}_i + \alpha u^{n}_{i-1}
 \end{equation}
 
-The left hand side groups the unknowns and the right hand side groups knowns. The system of equations can be  reduced to a matrix system. 
+The left hand side groups the unknowns and the right hand side groups knowns. The system of equations can be  reduced to a matrix system.
 
 $$
 \begin{bmatrix}  
@@ -828,8 +827,10 @@ $$
 The last step is to work in reverse with the following equations.
 \[ f_k = d^{*}_k, \qquad f_i = d^{*}_k - c^{*}_i x_{i+1}, \qquad i = k-1, k-2, ... ,2,1 \]
 
- \subsection{Intel Math Kernel Library}
-Intel Math Kernel Library implements routines for solving systems of linear equations from the standard LAPACK library. Variety of atrix types are supported by the routines.  Specifically gtsv function is utilized from the package. Using Gaussian elimination with partial pivoting, gstv computes the solution to the system of linear equations with a tridiagonal coefficient matrix \cite{gtsv}.  
+Notice that when solving Thomas Algorithm, it cannot take advantage of parallelism as each step depends on the other element.
+
+\subsection{Intel Math Kernel Library}
+Intel Math Kernel Library implements routines for solving systems of linear equations from the standard LAPACK library  which is a software package provided by University of Tennessee. Variety of matrix types are supported by the routines. Specifically gtsv function is utilized from the package. Using Gaussian elimination with partial pivoting, gstv computes the solution to the system of linear equations with a tridiagonal coefficient matrix \cite{gtsv}.  
 
 \subsection{Cyclic Reduction}\label{cyclic}
 Cyclic reduction was proposed by R. W. Hockney in the 1960s for solving the resulting linear systems from the  discretization of the Poisson equation \cite{Hockney}. Cyclic reduction consists of two stages, forward reduction and back substitution.
@@ -868,7 +869,7 @@ During the forward reduction stage  at each step $s$ the odd number equations ar
 \begin{equation}
 a_i^{s} f_{i - 2^{s - 1}}^{s} + f_i^{s} + c^{s}  x_{i + 2^{s - 1}} = d_i^s
 \end{equation}
-are generated where $ i = 2^s, 2^s + 2^s, ... , n$ and $s = 1, 2, ... , log_2 n$ .
+are generated where $ i = 2^s, 2^s + 2^s, ... , n$ and $s = 1, 2, ... , \log_2 n$ .
 
 \begin{figure}[!htb]
     \centering
@@ -886,13 +887,13 @@ d_i^{s} = d_i^{s - 1} - d_{i- 1}^{s - 1}  k_1 - d_{i + 1}^{s - 1}   k_2
 \end{eqnarray}
 The same procedure is applied recursively until there remains only one equation with one unknown. 
 
-During each step of backward substitution, we solve all rest of the unknowns by substituting the already solved value. As the name implies the steps go backwards as $s = log_2 n - 1, ... , 0$
+During each step of backward substitution, we solve all rest of the unknowns by substituting the already solved value. As the name implies the steps go backwards as $s = \log_2 n - 1, ... , 0$
 \begin{equation}
 f_i = \frac{d_i^{s} - a_i^{s} f_{i - 2^s}  - c_i^{s} f_{i + 2^s}}{b_i^s}
 \end{equation}
 where  $ i = 2^s, 2^s + 2^{s+1}, ... , n$ 
 
-If serially computed, Thomas algorithm performs $ 8 n $ operations while cyclic reduction performs $17n$ operations. On the other hand,if parallel computing is used with $n$ cores, cyclic reduction requires $2 log_2 n - 1$ steps  while the Thomas algorithm requires $2n$ steps \cite{gputri}. The cyclic reduction algorithm was focused towards fine-grained parallelism which could be achieved using CPU parallelism \cite{seltri}.
+If serially computed, Thomas algorithm performs $ 8 n $ operations while cyclic reduction performs $17n$ operations. On the other hand,if parallel computing is used with $n$ cores, cyclic reduction requires $2 \log_2 n - 1$ steps  while the Thomas algorithm requires $2n$ steps \cite{gputri}. The cyclic reduction algorithm was focused towards fine-grained parallelism which could be achieved using CPU parallelism \cite{seltri}.
 
 \section{Open Multi-Processing}
 Traditionally, programs are serially computed on a single processor. On the other hand, parallel computation is used to break our code execution in pieces so that it utilizes parallelism. Multithreading uses the CPUs cores to run calculations concurrently in each core. The concurrent programs are called a thread. If the code is executed on parallel processors, one of the biggest problem is the processors generally require results that have been calculated on other processors. The main issue in this case is that processors clocks are not synchronized and execute the code at minimally different speeds.

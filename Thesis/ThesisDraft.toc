@@ -1,36 +1,36 @@
-\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}% 
-\contentsline {section}{\numberline {1.1}Motivation of the Project}{8}{section.1.1}% 
-\contentsline {chapter}{\numberline {2}Pricing Financial Derivatives}{9}{chapter.2}% 
-\contentsline {section}{\numberline {2.1}The Risk Neutral Approach}{9}{section.2.1}% 
-\contentsline {subsection}{\numberline {2.1.1}Black-Scholes Partial Differential Equation}{10}{subsection.2.1.1}% 
-\contentsline {subsection}{\numberline {2.1.2}Derivation of the Black-Scholes Equation}{10}{subsection.2.1.2}% 
-\contentsline {section}{\numberline {2.2}Partial Differential Equations}{14}{section.2.2}% 
-\contentsline {subsection}{\numberline {2.2.1}Heat Equation}{15}{subsection.2.2.1}% 
-\contentsline {subsection}{\numberline {2.2.2}Two Dimensional Heat Equation}{19}{subsection.2.2.2}% 
-\contentsline {section}{\numberline {2.3}Finite Difference Methods}{21}{section.2.3}% 
-\contentsline {subsection}{\numberline {2.3.1}Discretization}{21}{subsection.2.3.1}% 
-\contentsline {subsection}{\numberline {2.3.2}Explicit Method}{23}{subsection.2.3.2}% 
-\contentsline {subsection}{\numberline {2.3.3}Crank-Nicholson Method}{25}{subsection.2.3.3}% 
-\contentsline {subsection}{\numberline {2.3.4}Alternating Direction Implicit Method}{27}{subsection.2.3.4}% 
-\contentsline {chapter}{\numberline {3}Optimizing Solvers}{31}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Solution Platforms}{31}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Compilers}{32}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}Visual Studio Optimization Switches}{33}{section.3.3}% 
-\contentsline {section}{\numberline {3.4}Tridiagonal Solvers}{34}{section.3.4}% 
-\contentsline {subsection}{\numberline {3.4.1}Thomas Algorithm}{35}{subsection.3.4.1}% 
-\contentsline {subsection}{\numberline {3.4.2}Intel Math Kernel Library}{36}{subsection.3.4.2}% 
-\contentsline {subsection}{\numberline {3.4.3}Cyclic Reduction}{36}{subsection.3.4.3}% 
-\contentsline {section}{\numberline {3.5}Open Multi-Processing}{38}{section.3.5}% 
-\contentsline {section}{\numberline {3.6}Timing the Code}{41}{section.3.6}% 
-\contentsline {subsection}{\numberline {3.6.1}Windows Application Programming Interface}{41}{subsection.3.6.1}% 
-\contentsline {subsection}{\numberline {3.6.2}Chrono Library}{42}{subsection.3.6.2}% 
-\contentsline {chapter}{\numberline {4}Comparison of Optimizations}{43}{chapter.4}% 
-\contentsline {subsection}{\numberline {4.0.1}Base Case}{44}{subsection.4.0.1}% 
-\contentsline {subsection}{\numberline {4.0.2}Visual Studio Optimizations}{44}{subsection.4.0.2}% 
-\contentsline {subsubsection}{/O2 Flag}{44}{section*.18}% 
-\contentsline {subsubsection}{/Ox Flag}{44}{section*.19}% 
-\contentsline {subsection}{\numberline {4.0.3}Cyclic Reduction with OpenMP}{44}{subsection.4.0.3}% 
-\contentsline {chapter}{\numberline {5}Conclusion}{45}{chapter.5}% 
-\contentsline {chapter}{\numberline {A}Usage of chrono class}{46}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Implementation of the {\tt PDE} class}{47}{appendix.B}% 
-\contentsline {chapter}{\numberline {C}Implementation of the {\tt FiniteDifferenceMethod} class}{48}{appendix.C}% 
+\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}
+\contentsline {section}{\numberline {1.1}Motivation of the Project}{8}{section.1.1}
+\contentsline {chapter}{\numberline {2}Pricing Financial Derivatives}{9}{chapter.2}
+\contentsline {section}{\numberline {2.1}The Risk Neutral Approach}{9}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Black-Scholes Partial Differential Equation}{10}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Derivation of the Black-Scholes Equation}{10}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}Partial Differential Equations}{14}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Heat Equation}{15}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Two Dimensional Heat Equation}{19}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}Finite Difference Methods}{21}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Discretization}{21}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Explicit Method}{23}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Crank-Nicolson Method}{25}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Alternating Direction Implicit Method}{27}{subsection.2.3.4}
+\contentsline {chapter}{\numberline {3}Optimizing Solvers}{31}{chapter.3}
+\contentsline {section}{\numberline {3.1}Solution Platforms}{31}{section.3.1}
+\contentsline {section}{\numberline {3.2}Compilers}{32}{section.3.2}
+\contentsline {section}{\numberline {3.3}Visual Studio Optimization Switches}{33}{section.3.3}
+\contentsline {section}{\numberline {3.4}Tridiagonal Solvers}{34}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Thomas Algorithm}{35}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Intel Math Kernel Library}{36}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Cyclic Reduction}{36}{subsection.3.4.3}
+\contentsline {section}{\numberline {3.5}Open Multi-Processing}{38}{section.3.5}
+\contentsline {section}{\numberline {3.6}Timing the Code}{41}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Windows Application Programming Interface}{41}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Chrono Library}{42}{subsection.3.6.2}
+\contentsline {chapter}{\numberline {4}Comparison of Optimizations}{43}{chapter.4}
+\contentsline {subsection}{\numberline {4.0.1}Base Case}{44}{subsection.4.0.1}
+\contentsline {subsection}{\numberline {4.0.2}Visual Studio Optimizations}{44}{subsection.4.0.2}
+\contentsline {subsubsection}{/O2 Flag}{44}{section*.18}
+\contentsline {subsubsection}{/Ox Flag}{44}{section*.19}
+\contentsline {subsection}{\numberline {4.0.3}Cyclic Reduction with OpenMP}{44}{subsection.4.0.3}
+\contentsline {chapter}{\numberline {5}Conclusion}{45}{chapter.5}
+\contentsline {chapter}{\numberline {A}Usage of chrono class}{46}{appendix.A}
+\contentsline {chapter}{\numberline {B}Implementation of the {\tt PDE} class}{47}{appendix.B}
+\contentsline {chapter}{\numberline {C}Implementation of the {\tt FiniteDifferenceMethod} class}{48}{appendix.C}

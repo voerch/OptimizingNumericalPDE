@@ -1,15 +1,11 @@
-﻿  mainADI.cpp
-  FDM.cpp
-C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\PDESolver\TridiagonalSolvers.h(75): warning #3180: unrecognized OpenMP #pragma
-    #pragma omp parallel for collapse(2)
-            ^
-  
-C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\PDESolver\TridiagonalSolvers.h(110): warning #3180: unrecognized OpenMP #pragma
-    #pragma omp parallel for collapse(2)
-            ^
-  
-  mainExpCN.cpp
-  mainOptimalGrid.cpp
-  PDE.cpp
-  mainTiming.cpp
+﻿  FDM.cpp
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\TridiagonalSolvers.h(11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\TridiagonalSolvers.h(40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\TridiagonalSolvers.h(52): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\mbe31\optimizingnumericalpde\pdesolver\pdesolver\TridiagonalSolvers.h(58): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  363 of 363 functions (100.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
   PDESolver.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\x64\Release\PDESolver.exe

@@ -47,6 +47,12 @@ Jim Douglas, Jr.
 \newblock Alternating direction methods for three space variables.
 \newblock {\em Numer. Math.}, 4(1):41--63, December 1962.
 
+\bibitem{duffyfinite}
+D.J. Duffy.
+\newblock {\em Finite Difference Methods in Financial Engineering: A Partial
+  Differential Equation Approach}.
+\newblock The Wiley Finance Series. Wiley, 2006.
+
 \bibitem{duffycpp}
 D.J. Duffy.
 \newblock {\em Financial Instrument Pricing Using C++}.

@@ -62,75 +62,75 @@ void IntelSolver(std::vector<double>& a, std::vector<double>& b, std::vector<dou
 }
 
 //Cyclic reduction implementation using OpenMP.
-void CyclicReduction(std::vector<double> LDiag, std::vector<double> Diag, std::vector<double> UDiag, std::vector<double>  oldResult, std::vector<double>& newResult)
-{
-	double Temp1, Temp2;
-	int iReducePlus, iReduceMinus, offset, backSubPlus, backSubMinus, iReduce, Step;
-	int size = newResult.size();
-
-	LDiag.insert(LDiag.begin(), 0.0);
-	UDiag.push_back(0.0);
-	
-//Forward Reduction phase
-#pragma omp parallel for collapse(2)
-	for (Step = 1; Step <= int(log2(size)); Step++)
-	{
-		for (int iReduce = pow(2, Step) - 1; iReduce < Diag.size(); iReduce += pow(2, Step))
-		{
-			offset = pow(2, Step - 1);
-			iReduceMinus = iReduce - offset;
-			iReducePlus = iReduce + offset;
-
-			if (iReduce == Diag.size() - 1)
-			{
-				Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
-				LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
-				UDiag[iReduce] = 0;
-				Diag[iReduce] = Diag[iReduce] - (UDiag[iReduceMinus] * Temp1);
-
-				oldResult[iReduce] = oldResult[iReduce] - oldResult[iReduceMinus] * Temp1;
-			}
-			else
-			{
-				Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
-				Temp2 = UDiag[iReduce] / Diag[iReducePlus];
-
-				LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
-				UDiag[iReduce] = -UDiag[iReducePlus] * Temp2;
-				Diag[iReduce] = Diag[iReduce] - (LDiag[iReducePlus] * Temp2) - (UDiag[iReduceMinus] * Temp1);
-				oldResult[iReduce] = oldResult[iReduce] - (oldResult[iReduceMinus] * Temp1) - (oldResult[iReducePlus] * Temp2);
-
-			}
-		}
-	}
-
-
-//Backward Substitution phase
-newResult[(size - 1) / 2] = oldResult[(size - 1) / 2] / Diag[(size - 1) / 2];
-#pragma omp parallel for collapse(2)
-	for (int Step = log2(size + 1) - 2; Step >= 0; Step--)
-	{
-		for (int backSub = pow(2, Step + 1) - 1; backSub < size; backSub += pow(2, Step + 1))
-		{
-			offset = pow(2, Step);
-			backSubMinus = backSub - offset;
-			backSubPlus = backSub + offset;
-
-			if (backSubMinus - offset < 0)
-			{
-				newResult[backSubPlus] = (oldResult[backSubPlus] - (UDiag[backSubPlus] * newResult[backSubPlus + offset])) / Diag[backSubPlus];
-			}
-			else if (backSubPlus + offset >= size)
-			{
-				newResult[backSubMinus] = (oldResult[backSubMinus] - (newResult[backSubMinus - offset] * LDiag[backSubMinus])) / Diag[backSubMinus];
-
-			}
-			else
-			{
-				newResult[backSubPlus] = (oldResult[backSubPlus] - (newResult[backSubPlus - offset] * LDiag[backSubPlus]) - (UDiag[backSubPlus] * newResult[backSubPlus + offset])) / Diag[backSubPlus];
-				newResult[backSubMinus] = (oldResult[backSubMinus] - (newResult[backSubMinus - offset] * LDiag[backSubMinus]) - (UDiag[backSubMinus] * newResult[backSubMinus + offset])) / Diag[backSubMinus];
-			}
-		}
-	}
-
-}
+//void CyclicReduction(std::vector<double> LDiag, std::vector<double> Diag, std::vector<double> UDiag, std::vector<double>  oldResult, std::vector<double>& newResult)
+//{
+//	double Temp1, Temp2;
+//	int iReducePlus, iReduceMinus, offset, backSubPlus, backSubMinus, iReduce, Step;
+//	int size = newResult.size();
+//
+//	LDiag.insert(LDiag.begin(), 0.0);
+//	UDiag.push_back(0.0);
+//	
+////Forward Reduction phase
+//#pragma omp parallel for collapse(2)
+//	for (Step = 1; Step <= int(log2(size)); Step++)
+//	{
+//		for (int iReduce = pow(2, Step) - 1; iReduce < Diag.size(); iReduce += pow(2, Step))
+//		{
+//			offset = pow(2, Step - 1);
+//			iReduceMinus = iReduce - offset;
+//			iReducePlus = iReduce + offset;
+//
+//			if (iReduce == Diag.size() - 1)
+//			{
+//				Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
+//				LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
+//				UDiag[iReduce] = 0;
+//				Diag[iReduce] = Diag[iReduce] - (UDiag[iReduceMinus] * Temp1);
+//
+//				oldResult[iReduce] = oldResult[iReduce] - oldResult[iReduceMinus] * Temp1;
+//			}
+//			else
+//			{
+//				Temp1 = LDiag[iReduce] / Diag[iReduceMinus];
+//				Temp2 = UDiag[iReduce] / Diag[iReducePlus];
+//
+//				LDiag[iReduce] = -LDiag[iReduceMinus] * Temp1;
+//				UDiag[iReduce] = -UDiag[iReducePlus] * Temp2;
+//				Diag[iReduce] = Diag[iReduce] - (LDiag[iReducePlus] * Temp2) - (UDiag[iReduceMinus] * Temp1);
+//				oldResult[iReduce] = oldResult[iReduce] - (oldResult[iReduceMinus] * Temp1) - (oldResult[iReducePlus] * Temp2);
+//
+//			}
+//		}
+//	}
+//
+//
+////Backward Substitution phase
+//newResult[(size - 1) / 2] = oldResult[(size - 1) / 2] / Diag[(size - 1) / 2];
+//#pragma omp parallel for collapse(2)
+//	for (int Step = log2(size + 1) - 2; Step >= 0; Step--)
+//	{
+//		for (int backSub = pow(2, Step + 1) - 1; backSub < size; backSub += pow(2, Step + 1))
+//		{
+//			offset = pow(2, Step);
+//			backSubMinus = backSub - offset;
+//			backSubPlus = backSub + offset;
+//
+//			if (backSubMinus - offset < 0)
+//			{
+//				newResult[backSubPlus] = (oldResult[backSubPlus] - (UDiag[backSubPlus] * newResult[backSubPlus + offset])) / Diag[backSubPlus];
+//			}
+//			else if (backSubPlus + offset >= size)
+//			{
+//				newResult[backSubMinus] = (oldResult[backSubMinus] - (newResult[backSubMinus - offset] * LDiag[backSubMinus])) / Diag[backSubMinus];
+//
+//			}
+//			else
+//			{
+//				newResult[backSubPlus] = (oldResult[backSubPlus] - (newResult[backSubPlus - offset] * LDiag[backSubPlus]) - (UDiag[backSubPlus] * newResult[backSubPlus + offset])) / Diag[backSubPlus];
+//				newResult[backSubMinus] = (oldResult[backSubMinus] - (newResult[backSubMinus - offset] * LDiag[backSubMinus]) - (UDiag[backSubMinus] * newResult[backSubMinus + offset])) / Diag[backSubMinus];
+//			}
+//		}
+//	}
+//
+//}
