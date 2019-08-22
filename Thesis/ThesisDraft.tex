@@ -151,7 +151,7 @@ The original model is used to price vanilla options, which is the simplest type 
 \frac{\partial V}{\partial t} = rS\frac{\partial V}{\partial S}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} - rV
 \end{equation}
 
-Framework shows the  price $V(t,S)$ of  a  European  option  driven  by  one underlying asset that satisfies the PDE where $r$, $\sigma$, $t$, $S$ respectively denotes the risk-free interest rate, volatility, time and the underlying price.  It is assumed that $r$ and $\sigma$ are constants. In more complicated models such as stochastic volatility, they are modelled as a function. We will consider the  PDE and conditions for the call options.  In order to price a vanilla call option the PDE needs to satisfy the following boundary and initial conditions. 
+Framework shows the  price $V(t,S)$ of  a  European  option  driven  by  one underlying asset that satisfies the PDE where $r$, $\sigma$, $t$, $S$ respectively denotes the risk-free interest rate, volatility, time and the underlying price.  It is assumed that $r$ and $\sigma$ are constants. In more complicated models such as stochastic volatility, they are modelled as a function. We will consider the  PDE and conditions for the call options.  In order to price a vanilla call option, the PDE needs to satisfy the following boundary and initial conditions. 
 
 \begin{eqnarray}
 C(0,t) &=& 0, \hspace{4pt} C(S_{\max},t)=S_{\max} - K e^{-r(T-t)}, \hspace{10pt} 0 \leq t \leq T \\[10pt]
