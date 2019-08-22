@@ -153,9 +153,9 @@ void CrankNicholson::innerDomain()
 		oldResult[iCounter] = (alpha + beta) * newResult[iCounter + 1] + (1.0 - (2 * alpha) + gamma) * newResult[iCounter] + (alpha - beta) * newResult[iCounter - 1];
 	}
 
-	ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+	//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 	//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-	//CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+	CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 }
 
 void CrankNicholson::timeMarch()
@@ -260,9 +260,9 @@ void ADI::InnerDomain()
 			oldResult[xCounter] = rY * FullStep[xCounter][yCounter + 1] + (1 - 2.0 *rY) * FullStep[xCounter][yCounter] + (rY)* FullStep[xCounter][yCounter - 1];
 		}
 
-		ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 		//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-		//CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 		for (long xCounter = 1; xCounter < xNumberSteps - 1; xCounter++)
 		{
 			HalfStep[xCounter][yCounter] = newResult[xCounter];
@@ -284,9 +284,9 @@ void ADI::InnerDomain()
 			oldResult[yCounter] = rX * FullStep[xCounter][yCounter + 1] + (1 - 2.0 *rX) * FullStep[xCounter][yCounter] + (rX)* FullStep[xCounter][yCounter - 1];
 		}
 
-		ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 		//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-		//CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 		for (long yCounter = 1; yCounter < yNumberSteps - 1; yCounter++)
 		{
 			FullStep[xCounter][yCounter] = newResult[xCounter];
