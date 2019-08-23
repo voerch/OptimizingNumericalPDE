@@ -1,6 +1,11 @@
-﻿  mainTiming.cpp
+﻿  mainADI.cpp
+  FDM.cpp
+  mainExpCN.cpp
+  mainOptimalGrid.cpp
+  PDE.cpp
+  mainTiming.cpp
   Generating code
-  1 of 363 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  363 of 363 functions (100.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

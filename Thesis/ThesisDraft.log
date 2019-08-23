@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2019.7.23)  22 AUG 2019 18:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2019.7.23)  23 AUG 2019 17:14
 entering extended mode
 **./ThesisDraft.tex
 (ThesisDraft.tex
@@ -1176,22 +1176,22 @@ Overfull \hbox (2.61108pt too wide) in paragraph at lines 656--664
 <figures/ADI.png, id=456, 402.75468pt x 360.59718pt>
 File: figures/ADI.png Graphic file (type png)
 <use figures/ADI.png>
-Package pdftex.def Info: figures/ADI.png  used on input line 693. on input line
- 693.
+Package pdftex.def Info: figures/ADI.png  used on input line 696. on input line
+ 696.
 Package pdftex.def Info: Requested size: 281.92635pt x 252.4163pt on input line
- 693.
+ 696.
  [29 <./figures/ADI.png>]
 <figures/ADIHeat.png, id=466, 433.62pt x 289.08pt>
 File: figures/ADIHeat.png Graphic file (type png)
 <use figures/ADIHeat.png>
-Package pdftex.def Info: figures/ADIHeat.png  used on input line 704. on input 
-line 704.
+Package pdftex.def Info: figures/ADIHeat.png  used on input line 707. on input 
+line 707.
 Package pdftex.def Info: Requested size: 260.17401pt x 173.44933pt on input lin
-e 704.
+e 707.
  [30 <./figures/ADIHeat.png>]
 Chapter 3.
 
-Overfull \hbox (26.68466pt too wide) in paragraph at lines 718--719
+Overfull \hbox (26.68466pt too wide) in paragraph at lines 721--722
 \OT1/cmr/m/n/12 RAM where a 64-bit reg-is-ter can the-o-ret-i-cally ref-er-ence
  18,446,744,073,709,551,616
  []
@@ -1202,20 +1202,20 @@ Overfull \hbox (26.68466pt too wide) in paragraph at lines 718--719
 <figures/compiler.png, id=481, 318.43968pt x 159.59625pt>
 File: figures/compiler.png Graphic file (type png)
 <use figures/compiler.png>
-Package pdftex.def Info: figures/compiler.png  used on input line 725. on input
- line 725.
+Package pdftex.def Info: figures/compiler.png  used on input line 728. on input
+ line 728.
 Package pdftex.def Info: Requested size: 318.4389pt x 159.59584pt on input line
- 725.
+ 728.
  [32] [33 <./figures/compiler.png>] [34] [35] [36]
 <figures/cyclic.png, id=538, 656.4525pt x 321.45094pt>
 File: figures/cyclic.png Graphic file (type png)
 <use figures/cyclic.png>
-Package pdftex.def Info: figures/cyclic.png  used on input line 876. on input l
-ine 876.
+Package pdftex.def Info: figures/cyclic.png  used on input line 879. on input l
+ine 879.
 Package pdftex.def Info: Requested size: 393.87454pt x 192.87204pt on input lin
-e 876.
+e 879.
 
-Overfull \hbox (3.87454pt too wide) in paragraph at lines 876--877
+Overfull \hbox (3.87454pt too wide) in paragraph at lines 879--880
  [][] 
  []
 
@@ -1223,19 +1223,19 @@ Overfull \hbox (3.87454pt too wide) in paragraph at lines 876--877
 <figures/openmp.png, id=556, 371.13657pt x 277.035pt>
 File: figures/openmp.png Graphic file (type png)
 <use figures/openmp.png>
-Package pdftex.def Info: figures/openmp.png  used on input line 903. on input l
-ine 903.
+Package pdftex.def Info: figures/openmp.png  used on input line 906. on input l
+ine 906.
 Package pdftex.def Info: Requested size: 222.68365pt x 166.22227pt on input lin
-e 903.
+e 906.
 <figures/cyclicopenmp.png, id=559, 730.22812pt x 377.91188pt>
 File: figures/cyclicopenmp.png Graphic file (type png)
 <use figures/cyclicopenmp.png>
-Package pdftex.def Info: figures/cyclicopenmp.png  used on input line 913. on i
-nput line 913.
+Package pdftex.def Info: figures/cyclicopenmp.png  used on input line 916. on i
+nput line 916.
 Package pdftex.def Info: Requested size: 438.14024pt x 226.74887pt on input lin
-e 913.
+e 916.
 
-Overfull \hbox (48.14024pt too wide) in paragraph at lines 913--914
+Overfull \hbox (48.14024pt too wide) in paragraph at lines 916--917
  [][] 
  []
 
@@ -1243,13 +1243,17 @@ Overfull \hbox (48.14024pt too wide) in paragraph at lines 913--914
 <figures/openmpnested.png, id=569, 524.71031pt x 315.42844pt>
 File: figures/openmpnested.png Graphic file (type png)
 <use figures/openmpnested.png>
-Package pdftex.def Info: figures/openmpnested.png  used on input line 921. on i
-nput line 921.
+Package pdftex.def Info: figures/openmpnested.png  used on input line 924. on i
+nput line 924.
 Package pdftex.def Info: Requested size: 367.29471pt x 220.79839pt on input lin
-e 921.
-Missing character: There is no Â in font cmr12!
-Missing character: There is no ­ in font cmr12!
- [40 <./figures/cyclicopenmp.png>]
+e 924.
+
+Overfull \hbox (17.2467pt too wide) in paragraph at lines 928--929
+\OT1/cmr/m/n/12 uses com-piler di-rec-tives, run-time func-tions, and en-vi-ron
+-ment vari-ables. OpenMP
+ []
+
+[40 <./figures/cyclicopenmp.png>]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
@@ -1269,7 +1273,7 @@ Chapter 4.
 ]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 944.
+(hyperref)                than one, level fixed on input line 947.
 
 [44]
 Chapter 5.
@@ -1438,15 +1442,15 @@ s,
  []
 
 [53]) [54]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1011.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1011.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1020.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1020.
  (ThesisDraft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1011.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1011.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1020.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1020.
 
 Package rerunfilecheck Info: File `ThesisDraft.out' has not changed.
 (rerunfilecheck)             Checksum: A7A076EF0E129190BEFA7250DD8010CC;2466.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1011.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1020.
  ) 
 Here is how much of TeX's memory you used:
  28381 strings out of 493314
@@ -1471,7 +1475,7 @@ s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX
 s/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
 sfonts/cm/cmtt12.pfb>
-Output written on ThesisDraft.pdf (55 pages, 1023257 bytes).
+Output written on ThesisDraft.pdf (55 pages, 1023577 bytes).
 PDF statistics:
  789 PDF objects out of 1000 (max. 8388607)
  226 named destinations out of 1000 (max. 500000)

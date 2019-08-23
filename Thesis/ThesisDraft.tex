@@ -664,7 +664,10 @@ The problem reduces to a tridiagonal matrix system. This system of equations can
 \end{figure}
 
 \subsection{Alternating Direction Implicit Method}
-Curse of dimensionality effects finite difference schemes as they tend to become more difficult to set up, understand and implement as the dimensionality of the space increases \cite{duffyfinite}. The alternating direction implicit (ADI) method is one of the most common techniques to numerically solve two dimensional parabolic PDEs. ADI scheme give us advantages of the implicit finite difference method and computationally requires to solve only tridiagonal matrices. The scheme was first proposed by Peaceman and Rachford in 1955 for oil reservoir modelling \cite{peace}. Basically the methods to split the spatial dimensions and solve a two dimensional problem as two consecutive one dimensional problems. It is possible to use ADI in more than three dimensions which produces the same number of consecutive one dimensional problems \cite{DougADI}. In order to develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
+Curse of dimensionality effects finite difference schemes as they tend to become more difficult to set up, understand and implement as the dimensionality of the space increases \cite{duffyfinite}. The alternating direction implicit (ADI) method is one of the most common techniques to numerically solve two dimensional parabolic PDEs. The scheme was first proposed by Peaceman and Rachford in 1955 for oil reservoir modelling \cite{peace}. Basically t to split the spatial dimensions and solve a two dimensional problem as two consecutive one dimensional problems. 
+At each pseudo-time step (iteration) the discrete equations are implicitly (line-by-line) solved first in one spatial direction, and then inthe other, leading to the terminologyAlternating Direction Implicit
+
+ADI scheme give us advantages of the implicit finite difference method and computationally requires to solve only tridiagonal matrices.It is possible to use ADI in more than three dimensions which produces the same number of consecutive one dimensional problems \cite{DougADI}. In order to develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
 
 \begin{equation}
 \delta x^2 u^{n}_{i,j}  = \frac{u^{n}_{i+1,j} - 2u^{n}_{i,j} + u^{n}_{i-1,j}}{\Delta x^2}
@@ -922,7 +925,7 @@ Algorithms like cyclic reduction \ref{cyclic} uses nested loops to calculate the
     \caption{4 threads create 2 threads, nested parallelism.}
 \end{figure}
 
-In order to specify and control the paralelization procedure, OpenMP uses compiler directives, runtime functions, and  envi­ronment variables. OpenMP enables developers to just give a high-level specification of the parallelism by indicating the regions to be executed in parallel using compiler directives, runtime library routines, and environment variables. The details of the parallelism is up to the compiler which makes OpenMP comparatively easy to use. 
+In order to specify and control the parallelization procedure, OpenMP uses compiler directives, runtime functions, and  environment variables. OpenMP enables developers to just give a high-level specification of the parallelism by indicating the regions to be executed in parallel using compiler directives, runtime library routines, and environment variables. The details of the parallelism is up to the compiler which makes OpenMP comparatively easy to use. 
 
 \section{Timing the Code}
 Measuring execution time intervals accurately is an important aspect to compare the efficiency and speed of different environments and implementations.
@@ -971,6 +974,12 @@ The base case consists of disabled optimizations of Visual Studio (/Od flag). An
 \chapter{Conclusion}
 A Critique of the Crank Nicolson Scheme Strengths and Weaknesses for FinancialInstrument Pricing + rannacher 
 AVX and Intrinsics CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512)GPGPU In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management. \cite{fpga},  cloud functions \cite{cloudfunc}.
+
+More type of options BSPde bdegistir callputflag duffy c++ 677 
+Generalize ADI (multi assset BS)
+Rannacher trick (168 foreign exchange pricing rannacher ve stencil)
+Burst cloud functions
+Rannacher trick
 
 change black scholes to a different pricing pde like interest rate derivatives The HJM model \cite{kohl}
 Parallel cyclic reductions is faster than thomas algorithm. 64 bit faster than 32 bit. 
