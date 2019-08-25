@@ -148,6 +148,15 @@ url="https://doi.org/10.1007/BF02127704"
     note = "[Online; accessed 7-August-2019]"
 }
 
+@misc{gtsvSource,
+    author = "{University of Tennessee}",
+    title = "LAPACK: Linear Algebra PACKage, dgtsv()",
+    year = "2016",
+    howpublished = "\url{http://www.netlib.org/lapack/explore-html/d4/d62/group__double_g_tsolve_ga2bf93f2ddefa5e671866eb2191dc19d4.html#ga2bf93f2ddefa5e671866eb2191dc19d4}",
+    note = "[Online; accessed 17-August-2019]"
+}
+
+
 @misc{sepvar,
     author = "{Matthew J. Hancock}",
     title = "The 1-D Heat Equation (MIT Course 18.303, Linear Partial Differential Equations)",
@@ -286,7 +295,7 @@ year = {2018}
   url={https://books.google.co.uk/books?id=-RW5AQAAQBAJ},
   year={2013},
   publisher={Wiley},
-  pages == {397-- 401}
+  pages == {397- 401}
 }
 
 @book{evans,
@@ -516,4 +525,15 @@ author = "Gustavo Chávez and George Turkiyyah and Stefano Zampini and Hatem Lta
   year={2011},
   organization={The Steering Committee of The World Congress in Computer Science, Computer~…}
 }
+
+@book{hull,
+  author = {Hull, John},
+  edition = {Ninth Edition},
+ place={Boston},
+  publisher = {Pearson Education Limited},
+  title = {Options, Futures, and Other Derivatives},
+  year = {2018},
+  pages={344}
+}
+
 

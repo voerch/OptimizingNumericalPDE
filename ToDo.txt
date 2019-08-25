@@ -1,12 +1,17 @@
 ﻿# TODO #
+
+tax system dissipative pde
+2d heat anala bak
 Grid size compare
 results tablolar hazirla
 appendixe tablo ekle
-ece figürler
 Put implementations appendix
-2d heat anala bak
-grammarlyden geçir + boşlukları kontrol + büyük küçük harf
-bibtex ref düzelt
+
+SALI
 kodlarin basina author date description ekle
-Timinge gore heatmap hazirla
+bibtex ref düzelt
 intro + conc + abstract + acknowledgments
+grammarlyden geçir + boşlukları kontrol + büyük küçük harf
+
+SORU
+Dissipative pde temperature gradient uxx mi ux mi?

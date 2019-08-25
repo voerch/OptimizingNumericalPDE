@@ -82,6 +82,11 @@ R.~W. Hockney.
 \newblock A fast direct solution of poisson's equation using fourier analysis.
 \newblock {\em J. ACM}, 12(1):95--113, January 1965.
 
+\bibitem{hull}
+John Hull.
+\newblock {\em Options, Futures, and Other Derivatives}.
+\newblock Pearson Education Limited, ninth edition edition, 2018.
+
 \bibitem{gtsv}
 {Intel}.
 \newblock Intel math kernel library for c, gtsv.
@@ -270,6 +275,14 @@ Linda Torczon and Keith Cooper.
 \newblock {\em Engineering A Compiler}, pages 19--21.
 \newblock Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 2nd edition,
   2011.
+
+\bibitem{gtsvSource}
+{University of Tennessee}.
+\newblock Lapack: Linear algebra package, dgtsv().
+\newblock
+  \url{http://www.netlib.org/lapack/explore-html/d4/d62/group__double_g_tsolve_ga2bf93f2ddefa5e671866eb2191dc19d4.html#ga2bf93f2ddefa5e671866eb2191dc19d4},
+  2016.
+\newblock [Online; accessed 17-August-2019].
 
 \bibitem{openmpnext}
 Ruud van~der Pas, Eric Stotzer, and Christian Terboven.
