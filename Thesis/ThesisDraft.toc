@@ -24,13 +24,15 @@
 \contentsline {section}{\numberline {3.6}Timing the Code}{44}{section.3.6}% 
 \contentsline {subsection}{\numberline {3.6.1}Windows Application Programming Interface}{44}{subsection.3.6.1}% 
 \contentsline {subsection}{\numberline {3.6.2}Chrono Library}{45}{subsection.3.6.2}% 
-\contentsline {chapter}{\numberline {4}Comparison of Optimizations}{46}{chapter.4}% 
+\contentsline {chapter}{\numberline {4}Results and Discussion}{46}{chapter.4}% 
 \contentsline {subsection}{\numberline {4.0.1}Base Case}{46}{subsection.4.0.1}% 
-\contentsline {subsection}{\numberline {4.0.2}Visual Studio Optimizations}{47}{subsection.4.0.2}% 
-\contentsline {subsubsection}{/O2 Flag}{47}{section*.19}% 
-\contentsline {subsubsection}{/Ox Flag}{47}{section*.20}% 
-\contentsline {subsection}{\numberline {4.0.3}Cyclic Reduction with OpenMP}{47}{subsection.4.0.3}% 
-\contentsline {chapter}{\numberline {5}Conclusion}{48}{chapter.5}% 
-\contentsline {chapter}{\numberline {A}Usage of chrono class}{49}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Implementation of the {\tt PDE} class}{50}{appendix.B}% 
-\contentsline {chapter}{\numberline {C}Implementation of the {\tt FiniteDifferenceMethod} class}{51}{appendix.C}% 
+\contentsline {subsection}{\numberline {4.0.2}Solution Platforms}{48}{subsection.4.0.2}% 
+\contentsline {subsection}{\numberline {4.0.3}Compilers}{48}{subsection.4.0.3}% 
+\contentsline {subsection}{\numberline {4.0.4}Visual Studio Optimizations}{48}{subsection.4.0.4}% 
+\contentsline {subsection}{\numberline {4.0.5}Tridiagonal Solvers}{48}{subsection.4.0.5}% 
+\contentsline {subsection}{\numberline {4.0.6}Effect of Grid Size}{48}{subsection.4.0.6}% 
+\contentsline {chapter}{\numberline {5}Conclusion}{54}{chapter.5}% 
+\contentsline {chapter}{\numberline {A}Usage of chrono class}{55}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Implementation of the {\tt PDE} class}{56}{appendix.B}% 
+\contentsline {chapter}{\numberline {C}Implementation of the {\tt FiniteDifferenceMethod} class}{57}{appendix.C}% 
+\contentsline {chapter}{\numberline {D}Timings}{58}{appendix.D}% 

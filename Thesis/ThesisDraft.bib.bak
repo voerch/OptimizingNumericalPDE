@@ -295,7 +295,7 @@ year = {2018}
   url={https://books.google.co.uk/books?id=-RW5AQAAQBAJ},
   year={2013},
   publisher={Wiley},
-  pages == {397- 401}
+  pages = {397-- 401}
 }
 
 @book{evans,

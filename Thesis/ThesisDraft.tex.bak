@@ -246,7 +246,7 @@ Assume that there is a solution to the function $V(x_t, t)$ that follow the part
 \frac{\partial V}{\partial t} +  \mu(x_t, t) \frac{\partial V}{\partial x} + \frac{1}{2} \sigma(x_t, t)^2 \frac{\partial^2 V}{\partial x^2} - r(t, x) V(x_t, t) = 0
 \end{equation}.
 
-The solution to the function is
+The solution to the function under the measure $Q$ is
 \begin{equation}
 V(x_t, t) = E^Q [ \exp(-  \int_{t}^{T} r(X_u, u)  \mathrm{d}u) V(X_T, T) \lvert \mathcal{F}_t]
 \end{equation}
@@ -281,14 +281,14 @@ C(S_t, t) = \exp(-r (T-t))  \int_K^{\infty} (S_T - K) \mathrm{d}F(S_t)
 \end{equation}.
 \begin{equation}\label{mainbsproof}
  = \exp(-r (T-t))  \int_K^{\infty} S_T \mathrm{d}F(S_t) - \exp(-r (T-t))  \int_K^{\infty} K \mathrm{d}F(S_t)
-\end{equation}.
+\end{equation}
  As the stock price $S$ follow log-normal distribution \cite{hull} the first integral becomes
  \begin{equation}
  \int_K^{\infty} S_T \mathrm{d}F(S_t)  = E^Q[S_T \lvert S_T > K] = S_t \exp(r(T-t)) \Phi( \frac{\log(S/K) + (r + \sigma^2/2)(T - t)}{\sigma \sqrt{T-t}}) 
- \end{equation}.
+ \end{equation}
   \begin{equation}
 0, S_t \exp(r(T-t)) \Phi(d_1) 
- \end{equation}.
+ \end{equation}
 Thus, second integral in \ref{mainbsproof} can be written as
 \begin{equation}
 \exp(-r (T-t))  K \int_K^{\infty} \mathrm{d}F(S_t) =
@@ -1064,30 +1064,111 @@ Windows Application Programming Interface (API) is the lowest level of interacti
 Using the Windows API for just timing the code is slightly excessive given the amount of work it takes. Luckily, Chrono library was introduced part of the C++11’s standard library.  Timers and clocks might differ on distinct systems, thus Chrono library is designed to work effortlessly with date and time. The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
 
 
-\chapter{Comparison of Optimizations}
+\chapter{Results and Discussion}
 This section documents the performance of attempted optimizations. Experiments are  conducted at W307 computer laboratory, Queen Mary University of London. Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7 - 6700 CPU with 4 cores clocked at 3.40 GHz. The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized in the tests include Intel Compiler, version 18.0.3 and Intel Math Kernel Library. 
 
-Numerical analysis and computer simulations is undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was solving the base cases \ref{bsAnal}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance. Different solution platforms, compilers, optimization flags and tridiagonal solvers will be tested against each other.
+Numerical analysis and computer simulations is undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was solving the base cases \ref{bsBase}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance. Different solution platforms, compilers, optimization flags and tridiagonal solvers will be tested against each other.
  
 \subsection{Base Case}
 Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are used to calculate errors for the solutions using different grid sizes. Space and time dimensions are discretized by $64$ for Explicit and Crank - Nicolson schemes. In order to solve two dimensional heat equation using the ADI scheme two space dimensions and the time dimension are discretized by $32$.  All optimizations of Visual Studio  (/Od flag) are disabled for the base case and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.
 
+
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.8]{baseCase.png}
-    \caption{Base case timings.}
+        \includegraphics[scale=0.6]{heatNotOptimized.png}
+    \caption{Heat equation non optimized timing using crank nicolson and ADI.}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{heat2Optimized.png}
+    \caption{Heat equation /O2 optimized timing using crank nicolson and ADI.}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{heatXOptimized.png}
+    \caption{Heat equation /Ox optimized timing using crank nicolson and ADI.}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{bsNotOptimized.png}
+    \caption{Heat equation non optimized timing using crank nicolson and ADI.}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.7]{bs2Optimized.png}
+    \caption{Heat equation  /O2 optimized timing using explicit scheme.}
+\end{figure}
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{bsXOptimized.png}
+    \caption{Heat equation  /Ox optimized timing using crank nicolson and ADI.}
+\end{figure}
+
+\subsection{Solution Platforms} 
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.8]{bitPercent.png}
+    \caption{Average increase when switched to 64 bit under different optimization flags.}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.8]{bit.png}
+    \caption{Average increase when switched to 64 bit under different optimization flags.}
+\end{figure}
+
+\subsection{Compilers} 
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.8]{compilerPercent.png}
+    \caption{Average increase when switched to intel compiler.}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.8]{compilerT.png}
+    \caption{Average timings comparing Intel Compiler and Visual Studio Compiler.}
 \end{figure}
 
 \subsection{Visual Studio Optimizations}
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.7]{expFlagPercent.png}
+    \caption{Average increase when switched to intel compiler.}
+\end{figure}
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{FlagPercent.png}
+    \caption{Average increase when switched to intel compiler.}
+\end{figure}
 
-\subsubsection{/O2 Flag}
 
-\subsubsection{/Ox Flag}
-
-\subsection{Cyclic Reduction with OpenMP} 
- 
-
-
+\subsection{Tridiagonal Solvers} 
+ \begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.7]{solverAveragePercentage.png}
+    \caption{Average increase when between solvers.}
+\end{figure}
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{solverAverage.png}
+    \caption{Average increase when between solvers timings.}
+\end{figure}
+\subsection{Effect of Grid Size} 
+ \begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.7]{gridTime.png}
+    \caption{Average increase when between solvers.}
+\end{figure}
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{gridTimePercent.png}
+    \caption{Average increase when between solvers timings.}
+\end{figure}
 \chapter{Conclusion}
 A Critique of the Crank Nicolson Scheme Strengths and Weaknesses for Financial Instrument Pricing + rannacher 
 AVX and Intrinsics CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512)GPGPU In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management. \cite{fpga},  cloud functions \cite{cloudfunc}.
@@ -1129,6 +1210,7 @@ void innerDomain();
 void timeMarch();
 \end{verbatim}
 
+\chapter{Timings}
 
 
 \bibliographystyle{plain}

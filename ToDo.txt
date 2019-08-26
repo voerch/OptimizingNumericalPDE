@@ -1,11 +1,6 @@
 ﻿# TODO #
 
-tax system dissipative pde
-2d heat anala bak
-Grid size compare
-results tablolar hazirla
-appendixe tablo ekle
-Put implementations appendix
+ implementations appendix
 
 SALI
 kodlarin basina author date description ekle
