@@ -1,3 +1,10 @@
+/*
+Author: Mustafa Berke Erdis, August 2019
+
+Implementation of the explicit, Crank - Nicolson and ADI finite difference methods.
+
+*/
+
 #include "FDM.h"
 #include <fstream>
 #include <iostream>
@@ -86,7 +93,7 @@ void ExplicitMethod::timeMarch()
 }
 
 //Defining functions for CN Method
-void CrankNicholson::stepSize()
+void CrankNicolson::stepSize()
 {
 	xStepSize = xDomain / static_cast<double>(xNumberSteps - 1);
 	tStepSize = tDomain / static_cast<double>(tNumberSteps - 1);
@@ -99,7 +106,7 @@ void CrankNicholson::stepSize()
 	r = tStepSize / (xStepSize * xStepSize);
 }
 
-void CrankNicholson::initialConditions()
+void CrankNicolson::initialConditions()
 {
 	double currentX = 0;
 
@@ -123,14 +130,14 @@ void CrankNicholson::initialConditions()
 
 }
 
-void CrankNicholson::boundaryConditions()
+void CrankNicolson::boundaryConditions()
 {
 	newResult[0] = PDE->BoundaryLeft(tPrevious, xValues[0]);
 	newResult[xNumberSteps - 1] = PDE->BoundaryRight(tPrevious, xValues[xNumberSteps - 1]);
 
 }
 
-void CrankNicholson::innerDomain()
+void CrankNicolson::innerDomain()
 {
 	alpha = PDE->DiffusionCoeff(tPrevious, xValues[0]) * tStepSize / (2 * xStepSize * xStepSize);
 	beta = PDE->ConvectionCoeff(tPrevious, xValues[0]) * tStepSize / (4.0 * xStepSize);
@@ -153,12 +160,12 @@ void CrankNicholson::innerDomain()
 		oldResult[iCounter] = (alpha + beta) * newResult[iCounter + 1] + (1.0 - (2 * alpha) + gamma) * newResult[iCounter] + (alpha - beta) * newResult[iCounter - 1];
 	}
 
-	ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+	//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 	//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-	//CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+	CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 }
 
-void CrankNicholson::timeMarch()
+void CrankNicolson::timeMarch()
 {
 	std::ofstream grid("CNGrid.csv");
 	grid << "xValues,tValues,Solution" << std::endl;
@@ -260,9 +267,9 @@ void ADI::InnerDomain()
 			oldResult[xCounter] = rY * FullStep[xCounter][yCounter + 1] + (1 - 2.0 *rY) * FullStep[xCounter][yCounter] + (rY)* FullStep[xCounter][yCounter - 1];
 		}
 
-		ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 		//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-		//CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 		for (long xCounter = 1; xCounter < xNumberSteps - 1; xCounter++)
 		{
 			HalfStep[xCounter][yCounter] = newResult[xCounter];
@@ -284,9 +291,9 @@ void ADI::InnerDomain()
 			oldResult[yCounter] = rX * FullStep[xCounter][yCounter + 1] + (1 - 2.0 *rX) * FullStep[xCounter][yCounter] + (rX)* FullStep[xCounter][yCounter - 1];
 		}
 
-		ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		//ThomasAlgorithm(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 		//IntelSolver(LowerDiag, Diag, UpperDiag, oldResult, newResult);
-		//CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
+		CyclicReduction(LowerDiag, Diag, UpperDiag, oldResult, newResult);
 		for (long yCounter = 1; yCounter < yNumberSteps - 1; yCounter++)
 		{
 			FullStep[xCounter][yCounter] = newResult[xCounter];

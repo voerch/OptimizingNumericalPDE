@@ -10,7 +10,7 @@
 \BOOKMARK [1][-]{section.2.3}{Finite Difference Methods}{chapter.2}% 10
 \BOOKMARK [2][-]{subsection.2.3.1}{Discretization}{section.2.3}% 11
 \BOOKMARK [2][-]{subsection.2.3.2}{Explicit Method}{section.2.3}% 12
-\BOOKMARK [2][-]{subsection.2.3.3}{Crank-Nicolson Method}{section.2.3}% 13
+\BOOKMARK [2][-]{subsection.2.3.3}{Crank - Nicolson Method}{section.2.3}% 13
 \BOOKMARK [2][-]{subsection.2.3.4}{Alternating Direction Implicit Method}{section.2.3}% 14
 \BOOKMARK [0][-]{chapter.3}{Optimizing Solvers}{}% 15
 \BOOKMARK [1][-]{section.3.1}{Solution Platforms}{chapter.3}% 16
@@ -32,8 +32,7 @@
 \BOOKMARK [2][-]{subsection.4.0.5}{Tridiagonal Solvers}{subsection.4.0.1}% 32
 \BOOKMARK [2][-]{subsection.4.0.6}{Different Sized Discretizations}{subsection.4.0.1}% 33
 \BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 34
-\BOOKMARK [0][-]{appendix.A}{Usage of chrono class}{}% 35
-\BOOKMARK [0][-]{appendix.B}{Implementation of the PDE class}{}% 36
-\BOOKMARK [0][-]{appendix.C}{Implementation of the FiniteDifferenceMethod class}{}% 37
-\BOOKMARK [0][-]{appendix.D}{Heat Equation Timings}{}% 38
-\BOOKMARK [0][-]{appendix.E}{Black - Scholes Equation Timings}{}% 39
+\BOOKMARK [0][-]{appendix.A}{Implementation of the PDE class}{}% 35
+\BOOKMARK [0][-]{appendix.B}{Implementation of the FiniteDifferenceMethod class}{}% 36
+\BOOKMARK [0][-]{appendix.C}{Heat Equation Timings}{}% 37
+\BOOKMARK [0][-]{appendix.D}{Black - Scholes Equation Timings}{}% 38

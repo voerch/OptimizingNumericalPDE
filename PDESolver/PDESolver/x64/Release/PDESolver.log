@@ -1,2 +1,13 @@
-﻿  mainTiming.cpp
+﻿  FDM.cpp
+C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\PDESolver\TridiagonalSolvers.h(82): warning #3180: unrecognized OpenMP #pragma
+    #pragma omp parallel for collapse(2)
+            ^
+  
+C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\PDESolver\TridiagonalSolvers.h(117): warning #3180: unrecognized OpenMP #pragma
+    #pragma omp parallel for collapse(2)
+            ^
+  
+  PDE.cpp
+  mainExpCN.cpp
+  mainTiming.cpp
   PDESolver.vcxproj -> C:\Users\mbe31\OptimizingNumericalPDE\PDESolver\x64\Release\PDESolver.exe

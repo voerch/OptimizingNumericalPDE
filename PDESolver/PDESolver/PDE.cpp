@@ -1,7 +1,15 @@
+/*
+Author: Mustafa Berke Erdis, August 2019
+
+This file consists of Black - Scholes equation, one-dimensional and two dimensional heat equation implementations 
+
+*/
+
 #include "PDE.h"
 #include "Option.h"
 #include <cmath>
 
+//Implementation of the heat equation
 double HeatEqn::DiffusionCoeff(double t, double x) const
 {
 	return 1;
@@ -36,6 +44,7 @@ double HeatEqn::AnalyticSol(double t, double x) const
 	return exp(-t * pow(PI, 2)) * sin(PI * x);
 }
 
+// Black - Scholes partial differential equation implementation.
 double BlackScholesPDE::DiffusionCoeff(double t, double x) const
 {
 	return 0.5 * option->sigma * option->sigma * x * x;
@@ -70,41 +79,7 @@ double BlackScholesPDE::AnalyticSol(double t, double x) const
 	return option->PriceByBS(x);
 }
 
-double LogSpotBlackScholesPDE::DiffusionCoeff(double t, double x) const
-{
-	return 0.5 * option->sigma * option->sigma;
-}
-double LogSpotBlackScholesPDE::ConvectionCoeff(double t, double x) const
-{
-	return option->interestRate - (0.5 * option->sigma * option->sigma);
-}
-double LogSpotBlackScholesPDE::ZeroCoeff(double t, double x) const
-{
-	return -option->interestRate;
-}
-double LogSpotBlackScholesPDE::SourceCoeff(double t, double x) const
-{
-	return 0.0;
-}
-double LogSpotBlackScholesPDE::BoundaryLeft(double t, double x) const
-{
-	return 0.0;
-}
-double LogSpotBlackScholesPDE::BoundaryRight(double t, double x) const
-{
-	return (exp(x) - (option->strike)*exp(-(option->interestRate)*((option->timeToExpiry) - t)));
-}
-double LogSpotBlackScholesPDE::InitCond(double x) const
-{
-	return option->Payoff(exp(x));
-}
-double LogSpotBlackScholesPDE::AnalyticSol(double t, double x) const
-{
-	return option->PriceByBS(exp(x));
-}
-
-
-// 2D
+// 2D Heat equation implementation
 double Heat2D::DiffusionCoeff2D(double t, double x, double y) const
 {
 	return 1;

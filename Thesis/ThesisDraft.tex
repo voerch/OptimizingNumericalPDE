@@ -15,7 +15,7 @@
 \usepackage{siunitx}
 \usetikzlibrary{calc,decorations.pathmorphing,patterns}
 
-%\usepackage[margin=1.2in]{geometry}
+\usepackage[margin=1.2in]{geometry}
 
 \usepackage[colorlinks=true, urlcolor=blue, pdfborder={0 0 0}]{hyperref}
 \hypersetup{
@@ -256,53 +256,51 @@ V(x_t, t) = E^Q [ \exp(-  \int_{t}^{T} r(X_u, u)  \mathrm{d}u) V(X_T, T) \lvert 
 \begin{theorem}\label{bsAnal} 
 Solving the equations, the formulae \cite{wilmott} for European call is
 \begin{eqnarray}
-C = S \Phi (d_1) - K e^{-r(T-t)} \Phi (d_2) \\[10pt]
-d_1 = \frac{\log(S/K) + (r + \sigma^2/2)(T - t)}{\sigma \sqrt{T-t}} \\[10pt]
-d_2 = d_1 - \sigma \sqrt{T-t}
+C &=& S \Phi (d_1) - K e^{-r(T-t)} \Phi (d_2) \\[10pt]
+d_1 &=& \frac{\log(S/K) + (r + \sigma^2/2)(T - t)}{\sigma \sqrt{T-t}} \\[10pt]
+d_2 &=& d_1 - \sigma \sqrt{T-t}
 \end{eqnarray}
 
 where $\Phi(x)$ denotes the cumulative normal distribution function.
 \begin{equation}
 \Phi(x) = \frac{1}{\sqrt{2 \pi}} \int_0^x \exp (-\frac{t^2}{2}) \mathrm{d}t
 \end{equation}
-
 \end{theorem}
+
 \begin{proof}
 Applying the Feynman - Kac formula \ref{Feynman} to the Black-Scholes equation with boundary conditions yields
-\begin{equation}
-C(S_t, t) = E^Q [ \exp(-  \int_{t}^{T} r(X_u, u)  \mathrm{d}u) C(S_T, T) \lvert \mathcal{F}_t]
-\end{equation}
-\begin{equation}
-C(S_t, t) = \exp(-r (T-t))  E^Q [(S_T - K)^+ \lvert \mathcal{F}_t]
-\end{equation}.
+
+\begin{eqnarray}
+C(S_t, t) &=& E^Q [ e^{-  \int_{t}^{T} r(X_u, u} \mathrm{d}u) C(S_T, T) \lvert \mathcal{F}_t]\\
+&=& e^{-r (T-t)}  E^Q [(S_T - K)^+ \lvert \mathcal{F}_t]
+\end{eqnarray}
+
 Evaluating the expectation as integral
-\begin{equation}
-C(S_t, t) = \exp(-r (T-t))  \int_K^{\infty} (S_T - K) \mathrm{d}F(S_t)
-\end{equation}.
-\begin{equation}\label{mainbsproof}
- = \exp(-r (T-t))  \int_K^{\infty} S_T \mathrm{d}F(S_t) - \exp(-r (T-t))  \int_K^{\infty} K \mathrm{d}F(S_t)
-\end{equation}
- As the stock price $S$ follow log-normal distribution \cite{hull} the first integral becomes
- \begin{equation}
- \int_K^{\infty} S_T \mathrm{d}F(S_t)  = E^Q[S_T \lvert S_T > K] = S_t \exp(r(T-t)) \Phi( \frac{\log(S/K) + (r + \sigma^2/2)(T - t)}{\sigma \sqrt{T-t}}) 
- \end{equation}
-  \begin{equation}
-0, S_t \exp(r(T-t)) \Phi(d_1) 
- \end{equation}
+
+\begin{eqnarray}\label{mainbsproof}
+C(S_t, t) &=& e^{-r (T-t)}  \int_K^{\infty} (S_T - K) \mathrm{d}F(S_t) \\
+&=& e^{-r (T-t)}\int_K^{\infty} S_T \mathrm{d}F(S_t) - e^{-r (T-t)} \int_K^{\infty} K \mathrm{d}F(S_t)
+\end{eqnarray}
+
+As the stock price $S$ follow log-normal distribution \cite{hull} the first integral becomes
+
+\begin{eqnarray}
+\int_K^{\infty} S_T \mathrm{d}F(S_t) &=& E^Q[S_T \lvert S_T > K]\\
+&=& S_t e^{r (T-t)} \Phi( \frac{\log(S/K) + (r + \sigma^2/2)(T - t)}{\sigma \sqrt{T-t}}) \\
+&=& S_t e^{r (T-t)} \Phi(d_1)
+\end{eqnarray}
+
 Thus, second integral in \ref{mainbsproof} can be written as
-\begin{equation}
-\exp(-r (T-t))  K \int_K^{\infty} \mathrm{d}F(S_t) =
-\end{equation}
-\begin{equation}
-= \exp(-r (T-t))  K (1 - \Phi(\frac{\ln K - \ln S_t - (r - \frac{\sigma^2}{2})(T- t)}{\sigma \sqrt{T - t}})
-\end{equation}
-\begin{equation}
-= \exp(-r (T-t))  K (1 - \Phi( \sigma \sqrt{T-t} - d_1) 
-\end{equation}
-\begin{equation}
-= \exp(-r (T-t))  K \Phi(d_2) 
-\end{equation}
+
+\begin{eqnarray}
+e^{-r (T-t)} K \int_K^{\infty} \mathrm{d}F(S_t) &=& e^{-r (T-t)} K (1 - F(K)) \\
+&=& e^{-r (T-t)}  K (1 - \Phi(\frac{\ln (K/S_t) - (r - \frac{\sigma^2}{2})(T- t)}{\sigma \sqrt{T - t}}))\\
+&=& e^{-r (T-t)}  K (1 - \Phi( \sigma \sqrt{T-t} - d_1) \\
+&=& e^{-r (T-t)}  K \Phi(d_2) 
+\end{eqnarray}
+
 Combining both integrals yield the analytical solution for the Black-Scholes equation with the given boundary conditions.
+
 \begin{equation}
 C = S \Phi (d_1) - K e^{-r(T-t)} \Phi (d_2)
 \end{equation}
@@ -370,20 +368,20 @@ Heat equation $u(x, t)$ is a dissipative partial differential equation, describi
 Certain kinds of partial differential equations allows us to find an analytical solution with the help of the Separation of Variables technique.
 
 \begin{eqnarray}
-u(x,t) = X(x) T(t) \\[10pt]
-u_{xx}(x, t) = X^{''}(x) T(t) \\[10pt]
-u_t (x,t) = X(t) T^{'}(t)
+u(x,t) &=& X(x) T(t) \\[10pt]
+u_{xx}(x, t) &=& X^{''}(x) T(t) \\[10pt]
+u_t (x,t) &=& X(t) T^{'}(t)
 \end{eqnarray}
 
 Using the partial derivatives the equation $ u_t = u_{xx} $ becomes
 \begin{equation}
-\frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)}
+\frac{T^{'}(t)}{T(t)} = \frac{X^{''}(x)}{X(x)}
 \end{equation}
 
 Right hand side only depends on $x$ and the left hand side depends only on $t$. Therefore, the equation is valid only when each side is equal to a constant, which we set to $ \lambda $. Rearranging terms gives us the following equations:
 
 \begin{equation}
-\frac{T^{'}(t)}{T(t)}  = \frac{X^{''}(x)}{X(x)} = -\lambda \\[10pt]
+\frac{T^{'}(t)}{T(t)} = \frac{X^{''}(x)}{X(x)} = -\lambda \\[10pt]
 \end{equation}
 \begin{equation}\label{xlambda}
 X^{''}(x)  + \lambda X(x) = 0 
@@ -391,7 +389,6 @@ X^{''}(x)  + \lambda X(x) = 0
 \begin{equation}\label{tlambda}
 T^{'}(t) + \lambda T(t) = 0
 \end{equation}
-
 \begin{equation}
 X(0) = X(1) = 0
 \end{equation}
@@ -457,26 +454,26 @@ The natural extension of our study of the one-dimensional problem would now be t
 \end{equation}$  $
 Initial and boundary condition
 \begin{eqnarray} \label{HeatTwoBase}
-u(x,y,0) = 1, \hspace{10pt} 0 \leq x \leq x_{\max}, \hspace{10pt} 0 \leq y \leq y_{\max} \\[10pt]
-u(x, 0, t) = u(x, y_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
-u(x, 0, t) = u(x, 1, t) = 0 , \hspace{10pt} 0 \leq t \leq T
+u(x,y,0) &=& 1, \hspace{10pt} 0 \leq x \leq x_{\max}, \hspace{10pt} 0 \leq y \leq y_{\max} \\[10pt]
+u(x, 0, t) &=& u(x, y_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
+u(0, y, t) &=& u(x_{max}, y, t) = 0 , \hspace{10pt} 0 \leq t \leq T
 \end{eqnarray}
 In the calculations, we will test the case where $T = 0.06$, $x_{max} = 1.0$ and $y_{max} = 1.0$.
 
 \begin{definition}\label{heat2Anal} Analytical Solution of Two Dimensional Heat Equation
 Similarly, applying separation of variables method to the equation
 \begin{eqnarray}
-u(x,t) = X(x) Y(y) T(t) \\[10pt]
-X^{''}(x) - B X(x) = 0 \\[10pt]
-Y^{''}(y) - C (y) = 0 \\[10pt]
-T^{'}(t) - (B + C) T(t) = 0 \\[10pt]
-X(0) = X(1) = 0, \hspace{10pt} Y(0) = Y(1) = 0
+u(x,t) &=& X(x) Y(y) T(t) \\[10pt]
+X^{''}(x) - B X(x) &=& 0 \\[10pt]
+Y^{''}(y) - C (y) &=& 0 \\[10pt]
+T^{'}(t) - (B + C) T(t) &=& 0 \\[10pt]
+X(0) = X(1) = 0, \hspace{10pt} Y(0) &=& Y(1) = 0
 \end{eqnarray}
 
 In \ref{heatAnal}, we have already seen that the solutions to X(x) and Y(y) are
 \begin{eqnarray} 
-X_m (x) =  b_n \sin(m \pi x) \\
-Y_n (x) =  a_m \sin(n \pi y)
+X_m (x) &=& b_n \sin(m \pi x) \\
+Y_n (x) &=& a_m \sin(n \pi y)
 \end{eqnarray}
 
 Using these values to solve for $T(t)$ gives
@@ -485,12 +482,10 @@ T_{mn}(t) = c_{mn} \exp(- \pi^2 (m^2 + n^2)t)
 \end{equation}
 
 Substituting the solutions yields
-\begin{equation}
-u_{mn}(x, y, t) = X_m(x) Y_n(y) T_{mn}(t)
-\end{equation}
-\begin{equation}
-u(x, y, t) = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} A_{mn} \sin(m \pi x) \sin(n \pi y) \exp(- \pi^2 (m^2 + n^2)t)
-\end{equation}
+\begin{eqnarray}
+u_{mn}(x, y, t) &=& X_m(x) Y_n(y) T_{mn}(t)\\
+u(x, y, t) &=& \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} A_{mn} \sin(m \pi x) \sin(n \pi y) \exp(- \pi^2 (m^2 + n^2)t)
+\end{eqnarray}
 where $A_{mn} = b_n a_m c_{mn}$.
 The initial condition gives
 \begin{equation}
@@ -501,10 +496,9 @@ which is a double Fourier sine series. Thus, the coefficient $A_{mn}$ is chosen 
  A_{mn} = 4 \int_{0}^{1}  \int_{0}^{1} \sin(\pi m x) \sin(\pi n y) \mathrm{d}x \mathrm{d}y = \frac{4(\cos(\pi n) - 1)(\cos(\pi m) - 1)}{\pi^2 m n} 
 \end{equation}
 Combining the solutions
-\begin{multline}
-u_{mn}(x, y, t) =  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(\cos(\pi n) - 1)(\cos(\pi m) - 1)}{\pi^2 m n}  \\ \sin(m \pi x) \sin(n \pi y) \exp(- \pi^2 (m^2 + n^2)t)
-\end{multline}
-
+\begin{equation}
+u(x, y, t) = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{4(\cos(\pi n) - 1)(\cos(\pi m) - 1)}{\pi^2 m n}  \sin(m \pi x) \sin(n \pi y) e^{- \pi^2 (m^2 + n^2)t}
+\end{equation}
 \end{definition}
 
 
@@ -515,7 +509,7 @@ Essentially, solving a PDE is the problem of finding a function which depends on
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.8]{Discretize.png}
+        \includegraphics[scale=1]{Discretize.png}
     \caption{10 x 10 grid.}
 \end{figure}
 In order to replace our PDE, we need to utilize finite difference approximations for the partial derivatives. Notationally, we will define $u^n_i$ to be a function defined at the point $(i \Delta x, n \Delta t) $.
@@ -543,16 +537,18 @@ We now have a grid that approximates our domain. Aiming to obtain a unique solut
 \subsection{Explicit Method}
 Explicit method generalises the parabolic partial differential equation by applying the forward difference to the time derivative and the centred second difference (FTCS scheme).
 \begin{equation} \label{gen}
- u_t = a(t, x)  u_{xx} + b(t, x) u_x + c(t, x) u
+ u_t = a(x, t)  u_{xx} + b(x, t) u_x + c(x, t) u
 \end{equation}
 
 We will be applying the finite differences to the equation  \ref{gen}  for the purposes of simplicity since heat equation and Black-Scholes equation can be generalized in the form for certain choices of coefficients. Applying the forward time and centred space differences where $ r = \frac{\Delta t}{\Delta x^2} $.
 
-\begin{multline}
-\frac{u^{n+1}_i - u^n_i}{\Delta t} = a(t, x)  \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2}  + b(t, x)  \frac{u^{n}_{i+1} - u^{n}_{i-1}}{\Delta x} +   + c(t, x) u^n_i \\
-u^{n+1}_i = u^n_{i + 1} (\frac{-r b(t,x)}{\Delta x} - r a(t, x)) + u^n_{i}(1 + 2 r a(t, x) - c(t, x) \Delta t) \\
-+ u^n_{i - 1} (-r a(t, x) + \frac{r b(t, x)}{\Delta x})
-\end{multline}
+\begin{eqnarray*}
+\frac{u^{n+1}_i - u^n_i}{\Delta t} &=& a(x, t)  \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1}}{(\Delta x)^2}  + b(x, t)  \frac{u^{n}_{i+1} - u^{n}_{i-1}}{\Delta x} + c(x, t) u^n_i \\
+u^{n+1}_i &=& u^n_{i + 1} (\frac{-r b(x, t)}{\Delta x} - r a(x, t))\\
+&+& u^n_{i}(1 + 2 r a(x, t) - c(x, t) \Delta t) \\
+&+& u^n_{i - 1} (-r a(x, t) + \frac{r b(x, t)}{\Delta x})
+\end{eqnarray*}
+
 
 We will replace the coefficients of $ u^n_{i + 1},  u^n_i,  u^n_{i - 1}$  terms with $\gamma,  \alpha, \beta$ respectively. The formula reduces to
 
@@ -569,6 +565,17 @@ u_2^{n+1} = \gamma u_{3}^{n} + \beta u_{2}^{n} + \alpha u_{1}^{n} \\
 \hspace{150pt} .\\
 u_{j-1}^{n+1} = \gamma u_{j}^{n} + \beta u_{j-1}^{n} + \alpha u_{j-2}^{n} 
 \end{multline}
+
+\begin{figure}[!htb]
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{ExplicitHeat.png}
+    \caption{Computational stencil \\of heat equation.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{ExplicitBS.png}
+    \caption{Computational stencil \\of Black-Scholes equation.}
+  \end{minipage}
+\end{figure}
 
 Using the boundary conditions and  initial condition, the expanded formula can be condensed in the following matrix form. 
 $$
@@ -621,50 +628,40 @@ In the case of Black-Scholes formula, since the share price $S_j$ increases line
 
 Lastly, solving heat equation and Black-Scholes differs in time stepping. Black-Scholes formula is solved backwards in time. On the other hand, heat equation is solved forwards in time. 
 
-\begin{figure}[!htb]
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{ExplicitHeat.png}
-    \caption{Computational stencil \\of heat equation.}
-  \end{minipage}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{ExplicitBS.png}
-    \caption{Computational stencil \\of Black-Scholes.}
-  \end{minipage}
-\end{figure}
+
 
 \begin{figure}[!htb]
   \begin{minipage}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth]{HeatExplicitGrid.png}
-    \caption{Output grid of heat equation.}
+    \caption{Output grid of heat equation using explicit scheme.}
   \end{minipage}
   \begin{minipage}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth]{BSExplicitGrid.png}
-    \caption{Output grid of Black-Scholes equation.}
+    \caption{Output grid of Black-Scholes equation using explicit scheme.}
   \end{minipage}
 \end{figure}
 
-\subsection{Crank-Nicolson Method}
-The explicit method is computationally cheap. However, this brings a serious drawback, for explicit method to attain reasonable accuracy the step size must be kept small \cite{gdsmith}. Thankfully, the Crank-Nicolson finite difference scheme was introduced by John Crank and Phyllis Nicolson \cite{cn}. Considering numerous articles and publications in the financial engineering literature use Crank-Nicolson as the de-facto scheme for time discretisation, the method has become one of the most popular finite difference schemes for approximating the solution of the Black - Scholes equation and its generalisations \cite{tavella}.
+\subsection{Crank - Nicolson Method}
+The explicit method is computationally cheap. However, this brings a serious drawback, for explicit method to attain reasonable accuracy the step size must be kept small \cite{gdsmith}. Thankfully, the Crank-Nicolson finite difference scheme was introduced by John Crank and Phyllis Nicolson \cite{cn}. Considering numerous articles and publications in the financial engineering literature use Crank-Nicolson as the de-facto scheme for time discretisation, the method has become one of the most popular finite difference schemes for approximating the solution of the Black - Scholes equation and its generalisations \cite{tavella}. If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. Applying the BTCS to the base equation \ref{gen} yields
 
- If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. Applying the BTCS to the base equation \ref{gen} yields
-    \begin{equation}
-\frac{u^{n+1}_i - u^n_i}{\Delta t}  = a(t, x)  \frac{u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{(\Delta x)^2}  + b(t, x)  \frac{u^{n+1}_i - u^{n+1}_i}{\Delta t}  + c(t, x)  u^{n+1}_i
+\begin{equation}
+\frac{u^{n+1}_i - u^n_i}{\Delta t}  = a(x, t)  \frac{u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{(\Delta x)^2}  + b(x, t)  \frac{u^{n+1}_i - u^{n+1}_i}{\Delta t}  + c(x, t)  u^{n+1}_i
 \end{equation}
 
-Crank-Nicolson method takes a weighted average of the FTCS and BTCS schemes. Therefore the approximations become
-$$ u(t,x) \approx \frac{1}{2} ( u^{n+1}_i +  u^n_i) $$
-$$ \frac{\partial u}{\partial t} \approx \frac{u^{n+1}_i - u^n_i}{\Delta t} $$
-$$ \frac{\partial u}{\partial x} \approx \frac{u^n_{i+1} - u^n_{i-1} + u^{n+1}_{i+1} - u^{n+1}_{i-1}}{4\Delta x} $$
-$$ \frac{\partial^2 u}{\partial x^2} \approx \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1} + u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{2(\Delta x)^2} $$
+Crank - Nicolson method takes a weighted average of the FTCS and BTCS schemes. Therefore, the approximations become
+\begin{eqnarray}
+u(x, t) &\approx& \frac{1}{2} ( u^{n+1}_i +  u^n_i)\\
+\frac{\partial u}{\partial t} &\approx & \frac{u^{n+1}_i - u^n_i}{\Delta t}\\
+\frac{\partial u}{\partial x} &\approx & \frac{u^n_{i+1} - u^n_{i-1} + u^{n+1}_{i+1} - u^{n+1}_{i-1}}{4\Delta x} \\ 
+\frac{\partial^2 u}{\partial x^2} &\approx & \frac{u^n_{i+1}- 2u^n_i + u^n_{i-1} + u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{2(\Delta x)^2}
+\end{eqnarray}
 
-Applying the new finite differences to the base partial differential equation equation \ref{gen}
-\begin{multline}
- (-A -B) u^{n+1}_{i+1} + (1 + 2A - C) u^{n+1}_i + (-A + B) u^{n+1}_{i-1} \\
-=  (A+B) u^{n}_{i+1} + (1 - 2A + C) u^{n}_i + (A - B) u^{n}_{i-1}
-\end{multline}
-$$ A = a(t,x) \frac{\Delta t}{\Delta x^2},  B = b(t,x) \frac{\Delta t}{4\Delta x}, C = c(t,x) \frac{\Delta t}{2}$$ 
+Applying the new finite differences to the base partial differential equation equation \ref{gen} yields
+\begin{equation}
+(-A -B) u^{n+1}_{i+1} + (1 + 2A - C) u^{n+1}_i + (-A + B) u^{n+1}_{i-1} = (A + B) u^{n}_{i+1} + (1 - 2A + C) u^{n}_i + (A - B) u^{n}_{i-1}
+\end{equation}
 
-Note that in contrast to the FTCS scheme, we now have three unknowns in this equation, the three values of $u$ at the higher time level.  We respectively denote the coefficients in the right hand side as $\gamma, \beta, \alpha$ and coefficients in the left hand side as $\lambda, \theta, \omega$ for simplicity.
+where $ A = a(x, t) \frac{\Delta t}{\Delta x^2}, \hspace{10pt}  B = b(x, t) \frac{\Delta t}{4\Delta x}, \hspace{10pt} C = c(x, t) \frac{\Delta t}{2}$. Note that in contrast to the FTCS scheme, we now have three unknowns in this equation, the three values of $u$ at the higher time level.  We respectively denote the coefficients in the right hand side as $\gamma, \beta, \alpha$ and coefficients in the left hand side as $\lambda, \theta, \omega$ for simplicity.
 \begin{equation}
 \lambda u^{n+1}_{i+1} + \theta u^{n+1}_i + \omega u^{n+1}_{i-1} \\
 =  \gamma u^{n}_{i+1} + \beta u^{n}_i + \alpha u^{n}_{i-1}
@@ -721,19 +718,16 @@ The problem reduces to a tridiagonal matrix system. This system of equations can
 \begin{figure}[!htb]
   \begin{minipage}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth]{HeatCNGrid.png}
-    \caption{Output grid of heat equation.}
+    \caption{Output grid of heat equation using Crank - Nicolson scheme.}
   \end{minipage}
   \begin{minipage}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth]{BSCNGrid.png}
-    \caption{Output grid of Black-Scholes equation.}
+    \caption{Output grid of Black-Scholes equation using Crank - Nicolson scheme.}
   \end{minipage}
 \end{figure}
 
 \subsection{Alternating Direction Implicit Method}
-Curse of dimensionality effects finite difference schemes as they tend to become more difficult to set up, understand and implement as the dimensionality of the space increases \cite{duffyfinite}. The alternating direction implicit (ADI) method is one of the most common techniques to numerically solve two dimensional parabolic PDEs. The scheme was first proposed by Peaceman and Rachford in 1955 for oil reservoir modelling \cite{peace}. Basically t to split the spatial dimensions and solve a two dimensional problem as two consecutive one dimensional problems. 
-At each pseudo-time step (iteration) the discrete equations are implicitly (line-by-line) solved first in one spatial direction, and then inthe other, leading to the terminologyAlternating Direction Implicit
-
-ADI scheme give us advantages of the implicit finite difference method and computationally requires to solve only tridiagonal matrices.It is possible to use ADI in more than three dimensions which produces the same number of consecutive one dimensional problems \cite{DougADI}. In order to develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
+Curse of dimensionality effects finite difference schemes as they tend to become more difficult to set up, understand and implement as the dimensionality of the space increases \cite{duffyfinite}. The alternating direction implicit (ADI) method is one of the most common techniques to numerically solve two-dimensional parabolic PDEs. The scheme was first proposed by Peaceman and Rachford in 1955 for oil reservoir modelling \cite{peace}. The method consists of splitting the time dimension and solving the two-dimensional problem as two consecutive one-dimensional problems.  At each time step, the spatial dimensions are solved implicitly in one direction and explicitly in the other dimension. Using the alternating direction implicit scheme provides us with the advantages of implicit method. Computationally requires only solving tridiagonal systems. It is possible to use ADI in more than three dimensions which produce the same number of consecutive one-dimensional problems \cite{DougADI}. To develop a more compact notation, we introduce the finite difference operator notation $\delta^2$.
 
 \begin{equation}
 \delta x^2 u^{n}_{i,j}  = \frac{u^{n}_{i+1,j} - 2u^{n}_{i,j} + u^{n}_{i-1,j}}{\Delta x^2}
@@ -760,7 +754,7 @@ Rearranging the set of equations yields a tridiagonal system which is solved for
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.7]{ADI.png}
-    \caption{Computational stencil of alternating direction implicit method}
+    \caption{Computational stencil of alternating direction implicit method.}
 \end{figure}
 
 Next step of the grid $u^{n+1}_{i,j}$ is calculated by approximating explicitly x and implicitly over y.
@@ -771,7 +765,7 @@ Next step of the grid $u^{n+1}_{i,j}$ is calculated by approximating explicitly 
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.6]{ADIHeat.png}
-    \caption{Solution of two dimensional heat equation using ADI.}
+    \caption{Output grid of two dimensional heat equation using ADI.}
 \end{figure}
 
 Rearranging the set of equations yields a tridiagonal system which can be solved using Gaussian elimination, cyclic reduction or Thomas algorithm.
@@ -999,48 +993,45 @@ During the forward reduction stage  at each step $s$ the odd number equations ar
 \begin{equation}
 a_i^{s} f_{i - 2^{s - 1}}^{s} + f_i^{s} + c^{s}  x_{i + 2^{s - 1}} = d_i^s
 \end{equation}
-are generated where $ i = 2^s, 2^s + 2^s, ... , n$ and $s = 1, 2, ... , \log_2 n$ .
+are generated where $ i = 2^s, 2^s + 2^s, ... , n$ and $s = 1, 2, ... , \log_2 n$. The updated values at each step are  
+\begin{eqnarray}
+k_1 &=& \frac{ a_{i}^{s - 1}}{b_{i-1}^{s - 1}}, \hspace{30pt} k_2 = \frac{ c_{i}^{s - 1}}{b_{i+1}^{s - 1}} \\
+a_i^{s} &=& -a_{i-1}^{s - 1}  k_1, \hspace{30pt} c_i^{s} = -c_{i+1}^{s - 1}  k_2\\
+b_i^{s} &=& b_{i}^{s - 1} -c_{i-1}^{s - 1} k_1 - a_{i+1}^{s - 1}  k_2  \\
+d_i^{s} &=& d_i^{s - 1} - d_{i- 1}^{s - 1}  k_1 - d_{i + 1}^{s - 1}   k_2
+\end{eqnarray}
+
+The same procedure is applied recursively until there remains only one equation with one unknown where $ i = 2^s, 2^s + 2^s, ... , n$ and $s = 1, 2, ... , \log_2 n$. \\\\\\
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.6]{cyclic.png}
+        \includegraphics[scale=0.7]{cyclic.png}
     \caption{Cyclic reduction for an eight equation system.}
 \end{figure}
 
-The updated values at each step are  
-\begin{eqnarray}
-k_1 = \frac{ a_{i}^{s - 1}}{b_{i-1}^{s - 1}} \hspace{10pt} k_2 = \frac{ c_{i}^{s - 1}}{b_{i+1}^{s - 1}} \\
-a_i^{s} = -a_{i-1}^{s - 1}  k_1\\
-c_i^{s} = -c_{i+1}^{s - 1}  k_2\\
-b_i^{s} = b_{i}^{s - 1} -c_{i-1}^{s - 1} k_1 - a_{i+1}^{s - 1}  k_2  \\
-d_i^{s} = d_i^{s - 1} - d_{i- 1}^{s - 1}  k_1 - d_{i + 1}^{s - 1}   k_2
-\end{eqnarray}
-The same procedure is applied recursively until there remains only one equation with one unknown. 
-
-During each step of backward substitution, we solve all rest of the unknowns by substituting the already solved value. As the name implies the steps go backwards as $s = \log_2 n - 1, ... , 0$
+Each step of backward substitution, we solve all rest of the unknowns by substituting the already solved value. As the name implies the steps go backwards as $s = \log_2 n - 1, ... , 0$ and $ i = 2^s, 2^s + 2^{s+1}, ... , n$.
 \begin{equation}
 f_i = \frac{d_i^{s} - a_i^{s} f_{i - 2^s}  - c_i^{s} f_{i + 2^s}}{b_i^s}
 \end{equation}
-where  $ i = 2^s, 2^s + 2^{s+1}, ... , n$ 
 
 If serially computed, Thomas algorithm performs $ 8 n $ operations while cyclic reduction performs $17n$ operations. On the other hand,if parallel computing is used with $n$ cores, cyclic reduction requires $2 \log_2 n - 1$ steps  while the Thomas algorithm requires $2n$ steps \cite{gputri}. The cyclic reduction algorithm was focused towards fine-grained parallelism which could be achieved using CPU parallelism \cite{seltri}.
 
 \section{Open Multi-Processing}
 Traditionally, programs are serially computed on a single processor. On the other hand, parallel computation is used to break our code execution in pieces so that it utilizes parallelism. Multithreading uses the CPUs cores to run calculations concurrently in each core. The concurrent programs are called a thread. If the code is executed on parallel processors, one of the biggest problem is the processors generally require results that have been calculated on other processors. The main issue in this case is that processors clocks are not synchronized and execute the code at minimally different speeds.
 
+In order to solve this problem, a group of major computer hardware and software vendors and major parallel computing user facilities joined forces to form The Open Multi-Processing Architecture Review Board (The OpenMP ARB)\cite{openmpfaq}. Open Multi-Processing (OpenMP) is an implementation of multithreading for C, C++ and Fortran and it was introduced to public in 1997. OpenMP is aiming to standardize high level parallelism that is performant, productive and portable.
+
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.6]{openmp.png}
+        \includegraphics[scale=0.5]{openmp.png}
     \caption{The fork-join programming model.}
 \end{figure}
-
-In order to solve this problem, a group of major computer hardware and software vendors and major parallel computing user facilities joined forces to form The Open Multi-Processing Architecture Review Board (The OpenMP ARB)\cite{openmpfaq}. Open Multi-Processing (OpenMP) is an implementation of multithreading for C, C++ and Fortran and it was introduced to public in 1997. OpenMP is aiming to standardize high level parallelism that is performant, productive and portable.
 
  OpenMP approach to multithreading is the fork-join programming model. Firstly, the program start as a single thread of execution called the initial thread. The fork stage begins when the program encounters an OpenMP parallel construct. Parallel execution takes place and multiple threads are created in the parallel region. The initial thread becomes the master and collaborates with the newly created threads to execute the code dynamically. Finally, at the join stage all threads are synchronized, threads are terminated except the original thread \cite{openmp}.
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.7]{openmpnested.png}
+        \includegraphics[scale=0.5]{openmpnested.png}
     \caption{4 threads create 2 threads, nested parallelism.}
 \end{figure}
 
@@ -1048,40 +1039,47 @@ Algorithms like cyclic reduction \ref{cyclic} uses nested loops to calculate the
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.7]{cyclicopenmp.png}
+        \includegraphics[scale=0.5]{cyclicopenmp.png}
     \caption{Implementation of cyclic reduction using OpenMP.}
 \end{figure}
 
 In order to specify and control the parallelization procedure, OpenMP uses compiler directives, runtime functions, and  environment variables. OpenMP enables developers to just give a high-level specification of the parallelism by indicating the regions to be executed in parallel using compiler directives, runtime library routines, and environment variables. The details of the parallelism is up to the compiler which makes OpenMP comparatively easy to use. 
 
 \section{Timing the Code}
-Measuring execution time intervals accurately is an important aspect to compare the efficiency and speed of different environments and implementations.
+Timers and clocks might differ on distinct systems. Therefore, measuring execution time intervals accurately is an important task to compare the efficiency and speed of different environments and implementations. 
 
 \subsection{Windows Application Programming Interface}
 Windows Application Programming Interface (API) is the lowest level of interaction between applications and the windows operating system. Thus every program is built upon  the API. Mostly, the interaction is hidden, the runtime and support libraries manage it in the background \cite{windows}. The APIs can be used in the C++ environment. Runtime can be calculated by "QueryPerformanceCounter" or "QueryPerformanceFrequency"  functions. Respectively, the functions retrieve a high resolution time stamp and the frequency of the performance counter. 
 
 \subsection{Chrono Library}
-Using the Windows API for just timing the code is slightly excessive given the amount of work it takes. Luckily, Chrono library was introduced part of the C++11’s standard library.  Timers and clocks might differ on distinct systems, thus Chrono library is designed to work effortlessly with date and time. The "high resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time.  Once the start and end time of the code is recorded ,  the duration::count method is used to get the elapsed time.
+Given the amount of work, using the Windows API for just timing the code is slightly excessive. Luckily, Chrono library was introduced part of the C++11’s standard library. The Chrono library is intended to work effortlessly with date and time. The "high-resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time. 
+\begin{verbatim}
+auto Beginning = std::chrono::high_resolution_clock::now();
+    //Portion of code to be timed
+auto End = std::chrono::high_resolution_clock::now();
+\end{verbatim}
+Once the start and end time of the code is recorded, the duration::count method is used to get the elapsed time.
+\begin{verbatim}
+std::chrono::duration<double> Elapsed = End - Beginning;
+std::cout << "Elapsed time:" << Elapsed.count() << std::endl;
+\end{verbatim}
 
 
 \chapter{Results and Discussion}
-This section documents the performance of attempted optimizations. Experiments are  conducted at W307 computer laboratory, Queen Mary University of London. Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7 - 6700 CPU with 4 cores clocked at 3.40 GHz. The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools  utilized in the tests include Intel Compiler, version 18.0.3 and Intel Math Kernel Library. 
-
-Numerical analysis and computer simulations is undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. First step was solving the base cases \ref{bsBase}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance. Different solution platforms, compilers, optimization flags and tridiagonal solvers will be tested against each other.
+This section documents the performance of attempted optimizations. Experiments are conducted at W307 computer laboratory, Queen Mary University of London. Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7 - 6700 CPU with 4 cores clocked at 3.40 GHz. The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools utilized in the tests include Intel Compiler, version 18.0.3 and Intel Math Kernel Library. First step was solving the base cases \ref{bsBase}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance. Different solution platforms, compilers, optimization flags and tridiagonal solvers are tested against each other.
  
 \subsection{Base Case}
-Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are used to calculate errors for the solutions using different grid sizes. Space and time dimensions are discretized by $64$ for Explicit and Crank - Nicolson schemes. In order to solve two dimensional heat equation using the ADI scheme two space dimensions and the time dimension are discretized by $32$.  All optimizations of Visual Studio  (/Od flag) are disabled for the base case and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.
+Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are used to calculate errors for the solutions using different grid sizes. Space and time dimensions are discretized by $64$ for Explicit and Crank - Nicolson schemes. In order to solve two dimensional heat equation using the ADI scheme two space dimensions and the time dimension are discretized by $32$.  All optimizations of Visual Studio  (/Od flag) are disabled for the base case and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.\\\\\\
 
 \begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{heatNotOptimized.png}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{heatNotOptimized.png}
     \caption{Time taken to solve heat equation using the Explicit, Crank Nicolson and ADI schemes  without any optimization.}
-\end{figure}
-
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{bsNotOptimized.png}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{bsNotOptimized.png}
     \caption{Time taken to solve Black - Scholes equation using the Explicit and Crank Nicolson schemes without any optimization.}
+  \end{minipage}
 \end{figure}
 
 Following sections summarizes the performance increases by taking average of runtimes. For detailed timings, please refer to the Appendices \ref{bsTime} and \ref{heatTime}.
@@ -1096,23 +1094,21 @@ Switching the solution platform from x86 to x64 resulted in $17 - 22 \%$ decreas
     \label{bitPercent}
 \end{figure}
 
-Figure 1 plots the relative performance of the computational kernels when compiled by the different compilers and run with a single thread. The performance values are normalizes so that the performance of G++ is equal to 1.0. The normalization constant is different for different kernels.
-
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.8]{bit.png}
     \caption{Average increase when switched to 64 bit under different optimization flags.}
 \end{figure}
 
-\subsection{Compilers} 
-A good compiler should let us focus on the process of writing programs rather than struggling with the inadequacies of the compiler. It should compile the most recent language standards without complaint. We should feel confident in its ability to produce well-optimized code from even the most abstract codebase. Lastly, it should compile source code as quickly as possible.
+Therefore, we will prefer 64 bit for our best case.
 
-Figure 1 plots the relative performance of the computational kernels when compiled by the different compilers and run with a single thread. The performance values are normalizes so that the performance of G++ is equal to 1.0. The normalization constant is different for different kernels.
+\subsection{Compilers} 
+Switching to Intel Compiler provided $0.5 - 4.3 \%$ performance increase on average. 
 
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.8]{compilerPercent.png}
-    \caption{Average increase when switched to intel compiler.}
+    \caption{Average increase when switched to Intel compiler.}
 \end{figure}
 
 \begin{figure}[!htb]
@@ -1121,7 +1117,13 @@ Figure 1 plots the relative performance of the computational kernels when compil
     \caption{Average timings comparing Intel Compiler and Visual Studio Compiler.}
 \end{figure}
 
+
+The gtsv function from Intel Math Library was faster under the Intel compiler when compiler optimizations are disabled. However when we enable the /O2 and /Ox optimizations the difference was negligible. The OpenMP support of Visual Studio compiler was not supporting nested for loops. Therefore it is only tested using Intel Compiler. All in all, Intel compiler is faster and provides the support for new technologies such as parallelism. Thus, Intel compiler should be used when dealing with numerical calculations.
+
 \subsection{Visual Studio Optimizations}
+Figure 1 plots the relative performance of the computational kernels when compiled by the different compilers and run with a single thread. The performance values are normalizes so that the performance of G++ is equal to 1.0. The normalization constant is different for different kernels.
+
+
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.7]{expFlagPercent.png}
@@ -1153,6 +1155,8 @@ Figure 1 plots the relative performance of the computational kernels when compil
 
 
 \subsection{Tridiagonal Solvers} 
+The best performing tridiagonal solver is cyclic reduction with OpenMP followed by the gtsv function from Intel Math Library. The worst performer was the thomas algorithm as expected.
+
  \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.7]{solverAveragePercentage.png}
@@ -1163,12 +1167,12 @@ Figure 1 plots the relative performance of the computational kernels when compil
         \includegraphics[scale=0.6]{solverAverage.png}
     \caption{Average increase when between solvers timings.}
 \end{figure}
+
+Our base case is using x86 platform, Visual Studio compiler, Thomas algorithm and no optimizations. Under these conditions heat equation was solved in $0.046$ seconds and Black - Scholes equation was solved in $0.044$ seconds using the Crank - Nicolson method. The fastest time we achieved is $0.030$ for heat equation and $0.031$ for Black - Scholes equation. Utilizing the Intel compiler, cyclic reduction with OpenMP and /Ox optimization flag resulted in $35.5 \%$ and $30.5 \%$ performance gain for heat equation and Black - Scholes equation. Under the same base case and fastest case conditions the ADI method for two-dimensional heat equation ran in $0.34$ and $0.23$ seconds, resulting in $34.1 \%$ faster solutions.
+
 \subsection{Different Sized Discretizations} 
+In the numerical experiments above, the grid size is kept constant. Logically, the performance increase should be greater in case of bigger grids. Therefore, the grid size for Crank - Nicolson method was increase to $128$ by $128$ and $256$ by $256$. Only the base case and fastest case is tested in this section.
 
-In our numerical method, it is mentioned that the  space discretization may notbe a good choice for Black-Scholes-like PDE mainly because of the non-smoothness of initial condition.  
-
-Therefore, we need to test the performance of these two more grid sizes.  
-    
  \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.7]{gridTime.png}
@@ -1180,7 +1184,17 @@ Therefore, we need to test the performance of these two more grid sizes.
         \includegraphics[scale=0.6]{gridTimePercent.png}
     \caption{Average increase when between solvers timings.}
 \end{figure}
+
+
+As expected, the bigger grid size benefits more from the performance gain. 
+Similarly, the grid size of ADI method is increased to 64 and 128 from 32 for all dimensions.
+
+
+
 \chapter{Conclusion}
+
+Numerical analysis and computer simulations are undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations.
+
 A Critique of the Crank Nicolson Scheme Strengths and Weaknesses for Financial Instrument Pricing + rannacher 
 AVX and Intrinsics CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512)GPGPU In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management. \cite{fpga},  cloud functions \cite{cloudfunc}.
 
@@ -1195,15 +1209,6 @@ Parallel cyclic reductions is faster than thomas algorithm. 64 bit faster than 3
 Results concludela
 
 \appendix
-\chapter{Usage of chrono class}
-Should code example be in appendix or stay here?
-\begin{verbatim}
-auto start = std::chrono::high_resolution_clock::now();
-    Portion of code to be timed
-auto finish = std::chrono::high_resolution_clock::now();
-std::chrono::duration<double> elapsed = finish - start;
-std::cout << "Elapsed time: " << elapsed.count() << " s\n";
-\end{verbatim}
 
 \chapter{Implementation of the {\tt PDE} class}
 Parabolic partial differential equation can be denoted as
@@ -1222,29 +1227,32 @@ void timeMarch();
 \end{verbatim}
 
 \chapter{Heat Equation Timings} \label{heatTime}
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{heat2Optimized.png}
-    \caption{Time taken to solve heat equation using the Explicit, Crank Nicolson and ADI schemes  optimized with /O2 flag.}
-\end{figure}
 
 \begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{heatXOptimized.png}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{heat2Optimized.png}
+    \caption{Time taken to solve heat equation using the Explicit, Crank Nicolson and ADI schemes  optimized with /O2 flag.}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{heatXOptimized.png}
     \caption{Time taken to solve heat equation using the Explicit, Crank Nicolson and ADI schemes  optimized with /Ox flag.}
+  \end{minipage}
 \end{figure}
+
 
 \chapter{Black - Scholes Equation Timings}\label{bsTime}
+
 \begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.7]{bs2Optimized.png}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{bs2Optimized.png}
     \caption{Time taken to solve heat equation using the Explicit and Crank Nicolson schemes  optimized with /O2 flag.}
-\end{figure}
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{bsXOptimized.png}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{bsXOptimized.png}
     \caption{Time taken to solve heat equation using the Explicit and Crank Nicolson schemes  optimized with /Ox flag.}
+  \end{minipage}
 \end{figure}
+
 
 
 \bibliographystyle{plain}
