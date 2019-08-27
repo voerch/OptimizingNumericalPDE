@@ -26,13 +26,14 @@
 \contentsline {subsection}{\numberline {3.6.2}Chrono Library}{45}{subsection.3.6.2}% 
 \contentsline {chapter}{\numberline {4}Results and Discussion}{46}{chapter.4}% 
 \contentsline {subsection}{\numberline {4.0.1}Base Case}{46}{subsection.4.0.1}% 
-\contentsline {subsection}{\numberline {4.0.2}Solution Platforms}{48}{subsection.4.0.2}% 
-\contentsline {subsection}{\numberline {4.0.3}Compilers}{48}{subsection.4.0.3}% 
-\contentsline {subsection}{\numberline {4.0.4}Visual Studio Optimizations}{48}{subsection.4.0.4}% 
-\contentsline {subsection}{\numberline {4.0.5}Tridiagonal Solvers}{48}{subsection.4.0.5}% 
-\contentsline {subsection}{\numberline {4.0.6}Effect of Grid Size}{48}{subsection.4.0.6}% 
+\contentsline {subsection}{\numberline {4.0.2}Solution Platforms}{47}{subsection.4.0.2}% 
+\contentsline {subsection}{\numberline {4.0.3}Compilers}{49}{subsection.4.0.3}% 
+\contentsline {subsection}{\numberline {4.0.4}Visual Studio Optimizations}{50}{subsection.4.0.4}% 
+\contentsline {subsection}{\numberline {4.0.5}Tridiagonal Solvers}{50}{subsection.4.0.5}% 
+\contentsline {subsection}{\numberline {4.0.6}Different Sized Discretizations}{50}{subsection.4.0.6}% 
 \contentsline {chapter}{\numberline {5}Conclusion}{54}{chapter.5}% 
 \contentsline {chapter}{\numberline {A}Usage of chrono class}{55}{appendix.A}% 
 \contentsline {chapter}{\numberline {B}Implementation of the {\tt PDE} class}{56}{appendix.B}% 
 \contentsline {chapter}{\numberline {C}Implementation of the {\tt FiniteDifferenceMethod} class}{57}{appendix.C}% 
-\contentsline {chapter}{\numberline {D}Timings}{58}{appendix.D}% 
+\contentsline {chapter}{\numberline {D}Heat Equation Timings}{58}{appendix.D}% 
+\contentsline {chapter}{\numberline {E}Black - Scholes Equation Timings}{60}{appendix.E}% 

@@ -30,9 +30,10 @@
 \BOOKMARK [2][-]{subsection.4.0.3}{Compilers}{subsection.4.0.1}% 30
 \BOOKMARK [2][-]{subsection.4.0.4}{Visual Studio Optimizations}{subsection.4.0.1}% 31
 \BOOKMARK [2][-]{subsection.4.0.5}{Tridiagonal Solvers}{subsection.4.0.1}% 32
-\BOOKMARK [2][-]{subsection.4.0.6}{Effect of Grid Size}{subsection.4.0.1}% 33
+\BOOKMARK [2][-]{subsection.4.0.6}{Different Sized Discretizations}{subsection.4.0.1}% 33
 \BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 34
 \BOOKMARK [0][-]{appendix.A}{Usage of chrono class}{}% 35
 \BOOKMARK [0][-]{appendix.B}{Implementation of the PDE class}{}% 36
 \BOOKMARK [0][-]{appendix.C}{Implementation of the FiniteDifferenceMethod class}{}% 37
-\BOOKMARK [0][-]{appendix.D}{Timings}{}% 38
+\BOOKMARK [0][-]{appendix.D}{Heat Equation Timings}{}% 38
+\BOOKMARK [0][-]{appendix.E}{Black - Scholes Equation Timings}{}% 39

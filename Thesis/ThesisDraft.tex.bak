@@ -1072,48 +1072,31 @@ Numerical analysis and computer simulations is undertaken to put theory and obse
 \subsection{Base Case}
 Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are used to calculate errors for the solutions using different grid sizes. Space and time dimensions are discretized by $64$ for Explicit and Crank - Nicolson schemes. In order to solve two dimensional heat equation using the ADI scheme two space dimensions and the time dimension are discretized by $32$.  All optimizations of Visual Studio  (/Od flag) are disabled for the base case and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.
 
-
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.6]{heatNotOptimized.png}
-    \caption{Heat equation non optimized timing using crank nicolson and ADI.}
-\end{figure}
-
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{heat2Optimized.png}
-    \caption{Heat equation /O2 optimized timing using crank nicolson and ADI.}
-\end{figure}
-
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{heatXOptimized.png}
-    \caption{Heat equation /Ox optimized timing using crank nicolson and ADI.}
+    \caption{Time taken to solve heat equation using the Explicit, Crank Nicolson and ADI schemes  without any optimization.}
 \end{figure}
 
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.6]{bsNotOptimized.png}
-    \caption{Heat equation non optimized timing using crank nicolson and ADI.}
+    \caption{Time taken to solve Black - Scholes equation using the Explicit and Crank Nicolson schemes without any optimization.}
 \end{figure}
 
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.7]{bs2Optimized.png}
-    \caption{Heat equation  /O2 optimized timing using explicit scheme.}
-\end{figure}
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{bsXOptimized.png}
-    \caption{Heat equation  /Ox optimized timing using crank nicolson and ADI.}
-\end{figure}
+Following sections summarizes the performance increases by taking average of runtimes. For detailed timings, please refer to the Appendices \ref{bsTime} and \ref{heatTime}.
 
 \subsection{Solution Platforms} 
+Switching the solution platform from x86 to x64 resulted in $17 - 22 \%$ decrease in the computing time on average.  The x86 CPU architecture provides $8$ 32 bit general registers and $8$ SSE registers. Using a x64 architecture increases the number of both registers  to $16$. Therefore, calculations are more efficient and fast under 64 bit.
+
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.8]{bitPercent.png}
-    \caption{Average increase when switched to 64 bit under different optimization flags.}
+    \caption{Average increase when switched to Intel Compiler under different optimization flags.}
+    \label{bitPercent}
 \end{figure}
+
+Figure 1 plots the relative performance of the computational kernels when compiled by the different compilers and run with a single thread. The performance values are normalizes so that the performance of G++ is equal to 1.0. The normalization constant is different for different kernels.
 
 \begin{figure}[!htb]
     \centering
@@ -1122,6 +1105,10 @@ Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2
 \end{figure}
 
 \subsection{Compilers} 
+A good compiler should let us focus on the process of writing programs rather than struggling with the inadequacies of the compiler. It should compile the most recent language standards without complaint. We should feel confident in its ability to produce well-optimized code from even the most abstract codebase. Lastly, it should compile source code as quickly as possible.
+
+Figure 1 plots the relative performance of the computational kernels when compiled by the different compilers and run with a single thread. The performance values are normalizes so that the performance of G++ is equal to 1.0. The normalization constant is different for different kernels.
+
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.8]{compilerPercent.png}
@@ -1146,6 +1133,24 @@ Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2
     \caption{Average increase when switched to intel compiler.}
 \end{figure}
 
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{thomasFlagBar.png}
+    \caption{Average increase when switched to intel compiler.}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{intelFlagBar.png}
+    \caption{Average increase when switched to intel compiler.}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{cyclicFlagBar.png}
+    \caption{Average increase when switched to intel compiler.}
+\end{figure}
+
 
 \subsection{Tridiagonal Solvers} 
  \begin{figure}[!htb]
@@ -1158,12 +1163,18 @@ Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2
         \includegraphics[scale=0.6]{solverAverage.png}
     \caption{Average increase when between solvers timings.}
 \end{figure}
-\subsection{Effect of Grid Size} 
+\subsection{Different Sized Discretizations} 
+
+In our numerical method, it is mentioned that the  space discretization may notbe a good choice for Black-Scholes-like PDE mainly because of the non-smoothness of initial condition.  
+
+Therefore, we need to test the performance of these two more grid sizes.  
+    
  \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.7]{gridTime.png}
     \caption{Average increase when between solvers.}
 \end{figure}
+
 \begin{figure}[!htb]
     \centering
         \includegraphics[scale=0.6]{gridTimePercent.png}
@@ -1210,7 +1221,30 @@ void innerDomain();
 void timeMarch();
 \end{verbatim}
 
-\chapter{Timings}
+\chapter{Heat Equation Timings} \label{heatTime}
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{heat2Optimized.png}
+    \caption{Time taken to solve heat equation using the Explicit, Crank Nicolson and ADI schemes  optimized with /O2 flag.}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{heatXOptimized.png}
+    \caption{Time taken to solve heat equation using the Explicit, Crank Nicolson and ADI schemes  optimized with /Ox flag.}
+\end{figure}
+
+\chapter{Black - Scholes Equation Timings}\label{bsTime}
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.7]{bs2Optimized.png}
+    \caption{Time taken to solve heat equation using the Explicit and Crank Nicolson schemes  optimized with /O2 flag.}
+\end{figure}
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.6]{bsXOptimized.png}
+    \caption{Time taken to solve heat equation using the Explicit and Crank Nicolson schemes  optimized with /Ox flag.}
+\end{figure}
 
 
 \bibliographystyle{plain}
