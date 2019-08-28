@@ -1069,38 +1069,31 @@ std::cout << "Elapsed time:" << Elapsed.count() << std::endl;
 This section documents the performance of attempted optimizations. Experiments are conducted at W307 computer laboratory, Queen Mary University of London. Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7 - 6700 CPU with 4 cores clocked at 3.40 GHz. The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools utilized in the tests include Intel Compiler, version 18.0.3 and Intel Math Kernel Library. First step was solving the base cases \ref{bsBase}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance. Different solution platforms, compilers, optimization flags and tridiagonal solvers are tested against each other.
  
 \subsection{Base Case}
-Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are used to calculate errors for the solutions using different grid sizes. Space and time dimensions are discretized by $64$ for Explicit and Crank - Nicolson schemes. In order to solve two dimensional heat equation using the ADI scheme two space dimensions and the time dimension are discretized by $32$.  All optimizations of Visual Studio  (/Od flag) are disabled for the base case and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.\\\\\\
-
-\begin{figure}[!htb]
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{heatNotOptimized.png}
-    \caption{Time taken to solve heat equation using the Explicit, Crank Nicolson and ADI schemes  without any optimization.}
-  \end{minipage}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{bsNotOptimized.png}
-    \caption{Time taken to solve Black - Scholes equation using the Explicit and Crank Nicolson schemes without any optimization.}
-  \end{minipage}
-\end{figure}
-
-Following sections summarizes the performance increases by taking average of runtimes. For detailed timings, please refer to the Appendices \ref{bsTime} and \ref{heatTime}.
-
-\subsection{Solution Platforms} 
-Switching the solution platform from x86 to x64 resulted in $17 - 22 \%$ decrease in the computing time on average.  The x86 CPU architecture provides $8$ 32 bit general registers and $8$ SSE registers. Using a x64 architecture increases the number of both registers  to $16$. Therefore, calculations are more efficient and fast under 64 bit.
+Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are used to calculate errors for the solutions using different grid sizes. Space and time dimensions are discretized by $64$ for Explicit and Crank - Nicolson schemes. In order to solve two dimensional heat equation using the ADI scheme two space dimensions and the time dimension are discretized by $32$.  All optimizations of Visual Studio  (/Od flag) are disabled for the base case and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.8]{bitPercent.png}
+        \includegraphics[scale=0.6]{notOptimized.png}
+    \caption{Time taken to solve Black - Scholes equation and heat equation using the Explicit, Crank Nicolson and ADI schemes  without any optimization.}
+\end{figure}
+
+Following sections summarizes the performance increases by taking average of runtimes. For detailed timings, please refer to the Appendix \ref{timings}.
+
+\subsection{Solution Platforms} 
+Switching the solution platform from x86 to x64 resulted in $17 - 22 \%$ decrease in the computing time on average.  The x86 CPU architecture provides $8$ 32 bit general registers and $8$ SSE registers. Using a x64 architecture increases the number of both registers  to $16$. Therefore, calculations are more efficient and fast under 64 bit and , we will prefer 64 bit for our best case..
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.7]{bitPercent.png}
     \caption{Average increase when switched to Intel Compiler under different optimization flags.}
     \label{bitPercent}
 \end{figure}
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.8]{bit.png}
+        \includegraphics[scale=0.7]{bit.png}
     \caption{Average increase when switched to 64 bit under different optimization flags.}
 \end{figure}
-
-Therefore, we will prefer 64 bit for our best case.
 
 \subsection{Compilers} 
 Switching to Intel Compiler provided $0.5 - 4.3 \%$ performance increase on average. 
@@ -1120,42 +1113,34 @@ Switching to Intel Compiler provided $0.5 - 4.3 \%$ performance increase on aver
 
 The gtsv function from Intel Math Library was faster under the Intel compiler when compiler optimizations are disabled. However when we enable the /O2 and /Ox optimizations the difference was negligible. The OpenMP support of Visual Studio compiler was not supporting nested for loops. Therefore it is only tested using Intel Compiler. All in all, Intel compiler is faster and provides the support for new technologies such as parallelism. Thus, Intel compiler should be used when dealing with numerical calculations.
 
+
 \subsection{Visual Studio Optimizations}
-Figure 1 plots the relative performance of the computational kernels when compiled by the different compilers and run with a single thread. The performance values are normalizes so that the performance of G++ is equal to 1.0. The normalization constant is different for different kernels.
-
-
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.7]{expFlagPercent.png}
-    \caption{Average increase when switched to intel compiler.}
-\end{figure}
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{FlagPercent.png}
-    \caption{Average increase when switched to intel compiler.}
-\end{figure}
+The runtime when solving tridiagonal systems greatly benefits from enabling Visual Studio optimizations /Ox and /O2 flags. The Thomas algorithm benefits the most by $10.1 \%$ decrease in runtime on average of  $24$ observations. Similarly, the times for cyclic reduction improved  by $9.5 \%$ on average of $12$ observations. Given the fact that the functions from Intel Math Library are already heavily optimized,  Intel solver improved only $4.6 \%$ on average of $24$ observations. 
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.6]{thomasFlagBar.png}
-    \caption{Average increase when switched to intel compiler.}
+    \includegraphics[scale=0.6]{thomasFlagBar.png}
+    \caption{The relative performance of optimization switches when using Thomas algorithm.}
 \end{figure}
 
 \begin{figure}[!htb]
+    \label{intelBar}
     \centering
         \includegraphics[scale=0.6]{intelFlagBar.png}
-    \caption{Average increase when switched to intel compiler.}
-\end{figure}
+    \caption{The relative performance of optimization switches when using Intel solver.}
+\end{figure} 
 
 \begin{figure}[!htb]
+    \label{cyclicBar}
     \centering
         \includegraphics[scale=0.6]{cyclicFlagBar.png}
-    \caption{Average increase when switched to intel compiler.}
+    \caption{The relative performance of optimization switches when using cyclic reduction.}
 \end{figure}
 
+The /Ox switch recorded the fastest times when solving Black - Scholes equation and heat equation regardless of the tridiagonal solvers. Even the explicit method which doesn't require any matrix operations benefited from switching the optimization switches on. At best /Ox flag provided a $13.8 \%$ performance gain. Overall explicit methods performance improved by $5.4 \%$. Even though the two optimization switches are really close to each other, overall we can conclude that the /Ox flag performs better in the given task  of optimizing schemes. For a detailed view of the performance increases please see the \ref{flagPercent}.
 
-\subsection{Tridiagonal Solvers} 
-The best performing tridiagonal solver is cyclic reduction with OpenMP followed by the gtsv function from Intel Math Library. The worst performer was the thomas algorithm as expected.
+\subsection{Tridiagonal Solvers}
+Solving tridiagonal systems is the computationally heaviest component of when calculating solutions with Crank - Nicolson and ADI schemes. Therefore, choosing a fast solver is crucial in our task. Compared to our base case, thomas algorithm, cyclic reduction improved the performance $6.7 \%$ on average. The gtsv function from the Intel Math Library only improved by $0.6 \%$. 
 
  \begin{figure}[!htb]
     \centering
@@ -1179,34 +1164,32 @@ In the numerical experiments above, the grid size is kept constant. Logically, t
     \caption{Average increase when between solvers.}
 \end{figure}
 
-\begin{figure}[!htb]
+As expected, the bigger grid size benefits more from the performance gain. The grid size of ADI method is increased to 64 and 128 from 32 for all dimensions.
+
+ \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.6]{gridTimePercent.png}
-    \caption{Average increase when between solvers timings.}
+        \includegraphics[scale=0.7]{gridTimeADI.png}
+    \caption{Average increase when between solvers.}
 \end{figure}
 
-
-As expected, the bigger grid size benefits more from the performance gain. 
-Similarly, the grid size of ADI method is increased to 64 and 128 from 32 for all dimensions.
-
-
-
+Similarly, as the grid size increases the performance gains increase when using ADI method.
 \chapter{Conclusion}
 
-Numerical analysis and computer simulations are undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations.
+Option pricing is a central component for financial corporations, efficient and accurate pricing of them is critical in day to day operations. For  most  partial differential equations, there are no analytical formula giving their price, therefore, numerical methods used to price them. In this thesis, we choose the value options and solve the heat equation to test optimizations for the numerical methods, Crank Nicolson method, explicit method and alternating direction implicit scheme. Numerical analysis and computer simulations are undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. 
 
+The tests in this work suggest that the Intel compiler with 64 bit generally produces faster code. The Intel compiler provides detailed documentation and support for libraries and tools to develop high-performance programs such as Intel Math Library, Intel Advisor, Intel VTune Performance Analyzer, etc. The timings suggest that the /Ox optimization switch is generally able to provide the best performance. In implementing finite difference methods, we’ve verified that solving tridiagonal systems is the bottleneck. Therefore, we study the effect of various tridiagonal solvers on the speed of the numerical solution. 
+Our results indicate that parallel cyclic reduction is the fastest when using Intel compiler with 64 bit and /Ox switch enabled. Thus making it the the optimal solver . 
+
+\subsection{Further Work}
 A Critique of the Crank Nicolson Scheme Strengths and Weaknesses for Financial Instrument Pricing + rannacher 
 AVX and Intrinsics CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512)GPGPU In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management. \cite{fpga},  cloud functions \cite{cloudfunc}.
-
 More type of options BSPde bdegistir callputflag duffy c++ 677 
 Generalize ADI (multi assset BS)
 Rannacher trick (168 foreign exchange pricing rannacher ve stencil)
 Burst cloud functions
 Rannacher trick
-
 change black scholes to a different pricing pde like interest rate derivatives The HJM model \cite{kohl}
-Parallel cyclic reductions is faster than thomas algorithm. 64 bit faster than 32 bit. 
-Results concludela
+
 
 \appendix
 
@@ -1226,33 +1209,27 @@ void innerDomain();
 void timeMarch();
 \end{verbatim}
 
-\chapter{Heat Equation Timings} \label{heatTime}
+\chapter{Detailed Timings} \label{timings}
+
 
 \begin{figure}[!htb]
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{heat2Optimized.png}
-    \caption{Time taken to solve heat equation using the Explicit, Crank Nicolson and ADI schemes  optimized with /O2 flag.}
-  \end{minipage}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{heatXOptimized.png}
-    \caption{Time taken to solve heat equation using the Explicit, Crank Nicolson and ADI schemes  optimized with /Ox flag.}
-  \end{minipage}
+    \centering
+        \includegraphics[scale=0.6]{o2Optimized.png}
+    \caption{Time taken to solve Black - Scholes equation and heat equation using the Explicit, Crank Nicolson and ADI schemes  optimized with /O2 flag.}
 \end{figure}
-
-
-\chapter{Black - Scholes Equation Timings}\label{bsTime}
 
 \begin{figure}[!htb]
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{bs2Optimized.png}
-    \caption{Time taken to solve heat equation using the Explicit and Crank Nicolson schemes  optimized with /O2 flag.}
-  \end{minipage}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{bsXOptimized.png}
-    \caption{Time taken to solve heat equation using the Explicit and Crank Nicolson schemes  optimized with /Ox flag.}
-  \end{minipage}
+    \centering
+        \includegraphics[scale=0.6]{oXOptimized.png}
+    \caption{Time taken to solve Black - Scholes equation and heat equation using the Explicit, Crank Nicolson and ADI schemes optimized with /Ox flag.}
 \end{figure}
 
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.5]{FlagPercent.png}
+    \caption{Percentage decrease in runtime under the /Ox and /O2 flags using the Explicit, Crank Nicolson and ADI schemes .}
+    \label{flagPercent}
+\end{figure}
 
 
 \bibliographystyle{plain}
