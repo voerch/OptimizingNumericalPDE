@@ -1064,12 +1064,13 @@ std::chrono::duration<double> Elapsed = End - Beginning;
 std::cout << "Elapsed time:" << Elapsed.count() << std::endl;
 \end{verbatim}
 
+ and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.
 
 \chapter{Results and Discussion}
 This section documents the performance of attempted optimizations. Experiments are conducted at W307 computer laboratory, Queen Mary University of London. Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7 - 6700 CPU with 4 cores clocked at 3.40 GHz. The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools utilized in the tests include Intel Compiler, version 18.0.3 and Intel Math Kernel Library. First step was solving the base cases \ref{bsBase}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance. Different solution platforms, compilers, optimization flags and tridiagonal solvers are tested against each other.
  
 \subsection{Base Case}
-Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are used to calculate errors for the solutions using different grid sizes. Space and time dimensions are discretized by $64$ for Explicit and Crank - Nicolson schemes. In order to solve two dimensional heat equation using the ADI scheme two space dimensions and the time dimension are discretized by $32$.  All optimizations of Visual Studio  (/Od flag) are disabled for the base case and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.
+Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are used to calculate errors for the solutions using different grid sizes. Space and time dimensions are discretized by $64$ for Explicit and Crank - Nicolson schemes. In order to solve two dimensional heat equation using the ADI scheme two space dimensions and the time dimension are discretized by $32$.  All optimizations of Visual Studio  (/Od flag) are disabled for the base case.
 
 \begin{figure}[!htb]
     \centering
