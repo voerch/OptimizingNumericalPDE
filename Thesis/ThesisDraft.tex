@@ -56,7 +56,7 @@ Mathematical Finance MSc Dissertation MTH775P, 2018/19
         \vspace{0.4cm}        
         \textbf{Mustafa Berke Erdis, ID 180883925}% student name and number        
         \\
-        \large Supervisor: Dr. Sebastian del Bano Rollin
+        \large Supervisor: Dr. Sebastian del Ba\~{n}o Rollin
         \\
         \vspace{0.9cm}
         \includegraphics[scale=0.23]{QMCrest.png}
@@ -98,15 +98,15 @@ Referenced text has been flagged by:
 
 \thispagestyle{empty}
         \begin{flushright}
-                This work is dedicated to my family.
+                This work is dedicated to my parents.
         \end{flushright}
 \vspace{\stretch{2}}\null
 
 
 
 \chapter*{Acknowledgements}
-Here you thank people that have helped you in the journey. \\
-\lipsum[100] % replace this by your text
+I would like to express my gratitude to my supervisor Sebastian del Ba\~{n}o Rollin for the encouragement and guidance through the learning process of this master thesis. I must express my very profound gratitude to my parents for providing me with unfailing support and continuous encouragement throughout my years of study and through the process of researching and writing this thesis. This accomplishment would not have been possible without them.
+
 
 \chapter*{Abstract}
 \begin{center}
@@ -359,7 +359,7 @@ u(0, t) &=& u(x_{max}, t) = 0, \hspace{10pt} 0 \leq t \leq T \\[10pt]
 u(x, 0) &=& \sin(\pi x), \hspace{10pt} 0 \leq x \leq x_{\max}
 \end{eqnarray}
 
-Heat equation $u(x, t)$ is a dissipative partial differential equation, describing the dissipation of heat in a region. Physically, as time progresses heat flows to cooler regions from the warmer regions. The temperature gradient, $\Delta u = u_x$, governs the heat flow. If there is an injustice distribution of heat at a certain point such that  $\Delta u < 0 $ or  $\Delta u > 0$, heat flow will continue until there is no privilege  and $\Delta u = 0 $. This phenomenon is also known as the tax system or robin hood principle.
+Heat equation $u(x, t)$ is a dissipative partial differential equation, describing the dissipation of heat in a region. Physically, as time progresses heat flows to cooler regions from the warmer regions. The Laplacian operator returns the difference between average value of the function around a given point, and the value at the point. The Laplacian of the heat equation, $\Delta u = u_{xx}$, governs the heat flow and tells whether the surrounding points are hotter or colder at a given point. If there is an injustice distribution of heat at a certain point such that  $\Delta u < 0 $ or  $\Delta u > 0$, heat will flow will from hotter regions to adjacent colder regions until there is no privilege and $\Delta u = 0 $. This phenomenon is also known as the tax system or robin hood principle.
 
 \begin{definition}\label{heatAnal} Analytical Solution of Heat Equation
 
@@ -640,13 +640,7 @@ Lastly, solving heat equation and Black-Scholes differs in time stepping. Black-
 \end{figure}
 
 \subsection{Crank - Nicolson Method}
-The explicit method is computationally cheap. However, this brings a serious drawback, for explicit method to attain reasonable accuracy the step size must be kept small \cite{gdsmith}. Thankfully, the Crank-Nicolson finite difference scheme was introduced by John Crank and Phyllis Nicolson \cite{cn}. 
-
-Considering numerous articles and publications in the financial engineering literature use Crank-Nicolson as the de-facto scheme for time discretisation, the method has become one of the most popular finite difference schemes for approximating the solution of the Black - Scholes equation and its generalisations 
-
-\cite{tavella}. 
-
-If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. Applying the BTCS to the base equation \ref{gen} yields
+The explicit method is computationally cheap. However, this brings a serious drawback, for explicit method to attain reasonable accuracy the step size must be kept small \cite{gdsmith}. Thankfully, the Crank-Nicolson finite difference scheme was introduced by John Crank and Phyllis Nicolson \cite{cn}. In the financial engineering field Crank-Nicolson method is one of the most popular finite difference schemes for calculating numerical solution of the Black-Scholes equation and its variations \cite{tavella}. If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. Applying the BTCS to the base equation \ref{gen} yields
 
 \begin{equation}
 \frac{u^{n+1}_i - u^n_i}{\Delta t}  = a(x, t)  \frac{u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{(\Delta x)^2}  + b(x, t)  \frac{u^{n+1}_i - u^{n+1}_i}{\Delta t}  + c(x, t)  u^{n+1}_i
@@ -1053,22 +1047,25 @@ In order to specify and control the parallelization procedure, OpenMP uses compi
 Timers and clocks might differ on distinct systems. Therefore, measuring execution time intervals accurately is an important task to compare the efficiency and speed of different environments and implementations. 
 
 \subsection{Windows Application Programming Interface}
-Windows Application Programming Interface (API) is the lowest level of interaction between applications and the windows operating system. Thus every program is built upon  the API. Mostly, the interaction is hidden, the runtime and support libraries manage it in the background \cite{windows}. The APIs can be used in the C++ environment. Runtime can be calculated by "QueryPerformanceCounter" or "QueryPerformanceFrequency"  functions. Respectively, the functions retrieve a high resolution time stamp and the frequency of the performance counter. 
+Windows Application Programming Interface (API) is the lowest level of interaction between applications and the Windows operating system. Thus every program is built upon  the API. Mostly, the interaction is hidden, the runtime and support libraries manage it in the background \cite{windows}. The APIs can be used in the C++ environment. Runtime can be calculated by "QueryPerformanceCounter" or "QueryPerformanceFrequency"  functions. Respectively, the functions retrieve a high resolution time stamp and the frequency of the performance counter. 
 
 \subsection{Chrono Library}
-Given the amount of work, using the Windows API for just timing the code is slightly excessive. Luckily, Chrono library was introduced part of the C++11’s standard library. The Chrono library is intended to work effortlessly with date and time. The "high-resolution clock" provides the smallest possible tick period and with the “now” method, returns a value corresponding to the call’s point in time. 
+Given the amount of work, using the Windows API for just timing the code is slightly excessive and dependent on the Windows platform. Chrono library was introduced part of the C++11’s standard library. The Chrono library is intended to work with date and time. Chrono library is advantageous since it is platform independent and easy to implement. The \verb!high_resolution_clock! provides the smallest possible tick period and with the \verb!now! method, returns a value corresponding to the call’s point in time. 
 \begin{verbatim}
-auto Beginning = std::chrono::high_resolution_clock::now();
+auto Beginning = chrono::high_resolution_clock::now();
     //Portion of code to be timed
-auto End = std::chrono::high_resolution_clock::now();
+auto End = chrono::high_resolution_clock::now();
 \end{verbatim}
-Once the start and end time of the code is recorded, the duration::count method is used to get the elapsed time.
+Once the start and end time of the code is recorded, the duration::count method is used to get the elapsed time. The default setting returns the duration in seconds. Using the \verb!duration\_cast!, the resolution can be converted in hours, minutes, seconds, milliseconds, microseconds and nanoseconds.
 \begin{verbatim}
-std::chrono::duration<double> Elapsed = End - Beginning;
-std::cout << "Elapsed time:" << Elapsed.count() << std::endl;
+chrono::duration<double> Elapsed = End - Beginning;
+// Prints the time in seconds.
+cout << "Elapsed time:" << Elapsed.count() << std::endl;
+// Prints the time in nanoseconds. 
+cout << chrono::duration_cast<chrono::nanoseconds>(Elapsed).count();
 \end{verbatim}
 
- and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.
+An average of 1000 trials is taken to make sure the integrity of timings. Because of the fact that the compiler is clever enough to notice same calculations are repeated, during each execution a random number $ 0 < \epsilon < 10^{-7} $ is added to the step size. 
 
 \chapter{Results and Discussion}
 This section documents the performance of attempted optimizations. Experiments are conducted at W307 computer laboratory, Queen Mary University of London. Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7 - 6700 CPU with 4 cores clocked at 3.40 GHz. The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools utilized in the tests include Intel Compiler, version 18.0.3 and Intel Math Kernel Library. First step was solving the base cases \ref{bsBase}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance. Different solution platforms, compilers, optimization flags and tridiagonal solvers are tested against each other.
