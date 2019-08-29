@@ -1,5 +1,13 @@
 \begin{thebibliography}{10}
 
+\bibitem{nobel}
+The sveriges riksbank prize in economic sciences in memory of alfred nobel
+  1997.
+\newblock
+  \url{https://www.nobelprize.org/prizes/economic-sciences/1997/press-release/},
+  Oct 1997.
+\newblock [Online; accessed 28-August-2019].
+
 \bibitem{thalesians}
 Saeed Amen.
 \newblock {\em Trading Thalesians: What the Ancient World Can Teach Us About
@@ -15,6 +23,13 @@ TRAVIS~M Austin, Markus Berndt, and J~David Moulton.
 Fischer Black and Myron Scholes.
 \newblock The pricing of options and corporate liabilities.
 \newblock {\em Journal of Political Economy}, 81(3):637--654, 1973.
+
+\bibitem{firstFDM}
+Michael~J. Brennan and Eduardo~S. Schwartz.
+\newblock Finite difference methods and jump processes arising in the pricing
+  of contingent claims: A synthesis.
+\newblock {\em The Journal of Financial and Quantitative Analysis},
+  13(3):461--474, 1978.
 
 \bibitem{openmp}
 Barbara Chapman, Gabriele Jost, and Ruud van~der Pas.

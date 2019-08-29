@@ -126,22 +126,23 @@ Queen Mary University of London\\
 \chapter{Introduction}
 In Ancient Greece, Thales was scorned for his poverty. Later that year, Thales utilized his skills in astrology to forecast an increase in olive yields. Using his limited capital, he rented oil presses in winter. Months later, over the oil making season, many people rushed to the presses because of the high yields that Thales predicted. As he rented the presses over the winter, he forced the terms he pleased. Thales showed it was easy for philosophers to be rich if they chose it and practically used the first  financial derivative product \cite{thalesians}. 
 
-In the modern world, financial derivatives are contracts between two or more parties. The value of the contract depends on one or several underlying assets. Commonly the assets are currencies, equities, bonds, interest rates, market indices or commodities. The vanilla call option gives the right but not the obligation to buy the underlying asset at the expiry date at a previously agreed strike price. Essentially, Thales bought call options for oil presses.  If the olive yields didn't come as Thales expected he didn't have the obligation to use the olive presses.  On the other hand, the vanilla put option gives the right but not the obligation to sell the underlying asset at the expiry date at a previously agreed strike price. Practical applications of the options include hedging or speculating the future asset price. Hence, accurately pricing the options is crucial for an efficient and mature financial market. Merton and Scholes received the 1997 Nobel Prize in Economic Science for this work \cite{merton}. 
+In the modern world, financial derivatives are contracts between two or more parties. The value of the contract depends on one or several underlying assets. Commonly the assets are currencies, equities, bonds, interest rates, market indices or commodities. The vanilla call option gives the right but not the obligation to buy the underlying asset at the expiry date at a previously agreed strike price. Essentially, Thales bought call options for oil presses.  If the olive yields didn't come as Thales expected he didn't have the obligation to use the olive presses.  On the other hand, the vanilla put option gives the right but not the obligation to sell the underlying asset at the expiry date at a previously agreed strike price. Practical applications of the options include hedging or speculating the future asset price. Hence, accurately pricing the options is crucial for an efficient and mature financial market. 
+
+Black - Scholes model was introduced by Fischer Black and Myron Scholes to fix the option pricing problem in 1973 \cite{BS}. Merton extended the framework to allow jumps in the underlying assets \cite{merton}. Besides option valution, the framework gives a new perspective of hedging using the derivatives of the option price, the Greeks. The formula is used by thousand of traders and investors on day to day tasks to value options and manage risk throughout the world financial markets. This new method of determining the value of derivatives by Merton and Scholes received the Nobel Prize in Economic Science in 1997 \cite{nobel}. The Black - Scholes model is a parabolic partial differential equation that the price of option satisfies under certain conditions and assumptions. Determining an analytical solution to partial differential equations are impossible in most cases. Therefore using numerical methods are essential.     The methods are introduced in mathematical finance in 1977 for option valuation by Brennan and Schwart \cite{firstFDM}.
 
 \section{Motivation of the Project}
-Derivative pricing in the real world is a computationally intensive task. The existing numerical methods for partial differential equations are all constrained by the computational complexity. Being fast when evaluating new information is critical for the operations of hedge funds and investment banks. Therefore optimizing the existing numerical methods with hardware and software that can be installed on a trading floor is crucial. Goal of the project is to provide efficient methods for pricing options.
+Derivative pricing in the real world is a computationally intensive task. The existing numerical methods for partial differential equations are all constrained by the computational complexity. Being fast when evaluating new information is critical for the operations of hedge funds and investment banks. Hence optimizing the existing numerical methods with hardware and software that can be installed on a trading floor is crucial. Purpose of this project to achieve faster numerical solutions of financial partial differential equations. 
 
-Purpose of this project to optimize numerical solutions of parabolic PDEs by testing tridiagonal system solvers, compilers and solution platforms. The idea of this project is to study how to take advantage of parallelism and explore how much faster we can make these calculations
-.
-Included in your ‘Introduction’ section should be a clear summary of  what  you  have  achieved  in  the  project  work  presented,  such  as  any  new  results, generalisations, corollaries, examples, new connections, or computer investigations. 
+Existing explicit, Crank - Nicolson and alternating direction implicit schemes are used. Firstly, Visual Studio compiler for C++ is replaced by Intel compiler to explore making the methods faster. x86 and x64 solution platforms are used to test the compilers against each other. The effects of Visual Studio optimization switches are explored under these conditions to achieve a faster option pricing. An important consideration in this thesis is the efficient solution of the tridiagonal system arising at each timestep. In this case, the standard tridiagonal system solver, such as the Thomas algorithm or Gaussian elimination, may not be an efficient choice. To take advantage of the high-performance CPU parallelism techniques, the cyclic reduction method is considered.
+
 
 \chapter{Pricing Financial Derivatives}\label{Pricing Financial Derivatives}
 \section{The Risk Neutral Approach}
-The Black-Scholes framework is a theoretical valuation formula for options. It reveals the relationship between the prices of the options and the underlying assets. Since almost all corporate liabilities can be viewed as combinations of options, the formula is applicable to common stocks and corporate bonds \cite{BS}. The Black-Scholes model makes the following assumptions:
+The Black-Scholes framework is a theoretical valuation formula for options. It reveals the relationship between the prices of the options and the underlying assets. Since almost all corporate liabilities can be viewed as combinations of options, the formula applies to common stocks and corporate bonds \cite{BS}. The Black-Scholes model makes the following assumptions:
 \begin{itemize}
-\item There does not exist any arbitrage opportunity in the financial market.  The traders can’t make instantaneous profit without any risk.
-\item The underlying asset value follows a geometric Brownian Motion $\mathrm{d}S = \mu S \mathrm{d}t + \sigma S \mathrm{d}B $ where $\mu$ denotes the average rate of growth of the underlying assets, $\sigma$ denotes the volatility of the asset price and B is a Brownian Motion.
-\item The market is frictionless.  This means there are no transaction fees, the interest rates for borrowing and lending money from and to the bank are the same, every party  in  market  has  immediate  information  and  all  entities  are  available  at  any time and in any size.
+\item There does not exist any arbitrage opportunity in the financial market.  The traders can not make profits without any risk.
+\item The underlying asset value follows a geometric Brownian Motion, $\mathrm{d}S = \mu S \mathrm{d}t + \sigma S \mathrm{d}B $ where $\mu$, denotes the average rate of growth of the underlying assets, $\sigma$ denotes the volatility of the asset price and B is a Brownian Motion.
+\item The market is frictionless.  This means there are no transaction fees, the interest rates for borrowing and lending money from and to the bank are the same, every party in the market has immediate information and all entities are available at any time and in any size.
 \end{itemize}
 
 \subsection{Black-Scholes Partial Differential Equation}
@@ -345,12 +346,9 @@ The transformation creates a PDE with constant coefficients rather than coeffici
 
 
 \section{Partial Differential Equations}
-Since the foundation of the world humanity tried to understand and model the nature. Differential equations serves this purpose by enabling us to describe natural phenomena for instance, heat, sound and fluid flow. Differential equations can be classified in to two categories. Ordinary differential equations serve to model a movement space or plane, an example would be the trajectory of a projectile launched from a cannon follows a curve determined by an ordinary differential equation that is derived from Newton's second law.
+Since the foundation of the world humanity tried to understand and model nature. Mathematics describes natural phenomena such as heat, sound and flow using differential equations. They can be classified into two categories. Ordinary differential equations serve to model a movement space or plane such as the trajectory of a projectile launched from a cannon. The ordinary differential equation is used to model the curve of the trajectory. On the other hand, partial differential equations models a function, a typical example is the heat distribution. This distinction usually makes PDEs much harder to determine an analytical solution than ordinary differential equations.  Therefore, we need to achieve a numerical solution to the problem. One of the most common numerical methods for partial differential equations is the finite difference methods. The schemes consist of finding approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. Finite difference methods are simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. 
 
-On the other hand, partial differential equations modelles a function, a typical example is the heat distribution. This distinction usually makes PDEs much harder to determine an analytical solution than ordinary differential equations.  Therefore, we need to achieve a numerical solution to the problem. One of the most commong numerical method for partial differential equations is the finite difference methods. The methods consist of finding approximate solutions to the problem at a discrete set of points, normally on a rectangular grid of points. Finite difference methods are simple to construct and analyse but can compromise performance because of increased computational complexity when there are high dimensions. 
-
-Feynman-Kac theorem \cite{klebaner}, establishes a link between partial differential equations and stochastic processes by writing the solution as a conditional expectation. Thanks to the theorem, Monte Carlo method is also utilized to find the numerical solutions to the partial differential equations. The convergence rate of Monte Carlo method for $n$ simulations can be denoted as $\mathcal{O}(n^{\frac{-1}{2}}) $ which holds for all dimensions ($d$).
-The error in $d$ dimensional trapezoidal rule for twice continuously differentiable integrands is $\mathcal{O}(n^{\frac{-2}{d}}) $ \cite{glasserman}. Thus, Monte Carlo is a method of choice when evaluating higher dimensions. In our calculations, we will test the case where $T = 0.06$ and $x_{max} = 1.0$.
+Feynman-Kac theorem \cite{klebaner} establishes the link between partial differential equations and stochastic processes by writing the solution as a conditional expectation. The theorem enabled Monte Carlo method to be utilized to find the numerical solutions to the partial differential equations. The convergence rate of Monte Carlo method for $n$ simulations can be denoted as $\mathcal{O}(n^{\frac{-1}{2}}) $ which holds for all dimensions ($d$). The error in $d$ dimensional trapezoidal rule for twice continuously differentiable integrands is $\mathcal{O}(n^{\frac{-2}{d}}) $ \cite{glasserman}. Thus, Monte Carlo is a method of choice when evaluating higher dimensions. In our calculations, we will test the case where $T = 0.06$ and $x_{max} = 1.0$.
 
 \subsection{Heat Equation}
 The heat equation is fundamental to financial engineering. Heat equation is a component in the Black-Schole equation and Black-Scholes equation can be transformed to the heat equation by changing variables \cite{capinski}. Therefore, understanding heat equation is crucial to grasping concepts of partial differential equations. Heat equation will serve as a benchmark with the following initial and boundary conditions.
@@ -642,7 +640,13 @@ Lastly, solving heat equation and Black-Scholes differs in time stepping. Black-
 \end{figure}
 
 \subsection{Crank - Nicolson Method}
-The explicit method is computationally cheap. However, this brings a serious drawback, for explicit method to attain reasonable accuracy the step size must be kept small \cite{gdsmith}. Thankfully, the Crank-Nicolson finite difference scheme was introduced by John Crank and Phyllis Nicolson \cite{cn}. Considering numerous articles and publications in the financial engineering literature use Crank-Nicolson as the de-facto scheme for time discretisation, the method has become one of the most popular finite difference schemes for approximating the solution of the Black - Scholes equation and its generalisations \cite{tavella}. If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. Applying the BTCS to the base equation \ref{gen} yields
+The explicit method is computationally cheap. However, this brings a serious drawback, for explicit method to attain reasonable accuracy the step size must be kept small \cite{gdsmith}. Thankfully, the Crank-Nicolson finite difference scheme was introduced by John Crank and Phyllis Nicolson \cite{cn}. 
+
+Considering numerous articles and publications in the financial engineering literature use Crank-Nicolson as the de-facto scheme for time discretisation, the method has become one of the most popular finite difference schemes for approximating the solution of the Black - Scholes equation and its generalisations 
+
+\cite{tavella}. 
+
+If we apply backwards time difference instead of forward time difference that Explicit method used and a central space approximation in space again, we get the BTCS scheme. Applying the BTCS to the base equation \ref{gen} yields
 
 \begin{equation}
 \frac{u^{n+1}_i - u^n_i}{\Delta t}  = a(x, t)  \frac{u^{n+1}_{i+1}- 2u^{n+1}_i + u^{n+1}_{i-1}}{(\Delta x)^2}  + b(x, t)  \frac{u^{n+1}_i - u^{n+1}_i}{\Delta t}  + c(x, t)  u^{n+1}_i
@@ -1064,12 +1068,13 @@ std::chrono::duration<double> Elapsed = End - Beginning;
 std::cout << "Elapsed time:" << Elapsed.count() << std::endl;
 \end{verbatim}
 
+ and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.
 
 \chapter{Results and Discussion}
 This section documents the performance of attempted optimizations. Experiments are conducted at W307 computer laboratory, Queen Mary University of London. Each computer has Windows 10 Enterprise 64 bit, 16 GB of RAM, Intel Core i7 - 6700 CPU with 4 cores clocked at 3.40 GHz. The source code is written in C++ and compiled with Microsoft Visual Studio Enterprise 2017, Version 15.3.3 in the release mode. External tools utilized in the tests include Intel Compiler, version 18.0.3 and Intel Math Kernel Library. First step was solving the base cases \ref{bsBase}, \ref{HeatBase}, \ref{HeatTwoBase} by hand and Excel. Following the simple implementations, the solvers are ported to C++ to measure and optimize the performance. Different solution platforms, compilers, optimization flags and tridiagonal solvers are tested against each other.
  
 \subsection{Base Case}
-Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are used to calculate errors for the solutions using different grid sizes. Space and time dimensions are discretized by $64$ for Explicit and Crank - Nicolson schemes. In order to solve two dimensional heat equation using the ADI scheme two space dimensions and the time dimension are discretized by $32$.  All optimizations of Visual Studio  (/Od flag) are disabled for the base case and an average of 1000 trials is taken to make sure the integrity of timings. During each trial a random number $ 0 < \epsilon < 10^-7 $ is added to the step size to avoid automated optimizations.
+Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2Anal} are used to calculate errors for the solutions using different grid sizes. Space and time dimensions are discretized by $64$ for Explicit and Crank - Nicolson schemes. In order to solve two dimensional heat equation using the ADI scheme two space dimensions and the time dimension are discretized by $32$.  All optimizations of Visual Studio  (/Od flag) are disabled for the base case.
 
 \begin{figure}[!htb]
     \centering
@@ -1175,28 +1180,19 @@ As expected, the bigger grid size benefits more from the performance gain. The g
 Similarly, as the grid size increases the performance gains increase when using ADI method.
 \chapter{Conclusion}
 
-Option pricing is a central component for financial corporations, efficient and accurate pricing of them is critical in day to day operations. For  most  partial differential equations, there are no analytical formula giving their price, therefore, numerical methods used to price them. In this thesis, we choose the value options and solve the heat equation to test optimizations for the numerical methods, Crank Nicolson method, explicit method and alternating direction implicit scheme. Numerical analysis and computer simulations are undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations.
+Option pricing is a central component for financial corporations, efficient and accurate pricing of them is critical in day to day operations. For  most  partial differential equations, there are no analytical formula giving their price, therefore, numerical methods used to price them. In this thesis, we choose the value options and solve the heat equation to test optimizations for the numerical methods, Crank Nicolson method, explicit method and alternating direction implicit scheme. Numerical analysis and computer simulations are undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. 
 
-The tests in this work suggest that the Intel compiler with 64 bit generally produces faster code. 
+The tests in this work suggest that the Intel compiler with 64 bit generally produces faster code. The Intel compiler provides detailed documentation and support for libraries and tools to develop high-performance programs such as Intel Math Library, Intel Advisor, Intel VTune Performance Analyzer, etc. The timings suggest that the /Ox optimization switch is generally able to provide the best performance. In implementing finite difference methods, we’ve verified that solving tridiagonal systems is the bottleneck. Therefore, we study the effect of various tridiagonal solvers on the speed of the numerical solution. 
+Our results indicate that parallel cyclic reduction is the fastest when using Intel compiler with 64 bit and /Ox switch enabled. Thus making it the the optimal solver . 
 
-The Intel compiler provides detailed documentation and support for libraries and tools to develop high-performance improve the performance such as Intel Math Library, Intel Advisor, Intel VTune Performance Analyzer, etc.
-
- has detailed documentation, code samples, and is able to output helpful optimization reports (see, e.g., this paper) that can be used to determine how to further improve application performance. Lastly, the Intel compiler is a part of a suite of libraries and tools, such as Intel MKL, Intel Advisor, Intel VTune Performance Analyzer, etc., which are very helpful for high-performance application development.
-
-The timings suggest that the /Ox optimization switch is generally able to provide the best performance. In implementing finite difference methods, we’ve verified that solving tridiagonal systems is the bottleneck. Therefore,  we study the effect of various tridiagonal solvers  on  the  speed of the numerical solution.
- 
-
-Parallel cyclic reductions is faster than thomas algorithm. 64 bit faster than 32 bit. 
 \subsection{Further Work}
 A Critique of the Crank Nicolson Scheme Strengths and Weaknesses for Financial Instrument Pricing + rannacher 
 AVX and Intrinsics CPUs are pipelining and use of SSE/SIMD kusswurm registers with Advanced Vector Extensions(AVX 512)GPGPU In the case of General Purpose GPUs, CUDA or Open Computing Language(OpenCL) can be utilized but can be challenging because of the requirement of delicate memory management. \cite{fpga},  cloud functions \cite{cloudfunc}.
-
 More type of options BSPde bdegistir callputflag duffy c++ 677 
 Generalize ADI (multi assset BS)
 Rannacher trick (168 foreign exchange pricing rannacher ve stencil)
 Burst cloud functions
 Rannacher trick
-
 change black scholes to a different pricing pde like interest rate derivatives The HJM model \cite{kohl}
 
 

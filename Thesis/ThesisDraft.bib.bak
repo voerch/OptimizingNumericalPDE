@@ -536,4 +536,28 @@ author = "Gustavo Chávez and George Turkiyyah and Stefano Zampini and Hatem Lta
   pages={344}
 }
 
+@misc{nobel, 
+title={The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 1997},
+howpublished = "\url{https://www.nobelprize.org/prizes/economic-sciences/1997/press-release/}",
+journal={NobelPrize.org}, 
+publisher={The Sveriges Riksbank}, 
+year={1997},
+month={Oct},
+note = "[Online; accessed 28-August-2019]"
+}
+
+
+@article{firstFDM,
+ ISSN = {00221090, 17566916},
+ URL = {http://www.jstor.org/stable/2330152},
+ author = {Michael J. Brennan and Eduardo S. Schwartz},
+ journal = {The Journal of Financial and Quantitative Analysis},
+ number = {3},
+ pages = {461--474},
+ publisher = {Cambridge University Press},
+ title = {Finite Difference Methods and Jump Processes Arising in the Pricing of Contingent Claims: A Synthesis},
+ volume = {13},
+ year = {1978}
+}
+
 
