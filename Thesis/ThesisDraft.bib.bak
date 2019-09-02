@@ -561,3 +561,13 @@ note = "[Online; accessed 28-August-2019]"
 }
 
 
+@InBook{kusswurm,
+ author = {Kusswurm, Daniel},
+ title = {Modern X86 Assembly Language Programming: 32-bit, 64-bit, SSE, and AVX},
+ year = {2014},
+ isbn = {1484200659, 9781484200650},
+ edition = {1st},
+ publisher = {Apress},
+ pages = {2--3},
+ address = {Berkely, CA, USA},
+} 

@@ -126,6 +126,12 @@ P.~Kohl-Landgraf.
   Implementation}, pages 423--438.
 \newblock Books on Demand, 2007.
 
+\bibitem{kusswurm}
+Daniel Kusswurm.
+\newblock {\em Modern X86 Assembly Language Programming: 32-bit, 64-bit, SSE,
+  and AVX}, pages 2--3.
+\newblock Apress, Berkely, CA, USA, 1st edition, 2014.
+
 \bibitem{sepvar}
 {Matthew J. Hancock}.
 \newblock The 1-d heat equation (mit course 18.303, linear partial differential

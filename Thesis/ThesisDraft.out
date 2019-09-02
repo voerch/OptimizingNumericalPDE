@@ -34,5 +34,5 @@
 \BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 34
 \BOOKMARK [1][-]{subsection.5.0.1}{Further Work}{chapter.5}% 35
 \BOOKMARK [0][-]{appendix.A}{Implementation of the PDE class}{}% 36
-\BOOKMARK [0][-]{appendix.B}{Implementation of the FiniteDifferenceMethod class}{}% 37
+\BOOKMARK [0][-]{appendix.B}{Implementation of the FDM class}{}% 37
 \BOOKMARK [0][-]{appendix.C}{Detailed Timings}{}% 38
