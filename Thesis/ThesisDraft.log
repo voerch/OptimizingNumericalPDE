@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.7.29)  2 SEP 2019 04:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.7.29)  3 SEP 2019 04:09
 entering extended mode
 **./ThesisDraft.tex
 (ThesisDraft.tex
@@ -1229,7 +1229,7 @@ Overfull \hbox (22.27777pt too wide) in paragraph at lines 1036--1036
 t[iReduceMinus][] 
  []
 
-<figures/cyclic.png, id=584, 656.4525pt x 321.45094pt>
+<figures/cyclic.png, id=582, 656.4525pt x 321.45094pt>
 File: figures/cyclic.png Graphic file (type png)
 <use figures/cyclic.png>
 Package pdftex.def Info: figures/cyclic.png  used on input line 1039.
@@ -1252,18 +1252,18 @@ ackSubMinus]))[]
  []
 
 [38]
-<figures/openmp.png, id=606, 371.13657pt x 277.035pt>
+<figures/openmp.png, id=604, 371.13657pt x 277.035pt>
 File: figures/openmp.png Graphic file (type png)
 <use figures/openmp.png>
 Package pdftex.def Info: figures/openmp.png  used on input line 1099.
 (pdftex.def)             Requested size: 222.68365pt x 166.22227pt.
-<figures/openmpnested.png, id=608, 571.38469pt x 326.72063pt>
+<figures/openmpnested.png, id=606, 571.38469pt x 326.72063pt>
 File: figures/openmpnested.png Graphic file (type png)
 <use figures/openmpnested.png>
 Package pdftex.def Info: figures/openmpnested.png  used on input line 1107.
 (pdftex.def)             Requested size: 342.83345pt x 196.03387pt.
  [39 <./figures/openmp.png>]
-<figures/cyclicopenmp.png, id=619, 569.87906pt x 293.59688pt>
+<figures/cyclicopenmp.png, id=617, 569.87906pt x 293.59688pt>
 File: figures/cyclicopenmp.png Graphic file (type png)
 <use figures/cyclicopenmp.png>
 Package pdftex.def Info: figures/cyclicopenmp.png  used on input line 1115.
@@ -1279,7 +1279,7 @@ Chapter 4.
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 1148.
 
-<figures/notOptimized.png, id=647, 569.12625pt x 376.40625pt>
+<figures/notOptimized.png, id=645, 569.12625pt x 376.40625pt>
 File: figures/notOptimized.png Graphic file (type png)
 <use figures/notOptimized.png>
 Package pdftex.def Info: figures/notOptimized.png  used on input line 1153.
@@ -1287,86 +1287,66 @@ Package pdftex.def Info: figures/notOptimized.png  used on input line 1153.
 [43
 
 ]
-<figures/bitPercent.png, id=652, 674.52pt x 87.32625pt>
+<figures/bitPercent.png, id=650, 674.52pt x 87.32625pt>
 File: figures/bitPercent.png Graphic file (type png)
 <use figures/bitPercent.png>
 Package pdftex.def Info: figures/bitPercent.png  used on input line 1163.
-(pdftex.def)             Requested size: 472.16078pt x 61.12794pt.
+(pdftex.def)             Requested size: 438.4328pt x 56.76138pt.
 
-Overfull \hbox (31.31332pt too wide) in paragraph at lines 1163--1164
- [][] 
+Underfull \hbox (badness 10000) in paragraph at lines 1169--1170
+
  []
 
-<figures/compilerPercent.png, id=653, 596.98032pt x 86.57344pt>
+<figures/compilerPercent.png, id=651, 596.98032pt x 86.57344pt>
 File: figures/compilerPercent.png Graphic file (type png)
 <use figures/compilerPercent.png>
-Package pdftex.def Info: figures/compilerPercent.png  used on input line 1175.
-(pdftex.def)             Requested size: 477.5849pt x 69.25882pt.
-
-Overfull \hbox (36.73744pt too wide) in paragraph at lines 1175--1176
- [][] 
- []
-
+Package pdftex.def Info: figures/compilerPercent.png  used on input line 1173.
+(pdftex.def)             Requested size: 388.03261pt x 56.27205pt.
 [44 <./figures/notOptimized.png> <./figures/bitPercent.png>]
-<figures/thomasFlagBar.png, id=662, 609.77812pt x 292.09125pt>
+<figures/thomasFlagBar.png, id=660, 609.77812pt x 292.09125pt>
 File: figures/thomasFlagBar.png Graphic file (type png)
 <use figures/thomasFlagBar.png>
-Package pdftex.def Info: figures/thomasFlagBar.png  used on input line 1187.
+Package pdftex.def Info: figures/thomasFlagBar.png  used on input line 1184.
 (pdftex.def)             Requested size: 365.86969pt x 175.25609pt.
-<figures/intelFlagBar.png, id=663, 615.0478pt x 303.38344pt>
+<figures/intelFlagBar.png, id=661, 615.0478pt x 303.38344pt>
 File: figures/intelFlagBar.png Graphic file (type png)
 <use figures/intelFlagBar.png>
-Package pdftex.def Info: figures/intelFlagBar.png  used on input line 1194.
+Package pdftex.def Info: figures/intelFlagBar.png  used on input line 1191.
 (pdftex.def)             Requested size: 369.03154pt x 182.03146pt.
-<figures/cyclicFlagBar.png, id=664, 557.08125pt x 319.1925pt>
+<figures/cyclicFlagBar.png, id=662, 557.08125pt x 319.1925pt>
 File: figures/cyclicFlagBar.png Graphic file (type png)
 <use figures/cyclicFlagBar.png>
-Package pdftex.def Info: figures/cyclicFlagBar.png  used on input line 1201.
+Package pdftex.def Info: figures/cyclicFlagBar.png  used on input line 1198.
 (pdftex.def)             Requested size: 334.25133pt x 191.51697pt.
  [45 <./figures/compilerPercent.png> <./figures/thomasFlagBar.png>] [46 <./figu
 res/intelFlagBar.png> <./figures/cyclicFlagBar.png>]
-<figures/solverAveragePercentage.png, id=683, 636.87938pt x 87.32625pt>
+<figures/solverAverage.png, id=681, 637.63219pt x 110.66344pt>
+File: figures/solverAverage.png Graphic file (type png)
+<use figures/solverAverage.png>
+Package pdftex.def Info: figures/solverAverage.png  used on input line 1209.
+(pdftex.def)             Requested size: 414.45601pt x 71.93036pt.
+<figures/solverAveragePercentage.png, id=682, 636.87938pt x 87.32625pt>
 File: figures/solverAveragePercentage.png Graphic file (type png)
 <use figures/solverAveragePercentage.png>
 Package pdftex.def Info: figures/solverAveragePercentage.png  used on input lin
-e 1212.
-(pdftex.def)             Requested size: 445.81253pt x 61.12794pt.
-
-Overfull \hbox (4.96507pt too wide) in paragraph at lines 1212--1213
- [][] 
- []
-
-<figures/solverAverage.png, id=684, 637.63219pt x 110.66344pt>
-File: figures/solverAverage.png Graphic file (type png)
-<use figures/solverAverage.png>
-Package pdftex.def Info: figures/solverAverage.png  used on input line 1217.
-(pdftex.def)             Requested size: 382.58226pt x 66.39856pt.
-<figures/gridTime.png, id=685, 715.17188pt x 145.29282pt>
+e 1217.
+(pdftex.def)             Requested size: 413.96669pt x 56.76138pt.
+<figures/gridTime.png, id=683, 715.17188pt x 145.29282pt>
 File: figures/gridTime.png Graphic file (type png)
 <use figures/gridTime.png>
 Package pdftex.def Info: figures/gridTime.png  used on input line 1228.
-(pdftex.def)             Requested size: 500.6169pt x 101.70427pt.
-
-Overfull \hbox (59.76944pt too wide) in paragraph at lines 1228--1229
- [][] 
- []
-
-[47 <./figures/solverAveragePercentage.png> <./figures/solverAverage.png>]
-<figures/gridTimeADI.png, id=694, 713.66624pt x 89.58469pt>
+(pdftex.def)             Requested size: 429.10643pt x 87.17635pt.
+ [47 <./figures/solverAverage.png> <./figures/solverAveragePercentage.png>]
+<figures/gridTimeADI.png, id=692, 713.66624pt x 89.58469pt>
 File: figures/gridTimeADI.png Graphic file (type png)
 <use figures/gridTimeADI.png>
 Package pdftex.def Info: figures/gridTimeADI.png  used on input line 1236.
-(pdftex.def)             Requested size: 499.56296pt x 62.70883pt.
-
-Overfull \hbox (58.7155pt too wide) in paragraph at lines 1236--1237
- [][] 
- []
-
-[48 <./figures/gridTime.png> <./figures/gridTimeADI.png>]
+(pdftex.def)             Requested size: 428.20305pt x 53.75122pt.
+ [48 <./figures/gridTime.png> <./figures/gridTimeADI.png>]
 Chapter 5.
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1250.
+(hyperref)                than one, level fixed on input line 1247.
 
 [49
 
@@ -1380,33 +1360,33 @@ Appendix B.
 
 ]
 Appendix C.
-<figures/o2Optimized.png, id=727, 569.87906pt x 375.65344pt>
+<figures/o2Optimized.png, id=725, 569.87906pt x 375.65344pt>
 File: figures/o2Optimized.png Graphic file (type png)
 <use figures/o2Optimized.png>
-Package pdftex.def Info: figures/o2Optimized.png  used on input line 1301.
+Package pdftex.def Info: figures/o2Optimized.png  used on input line 1298.
 (pdftex.def)             Requested size: 341.93007pt x 225.3938pt.
-<figures/oXOptimized.png, id=728, 569.87906pt x 377.15906pt>
+<figures/oXOptimized.png, id=726, 569.87906pt x 377.15906pt>
 File: figures/oXOptimized.png Graphic file (type png)
 <use figures/oXOptimized.png>
-Package pdftex.def Info: figures/oXOptimized.png  used on input line 1307.
+Package pdftex.def Info: figures/oXOptimized.png  used on input line 1304.
 (pdftex.def)             Requested size: 341.93007pt x 226.29718pt.
-<figures/bit.png, id=729, 675.27281pt x 234.1247pt>
+<figures/bit.png, id=727, 675.27281pt x 234.1247pt>
 File: figures/bit.png Graphic file (type png)
 <use figures/bit.png>
-Package pdftex.def Info: figures/bit.png  used on input line 1313.
+Package pdftex.def Info: figures/bit.png  used on input line 1310.
 (pdftex.def)             Requested size: 438.92213pt x 152.17924pt.
-<figures/compilerT.png, id=730, 596.2275pt x 233.37187pt>
+<figures/compilerT.png, id=728, 596.2275pt x 233.37187pt>
 File: figures/compilerT.png Graphic file (type png)
 <use figures/compilerT.png>
-Package pdftex.def Info: figures/compilerT.png  used on input line 1319.
+Package pdftex.def Info: figures/compilerT.png  used on input line 1316.
 (pdftex.def)             Requested size: 387.54329pt x 151.68991pt.
-<figures/FlagPercent.png, id=731, 931.98187pt x 464.4853pt>
+<figures/FlagPercent.png, id=729, 931.98187pt x 464.4853pt>
 File: figures/FlagPercent.png Graphic file (type png)
 <use figures/FlagPercent.png>
-Package pdftex.def Info: figures/FlagPercent.png  used on input line 1325.
+Package pdftex.def Info: figures/FlagPercent.png  used on input line 1322.
 (pdftex.def)             Requested size: 465.98979pt x 232.24208pt.
 
-Overfull \hbox (25.14233pt too wide) in paragraph at lines 1325--1326
+Overfull \hbox (25.14233pt too wide) in paragraph at lines 1322--1323
  [][] 
  []
 
@@ -1415,111 +1395,143 @@ Overfull \hbox (25.14233pt too wide) in paragraph at lines 1325--1326
  <./figures/o2Optimized.png>] [54 <./figures/oXOptimized.png> <./figures/bit.pn
 g>] [55 <./figures/compilerT.png> <./figures/FlagPercent.png>] [56
 
-] [57]
-Underfull \hbox (badness 2443) in paragraph at lines 136--143
-\OT1/cmr/m/n/12 tial dif-fer-en-tial equa-tions).  [][]$\OT1/cmtt/m/n/12 https 
-: / / ocw . mit . edu / courses / mathematics /
+]
+Underfull \hbox (badness 10000) in paragraph at lines 106--110
+\OT1/cmr/m/it/12 tial dif-fer-en-tial equa-tions)\OT1/cmr/m/n/12 , [][]$\OT1/cm
+tt/m/n/12 https : / / ocw . mit . edu / courses / mathematics /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 136--143
+Underfull \hbox (badness 10000) in paragraph at lines 106--110
 \OT1/cmtt/m/n/12 18-[]303-[]linear-[]partial-[]differential-[]equations-[]fall-
 []2006 /
  []
 
-
-Underfull \hbox (badness 1688) in paragraph at lines 150--156
-[]\OT1/cmr/m/n/12 Microsoft.  /gf (elim-i-nate du-pli-cate strings).  [][]$\OT1
-/cmtt/m/n/12 https : / / docs . microsoft .
+[57]
+Underfull \hbox (badness 1248) in paragraph at lines 117--120
+[]\OT1/cmr/m/n/12 Microsoft, \OT1/cmr/m/it/12 /gf (elim-i-nate du-pli-cate stri
+ngs)\OT1/cmr/m/n/12 , [][]$\OT1/cmtt/m/n/12 https : / / docs . microsoft . com 
+/
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--156
-\OT1/cmtt/m/n/12 com / en-[]us / cpp / build / reference / gf-[]eliminate-[]dup
-licate-[]strings ? view =
+Underfull \hbox (badness 10000) in paragraph at lines 117--120
+\OT1/cmtt/m/n/12 en-[]us / cpp / build / reference / gf-[]eliminate-[]duplicate
+-[]strings ? view =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 158--164
+Underfull \hbox (badness 1377) in paragraph at lines 122--125
+[][]\OT1/cmr/m/n/12 , \OT1/cmr/m/it/12 /gy (en-able function-level link-ing)\OT
+1/cmr/m/n/12 , [][]$\OT1/cmtt/m/n/12 https : / / docs . microsoft . com /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--125
 \OT1/cmtt/m/n/12 en-[]us / cpp / build / reference / gy-[]enable-[]function-[]l
 evel-[]linking ? view =
  []
 
 
-Underfull \hbox (badness 2221) in paragraph at lines 166--172
-[]\OT1/cmr/m/n/12 Microsoft.  /ob (in-line func-tion ex-pan-sion).  [][]$\OT1/c
-mtt/m/n/12 https : / / docs . microsoft .
+Underfull \hbox (badness 2073) in paragraph at lines 132--135
+[][]\OT1/cmr/m/n/12 , \OT1/cmr/m/it/12 /oi (gen-er-ate in-trin-sic func-tions)\
+OT1/cmr/m/n/12 , [][]$\OT1/cmtt/m/n/12 https : / / docs . microsoft . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--172
-\OT1/cmtt/m/n/12 com / en-[]us / cpp / build / reference / ob-[]inline-[]functi
-on-[]expansion ? view =
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 174--180
+Underfull \hbox (badness 10000) in paragraph at lines 132--135
 \OT1/cmtt/m/n/12 en-[]us / cpp / build / reference / oi-[]generate-[]intrinsic-
 []functions ? view =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 182--188
-[]\OT1/cmr/m/n/12 Microsoft.  /os, /ot (fa-vor small code, fa-vor fast code).
+Underfull \hbox (badness 10000) in paragraph at lines 137--140
+[][]\OT1/cmr/m/n/12 , \OT1/cmr/m/it/12 /os, /ot (fa-vor small code, fa-vor fast
+ code)\OT1/cmr/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 182--188
+Underfull \hbox (badness 10000) in paragraph at lines 137--140
 [][]$\OT1/cmtt/m/n/12 https : / / docs . microsoft . com / en-[]us / cpp / buil
 d / reference /
  []
 
 
-Underfull \hbox (badness 1048) in paragraph at lines 182--188
+Underfull \hbox (badness 6252) in paragraph at lines 137--140
 \OT1/cmtt/m/n/12 os-[]ot-[]favor-[]small-[]code-[]favor-[]fast-[]code ? view = 
-vs-[]2019$[][]\OT1/cmr/m/n/12 , 2016.  [On-line;
+vs-[]2019$[][]\OT1/cmr/m/n/12 , 2016, [On-line;
  []
 
-[58]
-Underfull \hbox (badness 10000) in paragraph at lines 206--212
+
+Underfull \hbox (badness 1472) in paragraph at lines 142--145
+[][]\OT1/cmr/m/n/12 , \OT1/cmr/m/it/12 /o op-tions (op-ti-mize code)\OT1/cmr/m/
+n/12 , [][]$\OT1/cmtt/m/n/12 https : / / docs . microsoft . com / en-[]us /
+ []
+
+
+Underfull \hbox (badness 3333) in paragraph at lines 147--150
+\OT1/cmtt/m/n/12 build / reference / og-[]global-[]optimizations ? view = vs-[]
+2019$[][]\OT1/cmr/m/n/12 , 2017, [On-line;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--155
 \OT1/cmtt/m/n/12 cpp / build / reference / oy-[]frame-[]pointer-[]omission ? vi
-ew = vs-[]2019$[][]\OT1/cmr/m/n/12 , 2018.
+ew = vs-[]2019$[][]\OT1/cmr/m/n/12 , 2018,
  []
 
-[59]
-Underfull \hbox (badness 5741) in paragraph at lines 301--307
-[]\OT1/cmr/m/n/12 University of Ten-nessee.  La-pack: Lin-ear al-ge-bra pack-ag
-e, dgtsv().
+[58] [59]
+Underfull \hbox (badness 1622) in paragraph at lines 211--214
+[][]$\OT1/cmtt/m/n/12 https : / / www . openmp . org / about / openmp-[]faq/$[]
+[]\OT1/cmr/m/n/12 , 2018, [On-line; ac-cessed 10-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--307
+Underfull \hbox (badness 10000) in paragraph at lines 229--232
+[]\OT1/cmr/m/n/12 University of Ten-nessee, \OT1/cmr/m/it/12 La-pack: Lin-ear a
+l-ge-bra pack-age, dgtsv()\OT1/cmr/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 229--232
 [][]$\OT1/cmtt/m/n/12 http : / / www . netlib . org / lapack / explore-[]html /
  d4 / d62 / group _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--307
+Underfull \hbox (badness 10000) in paragraph at lines 229--232
 \OT1/cmtt/m/n/12 _double _ g _ tsolve _ ga2bf93f2ddefa5e671866eb2191dc19d4 . ht
 ml #
  []
 
+
+Underfull \hbox (badness 1052) in paragraph at lines 229--232
+\OT1/cmtt/m/n/12 ga2bf93f2ddefa5e671866eb2191dc19d4$[][]\OT1/cmr/m/n/12 , 2016,
+ [On-line; ac-cessed 17-August-
+ []
+
+
+Underfull \hbox (badness 1072) in paragraph at lines 239--241
+[]\OT1/cmr/m/n/12 Paul Wilmott, \OT1/cmr/m/it/12 Paul wilmott in-tro-duces quan
+-ti-ta-tive fi-nance\OT1/cmr/m/n/12 , 2 ed., Wiley-
+ []
+
 ) [60]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1334.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1334.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1331.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1331.
  (ThesisDraft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1334.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1334.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1331.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1331.
 
 Package rerunfilecheck Info: File `ThesisDraft.out' has not changed.
 (rerunfilecheck)             Checksum: 29D8A1925ADD1108B19A7B9BBC8430AE;2733.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1334.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1331.
  ) 
 Here is how much of TeX's memory you used:
- 31454 strings out of 492895
- 629376 string characters out of 3133479
- 746869 words of memory out of 3000000
- 34697 multiletter control sequences out of 15000+200000
+ 31455 strings out of 492895
+ 629371 string characters out of 3133479
+ 745832 words of memory out of 3000000
+ 34699 multiletter control sequences out of 15000+200000
  544708 words of font info for 70 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,65p,1185b,847s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1540,9 +1552,9 @@ ype1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
 ic/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
 tt12.pfb>
-Output written on ThesisDraft.pdf (61 pages, 1462646 bytes).
+Output written on ThesisDraft.pdf (61 pages, 1460965 bytes).
 PDF statistics:
- 922 PDF objects out of 1000 (max. 8388607)
- 263 named destinations out of 1000 (max. 500000)
+ 919 PDF objects out of 1000 (max. 8388607)
+ 262 named destinations out of 1000 (max. 500000)
  477 words of extra memory for PDF output out of 10000 (max. 10000000)
 

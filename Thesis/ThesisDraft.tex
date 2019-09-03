@@ -806,7 +806,7 @@ Visual Studio Optimization Switches, also known as /O options controls various o
 /O2 and /Ox flags are tested for maximum speed against the /Od flag which disables all the optimizations.
  
 \section{Tridiagonal Solvers}
-Tridiagonal solvers are the most demanding part of the solvers. Hence, development and improvement of such solvers is of great interest \cite{terekhov} \cite{chavez} \cite{hofen} \cite{austin} \cite{fpga} concerned with this problem.  Large tridiagonal systems appear in many numerical analysis applications. In our work, they arise in the Crank-Nicolson and Alternating Direction Implicit schemes.  Solving tridiagonal systems is the most computationally intensive part of the schemes. Therefore, choosing efficient tridiagonal solvers is crucial for the speed of the solver. In this experiment, implementations of the Thomas algorithm, Gaussian elimination and cyclic reduction will be tested.
+Tridiagonal solvers are the most demanding part of the solvers. Hence, development and improvement of such solvers is of great interest \cite{terekhov} \cite{chavez} \cite{hofen} \cite{fpga} concerned with this problem.  Large tridiagonal systems appear in many numerical analysis applications. In our work, they arise in the Crank-Nicolson and Alternating Direction Implicit schemes.  Solving tridiagonal systems is the most computationally intensive part of the schemes. Therefore, choosing efficient tridiagonal solvers is crucial for the speed of the solver. In this experiment, implementations of the Thomas algorithm, Gaussian elimination and cyclic reduction will be tested.
 
 \subsection{Thomas Algorithm}
 Thomas Algorithm is the most commonly used method for solving a tridiagonal system of equations. The method is used to solve a tridiagonal matrix system invented by Llewellyn Thomas \cite{thomas}. The algorithm is equivalent to Gaussian elimination without pivoting. The system equations can be written as
@@ -1156,66 +1156,66 @@ Previously defined analytical solutions \ref{bsAnal}, \ref{heatAnal}, \ref{heat2
 
 
 \subsection{Solution Platforms} 
-Switching the solution platform from x86 to x64 resulted in $17 - 22 \%$ decrease in the computing time on average.  The x86 CPU architecture provides $8$ 32-bit general registers and $8$ SSE registers. Using a x64 architecture increases the number of both registers  to $16$. Therefore, calculations are more efficient and fast under 64-bit and we will prefer 64-bit for our best case..
+Switching the solution platform from x86 to x64 resulted in $17 - 22 \%$ decrease in the computing time on average.  The x86 CPU architecture provides $8$ 32-bit general registers and $8$ SSE registers. Using a x64 architecture increases the number of both registers  to $16$. Therefore, calculations are more efficient and fast under 64-bit and we will prefer 64-bit for our best case.
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.7]{bitPercent.png}
-    \caption{Average increase when switched to Intel Compiler under different optimization flags.}
+        \includegraphics[scale=0.65]{bitPercent.png}
+    \caption{Average decrease in computation time when switched to x64 solution platform.}
     \label{bitPercent}
-\end{figure}
-
-
+\end{figure}    
 
 \subsection{Compilers} 
-Switching to Intel Compiler provided $0.5 - 4.3 \%$ performance increase on average. 
+Switching the Visual Studio compiler to Intel compiler provided $0.5 - 4.3 \%$ performance increase. \\
 
 \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.8]{compilerPercent.png}
-    \caption{Average increase when switched to Intel compiler.}
+        \includegraphics[scale=0.65]{compilerPercent.png}
+    \caption{Average performance increase when switched to Intel compiler.}
 \end{figure}
 
-The gtsv function from Intel Math Library was faster under the Intel compiler when compiler optimizations are disabled. However when we enable the /O2 and /Ox optimizations the difference was negligible. The OpenMP support of Visual Studio compiler was not supporting nested for loops. Therefore it is only tested using Intel Compiler. All in all, Intel compiler is faster and provides the support for new technologies such as parallelism. Thus, Intel compiler should be used when dealing with numerical calculations.
-
+The gtsv function from Intel Math Library was faster under the Intel compiler when compiler optimizations are disabled. However when we enable the /O2 and /Ox optimizations the difference was negligible. The OpenMP support of Visual Studio compiler was not supporting nested for loops, therefore it is only tested using Intel Compiler. All in all, Intel compiler is faster and provides the support for new technologies such as parallelism and should be used when dealing with heavy numerical operations.
 
 \subsection{Visual Studio Optimizations}
-The runtime when solving tridiagonal systems greatly benefits from enabling Visual Studio optimizations /Ox and /O2 flags. The Thomas algorithm benefits the most by $10.1 \%$ decrease in runtime on average of  $24$ observations. Similarly, the times for cyclic reduction improved  by $9.5 \%$ on average of $12$ observations. Given the fact that the functions from Intel Math Library are already heavily optimized,  Intel solver improved only $4.6 \%$ on average of $24$ observations. 
+The runtime when solving tridiagonal systems greatly benefits from enabling Visual Studio optimizations /Ox and /O2 flags. The Thomas algorithm benefits the most by $10.1 \%$ decrease in runtime on average of $24$ observations. Similarly, the timings for cyclic reduction improved  by $9.5 \%$ on average of $12$ observations. Given the fact that the functions from Intel Math Library are already heavily optimized,  Intel solver improved only $4.6 \%$ on average of $24$ observations. 
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[scale=0.6]{thomasFlagBar.png}
-    \caption{The relative performance of optimization switches when using Thomas algorithm.}
+    \caption{Performance improvement of Thomas algorithm under different optimization switches.}
 \end{figure}
 
 \begin{figure}[!htb]
     \label{intelBar}
     \centering
         \includegraphics[scale=0.6]{intelFlagBar.png}
-    \caption{The relative performance of optimization switches when using Intel solver.}
+    \caption{Performance improvement of Intel solver under different optimization switches.}
 \end{figure} 
 
 \begin{figure}[!htb]
     \label{cyclicBar}
     \centering
         \includegraphics[scale=0.6]{cyclicFlagBar.png}
-    \caption{The relative performance of optimization switches when using cyclic reduction.}
+    \caption{Performance improvements of cyclic reduction under different optimization switches.}
 \end{figure}
 
 The /Ox switch recorded the fastest times when solving Black - Scholes equation and heat equation regardless of the tridiagonal solvers. Even the explicit method which doesn't require any matrix operations benefited from switching the optimization switches on. The most performance gain recorded by /Ox flag is $13.8 \%$. Overall explicit methods performance improved by $5.4 \%$. Even though the two optimization switches are really close to each other, overall we can conclude that the /Ox flag performs better in the given task  of optimizing schemes. For a detailed view of the performance increases please see the \ref{flagPercent}.
 
 \subsection{Tridiagonal Solvers}
-Solving tridiagonal systems is the computationally heaviest component of when calculating solutions with Crank - Nicolson and ADI schemes. Therefore, choosing a fast solver is crucial in our task. Compared to our base case, thomas algorithm, cyclic reduction improved the performance $6.7 \%$ on average. The gtsv function from the Intel Math Library only improved by $0.6 \%$. 
+Solving tridiagonal systems is the computationally heaviest component of when calculating solutions with Crank - Nicolson and ADI schemes. Therefore, choosing a fast solver is crucial in our task.
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.65]{solverAverage.png}
+    \caption{Average runtime of tridiagonal system solvers.}
+\end{figure}
+
+ Compared to our base case, thomas algorithm, cyclic reduction improved the performance $6.7 \%$ on average. The gtsv function from the Intel Math Library only improved by $0.6 \%$. 
 
  \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.7]{solverAveragePercentage.png}
-    \caption{Average increase when between solvers.}
-\end{figure}
-\begin{figure}[!htb]
-    \centering
-        \includegraphics[scale=0.6]{solverAverage.png}
-    \caption{Average increase when between solvers timings.}
+        \includegraphics[scale=0.65]{solverAveragePercentage.png}
+    \caption{Decrease in runtime compared to the base case with Thomas algorithm.}
 \end{figure}
 
 Our base case is using x86 platform, Visual Studio compiler, Thomas algorithm and no optimizations. Under these conditions heat equation was solved in $0.046$ seconds and Black - Scholes equation was solved in $0.044$ seconds using the Crank - Nicolson method. The fastest time we achieved is $0.030$ for heat equation and $0.031$ for Black - Scholes equation. Utilizing the Intel compiler, cyclic reduction with OpenMP and /Ox optimization flag resulted in $35.5 \%$ and $30.5 \%$ performance gain for heat equation and Black - Scholes equation. Under the same base case and fastest case conditions the ADI method for two-dimensional heat equation ran in $0.34$ and $0.23$ seconds, resulting in $34.1 \%$ faster solutions.
@@ -1225,33 +1225,30 @@ In the numerical experiments above, the grid size is kept constant. Logically, t
 
  \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.7]{gridTime.png}
-    \caption{Average increase when between solvers.}
+        \includegraphics[scale=0.60]{gridTime.png}
+    \caption{Improvements in runtime between the base case and best case utilizing Crank - Nicolson under different grid sizes.}
 \end{figure}
 
 As expected, the bigger grid size benefits more from the performance gain. The grid size of ADI method is increased to 64 and 128 from 32 for all dimensions.
 
  \begin{figure}[!htb]
     \centering
-        \includegraphics[scale=0.7]{gridTimeADI.png}
-    \caption{Average increase when between solvers.}
+        \includegraphics[scale=0.60]{gridTimeADI.png}
+    \caption{Improvements in runtime between the base case and best case utilizing ADI under different grid sizes.}
 \end{figure}
 
 Similarly, as the grid size increases the performance gains increase when using ADI method.
 \chapter{Conclusion}
-
-Option pricing is a central component for financial corporations, efficient and accurate pricing of them is critical in day to day operations. For  most  partial differential equations, there are no analytical formula giving their price, therefore, numerical methods used to price them. In this thesis, we choose the value options and solve the heat equation to test optimizations for the numerical methods, Crank Nicolson method, explicit method and alternating direction implicit scheme. Numerical analysis and computer simulations are undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. 
+Option pricing is a central component for financial corporations, efficient and accurate pricing of them is critical in day to day operations. For most partial differential equations, there is no analytical formula giving their price, therefore, numerical methods used to price them. In this thesis, we choose the value options and solve the heat equation to test optimizations for the numerical methods, Crank Nicolson method, explicit method and alternating direction implicit scheme. Numerical analysis and computer simulations are undertaken to put theory and observation together to gain insight into the workings of numerical solutions of partial differential equations. 
 
 The tests in this work suggest that the Intel compiler with 64 bit produces faster code. The Intel compiler provides detailed documentation and support for libraries and tools to develop high-performance programs such as Intel Math Library, Intel Advisor, Intel VTune Performance Analyzer, etc. The timings suggest that the /Ox optimization switch is generally able to provide the best performance. In implementing finite difference methods, we’ve verified that solving tridiagonal systems is the bottleneck. Therefore, we studied the effects of various tridiagonal solvers on the speed of the numerical solution. 
-Our results indicate that parallel cyclic reduction is the fastest when using Intel compiler with 64 bit and /Ox switch enabled. 
-Against the base case, the best case decrease the timings for Black-Scholes equation and heat equation by $35.5 \%$ and $30.5 \%$. In the two-dimensional heat equation case the fastest solution recorded a  $34.1 \%$ performance gain. Lastly, the effects of optimizations when the grid size changes was studied. 
-
+Our results indicate that parallel cyclic reduction is the fastest when using Intel compiler with 64 bit and /Ox switch enabled. Against the base case, the best case decreases the timings for Black-Scholes equation and heat equation by $35.5 \%$ and $30.5 \%$. In the two-dimensional heat equation case, the fastest solution recorded a  $34.1 \%$ performance gain. Lastly, the effects of optimizations when the grid size changes were studied. 
 
 \subsection{Further Work}
-One of the limitations of this project was the type of options. Changing the type of options such as interest rate derivatives and the Black-Scholes model to another pricing framework such as multi asset Black-Scholes or HJM model \cite{kohl} can be implemented. Many optimization techniques have been left for future due to time constraints. The following ideas can provide potential performance improvements
+One of the limitations of this project was the type of options. Changing the type of options such as interest rate derivatives and the Black-Scholes model to another pricing framework such as multi-asset Black-Scholes or HJM model \cite{kohl} can be implemented. Many optimization techniques have been left for future due to time constraints. The following ideas can provide potential performance improvements
 \begin{itemize}
-\item Functions and algorithms can be implemented using x86-64 assembly language and the AVX, AVX2, and AVX-512 instruction sets \cite{kusswurm}.
-\item General Purpose GPUs can be used with CUDA or Open Computing Language(OpenCL) but can be challenging because of the requirement of delicate memory management.
+\item Numerical methods can be implemented using x86-64 Assembly language and the AVX, AVX2, and AVX-512 instruction set \cite{kusswurm}.
+\item General Purpose GPUs can be used to calculate numerical solutions with CUDA or Open Computing Language(OpenCL) but can be challenging because of the requirement of delicate memory management.
 \item Public cloud-computing services have steadily become cheaper and popular. A cloud function is a serverless execution environment which serves a single function. Building programs on a number of cloud functions is a difficult process. A new study from researchers at Stanford University claims to execute and parallelize existing programs using the cloud functions  \cite{cloudfunc}. Potentially, parallelizing the numerical methods in the cloud can save time and money for financial institutions.
 \end{itemize}
 
@@ -1328,7 +1325,7 @@ A file stream is opened for a csv file. At each time step\verb!innerDomain()! an
 \end{figure}
 
 
-\bibliographystyle{plain}
+\bibliographystyle{amsplain}
 \bibliography{ThesisDraft}
 
 \end{document}

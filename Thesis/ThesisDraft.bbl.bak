@@ -1,0 +1,257 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{nobel}
+\emph{The sveriges riksbank prize in economic sciences in memory of alfred
+  nobel 1997},
+  \url{https://www.nobelprize.org/prizes/economic-sciences/1997/press-release/},
+  Oct 1997, [Online; accessed 28-August-2019].
+
+\bibitem{thalesians}
+Saeed Amen, \emph{Trading thalesians: What the ancient world can teach us about
+  trading today}, pp.~39--60, Palgrave Macmillan UK, London, 2014.
+
+\bibitem{austin}
+TRAVIS~M Austin, Markus Berndt, and J~David Moulton, \emph{A memory efficient
+  parallel tridiagonal solver}, Preprint LA-VR-03-4149 (2004).
+
+\bibitem{BS}
+Fischer Black and Myron Scholes, \emph{The pricing of options and corporate
+  liabilities}, Journal of Political Economy \textbf{81} (1973), no.~3,
+  637--654.
+
+\bibitem{firstFDM}
+Michael~J. Brennan and Eduardo~S. Schwartz, \emph{Finite difference methods and
+  jump processes arising in the pricing of contingent claims: A synthesis}, The
+  Journal of Financial and Quantitative Analysis \textbf{13} (1978), no.~3,
+  461--474.
+
+\bibitem{openmp}
+Barbara Chapman, Gabriele Jost, and Ruud van~der Pas, \emph{Using openmp:
+  Portable shared memory parallel programming (scientific and engineering
+  computation)}, pp.~23 -- 25, The MIT Press, 2007.
+
+\bibitem{basket}
+Jaehyuk Choi, \emph{Sum of all black–scholes–merton models: An efficient
+  pricing method for spread, basket, and asian options}, Journal of Futures
+  Markets \textbf{38} (2018), no.~6, 627--644.
+
+\bibitem{chavez}
+Gustavo Chávez, George Turkiyyah, Stefano Zampini, Hatem Ltaief, and David
+  Keyes, \emph{Accelerated cyclic reduction: A distributed-memory fast solver
+  for structured linear systems}, Parallel Computing \textbf{74} (2018), 65 --
+  83, Parallel Matrix Algorithms and Applications (PMAA'16).
+
+\bibitem{cn}
+J.~Crank and P.~Nicolson, \emph{A practical method for numerical evaluation of
+  solutions of partial differential equations of the heat-conduction type},
+  Advances in Computational Mathematics \textbf{6} (1996), no.~1, 207--226.
+
+\bibitem{DougADI}
+Jim Douglas, Jr., \emph{Alternating direction methods for three space
+  variables}, Numer. Math. \textbf{4} (1962), no.~1, 41--63.
+
+\bibitem{duffyfinite}
+D.J. Duffy, \emph{Finite difference methods in financial engineering: A partial
+  differential equation approach}, The Wiley Finance Series, Wiley, 2006.
+
+\bibitem{duffycpp}
+\bysame, \emph{Financial instrument pricing using c++}, The Wiley Finance
+  Series, Wiley, 2013.
+
+\bibitem{evans}
+G.~Evans, J.M. Blackledge, and P.~Yardley, \emph{Numerical methods for partial
+  differential equations}, Springer undergraduate mathematics series, Springer,
+  2000.
+
+\bibitem{cloudfunc}
+Sadjad Fouladi, Francisco Romero, Dan Iter, Qian Li, Shuvo Chatterjee, Christos
+  Kozyrakis, Matei Zaharia, and Keith Winstein, \emph{From laptop to lambda:
+  Outsourcing everyday jobs to thousands of transient functional containers},
+  2019 {USENIX} Annual Technical Conference ({USENIX} {ATC} 19) (Renton, WA),
+  {USENIX} Association, July 2019, pp.~475--488.
+
+\bibitem{glasserman}
+P.~Glasserman, \emph{Monte carlo methods in financial engineering},
+  Applications of mathematics : stochastic modelling and applied probability,
+  pp.~2 -- 3, Springer, 2004.
+
+\bibitem{Hockney}
+R.~W. Hockney, \emph{A fast direct solution of poisson's equation using fourier
+  analysis}, J. ACM \textbf{12} (1965), no.~1, 95--113.
+
+\bibitem{hull}
+John Hull, \emph{Options, futures, and other derivatives}, ninth edition ed.,
+  Pearson Education Limited, 2018.
+
+\bibitem{gtsv}
+{Intel}, \emph{Intel math kernel library for c, gtsv},
+  \url{https://software.intel.com/en-us/mkl-developer-reference-c-gtsv}, 2019,
+  [Online; accessed 7-August-2019].
+
+\bibitem{weather}
+Stephen Jewson and Mihail Zervos, \emph{The black-scholes equation for weather
+  derivatives}, SSRN Electronic Journal (2003).
+
+\bibitem{klebaner}
+F.C. Klebaner, \emph{Introduction to stochastic calculus with applications},
+  Introduction to Stochastic Calculus with Applications, Imperial College
+  Press, 2005.
+
+\bibitem{kohl}
+P.~Kohl-Landgraf, \emph{Pde valuation of interest rate derivatives: From theory
+  to implementation}, pp.~423--438, Books on Demand, 2007.
+
+\bibitem{kusswurm}
+Daniel Kusswurm, \emph{Modern x86 assembly language programming: 32-bit,
+  64-bit, sse, and avx}, 1st ed., pp.~2--3, Apress, Berkely, CA, USA, 2014.
+
+\bibitem{sepvar}
+{Matthew J. Hancock}, \emph{The 1-d heat equation (mit course 18.303, linear
+  partial differential equations)},
+  \url{https://ocw.mit.edu/courses/mathematics/18-303-linear-partial-differential-equations-fall-2006/lecture-notes/heateqni.pdf},
+  2006, [Online; accessed 7-August-2019].
+
+\bibitem{merton}
+Robert~C. Merton, \emph{Option pricing when underlying stock returns are
+  discontinuous}, Journal of Financial Economics \textbf{3} (1976), no.~1, 125
+  -- 144.
+
+\bibitem{gf}
+{Microsoft}, \emph{/gf (eliminate duplicate strings)},
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/gf-eliminate-duplicate-strings?view=vs-2019},
+  2016, [Online; accessed 10-August-2019].
+
+\bibitem{gy}
+\bysame, \emph{/gy (enable function-level linking)},
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/gy-enable-function-level-linking?view=vs-2019},
+  2016, [Online; accessed 10-August-2019].
+
+\bibitem{ob}
+\bysame, \emph{/ob (inline function expansion)},
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/ob-inline-function-expansion?view=vs-2019},
+  2016, [Online; accessed 10-August-2019].
+
+\bibitem{oi}
+\bysame, \emph{/oi (generate intrinsic functions)},
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/oi-generate-intrinsic-functions?view=vs-2019},
+  2016, [Online; accessed10-August-2019].
+
+\bibitem{ot}
+\bysame, \emph{/os, /ot (favor small code, favor fast code)},
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/os-ot-favor-small-code-favor-fast-code?view=vs-2019},
+  2016, [Online; accessed 10-August-2019].
+
+\bibitem{vsopt}
+\bysame, \emph{/o options (optimize code)},
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/o-options-optimize-code?view=vs-2019},
+  2017, [Online; accessed 10-August-2019].
+
+\bibitem{og}
+\bysame, \emph{/og (global optimizations)},
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/og-global-optimizations?view=vs-2019},
+  2017, [Online; accessed 10-August-2019].
+
+\bibitem{oy}
+\bysame, \emph{/oy (frame-pointer omission)},
+  \url{https://docs.microsoft.com/en-us/cpp/build/reference/oy-frame-pointer-omission?view=vs-2019},
+  2018, [Online; accessed 10-August-2019].
+
+\bibitem{morton}
+K.~W. Morton and D.~F. Mayers, \emph{Numerical solution of partial differential
+  equations: An introduction}, 2 ed., Cambridge University Press, 2005.
+
+\bibitem{hofen}
+Martin Neuenhofen, \emph{A time-optimal algorithm for solving (block-)
+  tridiagonal linear systems of dimension n on a distributed computer of n
+  nodes}, arXiv preprint arXiv:1801.09840 (2018).
+
+\bibitem{fpga}
+Samuel Palmer, \emph{Accelerating implicit finite difference schemes using a
+  hardware optimised implementation of the thomas algorithm for fpgas}, arXiv
+  preprint arXiv: 1402.5094, 2014 (2014).
+
+\bibitem{peace}
+D.~W. Peaceman and H.~H. Rachford, \emph{The numerical solution of parabolic
+  and elliptic differential equations}, Journal of the Society for Industrial
+  and Applied Mathematics \textbf{3} (1955), no.~1, 28--41.
+
+\bibitem{windows}
+Charles Petzold, \emph{Programming windows, fifth edition}, 5th ed., Microsoft
+  Press, Redmond, WA, USA, 1998.
+
+\bibitem{seltri}
+Pablo Quesada-Barriuso, Juli{\'a}n Lamas-Rodr{\'\i}guez, Dora~B Heras,
+  Montserrat B{\'o}o, and Francisco Arg{\"u}ello, \emph{Selecting the best
+  tridiagonal system solver projected on multi-core cpu and gpu platforms},
+  Proceedings of the International Conference on Parallel and Distributed
+  Processing Techniques and Applications (PDPTA), The Steering Committee of The
+  World Congress in Computer Science, Computer~…, 2011, p.~1.
+
+\bibitem{BM}
+Sriram Ramaswamy, \emph{Pollen grains, random walks and einstein}, Resonance
+  \textbf{5} (2000).
+
+\bibitem{gdsmith}
+G.D. Smith, G.D. Smith, G.D.S. Smith, M.~Smither, and Oxford~University Press,
+  \emph{Numerical solution of partial differential equations: Finite difference
+  methods}, Oxford applied mathematics and computing science series, Clarendon
+  Press, 1985.
+
+\bibitem{tavella}
+D.~Tavella and C.~Randall, \emph{Pricing financial instruments: The finite
+  difference method}, Wiley Series in Financial Engineering, Wiley, 2000.
+
+\bibitem{terekhov}
+Andrew~V Terekhov, \emph{Parallel dichotomy algorithm for solving tridiagonal
+  system of linear equations with multiple right-hand sides}, Parallel
+  Computing \textbf{36} (2010), no.~8, 423--438.
+
+\bibitem{openmpfaq}
+{The OpenMP Architecture Review Board}, \emph{What problem does openmp solve?},
+  \url{https://www.openmp.org/about/openmp-faq/}, 2018, [Online; accessed
+  10-August-2019].
+
+\bibitem{jwthomas}
+J.W. Thomas, \emph{Numerical partial differential equations: Finite difference
+  methods}, Texts in Applied Mathematics, Springer New York, 2013.
+
+\bibitem{thomas}
+Llewellyn~Hilleth Thomas, \emph{Elliptic problems in linear difference
+  equations over a network}, Watson Sci. Comput. Lab. Rept., Columbia
+  University, New York \textbf{1} (1949).
+
+\bibitem{compiler}
+Linda Torczon and Keith Cooper, \emph{Engineering a compiler}, 2nd ed.,
+  pp.~19--21, Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 2011.
+
+\bibitem{gtsvSource}
+{University of Tennessee}, \emph{Lapack: Linear algebra package, dgtsv()},
+  \url{http://www.netlib.org/lapack/explore-html/d4/d62/group__double_g_tsolve_ga2bf93f2ddefa5e671866eb2191dc19d4.html#ga2bf93f2ddefa5e671866eb2191dc19d4},
+  2016, [Online; accessed 17-August-2019].
+
+\bibitem{openmpnext}
+Ruud van~der Pas, Eric Stotzer, and Christian Terboven, \emph{Using openmp --
+  the next step: Affinity, accelerators, tasking, and simd}, 1st ed., pp.~25 --
+  28, The MIT Press, 2017.
+
+\bibitem{wilmott}
+Paul Wilmott, \emph{Paul wilmott introduces quantitative finance}, 2 ed.,
+  Wiley-Interscience, New York, NY, USA, 2007.
+
+\bibitem{capinski}
+Tomasz Zastawniak and {Maciej J.} Capinski, \emph{Numerical methods in finance
+  with c++}, Mastering Mathematical Finance, pp.~149 -- 150, Cambridge
+  University Press, 7 2012 (English).
+
+\bibitem{gputri}
+Yao Zhang, Jonathan Cohen, and John~D. Owens, \emph{Fast tridiagonal solvers on
+  the gpu}, SIGPLAN Not. \textbf{45} (2010), no.~5, 127--136.
+
+\end{thebibliography}

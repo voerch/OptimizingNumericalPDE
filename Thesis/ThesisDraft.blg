@@ -1,5 +1,8 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: ThesisDraft.aux
-The style file: plain.bst
+The style file: amsplain.bst
 Database file #1: ThesisDraft.bib
-Warning--to sort, need author or key in nobel
-(There was 1 warning)
+Warning--missing pages in weather
+Warning--missing pages in hofen
+Warning--missing pages in fpga
+Warning--missing pages in thomas
+(There were 4 warnings)
